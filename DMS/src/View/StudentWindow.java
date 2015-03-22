@@ -925,9 +925,11 @@ public class StudentWindow extends javax.swing.JFrame {
 	private Hostel getStartEndDateFromText() throws ParseException {
 		Hostel hostel=new Hostel();
 		Date start=convertStringToDatetime(accoInfoStartDateText.getText());
-		Date end=convertStringToDatetime(accoInfoEndDateText.getText());
 		hostel.setStartDate(start);
-		hostel.setStartDate(end);
+		Date end=convertStringToDatetime(accoInfoEndDateText.getText());
+
+		hostel.setEndDate(end);
+		
 		return hostel;
 	}
 
@@ -961,10 +963,17 @@ public class StudentWindow extends javax.swing.JFrame {
 
 	private Student getStudentInfoFromText() throws ParseException {
 		Student student = new Student();
-		Date birthday=convertStringToDatetime(txtBirthday.getText());
+		if(txtBirthday.getText()==""){
+			student.setBirthday(null);
+			
+		}else{
+			Date birthday=convertStringToDatetime(txtBirthday.getText());
+			student.setBirthday(birthday);
+		}
+		
 		student.setName(personalInfoNameText.getText());
 		student.setSurname(personalInfoSurnameText.getText());
-		student.setBirthday(birthday);
+	
 		student.setEmail(personalInfoMailText.getText());
 		student.setGender(personalInfoGenderComboBox.getSelectedItem().toString());
 		student.setTC(personalInfoTCText.getText());
@@ -972,11 +981,19 @@ public class StudentWindow extends javax.swing.JFrame {
 	
 		return student;
 	}
-	private Date convertStringToDatetime(String dt) throws ParseException {
+/*	private Date convertStringToDatetime(String dt) throws ParseException {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy");
 		String date=dt;
 		Date birthday =sdf.parse(date);
 		return birthday;
+	}*/
+
+	private Date convertStringToDatetime(String dt) throws ParseException {
+		java.util.Date birthday = new java.util.Date(); 
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy"); 
+		birthday = sdf.parse(dt);
+		Date sqlDate = new java.sql.Date(birthday.getTime()); 
+		return sqlDate;
 	}
 	private boolean checkPersonalInfoEmpty() {
 		return personalInfoNameText.getText().isEmpty()

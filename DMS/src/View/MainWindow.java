@@ -8,11 +8,17 @@ package view;
 import javax.swing.JFrame;
 import javax.swing.JMenuItem;
 
-import org.jfree.chart.JFreeChart;
+//import org.jfree.chart.JFreeChart;
+//import org.jfree.ui.RefineryUtilities;
+
+
 import org.jfree.ui.RefineryUtilities;
+
+import database.DBConnection;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 
 public class MainWindow extends javax.swing.JFrame {
 
@@ -172,8 +178,26 @@ public class MainWindow extends javax.swing.JFrame {
 
 		searchScrollList.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 		searchScrollList.setModel(new javax.swing.AbstractListModel() {
-			String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4",
-					"Item 5" };
+			public String[] getList(){
+				DBConnection conn = new DBConnection();
+				String studentArray[] = null;
+				try{
+				ArrayList<String> studenNameSurname=conn.displayStudentNameSurname();
+				studentArray = new String[studenNameSurname.size()];
+				for (int i = 0; i < studentArray.length; i++) {
+					studentArray[i]=studenNameSurname.get(i);
+					
+				}	
+					
+				}catch(Exception e){
+					e.printStackTrace();
+				}
+				return studentArray;
+				
+				
+			}
+			String[] strings = getList();
+
 
 			public int getSize() {
 				return strings.length;

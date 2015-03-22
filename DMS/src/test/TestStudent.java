@@ -102,21 +102,21 @@ public class TestStudent {
 	@Test
 	public void testBirthday() {
 		Student student = new Student();
-		student.setBirthday("12-12-2000");
+		//student.setBirthday("12-12-2000");
 		assertEquals("12-12-2000", student.getBirthday());
 	}
 	
 	@Test
 	public void testBirthday2() {
 		Student student = new Student();
-		student.setBirthday("12/12/2000");
+		//student.setBirthday("12/12/2000");
 		assertEquals("12/12/2000", student.getBirthday());
 	}
 	
 	@Test
 	public void testBirthday3() {
 		Student student = new Student();
-		student.setBirthday("12.12.2000");
+		//student.setBirthday("12.12.2000");
 		assertEquals("12.12.2000", student.getBirthday());
 	}
 	

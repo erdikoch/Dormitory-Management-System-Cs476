@@ -1,5 +1,7 @@
 package view;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
+
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -13,6 +15,7 @@ public class CapacityWindow extends ApplicationFrame
    public CapacityWindow( String title ) 
    {
       super( title ); 
+      setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
       setContentPane(createDemoPanel( ));
    }
    

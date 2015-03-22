@@ -189,9 +189,8 @@ public class DormWindow extends javax.swing.JFrame {
 			dorm.setLocation(location);
 			DBConnection connection = new DBConnection();
 			if (connection.insertDorm(dorm)) {
-				connection.insertDorm(dorm);
 				System.out.println("Kayit basarili");
-				setVisible(false);
+				//setVisible(false);
 			} else {
 				System.out.println("Kayit basarisiz");
 			}

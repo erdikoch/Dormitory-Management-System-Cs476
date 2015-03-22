@@ -10,6 +10,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Date;
 import java.util.ArrayList;
+
+import view.DormListWindow;
 import view.DormWindow;
 import background.Dorm;
 import background.EmergencyContact;
@@ -25,6 +27,8 @@ public class DBConnection {
 	PreparedStatement ps;
 	DormWindow dormWin;
 	private ArrayList dorms;
+	private ArrayList rooms;
+	private DormListWindow dormListW;
 
 	public DBConnection() {
 
@@ -128,21 +132,22 @@ public class DBConnection {
 		}
 
 	}
-	 public ArrayList<String> displayStudentNameSurname() throws SQLException{
-		 ArrayList<String>studenList=new ArrayList<String>();
-		 Statement st=connect().createStatement();
-		 String sql="select StudentName,StudentSurname from Student";
-		 rs=st.executeQuery(sql);
-		 while(rs.next()){
-			 String name=rs.getString("StudentName");
-			 String surname=rs.getString("StudentSurname");
-			 studenList.add(name+" "+surname);
-			 
-		 }
-		 return studenList;
-		 
-		 
-	 }
+
+	public ArrayList<String> displayStudentNameSurname() throws SQLException {
+		ArrayList<String> studenList = new ArrayList<String>();
+		Statement st = connect().createStatement();
+		String sql = "select StudentName,StudentSurname from Student";
+		rs = st.executeQuery(sql);
+		while (rs.next()) {
+			String name = rs.getString("StudentName");
+			String surname = rs.getString("StudentSurname");
+			studenList.add(name + " " + surname);
+
+		}
+		return studenList;
+
+	}
+
 	public boolean insertStudent(Student st, EmergencyContact ec, School sc,
 			Dorm dorm, Room room, Hostel hostel) throws SQLException {
 		connect();
@@ -178,12 +183,6 @@ public class DBConnection {
 	}
 
 	public void retrieveDormInfo() {
-		try {
-			connect();
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
 		PreparedStatement pstmt = null;
 		try {
 			dorms = new ArrayList<>();
@@ -191,7 +190,7 @@ public class DBConnection {
 			// String query = "SELECT * FROM Dorm";
 
 			// ResultSet rs = stmt.executeQuery(query);
-			pstmt = con.prepareStatement("select * from Dorm");
+			pstmt = connect().prepareStatement("select * from Dorm");
 			ResultSet rs = pstmt.executeQuery();
 
 			while (rs.next()) {
@@ -208,16 +207,18 @@ public class DBConnection {
 
 	public void retrieveRooms() {
 		try {
-			connect();
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		try {
 			PreparedStatement pstmt = null;
-			pstmt = con
-					.prepareStatement("select RoomNo from Room where (select Dorm_ID from Dorm where DormName = 'Dorm 3') = Dorm_ID");
+			String selectedDorm = dormListW.selectedDorm;
+			pstmt = connect()
+					.prepareStatement("select RoomNo from Room where (select Dorm_ID from Dorm where DormName = '"
+							+ selectedDorm + "') = Dorm_ID");
 			ResultSet rs = pstmt.executeQuery();
+			rooms = new ArrayList<>();
+			while (rs.next()) {
+				rooms.add(rs.getString("RoomNo"));
+			}
+			pstmt.close();
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -239,6 +240,10 @@ public class DBConnection {
 
 	public ArrayList getDorms() {
 		return dorms;
+	}
+	
+	public ArrayList getRooms() {
+		return rooms;
 	}
 
 }

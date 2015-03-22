@@ -11,7 +11,6 @@ import javax.swing.JMenuItem;
 //import org.jfree.chart.JFreeChart;
 //import org.jfree.ui.RefineryUtilities;
 
-
 import org.jfree.ui.RefineryUtilities;
 
 import database.DBConnection;
@@ -19,6 +18,12 @@ import database.DBConnection;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
+import javax.swing.JButton;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.GroupLayout;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import java.awt.Font;
+import java.awt.Color;
 
 public class MainWindow extends javax.swing.JFrame {
 
@@ -143,7 +148,12 @@ public class MainWindow extends javax.swing.JFrame {
 		accoInfoEndDateLabel = new javax.swing.JLabel();
 		accoInfoStartDateText = new javax.swing.JTextField();
 		accoInfoEndDateText = new javax.swing.JTextField();
-		accoInfoSaveButton = new javax.swing.JButton();
+		saveButton = new javax.swing.JButton();
+		saveButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				clickSaveButton(evt);
+			}
+		});
 		paymentPanel = new javax.swing.JPanel();
 		menuBar = new javax.swing.JMenuBar();
 		homeMenu = new javax.swing.JMenu();
@@ -154,6 +164,8 @@ public class MainWindow extends javax.swing.JFrame {
 		addRoomMenuItem = new javax.swing.JMenuItem();
 		otherMenu = new javax.swing.JMenu();
 		addOtherChartMenuItem = new javax.swing.JMenuItem();
+
+		setEditableFalse();
 
 		jMenu3.setText("File");
 		jMenuBar2.add(jMenu3);
@@ -178,26 +190,26 @@ public class MainWindow extends javax.swing.JFrame {
 
 		searchScrollList.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 		searchScrollList.setModel(new javax.swing.AbstractListModel() {
-			public String[] getList(){
+			public String[] getList() {
 				DBConnection conn = new DBConnection();
 				String studentArray[] = null;
-				try{
-				ArrayList<String> studenNameSurname=conn.displayStudentNameSurname();
-				studentArray = new String[studenNameSurname.size()];
-				for (int i = 0; i < studentArray.length; i++) {
-					studentArray[i]=studenNameSurname.get(i);
-					
-				}	
-					
-				}catch(Exception e){
+				try {
+					ArrayList<String> studenNameSurname = conn
+							.displayStudentNameSurname();
+					studentArray = new String[studenNameSurname.size()];
+					for (int i = 0; i < studentArray.length; i++) {
+						studentArray[i] = studenNameSurname.get(i);
+
+					}
+
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
 				return studentArray;
-				
-				
-			}
-			String[] strings = getList();
 
+			}
+
+			String[] strings = getList();
 
 			public int getSize() {
 				return strings.length;
@@ -864,186 +876,76 @@ public class MainWindow extends javax.swing.JFrame {
 		accoInfoEndDateLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 		accoInfoEndDateLabel.setText("End Date:");
 
-		accoInfoSaveButton.setBackground(new java.awt.Color(204, 255, 204));
-		accoInfoSaveButton.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-		accoInfoSaveButton.setText("SAVE");
+		saveButton.setBackground(new Color(204, 255, 204));
+		saveButton.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+		saveButton.setText("SAVE");
+
+		JButton editButton = new JButton("EDIT");
+		editButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				clickEditButton(evt);
+			}
+		});
+		editButton.setBackground(new Color(204, 255, 204));
+		editButton.setFont(new Font("Tahoma", Font.BOLD, 12));
 
 		javax.swing.GroupLayout gl_accoInfoPanel = new javax.swing.GroupLayout(
 				accoInfoPanel);
+		gl_accoInfoPanel.setHorizontalGroup(
+			gl_accoInfoPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_accoInfoPanel.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(gl_accoInfoPanel.createParallelGroup(Alignment.LEADING)
+						.addComponent(accoInfoLabel, GroupLayout.PREFERRED_SIZE, 165, GroupLayout.PREFERRED_SIZE)
+						.addGroup(gl_accoInfoPanel.createSequentialGroup()
+							.addGroup(gl_accoInfoPanel.createParallelGroup(Alignment.TRAILING, false)
+								.addComponent(accoInfoRoomLabel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE)
+								.addComponent(accoInfoDormLabel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+							.addGap(29)
+							.addGroup(gl_accoInfoPanel.createParallelGroup(Alignment.LEADING, false)
+								.addComponent(accoInfoDormComboBox, 0, 92, Short.MAX_VALUE)
+								.addComponent(accoInfoRoomComboBox, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+							.addGap(78)
+							.addGroup(gl_accoInfoPanel.createParallelGroup(Alignment.TRAILING)
+								.addComponent(accoInfoStartDateLabel, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
+								.addComponent(accoInfoEndDateLabel, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE))
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addGroup(gl_accoInfoPanel.createParallelGroup(Alignment.LEADING)
+								.addComponent(accoInfoEndDateText, GroupLayout.PREFERRED_SIZE, 215, GroupLayout.PREFERRED_SIZE)
+								.addComponent(accoInfoStartDateText, GroupLayout.PREFERRED_SIZE, 215, GroupLayout.PREFERRED_SIZE))
+							.addGap(65)
+							.addGroup(gl_accoInfoPanel.createParallelGroup(Alignment.LEADING)
+								.addComponent(editButton, GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE)
+								.addComponent(saveButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+					.addGap(20))
+		);
+		gl_accoInfoPanel.setVerticalGroup(
+			gl_accoInfoPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_accoInfoPanel.createSequentialGroup()
+					.addGroup(gl_accoInfoPanel.createParallelGroup(Alignment.TRAILING)
+						.addGroup(gl_accoInfoPanel.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(accoInfoLabel)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addGroup(gl_accoInfoPanel.createParallelGroup(Alignment.BASELINE)
+								.addComponent(accoInfoDormLabel)
+								.addComponent(accoInfoDormComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(accoInfoStartDateLabel)
+								.addComponent(accoInfoStartDateText, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+							.addPreferredGap(ComponentPlacement.RELATED, 20, Short.MAX_VALUE))
+						.addGroup(gl_accoInfoPanel.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(editButton)
+							.addPreferredGap(ComponentPlacement.RELATED)))
+					.addGroup(gl_accoInfoPanel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(accoInfoRoomLabel)
+						.addComponent(accoInfoRoomComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(accoInfoEndDateLabel)
+						.addComponent(accoInfoEndDateText, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(saveButton, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap())
+		);
 		accoInfoPanel.setLayout(gl_accoInfoPanel);
-		gl_accoInfoPanel
-				.setHorizontalGroup(gl_accoInfoPanel
-						.createParallelGroup(
-								javax.swing.GroupLayout.Alignment.LEADING)
-						.addGroup(
-								gl_accoInfoPanel
-										.createSequentialGroup()
-										.addContainerGap()
-										.addGroup(
-												gl_accoInfoPanel
-														.createParallelGroup(
-																javax.swing.GroupLayout.Alignment.LEADING)
-														.addComponent(
-																accoInfoLabel,
-																javax.swing.GroupLayout.PREFERRED_SIZE,
-																165,
-																javax.swing.GroupLayout.PREFERRED_SIZE)
-														.addGroup(
-																gl_accoInfoPanel
-																		.createSequentialGroup()
-																		.addGroup(
-																				gl_accoInfoPanel
-																						.createParallelGroup(
-																								javax.swing.GroupLayout.Alignment.TRAILING,
-																								false)
-																						.addComponent(
-																								accoInfoRoomLabel,
-																								javax.swing.GroupLayout.Alignment.LEADING,
-																								javax.swing.GroupLayout.DEFAULT_SIZE,
-																								55,
-																								Short.MAX_VALUE)
-																						.addComponent(
-																								accoInfoDormLabel,
-																								javax.swing.GroupLayout.Alignment.LEADING,
-																								javax.swing.GroupLayout.DEFAULT_SIZE,
-																								javax.swing.GroupLayout.DEFAULT_SIZE,
-																								Short.MAX_VALUE))
-																		.addGap(29,
-																				29,
-																				29)
-																		.addGroup(
-																				gl_accoInfoPanel
-																						.createParallelGroup(
-																								javax.swing.GroupLayout.Alignment.LEADING,
-																								false)
-																						.addComponent(
-																								accoInfoDormComboBox,
-																								0,
-																								92,
-																								Short.MAX_VALUE)
-																						.addComponent(
-																								accoInfoRoomComboBox,
-																								0,
-																								javax.swing.GroupLayout.DEFAULT_SIZE,
-																								Short.MAX_VALUE))
-																		.addGap(78,
-																				78,
-																				78)
-																		.addGroup(
-																				gl_accoInfoPanel
-																						.createParallelGroup(
-																								javax.swing.GroupLayout.Alignment.TRAILING)
-																						.addComponent(
-																								accoInfoStartDateLabel,
-																								javax.swing.GroupLayout.PREFERRED_SIZE,
-																								83,
-																								javax.swing.GroupLayout.PREFERRED_SIZE)
-																						.addComponent(
-																								accoInfoEndDateLabel,
-																								javax.swing.GroupLayout.PREFERRED_SIZE,
-																								83,
-																								javax.swing.GroupLayout.PREFERRED_SIZE))
-																		.addPreferredGap(
-																				javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-																		.addGroup(
-																				gl_accoInfoPanel
-																						.createParallelGroup(
-																								javax.swing.GroupLayout.Alignment.LEADING)
-																						.addComponent(
-																								accoInfoStartDateText,
-																								javax.swing.GroupLayout.PREFERRED_SIZE,
-																								215,
-																								javax.swing.GroupLayout.PREFERRED_SIZE)
-																						.addGroup(
-																								gl_accoInfoPanel
-																										.createSequentialGroup()
-																										.addComponent(
-																												accoInfoEndDateText,
-																												javax.swing.GroupLayout.PREFERRED_SIZE,
-																												215,
-																												javax.swing.GroupLayout.PREFERRED_SIZE)
-																										.addPreferredGap(
-																												javax.swing.LayoutStyle.ComponentPlacement.RELATED,
-																												40,
-																												Short.MAX_VALUE)
-																										.addComponent(
-																												accoInfoSaveButton,
-																												javax.swing.GroupLayout.PREFERRED_SIZE,
-																												86,
-																												javax.swing.GroupLayout.PREFERRED_SIZE)))))
-										.addGap(20, 20, 20)));
-		gl_accoInfoPanel
-				.setVerticalGroup(gl_accoInfoPanel
-						.createParallelGroup(
-								javax.swing.GroupLayout.Alignment.LEADING)
-						.addGroup(
-								gl_accoInfoPanel
-										.createSequentialGroup()
-										.addContainerGap()
-										.addGroup(
-												gl_accoInfoPanel
-														.createParallelGroup(
-																javax.swing.GroupLayout.Alignment.LEADING)
-														.addGroup(
-																gl_accoInfoPanel
-																		.createSequentialGroup()
-																		.addComponent(
-																				accoInfoLabel)
-																		.addPreferredGap(
-																				javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-																		.addGroup(
-																				gl_accoInfoPanel
-																						.createParallelGroup(
-																								javax.swing.GroupLayout.Alignment.BASELINE)
-																						.addComponent(
-																								accoInfoDormLabel)
-																						.addComponent(
-																								accoInfoDormComboBox,
-																								javax.swing.GroupLayout.PREFERRED_SIZE,
-																								javax.swing.GroupLayout.DEFAULT_SIZE,
-																								javax.swing.GroupLayout.PREFERRED_SIZE)
-																						.addComponent(
-																								accoInfoStartDateLabel)
-																						.addComponent(
-																								accoInfoStartDateText,
-																								javax.swing.GroupLayout.PREFERRED_SIZE,
-																								javax.swing.GroupLayout.DEFAULT_SIZE,
-																								javax.swing.GroupLayout.PREFERRED_SIZE))
-																		.addPreferredGap(
-																				javax.swing.LayoutStyle.ComponentPlacement.RELATED,
-																				23,
-																				Short.MAX_VALUE)
-																		.addGroup(
-																				gl_accoInfoPanel
-																						.createParallelGroup(
-																								javax.swing.GroupLayout.Alignment.BASELINE)
-																						.addComponent(
-																								accoInfoRoomLabel)
-																						.addComponent(
-																								accoInfoRoomComboBox,
-																								javax.swing.GroupLayout.PREFERRED_SIZE,
-																								javax.swing.GroupLayout.DEFAULT_SIZE,
-																								javax.swing.GroupLayout.PREFERRED_SIZE)
-																						.addComponent(
-																								accoInfoEndDateLabel)
-																						.addComponent(
-																								accoInfoEndDateText,
-																								javax.swing.GroupLayout.PREFERRED_SIZE,
-																								javax.swing.GroupLayout.DEFAULT_SIZE,
-																								javax.swing.GroupLayout.PREFERRED_SIZE)))
-														.addGroup(
-																javax.swing.GroupLayout.Alignment.TRAILING,
-																gl_accoInfoPanel
-																		.createSequentialGroup()
-																		.addGap(0,
-																				0,
-																				Short.MAX_VALUE)
-																		.addComponent(
-																				accoInfoSaveButton,
-																				javax.swing.GroupLayout.PREFERRED_SIZE,
-																				32,
-																				javax.swing.GroupLayout.PREFERRED_SIZE)))
-										.addContainerGap()));
 
 		javax.swing.GroupLayout gl_mainPaneSubPanel = new javax.swing.GroupLayout(
 				mainPaneSubPanel);
@@ -1220,16 +1122,16 @@ public class MainWindow extends javax.swing.JFrame {
 
 		otherMenu.setText("Other");
 		menuBar.add(otherMenu);
-		
-		
+
 		addRoomMenuItem = new JMenuItem("Show Capacity");
 		addRoomMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				CapacityWindow capacityChart = new CapacityWindow( "Mobile Sales" );  
-			      capacityChart.setSize( 560 , 367 );    
-			      RefineryUtilities.centerFrameOnScreen( capacityChart );  
-			      capacityChart.setVisible( true ); 
-			      capacityChart.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+				CapacityWindow capacityChart = new CapacityWindow(
+						"Mobile Sales");
+				capacityChart.setSize(560, 367);
+				RefineryUtilities.centerFrameOnScreen(capacityChart);
+				capacityChart.setVisible(true);
+				capacityChart.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 			}
 		});
 		otherMenu.add(addRoomMenuItem);
@@ -1271,6 +1173,16 @@ public class MainWindow extends javax.swing.JFrame {
 
 		pack();
 	}// </editor-fold>//GEN-END:initComponents
+	
+	private void clickEditButton(ActionEvent evt) {
+		setEditableTrue();
+		
+	}
+	
+	private void clickSaveButton(ActionEvent evt) {
+		setEditableFalse();
+		
+	}
 
 	private void pTCidActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_pTCidActionPerformed
 		// TODO add your handling code here:
@@ -1291,6 +1203,50 @@ public class MainWindow extends javax.swing.JFrame {
 	private void viewDormActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jMenuItem3ActionPerformed
 		new DormListWindow().setVisible(true);
 	}// GEN-LAST:event_jMenuItem3ActionPerformed
+
+	private void setEditableFalse() {
+		personalInfoNameText.setEditable(false);
+		personalInfoSurnameTExt.setEditable(false);
+		personalInfoNationalIDText.setEditable(false);
+		personalInfoPhoneText.setEditable(false);
+		personalInfoMailText.setEditable(false);
+		personalInfoDayComBox.setEnabled(false);
+		personalInfoMounthComboBox.setEnabled(false);
+		personalInfoYearComboBox.setEnabled(false);
+		personalInfoGenderComboBox.setEnabled(false);
+		emergencyContactNameText.setEditable(false);
+		emergencyContactSurnameText.setEditable(false);
+		emergencyContactPhoneText.setEditable(false);
+		schoolInfoUniversityText.setEditable(false);
+		schoolInfoDepartmentText.setEditable(false);
+		schoolInfoGradeText.setEditable(false);
+		accoInfoDormComboBox.setEnabled(false);
+		accoInfoRoomComboBox.setEnabled(false);
+		accoInfoStartDateText.setEditable(false);
+		accoInfoEndDateText.setEditable(false);
+	}
+	
+	private void setEditableTrue() {
+		personalInfoNameText.setEditable(true);
+		personalInfoSurnameTExt.setEditable(true);
+		personalInfoNationalIDText.setEditable(true);
+		personalInfoPhoneText.setEditable(true);
+		personalInfoMailText.setEditable(true);
+		personalInfoDayComBox.setEnabled(true);
+		personalInfoMounthComboBox.setEnabled(true);
+		personalInfoYearComboBox.setEnabled(true);
+		personalInfoGenderComboBox.setEnabled(true);
+		emergencyContactNameText.setEditable(true);
+		emergencyContactSurnameText.setEditable(true);
+		emergencyContactPhoneText.setEditable(true);
+		schoolInfoUniversityText.setEditable(true);
+		schoolInfoDepartmentText.setEditable(true);
+		schoolInfoGradeText.setEditable(true);
+		accoInfoDormComboBox.setEnabled(true);
+		accoInfoRoomComboBox.setEnabled(true);
+		accoInfoStartDateText.setEditable(true);
+		accoInfoEndDateText.setEditable(true);	
+	}
 
 	/**
 	 * @param args
@@ -1365,7 +1321,7 @@ public class MainWindow extends javax.swing.JFrame {
 	private javax.swing.JTextField personalInfoNameText;
 	private javax.swing.JTextField personalInfoPhoneText;
 	private javax.swing.JComboBox accoInfoRoomComboBox;
-	private javax.swing.JButton accoInfoSaveButton;
+	private javax.swing.JButton saveButton;
 	private JMenuItem mntmAddRoomType;
 	private javax.swing.JTextField accoInfoStartDateText;
 	private javax.swing.JTextField personalInfoSurnameTExt;
@@ -1373,5 +1329,4 @@ public class MainWindow extends javax.swing.JFrame {
 	private javax.swing.JComboBox personalInfoYearComboBox;
 	private javax.swing.JTextField searchStudentText;
 	private JMenuItem viewDormMenuItem;
-	// End of variables declaration//GEN-END:variables
 }

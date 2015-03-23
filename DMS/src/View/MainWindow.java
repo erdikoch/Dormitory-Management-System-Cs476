@@ -24,6 +24,7 @@ import javax.swing.GroupLayout;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.Font;
 import java.awt.Color;
+import javax.swing.JMenu;
 
 public class MainWindow extends javax.swing.JFrame {
 
@@ -1137,6 +1138,9 @@ public class MainWindow extends javax.swing.JFrame {
 		otherMenu.add(addRoomMenuItem);
 
 		setJMenuBar(menuBar);
+		
+		mnSearch = new JMenu("Search");
+		menuBar.add(mnSearch);
 
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(
 				getContentPane());
@@ -1201,7 +1205,7 @@ public class MainWindow extends javax.swing.JFrame {
 	}// GEN-LAST:event_jMenuItem3ActionPerformed
 
 	private void viewDormActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jMenuItem3ActionPerformed
-		new DormListWindow().setVisible(true);
+		new SearchAllWindow().setVisible(true);
 	}// GEN-LAST:event_jMenuItem3ActionPerformed
 
 	private void setEditableFalse() {
@@ -1329,4 +1333,5 @@ public class MainWindow extends javax.swing.JFrame {
 	private javax.swing.JComboBox personalInfoYearComboBox;
 	private javax.swing.JTextField searchStudentText;
 	private JMenuItem viewDormMenuItem;
+	private JMenu mnSearch;
 }

@@ -41,6 +41,7 @@ public class StudentWindow extends javax.swing.JFrame {
 	 * Creates new form StrudentWindow
 	 */
 	public StudentWindow() {
+		setTitle("Add Student");
 		initComponents();
 	}
 
@@ -99,7 +100,7 @@ public class StudentWindow extends javax.swing.JFrame {
 			}
 
 			private void displayDormcombo(MouseEvent me) {
-				DBConnection conn =new DBConnection();
+				DBConnection conn = new DBConnection();
 				
 				try {
 				

@@ -62,15 +62,15 @@ public class SearchAllWindow extends javax.swing.JFrame {
 		roomList.setBounds(246, 72, 210, 285);
 		getContentPane().add(roomList);
 		
-		JLabel lblDormList = new JLabel("Dorm List:");
-		lblDormList.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblDormList.setBounds(26, 38, 79, 23);
-		getContentPane().add(lblDormList);
+		JLabel dormListLabel = new JLabel("Dorm List:");
+		dormListLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
+		dormListLabel.setBounds(26, 38, 79, 23);
+		getContentPane().add(dormListLabel);
 		
-		JLabel lblRoomlist = new JLabel("Room List:");
-		lblRoomlist.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblRoomlist.setBounds(246, 38, 79, 23);
-		getContentPane().add(lblRoomlist);
+		JLabel roomlistLabel = new JLabel("Room List:");
+		roomlistLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
+		roomlistLabel.setBounds(246, 38, 79, 23);
+		getContentPane().add(roomlistLabel);
 		
 		Button endDateButton = new Button("End Date");
 		endDateButton.setBounds(386, 10, 70, 22);

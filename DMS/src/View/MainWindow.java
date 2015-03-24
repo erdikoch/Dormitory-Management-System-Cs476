@@ -74,6 +74,7 @@ public class MainWindow extends javax.swing.JFrame {
 	}
 
 	public MainWindow() {
+		setTitle("Dormitory Management System");
 		initComponents();
 	}
 
@@ -1108,8 +1109,8 @@ public class MainWindow extends javax.swing.JFrame {
 		roomMenu.add(addRoomMenuItem);
 
 		menuBar.add(roomMenu);
-		mntmAddRoomType = new JMenuItem("Add Room Type");
-		mntmAddRoomType.addActionListener(new java.awt.event.ActionListener() {
+		addRoomTypeMenuItem = new JMenuItem("Add Room Type");
+		addRoomTypeMenuItem.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				addRoomTypeActionPerformed(evt);
 			}
@@ -1119,7 +1120,7 @@ public class MainWindow extends javax.swing.JFrame {
 
 			}
 		});
-		roomMenu.add(mntmAddRoomType);
+		roomMenu.add(addRoomTypeMenuItem);
 
 		otherMenu.setText("Other");
 		menuBar.add(otherMenu);
@@ -1139,8 +1140,11 @@ public class MainWindow extends javax.swing.JFrame {
 
 		setJMenuBar(menuBar);
 		
-		mnSearch = new JMenu("Search");
-		menuBar.add(mnSearch);
+		searchMenu = new JMenu("Search");
+		menuBar.add(searchMenu);
+		
+		searchAllMenuItem = new JMenuItem("Search All  Ctrl+F");
+		searchMenu.add(searchAllMenuItem);
 
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(
 				getContentPane());
@@ -1326,12 +1330,13 @@ public class MainWindow extends javax.swing.JFrame {
 	private javax.swing.JTextField personalInfoPhoneText;
 	private javax.swing.JComboBox accoInfoRoomComboBox;
 	private javax.swing.JButton saveButton;
-	private JMenuItem mntmAddRoomType;
+	private JMenuItem addRoomTypeMenuItem;
 	private javax.swing.JTextField accoInfoStartDateText;
 	private javax.swing.JTextField personalInfoSurnameTExt;
 	private javax.swing.JTextField personalInfoNationalIDText;
 	private javax.swing.JComboBox personalInfoYearComboBox;
 	private javax.swing.JTextField searchStudentText;
 	private JMenuItem viewDormMenuItem;
-	private JMenu mnSearch;
+	private JMenu searchMenu;
+	private JMenuItem searchAllMenuItem;
 }

@@ -44,6 +44,7 @@ public class DormListWindow extends javax.swing.JFrame {
 	 * Creates new form DormWindow
 	 */
 	public DormListWindow() {
+		setTitle("Dorm List");
 		initComponents();
 	}
 

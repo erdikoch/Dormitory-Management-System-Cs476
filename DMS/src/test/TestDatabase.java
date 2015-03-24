@@ -60,5 +60,4 @@ public class TestDatabase {
 	    public void closeStatementWithNullShouldNotThrow() {
 	        DBConnection.closeStatement(null);
 	    }
-
 }

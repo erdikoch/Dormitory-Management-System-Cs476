@@ -16,14 +16,14 @@ public class TestDorm {
 	}
 	
 	@Test
-	public void testDormName2() {
+	public void testEmptyDormName() {
 		Dorm dorm = new Dorm();
 		dorm.setDormName("");
 		assertEquals("", dorm.getDormName());
 	}
 	
 	@Test
-	public void testDormName3() {
+	public void testBlankDormName() {
 		Dorm dorm = new Dorm();
 		dorm.setDormName(" ");
 		assertEquals(" ", dorm.getDormName());
@@ -40,5 +40,4 @@ public class TestDorm {
 	public void testDormLocationLength() {
 		equals(new Dorm().getLocation().length() < 100 );
 	}
-
 }

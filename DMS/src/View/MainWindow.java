@@ -75,7 +75,6 @@ public class MainWindow extends javax.swing.JFrame {
 	}
 
 	public MainWindow() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\\u0130smetcan Herg\u00FCn\u015Fen\\Desktop\\dorm.png"));
 		setTitle("Dormitory Management System");
 		initComponents();
 	}

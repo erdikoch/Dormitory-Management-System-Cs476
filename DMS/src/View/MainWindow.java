@@ -24,6 +24,7 @@ import javax.swing.GroupLayout;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.Font;
 import java.awt.Color;
+import javax.swing.JMenu;
 
 public class MainWindow extends javax.swing.JFrame {
 
@@ -73,6 +74,7 @@ public class MainWindow extends javax.swing.JFrame {
 	}
 
 	public MainWindow() {
+		setTitle("Dormitory Management System");
 		initComponents();
 	}
 
@@ -1119,6 +1121,12 @@ public class MainWindow extends javax.swing.JFrame {
 			}
 		});
 		roomMenu.add(mntmAddRoomType);
+		
+		searchMenu = new JMenu("Search");
+		menuBar.add(searchMenu);
+		
+		searchAllMenuItem = new JMenuItem("Search All Ctrl+F");
+		searchMenu.add(searchAllMenuItem);
 
 		otherMenu.setText("Other");
 		menuBar.add(otherMenu);
@@ -1329,4 +1337,6 @@ public class MainWindow extends javax.swing.JFrame {
 	private javax.swing.JComboBox personalInfoYearComboBox;
 	private javax.swing.JTextField searchStudentText;
 	private JMenuItem viewDormMenuItem;
+	private JMenu searchMenu;
+	private JMenuItem searchAllMenuItem;
 }

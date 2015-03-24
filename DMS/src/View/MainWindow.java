@@ -1125,7 +1125,7 @@ public class MainWindow extends javax.swing.JFrame {
 		searchMenu = new JMenu("Search");
 		menuBar.add(searchMenu);
 		
-		searchAllMenuItem = new JMenuItem("Search All Ctrl+F");
+		searchAllMenuItem = new JMenuItem("Search All   Ctrl+F");
 		searchMenu.add(searchAllMenuItem);
 
 		otherMenu.setText("Other");

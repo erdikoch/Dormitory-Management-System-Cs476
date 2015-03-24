@@ -40,12 +40,17 @@ import org.jdatepicker.impl.UtilDateModel;
 import com.toedter.calendar.JCalendar;
 
 import java.awt.Button;
+import javax.swing.JTable;
+import javax.swing.JTextField;
 
 /**
  *
  * @author Nazli
  */
 public class SearchAllWindow extends javax.swing.JFrame {
+	private JTable searchTable;
+	private JTextField startDateTextField;
+	private JTextField endDateTextField;
 
 	/**
 	 * Creates new form DormWindow
@@ -54,31 +59,28 @@ public class SearchAllWindow extends javax.swing.JFrame {
 		setTitle("Search");
 		getContentPane().setLayout(null);
 		
-		JList dormList = new JList();
-		dormList.setBounds(26, 72, 210, 285);
-		getContentPane().add(dormList);
-		
-		JList roomList = new JList();
-		roomList.setBounds(246, 72, 210, 285);
-		getContentPane().add(roomList);
-		
-		JLabel dormListLabel = new JLabel("Dorm List:");
-		dormListLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
-		dormListLabel.setBounds(26, 38, 79, 23);
-		getContentPane().add(dormListLabel);
-		
-		JLabel roomlistLabel = new JLabel("Room List:");
-		roomlistLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
-		roomlistLabel.setBounds(246, 38, 79, 23);
-		getContentPane().add(roomlistLabel);
-		
 		Button endDateButton = new Button("End Date");
-		endDateButton.setBounds(386, 10, 70, 22);
+		endDateButton.setBounds(310, 10, 70, 22);
 		getContentPane().add(endDateButton);
 		
 		Button startDateButton = new Button("Start Date");
-		startDateButton.setBounds(310, 10, 70, 22);
+		startDateButton.setBounds(10, 10, 70, 22);
 		getContentPane().add(startDateButton);
+		
+		searchTable = new JTable();
+		searchTable.setColumnSelectionAllowed(true);
+		searchTable.setBounds(10, 52, 462, 308);
+		getContentPane().add(searchTable);
+		
+		startDateTextField = new JTextField();
+		startDateTextField.setBounds(86, 10, 86, 20);
+		getContentPane().add(startDateTextField);
+		startDateTextField.setColumns(10);
+		
+		endDateTextField = new JTextField();
+		endDateTextField.setBounds(386, 10, 86, 20);
+		getContentPane().add(endDateTextField);
+		endDateTextField.setColumns(10);
 		
 		startDateButton.addActionListener(new ActionListener() {
 			StartDatePopup startDatePopup = new StartDatePopup();

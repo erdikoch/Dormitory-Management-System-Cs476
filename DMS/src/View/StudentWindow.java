@@ -99,50 +99,47 @@ public class StudentWindow extends javax.swing.JFrame {
 			}
 
 			private void displayDormcombo(MouseEvent me) {
-				DBConnection conn =new DBConnection();
-				
+				DBConnection conn = new DBConnection();
+
 				try {
-				
-					ArrayList<String> list=conn.displayDorm();
-					for(int i =0;i<list.size();i++)
-					 accoInfoDormComboBox.addItem(list.get(i));
+
+					ArrayList<String> list = conn.displayDorm();
+					for (int i = 0; i < list.size(); i++)
+						accoInfoDormComboBox.addItem(list.get(i));
 				} catch (SQLException e) {
-		
+
 					e.printStackTrace();
 				}
-				
-				
-				
+
 			}
-				
-			
+
 		});
-	
+
 		accoInfoRoomComboBox = new javax.swing.JComboBox();
 		accoInfoRoomComboBox.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-        		displayRoomNoMouseClicked(e);
-        	}
+				displayRoomNoMouseClicked(e);
+			}
 
 			private void displayRoomNoMouseClicked(MouseEvent e) {
-				DBConnection conn =new DBConnection();
-				Dorm dorm=new Dorm();
-				
-				dorm.setDormName(accoInfoDormComboBox.getSelectedItem().toString());
-				
+				DBConnection conn = new DBConnection();
+				Dorm dorm = new Dorm();
+
+				dorm.setDormName(accoInfoDormComboBox.getSelectedItem()
+						.toString());
+
 				try {
-				
-					ArrayList<Integer> list=conn.displayRoomNo(dorm);
-					for(int i =0;i<list.size();i++)
-					 accoInfoRoomComboBox.addItem(list.get(i));
+
+					ArrayList<Integer> list = conn.displayRoomNo(dorm);
+					for (int i = 0; i < list.size(); i++)
+						accoInfoRoomComboBox.addItem(list.get(i));
 				} catch (SQLException ev) {
-		
+
 					ev.printStackTrace();
 				}
-				
-				
+
 			}
-        });
+		});
 		accoInfoStartDateLabel = new javax.swing.JLabel();
 		accoInfoEndDateLabel = new javax.swing.JLabel();
 		accoInfoStartDateText = new javax.swing.JTextField();
@@ -194,81 +191,215 @@ public class StudentWindow extends javax.swing.JFrame {
 		personalInfoBirthdayLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 		personalInfoBirthdayLabel.setText("Birthday:");
 
-
 		personalInfoGenderComboBox
 				.setModel(new javax.swing.DefaultComboBoxModel(new String[] {
 						"Female", "Male" }));
-		
+
 		txtBirthday = new JTextField();
 		txtBirthday.setColumns(10);
 
 		javax.swing.GroupLayout gl_personalInfoPanel = new javax.swing.GroupLayout(
 				personalInfoPanel);
-		gl_personalInfoPanel.setHorizontalGroup(
-			gl_personalInfoPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_personalInfoPanel.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_personalInfoPanel.createParallelGroup(Alignment.LEADING)
-						.addComponent(personalInfoLabel, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
-						.addGroup(gl_personalInfoPanel.createSequentialGroup()
-							.addGroup(gl_personalInfoPanel.createParallelGroup(Alignment.LEADING, false)
-								.addGroup(gl_personalInfoPanel.createSequentialGroup()
-									.addGroup(gl_personalInfoPanel.createParallelGroup(Alignment.TRAILING, false)
-										.addComponent(personalInfoGenderLabel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-										.addComponent(personalInfoNationalIDLabel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 63, Short.MAX_VALUE)
-										.addComponent(personalInfoSurnameLabel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-									.addGap(18)
-									.addGroup(gl_personalInfoPanel.createParallelGroup(Alignment.LEADING)
-										.addComponent(personalInfoSurnameText)
-										.addComponent(personalInfoTCText)
-										.addGroup(gl_personalInfoPanel.createSequentialGroup()
-											.addComponent(personalInfoGenderComboBox, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)
-											.addGap(0, 115, Short.MAX_VALUE))))
-								.addGroup(gl_personalInfoPanel.createSequentialGroup()
-									.addComponent(personalInfoNameLabel, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE)
-									.addGap(18)
-									.addComponent(personalInfoNameText)))
-							.addGap(61)
-							.addGroup(gl_personalInfoPanel.createParallelGroup(Alignment.LEADING, false)
-								.addComponent(personalInfoPhoneLabel, GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
-								.addComponent(personalInfoMailLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(personalInfoBirthdayLabel))
-							.addGap(37)
-							.addGroup(gl_personalInfoPanel.createParallelGroup(Alignment.LEADING, false)
-								.addComponent(txtBirthday)
-								.addComponent(personalInfoPhoneText, GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
-								.addComponent(personalInfoMailText))))
-					.addContainerGap(44, Short.MAX_VALUE))
-		);
-		gl_personalInfoPanel.setVerticalGroup(
-			gl_personalInfoPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_personalInfoPanel.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(personalInfoLabel)
-					.addGap(11)
-					.addGroup(gl_personalInfoPanel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(personalInfoNameLabel, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE)
-						.addComponent(personalInfoPhoneLabel)
-						.addComponent(personalInfoNameText, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(personalInfoPhoneText, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_personalInfoPanel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(personalInfoSurnameLabel)
-						.addComponent(personalInfoMailLabel)
-						.addComponent(personalInfoSurnameText, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(personalInfoMailText, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_personalInfoPanel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(personalInfoNationalIDLabel)
-						.addComponent(personalInfoBirthdayLabel)
-						.addComponent(personalInfoTCText, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(txtBirthday, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
-					.addGroup(gl_personalInfoPanel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(personalInfoGenderLabel)
-						.addComponent(personalInfoGenderComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap())
-		);
+		gl_personalInfoPanel
+				.setHorizontalGroup(gl_personalInfoPanel
+						.createParallelGroup(Alignment.LEADING)
+						.addGroup(
+								gl_personalInfoPanel
+										.createSequentialGroup()
+										.addContainerGap()
+										.addGroup(
+												gl_personalInfoPanel
+														.createParallelGroup(
+																Alignment.LEADING)
+														.addComponent(
+																personalInfoLabel,
+																GroupLayout.PREFERRED_SIZE,
+																123,
+																GroupLayout.PREFERRED_SIZE)
+														.addGroup(
+																gl_personalInfoPanel
+																		.createSequentialGroup()
+																		.addGroup(
+																				gl_personalInfoPanel
+																						.createParallelGroup(
+																								Alignment.LEADING,
+																								false)
+																						.addGroup(
+																								gl_personalInfoPanel
+																										.createSequentialGroup()
+																										.addGroup(
+																												gl_personalInfoPanel
+																														.createParallelGroup(
+																																Alignment.TRAILING,
+																																false)
+																														.addComponent(
+																																personalInfoGenderLabel,
+																																Alignment.LEADING,
+																																GroupLayout.DEFAULT_SIZE,
+																																GroupLayout.DEFAULT_SIZE,
+																																Short.MAX_VALUE)
+																														.addComponent(
+																																personalInfoNationalIDLabel,
+																																Alignment.LEADING,
+																																GroupLayout.DEFAULT_SIZE,
+																																63,
+																																Short.MAX_VALUE)
+																														.addComponent(
+																																personalInfoSurnameLabel,
+																																Alignment.LEADING,
+																																GroupLayout.DEFAULT_SIZE,
+																																GroupLayout.DEFAULT_SIZE,
+																																Short.MAX_VALUE))
+																										.addGap(18)
+																										.addGroup(
+																												gl_personalInfoPanel
+																														.createParallelGroup(
+																																Alignment.LEADING)
+																														.addComponent(
+																																personalInfoSurnameText)
+																														.addComponent(
+																																personalInfoTCText)
+																														.addGroup(
+																																gl_personalInfoPanel
+																																		.createSequentialGroup()
+																																		.addComponent(
+																																				personalInfoGenderComboBox,
+																																				GroupLayout.PREFERRED_SIZE,
+																																				97,
+																																				GroupLayout.PREFERRED_SIZE)
+																																		.addGap(0,
+																																				115,
+																																				Short.MAX_VALUE))))
+																						.addGroup(
+																								gl_personalInfoPanel
+																										.createSequentialGroup()
+																										.addComponent(
+																												personalInfoNameLabel,
+																												GroupLayout.PREFERRED_SIZE,
+																												63,
+																												GroupLayout.PREFERRED_SIZE)
+																										.addGap(18)
+																										.addComponent(
+																												personalInfoNameText)))
+																		.addGap(61)
+																		.addGroup(
+																				gl_personalInfoPanel
+																						.createParallelGroup(
+																								Alignment.LEADING,
+																								false)
+																						.addComponent(
+																								personalInfoPhoneLabel,
+																								GroupLayout.DEFAULT_SIZE,
+																								50,
+																								Short.MAX_VALUE)
+																						.addComponent(
+																								personalInfoMailLabel,
+																								GroupLayout.DEFAULT_SIZE,
+																								GroupLayout.DEFAULT_SIZE,
+																								Short.MAX_VALUE)
+																						.addComponent(
+																								personalInfoBirthdayLabel))
+																		.addGap(37)
+																		.addGroup(
+																				gl_personalInfoPanel
+																						.createParallelGroup(
+																								Alignment.LEADING,
+																								false)
+																						.addComponent(
+																								txtBirthday)
+																						.addComponent(
+																								personalInfoPhoneText,
+																								GroupLayout.DEFAULT_SIZE,
+																								223,
+																								Short.MAX_VALUE)
+																						.addComponent(
+																								personalInfoMailText))))
+										.addContainerGap(44, Short.MAX_VALUE)));
+		gl_personalInfoPanel
+				.setVerticalGroup(gl_personalInfoPanel
+						.createParallelGroup(Alignment.LEADING)
+						.addGroup(
+								gl_personalInfoPanel
+										.createSequentialGroup()
+										.addContainerGap()
+										.addComponent(personalInfoLabel)
+										.addGap(11)
+										.addGroup(
+												gl_personalInfoPanel
+														.createParallelGroup(
+																Alignment.BASELINE)
+														.addComponent(
+																personalInfoNameLabel,
+																GroupLayout.PREFERRED_SIZE,
+																15,
+																GroupLayout.PREFERRED_SIZE)
+														.addComponent(
+																personalInfoPhoneLabel)
+														.addComponent(
+																personalInfoNameText,
+																GroupLayout.PREFERRED_SIZE,
+																GroupLayout.DEFAULT_SIZE,
+																GroupLayout.PREFERRED_SIZE)
+														.addComponent(
+																personalInfoPhoneText,
+																GroupLayout.PREFERRED_SIZE,
+																GroupLayout.DEFAULT_SIZE,
+																GroupLayout.PREFERRED_SIZE))
+										.addPreferredGap(
+												ComponentPlacement.UNRELATED)
+										.addGroup(
+												gl_personalInfoPanel
+														.createParallelGroup(
+																Alignment.BASELINE)
+														.addComponent(
+																personalInfoSurnameLabel)
+														.addComponent(
+																personalInfoMailLabel)
+														.addComponent(
+																personalInfoSurnameText,
+																GroupLayout.PREFERRED_SIZE,
+																GroupLayout.DEFAULT_SIZE,
+																GroupLayout.PREFERRED_SIZE)
+														.addComponent(
+																personalInfoMailText,
+																GroupLayout.PREFERRED_SIZE,
+																GroupLayout.DEFAULT_SIZE,
+																GroupLayout.PREFERRED_SIZE))
+										.addPreferredGap(
+												ComponentPlacement.UNRELATED)
+										.addGroup(
+												gl_personalInfoPanel
+														.createParallelGroup(
+																Alignment.BASELINE)
+														.addComponent(
+																personalInfoNationalIDLabel)
+														.addComponent(
+																personalInfoBirthdayLabel)
+														.addComponent(
+																personalInfoTCText,
+																GroupLayout.PREFERRED_SIZE,
+																GroupLayout.DEFAULT_SIZE,
+																GroupLayout.PREFERRED_SIZE)
+														.addComponent(
+																txtBirthday,
+																GroupLayout.PREFERRED_SIZE,
+																GroupLayout.DEFAULT_SIZE,
+																GroupLayout.PREFERRED_SIZE))
+										.addPreferredGap(
+												ComponentPlacement.RELATED, 18,
+												Short.MAX_VALUE)
+										.addGroup(
+												gl_personalInfoPanel
+														.createParallelGroup(
+																Alignment.BASELINE)
+														.addComponent(
+																personalInfoGenderLabel)
+														.addComponent(
+																personalInfoGenderComboBox,
+																GroupLayout.PREFERRED_SIZE,
+																GroupLayout.DEFAULT_SIZE,
+																GroupLayout.PREFERRED_SIZE))
+										.addContainerGap()));
 		personalInfoPanel.setLayout(gl_personalInfoPanel);
 
 		emergencyContactPanel.setBorder(javax.swing.BorderFactory
@@ -874,21 +1005,23 @@ public class StudentWindow extends javax.swing.JFrame {
 		pack();
 	}// </editor-fold>//GEN-END:initComponents
 
-	private void addActionPerformed(java.awt.event.ActionEvent evt) throws ParseException {// GEN-FIRST:event_pTCidActionPerformed
+	private void addActionPerformed(java.awt.event.ActionEvent evt)
+			throws ParseException {// GEN-FIRST:event_pTCidActionPerformed
 		if (checkPersonalInfoEmpty()) {
 			JOptionPane.showMessageDialog(getContentPane(),
 					"The mandatory field is empty, please fill");
 		} else {
-			Student student = getStudentInfoFromText();	
+			Student student = getStudentInfoFromText();
 			EmergencyContact emgContact = getContactInfoFromText();
 			School school = getSchoolInfoFromText();
-			Dorm dorm=new Dorm();
+			Dorm dorm = new Dorm();
 			dorm.setDormName(accoInfoDormComboBox.getSelectedItem().toString());
 			Room room = getRoomFromText();
 			Hostel hostel = getStartEndDateFromText();
 			DBConnection conn = new DBConnection();
 			try {
-				if (conn.insertStudent(student, emgContact, school,dorm,room,hostel)) {
+				if (conn.insertStudent(student, emgContact, school, dorm, room,
+						hostel)) {
 					System.out.println("Kayit Basarili");
 				} else {
 					System.out.println("Kayit Basarili Degil");
@@ -902,19 +1035,26 @@ public class StudentWindow extends javax.swing.JFrame {
 	}// GEN-LAST:event_pTCidActionPerformed
 
 	private Hostel getStartEndDateFromText() throws ParseException {
-		Hostel hostel=new Hostel();
-		Date start=convertStringToDatetime(accoInfoStartDateText.getText());
+		Hostel hostel = new Hostel();
+		if (accoInfoStartDateText.getText().isEmpty()
+				|| accoInfoEndDateText.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(getContentPane(),
+					"Please enter start/end date");
+			hostel.setStartDate(null);
+			hostel.setEndDate(null);
+		}
+		Date start = convertStringToDatetime(accoInfoStartDateText.getText());
 		hostel.setStartDate(start);
-		Date end=convertStringToDatetime(accoInfoEndDateText.getText());
-
+		Date end = convertStringToDatetime(accoInfoEndDateText.getText());
 		hostel.setEndDate(end);
-		
+
 		return hostel;
 	}
 
 	private Room getRoomFromText() {
-		Room room =new Room();
-		int roomNo=Integer.parseInt(accoInfoRoomComboBox.getSelectedItem().toString());
+		Room room = new Room();
+		int roomNo = Integer.parseInt(accoInfoRoomComboBox.getSelectedItem()
+				.toString());
 		room.setRoomNo(roomNo);
 		return room;
 	}
@@ -942,38 +1082,38 @@ public class StudentWindow extends javax.swing.JFrame {
 
 	private Student getStudentInfoFromText() throws ParseException {
 		Student student = new Student();
-		if(txtBirthday.getText()==""){
+		if (txtBirthday.getText().isEmpty()) {
 			student.setBirthday(null);
-			
-		}else{
-			Date birthday=convertStringToDatetime(txtBirthday.getText());
+		} else {
+			Date birthday = convertStringToDatetime(txtBirthday.getText());
 			student.setBirthday(birthday);
 		}
-		
+
 		student.setName(personalInfoNameText.getText());
 		student.setSurname(personalInfoSurnameText.getText());
-	
 		student.setEmail(personalInfoMailText.getText());
-		student.setGender(personalInfoGenderComboBox.getSelectedItem().toString());
+		student.setGender(personalInfoGenderComboBox.getSelectedItem()
+				.toString());
 		student.setTC(personalInfoTCText.getText());
 		student.setPhone(personalInfoPhoneText.getText());
-	
+
 		return student;
 	}
-/*	private Date convertStringToDatetime(String dt) throws ParseException {
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy");
-		String date=dt;
-		Date birthday =sdf.parse(date);
-		return birthday;
-	}*/
+
+	/*
+	 * private Date convertStringToDatetime(String dt) throws ParseException {
+	 * SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy"); String
+	 * date=dt; Date birthday =sdf.parse(date); return birthday; }
+	 */
 
 	private Date convertStringToDatetime(String dt) throws ParseException {
-		java.util.Date birthday = new java.util.Date(); 
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy"); 
-		birthday = sdf.parse(dt);
-		Date sqlDate = new java.sql.Date(birthday.getTime()); 
+		java.util.Date date = new java.util.Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy");
+		date = sdf.parse(dt);
+		Date sqlDate = new java.sql.Date(date.getTime());
 		return sqlDate;
 	}
+
 	private boolean checkPersonalInfoEmpty() {
 		return personalInfoNameText.getText().isEmpty()
 				|| personalInfoSurnameText.getText().isEmpty()

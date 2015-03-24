@@ -51,6 +51,7 @@ public class SearchAllWindow extends javax.swing.JFrame {
 	private JTable searchTable;
 	private JTextField startDateTextField;
 	private JTextField endDateTextField;
+	private Button enterButton;
 
 	/**
 	 * Creates new form DormWindow
@@ -60,7 +61,7 @@ public class SearchAllWindow extends javax.swing.JFrame {
 		getContentPane().setLayout(null);
 		
 		Button endDateButton = new Button("End Date");
-		endDateButton.setBounds(310, 10, 70, 22);
+		endDateButton.setBounds(191, 10, 70, 22);
 		getContentPane().add(endDateButton);
 		
 		Button startDateButton = new Button("Start Date");
@@ -69,7 +70,7 @@ public class SearchAllWindow extends javax.swing.JFrame {
 		
 		searchTable = new JTable();
 		searchTable.setColumnSelectionAllowed(true);
-		searchTable.setBounds(10, 52, 462, 308);
+		searchTable.setBounds(10, 52, 462, 237);
 		getContentPane().add(searchTable);
 		
 		startDateTextField = new JTextField();
@@ -78,9 +79,18 @@ public class SearchAllWindow extends javax.swing.JFrame {
 		startDateTextField.setColumns(10);
 		
 		endDateTextField = new JTextField();
-		endDateTextField.setBounds(386, 10, 86, 20);
+		endDateTextField.setBounds(267, 10, 86, 20);
 		getContentPane().add(endDateTextField);
 		endDateTextField.setColumns(10);
+		
+		enterButton = new Button("ENTER");
+		enterButton.setFont(new Font("Tahoma", Font.BOLD, 12));
+		enterButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		enterButton.setBounds(392, 10, 80, 22);
+		getContentPane().add(enterButton);
 		
 		startDateButton.addActionListener(new ActionListener() {
 			StartDatePopup startDatePopup = new StartDatePopup();

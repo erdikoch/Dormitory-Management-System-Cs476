@@ -29,6 +29,7 @@ public class DBConnection {
 	private ArrayList dorms;
 	private ArrayList rooms;
 	private DormListWindow dormListW;
+	private ArrayList studentsInRooms;
 
 	public DBConnection() {
 
@@ -41,7 +42,7 @@ public class DBConnection {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		String url = "jdbc:sqlserver://192.168.230.1:1433;instance=MSSQLSERVER;DatabaseName=DormManagement";
+		String url = "jdbc:sqlserver://192.168.234.1:1433;instance=MSSQLSERVER;DatabaseName=DormManagement";
 
 		con = DriverManager.getConnection(url, "sa", "123456");
 		return con;
@@ -186,10 +187,6 @@ public class DBConnection {
 		PreparedStatement pstmt = null;
 		try {
 			dorms = new ArrayList<>();
-			// Statement stmt = con.createStatement();
-			// String query = "SELECT * FROM Dorm";
-
-			// ResultSet rs = stmt.executeQuery(query);
 			pstmt = connect().prepareStatement("select * from Dorm");
 			ResultSet rs = pstmt.executeQuery();
 
@@ -209,8 +206,8 @@ public class DBConnection {
 		try {
 			PreparedStatement pstmt = null;
 			String selectedDorm = dormListW.selectedDorm;
-			pstmt = connect()
-					.prepareStatement("select RoomNo from Room where (select Dorm_ID from Dorm where DormName = '"
+			pstmt = connect().prepareStatement(
+					"select RoomNo from Room where (select Dorm_ID from Dorm where DormName = '"
 							+ selectedDorm + "') = Dorm_ID");
 			ResultSet rs = pstmt.executeQuery();
 			rooms = new ArrayList<>();
@@ -223,9 +220,24 @@ public class DBConnection {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		// select RoomNo from Room where (select Dorm_ID from Dorm where
-		// DormName = 'Dorm 3') = Dorm_ID
+	}
 
+	public ArrayList<Integer> retrieveStudentsinRooms(String dormName,
+			int roomNo) throws SQLException {
+		studentsInRooms = new ArrayList<String>();
+		proc_stmt = connect().prepareCall("{ call Get_StudentsinRoom(?, ?) }");
+		proc_stmt.setString(1, dormName);
+		proc_stmt.setInt(2, roomNo);
+		rs = proc_stmt.executeQuery();
+		while (rs.next()) {
+			String stdName = rs.getString("StudentName");
+			String stdSurname = rs.getString("StudentSurname");
+			studentsInRooms.add(stdName + " " + stdSurname);
+		}
+		for (int i = 0; i < studentsInRooms.size(); i++) {
+			System.out.println(studentsInRooms.get(i));
+		}
+		return studentsInRooms;
 	}
 
 	public static void closeStatement(Statement statement) {
@@ -241,7 +253,7 @@ public class DBConnection {
 	public ArrayList getDorms() {
 		return dorms;
 	}
-	
+
 	public ArrayList getRooms() {
 		return rooms;
 	}

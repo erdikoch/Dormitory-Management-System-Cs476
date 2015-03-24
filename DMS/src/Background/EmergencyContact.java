@@ -4,10 +4,7 @@ public class EmergencyContact {
 	private String name;
 	private String surname;
 	private String phone;
-	
-	public EmergencyContact() {
-		
-	}
+
 
 	public String getName() {
 		return name;

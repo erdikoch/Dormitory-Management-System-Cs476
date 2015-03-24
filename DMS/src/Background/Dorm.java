@@ -5,9 +5,6 @@ public class Dorm {
 	private String dormName;
 	private String location;
 	
-	public Dorm(){
-	
-	}
 	public String getDormName() {
 		return dormName;
 	}

@@ -5,9 +5,6 @@ public class School {
 	private String department;
 	private int grade;
 	
-	public School() {
-		
-	}
 
 	public String getUniName() {
 		return uniName;

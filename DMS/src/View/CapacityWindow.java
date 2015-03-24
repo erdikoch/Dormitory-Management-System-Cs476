@@ -7,12 +7,15 @@ import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.general.PieDataset;
 import org.jfree.ui.ApplicationFrame;
 import org.jfree.ui.RefineryUtilities;
+import java.awt.Toolkit;
  
 public class CapacityWindow extends ApplicationFrame 
 {
    public CapacityWindow( String title ) 
    {
       super( title ); 
+      setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\\u0130smetcan Herg\u00FCn\u015Fen\\Desktop\\dorm.png"));
+      setTitle("Dorm Capacity");
       setContentPane(createDemoPanel( ));
    }
    

@@ -25,6 +25,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.Font;
 import java.awt.Color;
 import javax.swing.JMenu;
+import java.awt.Toolkit;
 
 public class MainWindow extends javax.swing.JFrame {
 
@@ -74,6 +75,7 @@ public class MainWindow extends javax.swing.JFrame {
 	}
 
 	public MainWindow() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\\u0130smetcan Herg\u00FCn\u015Fen\\Desktop\\dorm.png"));
 		setTitle("Dormitory Management System");
 		initComponents();
 	}
@@ -1130,19 +1132,22 @@ public class MainWindow extends javax.swing.JFrame {
 
 		otherMenu.setText("Other");
 		menuBar.add(otherMenu);
-
-		addRoomMenuItem = new JMenuItem("Show Capacity");
-		addRoomMenuItem.addActionListener(new ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				CapacityWindow capacityChart = new CapacityWindow(
-						"Mobile Sales");
-				capacityChart.setSize(560, 367);
-				RefineryUtilities.centerFrameOnScreen(capacityChart);
-				capacityChart.setVisible(true);
-				capacityChart.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-			}
-		});
-		otherMenu.add(addRoomMenuItem);
+		
+		lostItemsMenuItem = new JMenuItem("Lost Items");
+		otherMenu.add(lostItemsMenuItem);
+		
+				addRoomMenuItem = new JMenuItem("Show Capacity");
+				addRoomMenuItem.addActionListener(new ActionListener() {
+					public void actionPerformed(java.awt.event.ActionEvent evt) {
+						CapacityWindow capacityChart = new CapacityWindow(
+								"Mobile Sales");
+						capacityChart.setSize(560, 367);
+						RefineryUtilities.centerFrameOnScreen(capacityChart);
+						capacityChart.setVisible(true);
+						capacityChart.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+					}
+				});
+				otherMenu.add(addRoomMenuItem);
 
 		setJMenuBar(menuBar);
 
@@ -1339,4 +1344,5 @@ public class MainWindow extends javax.swing.JFrame {
 	private JMenuItem viewDormMenuItem;
 	private JMenu searchMenu;
 	private JMenuItem searchAllMenuItem;
+	private JMenuItem lostItemsMenuItem;
 }

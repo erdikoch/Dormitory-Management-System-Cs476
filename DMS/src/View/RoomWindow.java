@@ -24,6 +24,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.Toolkit;
 
 /**
  *
@@ -36,6 +37,7 @@ public class RoomWindow extends javax.swing.JFrame {
 	 * Creates new form StudentWindow
 	 */
 	public RoomWindow() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\\u0130smetcan Herg\u00FCn\u015Fen\\Desktop\\dorm.png"));
 		setTitle("Add Room No ");
 		initComponents();
 	}

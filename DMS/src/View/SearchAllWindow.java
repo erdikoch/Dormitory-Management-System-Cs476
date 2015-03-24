@@ -69,7 +69,7 @@ public class SearchAllWindow extends javax.swing.JFrame {
 		getContentPane().add(startDateButton);
 		
 		searchTable = new JTable();
-		searchTable.setColumnSelectionAllowed(true);
+		searchTable.setCellSelectionEnabled(true);
 		searchTable.setBounds(10, 52, 462, 237);
 		getContentPane().add(searchTable);
 		

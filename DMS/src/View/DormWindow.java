@@ -21,7 +21,6 @@ public class DormWindow extends javax.swing.JFrame {
 	 * Creates new form DormWindow
 	 */
 	public DormWindow() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\\u0130smetcan Herg\u00FCn\u015Fen\\Desktop\\dorm.png"));
 		setTitle("Add Dorm");
 		initComponents();
 	}

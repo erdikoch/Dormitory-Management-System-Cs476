@@ -37,8 +37,7 @@ public class RoomWindow extends javax.swing.JFrame {
 	 * Creates new form StudentWindow
 	 */
 	public RoomWindow() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\\u0130smetcan Herg\u00FCn\u015Fen\\Desktop\\dorm.png"));
-		setTitle("Add Room No ");
+		setTitle("Add Room");
 		initComponents();
 	}
 

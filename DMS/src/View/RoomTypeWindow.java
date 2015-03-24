@@ -30,7 +30,6 @@ public class RoomTypeWindow extends JFrame {
 	 * Create the frame.
 	 */
 	public RoomTypeWindow() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\\u0130smetcan Herg\u00FCn\u015Fen\\Desktop\\dorm.png"));
 		setTitle("Add Room Type");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 262, 174);

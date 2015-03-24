@@ -14,7 +14,6 @@ public class CapacityWindow extends ApplicationFrame
    public CapacityWindow( String title ) 
    {
       super( title ); 
-      setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\\u0130smetcan Herg\u00FCn\u015Fen\\Desktop\\dorm.png"));
       setTitle("Dorm Capacity");
       setContentPane(createDemoPanel( ));
    }
@@ -23,9 +22,8 @@ public class CapacityWindow extends ApplicationFrame
    private static PieDataset createDataset( ) 
    {
       DefaultPieDataset dataset = new DefaultPieDataset( );
-      dataset.setValue( "Students" , new Double( 20 ) );  // after student Addititon will be changed
-      dataset.setValue( "Employees" , new Double( 20 ) );   
-      dataset.setValue( "Teachers" , new Double( 40 ) );    
+      dataset.setValue( "Female Student" , new Double( 20 ) );   
+      dataset.setValue( "Male Student" , new Double( 40 ) );    
       dataset.setValue("Dorm Empty Spaces",new Double( 20 ));
       return dataset;         
    }

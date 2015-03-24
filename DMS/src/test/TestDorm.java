@@ -37,7 +37,22 @@ public class TestDorm {
 	}
 	
 	@Test
-	public void testDormLocationLength() {
+	public void testDormLocationLengthOneHundred() {
 		equals(new Dorm().getLocation().length() < 100 );
+	}
+	
+	@Test
+	public void testDormLocationLengthOneThosand() {
+		equals(new Dorm().getLocation().length() < 1000 );
+	}
+	
+	@Test
+	public void testDormLocationLengthZero() {
+		equals(new Dorm().getLocation().length() < 0 );
+	}
+	
+	@Test
+	public void testDormLocationLengthOneDigit() {
+		equals(new Dorm().getLocation().length() < 2 );
 	}
 }

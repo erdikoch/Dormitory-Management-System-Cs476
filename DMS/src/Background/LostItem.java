@@ -29,7 +29,4 @@ public class LostItem {
 		this.isFounded = isFounded;
 	}
 
-	public LostItem() {
-		
-	}
 }

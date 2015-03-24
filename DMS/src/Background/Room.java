@@ -4,11 +4,7 @@ public class Room {
 	private String typeName;
 	private int roomNo;
 	private double roomPrice;
-	
-	
-	public Room() {
-		
-	}
+
 	
 	public String getTypeName() {
 		return typeName;

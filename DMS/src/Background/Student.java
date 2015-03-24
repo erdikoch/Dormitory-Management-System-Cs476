@@ -20,11 +20,7 @@ public class Student {
 	public void setBirthday(Date birthday) {
 		this.birthday = birthday;
 	}
-
-	public Student() {
-		
-	}
-
+	
 	public String getName() {
 		return name;
 	}

@@ -97,7 +97,7 @@ public class RoomWindow extends javax.swing.JFrame {
 				
 						try {
 						
-							ArrayList<String> list=conn.displayRoomType();
+							ArrayList<Integer> list=conn.displayRoomType();
 							for(int i =0;i<list.size();i++)
 							 cboxRoomType.addItem(list.get(i));
 						} catch (SQLException e) {
@@ -183,7 +183,7 @@ public class RoomWindow extends javax.swing.JFrame {
 			throws SQLException {
 		Room room = new Room();	
 		int roomNo = Integer.parseInt(txtRoomNo.getText());
-		String roomType = cboxRoomType.getSelectedItem().toString();
+		int roomType = Integer.parseInt(cboxRoomType.getSelectedItem().toString());
 		room.setRoomNo(roomNo);
 		room.setTypeName(roomType);
 		Dorm dorm = new Dorm();

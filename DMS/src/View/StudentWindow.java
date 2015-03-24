@@ -41,7 +41,6 @@ public class StudentWindow extends javax.swing.JFrame {
 	 * Creates new form StrudentWindow
 	 */
 	public StudentWindow() {
-		setTitle("Add Student");
 		initComponents();
 	}
 
@@ -100,7 +99,7 @@ public class StudentWindow extends javax.swing.JFrame {
 			}
 
 			private void displayDormcombo(MouseEvent me) {
-				DBConnection conn = new DBConnection();
+				DBConnection conn =new DBConnection();
 				
 				try {
 				
@@ -118,28 +117,7 @@ public class StudentWindow extends javax.swing.JFrame {
 				
 			
 		});
-	/*	accoInfoDormComboBox.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent evt) {
-				displayDormcombo(evt);
-        	}
-
-			private void displayDormcombo(ActionEvent evt) {
-				DBConnection conn =new DBConnection();
-				
-				try {
-				
-					ArrayList<String> list=conn.displayDorm();
-					for(int i =0;i<list.size();i++)
-					 accoInfoDormComboBox.addItem(list.get(i));
-				} catch (SQLException e) {
-		
-					e.printStackTrace();
-				}
-				
-				
-				
-			}
-        });*/
+	
 		accoInfoRoomComboBox = new javax.swing.JComboBox();
 		accoInfoRoomComboBox.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {

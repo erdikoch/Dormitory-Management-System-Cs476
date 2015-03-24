@@ -24,7 +24,6 @@ import javax.swing.GroupLayout;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.Font;
 import java.awt.Color;
-import javax.swing.JMenu;
 
 public class MainWindow extends javax.swing.JFrame {
 
@@ -74,7 +73,6 @@ public class MainWindow extends javax.swing.JFrame {
 	}
 
 	public MainWindow() {
-		setTitle("Dormitory Management System");
 		initComponents();
 	}
 
@@ -1109,8 +1107,8 @@ public class MainWindow extends javax.swing.JFrame {
 		roomMenu.add(addRoomMenuItem);
 
 		menuBar.add(roomMenu);
-		addRoomTypeMenuItem = new JMenuItem("Add Room Type");
-		addRoomTypeMenuItem.addActionListener(new java.awt.event.ActionListener() {
+		mntmAddRoomType = new JMenuItem("Add Room Type");
+		mntmAddRoomType.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				addRoomTypeActionPerformed(evt);
 			}
@@ -1120,7 +1118,7 @@ public class MainWindow extends javax.swing.JFrame {
 
 			}
 		});
-		roomMenu.add(addRoomTypeMenuItem);
+		roomMenu.add(mntmAddRoomType);
 
 		otherMenu.setText("Other");
 		menuBar.add(otherMenu);
@@ -1139,12 +1137,6 @@ public class MainWindow extends javax.swing.JFrame {
 		otherMenu.add(addRoomMenuItem);
 
 		setJMenuBar(menuBar);
-		
-		searchMenu = new JMenu("Search");
-		menuBar.add(searchMenu);
-		
-		searchAllMenuItem = new JMenuItem("Search All  Ctrl+F");
-		searchMenu.add(searchAllMenuItem);
 
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(
 				getContentPane());
@@ -1209,7 +1201,7 @@ public class MainWindow extends javax.swing.JFrame {
 	}// GEN-LAST:event_jMenuItem3ActionPerformed
 
 	private void viewDormActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jMenuItem3ActionPerformed
-		new SearchAllWindow().setVisible(true);
+		new DormListWindow().setVisible(true);
 	}// GEN-LAST:event_jMenuItem3ActionPerformed
 
 	private void setEditableFalse() {
@@ -1330,13 +1322,11 @@ public class MainWindow extends javax.swing.JFrame {
 	private javax.swing.JTextField personalInfoPhoneText;
 	private javax.swing.JComboBox accoInfoRoomComboBox;
 	private javax.swing.JButton saveButton;
-	private JMenuItem addRoomTypeMenuItem;
+	private JMenuItem mntmAddRoomType;
 	private javax.swing.JTextField accoInfoStartDateText;
 	private javax.swing.JTextField personalInfoSurnameTExt;
 	private javax.swing.JTextField personalInfoNationalIDText;
 	private javax.swing.JComboBox personalInfoYearComboBox;
 	private javax.swing.JTextField searchStudentText;
 	private JMenuItem viewDormMenuItem;
-	private JMenu searchMenu;
-	private JMenuItem searchAllMenuItem;
 }

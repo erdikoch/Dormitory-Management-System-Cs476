@@ -41,7 +41,7 @@ public class DBConnection {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		String url = "jdbc:sqlserver://192.168.234.1:1433;instance=MSSQLSERVER;DatabaseName=DormManagement";
+		String url = "jdbc:sqlserver://192.168.230.1:1433;instance=MSSQLSERVER;DatabaseName=DormManagement";
 
 		con = DriverManager.getConnection(url, "sa", "123456");
 		return con;
@@ -50,7 +50,7 @@ public class DBConnection {
 	public boolean insertRoomType(Room room) {
 		try {
 			proc_stmt = connect().prepareCall("{ call Insert_RoomType(?,?) }");
-			proc_stmt.setString(1, room.getTypeName());
+			proc_stmt.setInt(1, room.getTypeName());
 			proc_stmt.setDouble(2, room.getRoomPrice());
 
 			proc_stmt.executeUpdate();
@@ -91,12 +91,12 @@ public class DBConnection {
 
 	}
 
-	public ArrayList<String> displayRoomType() throws SQLException {
-		ArrayList<String> typeList = new ArrayList<String>();
+	public ArrayList<Integer> displayRoomType() throws SQLException {
+		ArrayList<Integer> typeList = new ArrayList<Integer>();
 		proc_stmt = connect().prepareCall("{ call Get_RoomType() }");
 		rs = proc_stmt.executeQuery();
 		while (rs.next()) {
-			typeList.add(rs.getString("TypeName"));
+			typeList.add(rs.getInt("TypeName"));
 
 		}
 		return typeList;
@@ -121,7 +121,7 @@ public class DBConnection {
 		try {
 			proc_stmt = connect().prepareCall("{ call Insert_Room(?,?,?) }");
 			proc_stmt.setInt(1, room.getRoomNo());
-			proc_stmt.setString(2, room.getTypeName());
+			proc_stmt.setInt(2, room.getTypeName());
 			proc_stmt.setString(3, dorm.getDormName());
 
 			proc_stmt.executeUpdate();

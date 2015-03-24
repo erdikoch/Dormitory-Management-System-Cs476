@@ -13,18 +13,18 @@ public class CapacityWindow extends ApplicationFrame
    public CapacityWindow( String title ) 
    {
       super( title ); 
-      setTitle("Capacity");
       setContentPane(createDemoPanel( ));
    }
    
    //will be implemented (i will add counter function later)
    private static PieDataset createDataset( ) 
    {
-      DefaultPieDataset dataSet = new DefaultPieDataset( );
-      dataSet.setValue( "Female Students" , new Double( 20 ) );   
-      dataSet.setValue( "Male Students" , new Double( 40 ) );    
-      dataSet.setValue("Dorm Empty Spaces",new Double( 20 ));
-      return dataSet;         
+      DefaultPieDataset dataset = new DefaultPieDataset( );
+      dataset.setValue( "Students" , new Double( 20 ) );  // after student Addititon will be changed
+      dataset.setValue( "Employees" , new Double( 20 ) );   
+      dataset.setValue( "Teachers" , new Double( 40 ) );    
+      dataset.setValue("Dorm Empty Spaces",new Double( 20 ));
+      return dataset;         
    }
    private static JFreeChart createChart( PieDataset dataset )
    {

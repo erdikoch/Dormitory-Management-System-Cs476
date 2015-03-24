@@ -20,7 +20,6 @@ public class DormWindow extends javax.swing.JFrame {
 	 * Creates new form DormWindow
 	 */
 	public DormWindow() {
-		setTitle("Add Dorm");
 		initComponents();
 	}
 

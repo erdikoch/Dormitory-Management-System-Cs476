@@ -21,8 +21,8 @@ import java.awt.event.ActionEvent;
 public class RoomTypeWindow extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField typeNameTextField;
-	private JTextField priceTextField;
+	private JTextField txtTypeName;
+	private JTextField txtPrice;
 
 
 
@@ -30,33 +30,32 @@ public class RoomTypeWindow extends JFrame {
 	 * Create the frame.
 	 */
 	public RoomTypeWindow() {
-		setTitle("Add Room Type");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 262, 174);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
-		JLabel typeNameLabel = new JLabel("Type Name :");
+		JLabel lblTypeName = new JLabel("Type Name :");
 		
-		JLabel priceLabel = new JLabel("Price :");
+		JLabel lblPrice = new JLabel("Price :");
 		
-		typeNameTextField = new JTextField();
-		typeNameTextField.setColumns(10);
+		txtTypeName = new JTextField();
+		txtTypeName.setColumns(10);
 		
-		priceTextField = new JTextField();
-		priceTextField.setColumns(10);
+		txtPrice = new JTextField();
+		txtPrice.setColumns(10);
 		
-		JButton addButton = new JButton("Add");
-		addButton.addActionListener(new ActionListener() {
+		JButton btnAdd = new JButton("Add");
+		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
 				btnAddRoomTypeActionPerformed(evt);
 			}
 
 			private void btnAddRoomTypeActionPerformed(ActionEvent evt) {
 				Room room = new Room();
-				room.setTypeName(typeNameTextField.getText());
-				Double roomPrice=Double.parseDouble(priceTextField.getText());
+				room.setTypeName(Integer.parseInt(txtTypeName.getText()));
+				Double roomPrice=Double.parseDouble(txtPrice.getText());
 				room.setRoomPrice(roomPrice);
 				DBConnection conn=new DBConnection();
 				if(conn.insertRoomType(room)){
@@ -73,15 +72,15 @@ public class RoomTypeWindow extends JFrame {
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addContainerGap()
-							.addComponent(addButton, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE))
+							.addComponent(btnAdd, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE))
 						.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
-							.addComponent(typeNameLabel)
+							.addComponent(lblTypeName)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(typeNameTextField, GroupLayout.PREFERRED_SIZE, 119, GroupLayout.PREFERRED_SIZE))
+							.addComponent(txtTypeName, GroupLayout.PREFERRED_SIZE, 119, GroupLayout.PREFERRED_SIZE))
 						.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
-							.addComponent(priceLabel, GroupLayout.PREFERRED_SIZE, 55, GroupLayout.PREFERRED_SIZE)
+							.addComponent(lblPrice, GroupLayout.PREFERRED_SIZE, 55, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(priceTextField, GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE)))
+							.addComponent(txtPrice, GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE)))
 					.addGap(52))
 		);
 		gl_contentPane.setVerticalGroup(
@@ -89,14 +88,14 @@ public class RoomTypeWindow extends JFrame {
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(typeNameLabel)
-						.addComponent(typeNameTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(lblTypeName)
+						.addComponent(txtTypeName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addGap(24)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(priceLabel)
-						.addComponent(priceTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(lblPrice)
+						.addComponent(txtPrice, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addGap(18)
-					.addComponent(addButton)
+					.addComponent(btnAdd)
 					.addContainerGap(16, Short.MAX_VALUE))
 		);
 		contentPane.setLayout(gl_contentPane);

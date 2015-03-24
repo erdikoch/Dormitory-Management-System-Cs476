@@ -1,17 +1,20 @@
 package background;
 
 public class Room {
-	private String typeName;
+	private int typeName;
+	
 	private int roomNo;
 	private double roomPrice;
 
 	
-	public String getTypeName() {
+
+	public int getTypeName() {
 		return typeName;
 	}
-	public void setTypeName(String typeName) {
+	public void setTypeName(int typeName) {
 		this.typeName = typeName;
 	}
+
 	public int getRoomNo() {
 		return roomNo;
 	}

@@ -42,7 +42,7 @@ public class DBConnection {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		String url = "jdbc:sqlserver://192.168.234.1:1433;instance=MSSQLSERVER;DatabaseName=DormManagement";
+		String url = "jdbc:sqlserver://192.168.230.1:1433;instance=MSSQLSERVER;DatabaseName=DormManagement";
 
 		con = DriverManager.getConnection(url, "sa", "123456");
 		return con;
@@ -104,10 +104,11 @@ public class DBConnection {
 
 	}
 
-	public ArrayList<Integer> displayRoomNo(Dorm dorm) throws SQLException {
+	public ArrayList<Integer> displayRoomNo(Dorm dorm,Room room) throws SQLException {
 		ArrayList<Integer> roomNoList = new ArrayList<Integer>();
-		proc_stmt = connect().prepareCall("{ call Get_Room(?) }");
+		proc_stmt = connect().prepareCall("{ call Get_Room(?,?) }");
 		proc_stmt.setString(1, dorm.getDormName());
+		proc_stmt.setInt(2, room.getTypeName());
 		rs = proc_stmt.executeQuery();
 		while (rs.next()) {
 			roomNoList.add(rs.getInt("RoomNo"));

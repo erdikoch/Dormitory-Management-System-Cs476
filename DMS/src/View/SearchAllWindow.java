@@ -43,10 +43,6 @@ import java.awt.Button;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
-/**
- *
- * @author Nazli
- */
 public class SearchAllWindow extends javax.swing.JFrame {
 	private JTable searchTable;
 	private JTextField startDateTextField;

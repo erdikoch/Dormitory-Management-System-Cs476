@@ -31,10 +31,6 @@ import javax.swing.GroupLayout;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JTextField;
 
-/**
- *
- * @author Nazli
- */
 public class StudentWindow extends javax.swing.JFrame {
 
 	/**

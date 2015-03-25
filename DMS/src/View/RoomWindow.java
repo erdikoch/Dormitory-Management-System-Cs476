@@ -26,10 +26,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.Toolkit;
 
-/**
- *
- * @author Nazli
- */
 public class RoomWindow extends javax.swing.JFrame {
 	final JComboBox cboxDorm = new JComboBox();
 	final JComboBox cboxRoomType = new JComboBox();

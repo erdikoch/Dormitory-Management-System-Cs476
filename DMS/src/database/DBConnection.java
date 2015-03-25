@@ -118,6 +118,7 @@ public class DBConnection {
 		return roomNoList;
 
 	}
+	
 
 	public boolean insertRoom(Room room, Dorm dorm) throws SQLException {
 
@@ -148,6 +149,22 @@ public class DBConnection {
 
 		}
 		return studenList;
+
+	}
+	public int GetStudentNumber(Hostel hostel,Dorm dorm,Room room) throws SQLException {
+		int studentNumber=0;
+		connect();
+		proc_stmt=con.prepareCall("{ call Get_StudentBetweenStartEndDate(?,?,?,?) }");
+		proc_stmt.setDate(1, (Date) hostel.getStartDate() );
+		proc_stmt.setDate(2, (Date) hostel.getEndDate());
+		proc_stmt.setString(3, dorm.getDormName());
+		proc_stmt.setInt(4, room.getRoomNo());
+		rs=proc_stmt.executeQuery();
+			while(rs.next()){
+				studentNumber=rs.getInt(1);
+			}
+		
+		return studentNumber;
 
 	}
 
@@ -193,8 +210,7 @@ public class DBConnection {
 			ResultSet rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				dorms.add(rs.getString("DormName") + " - "
-						+ rs.getString("Location"));
+				dorms.add(rs.getString("DormName") + " - "+ rs.getString("Location"));
 			}
 
 			pstmt.close();

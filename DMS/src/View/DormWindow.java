@@ -11,10 +11,6 @@ import background.Dorm;
 import database.DBConnection;
 import java.awt.Toolkit;
 
-/**
- *
- * @author Nazli
- */
 public class DormWindow extends javax.swing.JFrame {
 
 	/**

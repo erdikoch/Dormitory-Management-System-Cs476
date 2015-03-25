@@ -27,7 +27,7 @@ public class DBConnection {
 	PreparedStatement ps;
 	DormWindow dormWin;
 	private ArrayList dorms;
-	private ArrayList rooms;
+	private ArrayList roomNoList;
 	private DormListWindow dormListW;
 	private ArrayList studentsInRooms;
 
@@ -42,7 +42,7 @@ public class DBConnection {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		String url = "jdbc:sqlserver://192.168.230.1:1433;instance=MSSQLSERVER;DatabaseName=DormManagement";
+		String url = "jdbc:sqlserver://192.168.234.1:1433;instance=MSSQLSERVER;DatabaseName=DormManagement";
 
 		con = DriverManager.getConnection(url, "sa", "123456");
 		return con;
@@ -163,9 +163,7 @@ public class DBConnection {
 			while(rs.next()){
 				studentNumber=rs.getInt(1);
 			}
-		
 		return studentNumber;
-
 	}
 
 	public boolean insertStudent(Student st, EmergencyContact ec, School sc,
@@ -220,17 +218,16 @@ public class DBConnection {
 		}
 	}
 
-	public void retrieveRooms() {
+	public void retrieveRoomNo(String selectedDorm) {
 		try {
 			PreparedStatement pstmt = null;
-			String selectedDorm = dormListW.selectedDorm;
 			pstmt = connect().prepareStatement(
 					"select RoomNo from Room where (select Dorm_ID from Dorm where DormName = '"
 							+ selectedDorm + "') = Dorm_ID");
 			ResultSet rs = pstmt.executeQuery();
-			rooms = new ArrayList<>();
+			roomNoList = new ArrayList<>();
 			while (rs.next()) {
-				rooms.add(rs.getString("RoomNo"));
+				roomNoList.add(rs.getString("RoomNo"));
 			}
 			pstmt.close();
 
@@ -272,8 +269,8 @@ public class DBConnection {
 		return dorms;
 	}
 
-	public ArrayList getRooms() {
-		return rooms;
+	public ArrayList getRoomNoList() {
+		return roomNoList;
 	}
 
 }

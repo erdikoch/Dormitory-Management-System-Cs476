@@ -33,6 +33,8 @@ import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.UIManager;
 
+import java.awt.event.MouseMotionAdapter;
+
 public class DormListWindow extends javax.swing.JFrame {
 	private JList dormList;
 	private JList roomList;
@@ -68,6 +70,11 @@ public class DormListWindow extends javax.swing.JFrame {
 
 		listModelRooms = new DefaultListModel();
 		roomList = new JList(listModelRooms);
+		roomList.addMouseMotionListener(new MouseMotionAdapter() {
+			public void mouseMoved(MouseEvent evt) {
+				// moveMouseOnList(evt);
+			}
+		});
 		roomList.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent evt) {
@@ -186,8 +193,8 @@ public class DormListWindow extends javax.swing.JFrame {
 		pack();
 	}// </editor-fold>//GEN-END:initComponents
 
-	private void clickRoomList(MouseEvent evt) {
-		String std = null;
+	private void moveMouseOnList(MouseEvent evt) {
+		String info = null;
 		DBConnection conn = new DBConnection();
 		String rNo = (String) roomList.getSelectedValue();
 		String room = rNo.substring(7);
@@ -196,13 +203,44 @@ public class DormListWindow extends javax.swing.JFrame {
 		try {
 			ArrayList<Integer> studentsinRooms = conn.retrieveStudentsinRooms(
 					selectedDorm, roomNo);
+			roomList = (JList) evt.getSource();
+			for (int i = 0; i < studentsinRooms.size(); i++) {
+				info += studentsinRooms.get(i) + ", ";
+			}
+			System.out.println(info);
+			int index = roomList.locationToIndex(evt.getPoint());
+			if (index > -1) {
+				roomList.setToolTipText(null);
+				String text = (String) listModelRooms.getElementAt(index);
+				roomList.setToolTipText(text);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	private void clickRoomList(MouseEvent evt) {
+		String info = "";
+		DBConnection conn = new DBConnection();
+		String rNo = (String) roomList.getSelectedValue();
+		String room = rNo.substring(7);
+		System.out.println(room);
+		int roomNo = Integer.parseInt(room);
+		try {
+			ArrayList<Integer> studentsinRooms = conn.retrieveStudentsinRooms(
+					selectedDorm, roomNo);
+			for (int i = 0; i < studentsinRooms.size(); i++) {
+				info += studentsinRooms.get(i) + ", ";
+			}
 			if (evt.getClickCount() == 1) {
 				if (studentsinRooms.isEmpty()) {
-					JOptionPane.showMessageDialog(getContentPane(),
-							"No student enrolled in this room");
+					roomList.setToolTipText("No student enrolled in this room");
+
 				} else {
-					JOptionPane.showMessageDialog(getContentPane(),
-							studentsinRooms.get(0));
+					roomList.setToolTipText("Enrolled students: " + info);
+
 				}
 			}
 		} catch (SQLException e) {
@@ -218,15 +256,15 @@ public class DormListWindow extends javax.swing.JFrame {
 			String sel = (String) dormList.getSelectedValue();
 			selectedDorm = sel.substring(0, sel.indexOf(" -"));
 			DBConnection conn = new DBConnection();
-			fillRooms(conn);
+			fillRooms(conn, selectedDorm);
 		}
 	}
 
-	private void fillRooms(DBConnection conn) {
-		conn.retrieveRooms();
-		String rooms[] = new String[conn.getRooms().size()];
-		for (int i = 0; i < conn.getRooms().size(); i++) {
-			rooms[i] = (String) conn.getRooms().get(i);
+	private void fillRooms(DBConnection conn, String selectedDorm) {
+		conn.retrieveRoomNo(selectedDorm);
+		String rooms[] = new String[conn.getRoomNoList().size()];
+		for (int i = 0; i < conn.getRoomNoList().size(); i++) {
+			rooms[i] = (String) conn.getRoomNoList().get(i);
 			listModelRooms.addElement("Room - " + rooms[i]);
 		}
 	}

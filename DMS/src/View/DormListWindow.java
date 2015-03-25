@@ -33,10 +33,6 @@ import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.UIManager;
 
-/**
- *
- * @author Nazli
- */
 public class DormListWindow extends javax.swing.JFrame {
 	private JList dormList;
 	private JList roomList;

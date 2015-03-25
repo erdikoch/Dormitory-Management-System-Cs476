@@ -101,7 +101,7 @@ public class StudentWindow extends javax.swing.JFrame {
 				DBConnection conn = new DBConnection();
 
 				try {
-
+					accoInfoDormComboBox.removeAllItems();
 					ArrayList<String> list = conn.displayDorm();
 					for (int i = 0; i < list.size(); i++)
 						accoInfoDormComboBox.addItem(list.get(i));
@@ -127,13 +127,20 @@ public class StudentWindow extends javax.swing.JFrame {
 				dorm.setDormName(accoInfoDormComboBox.getSelectedItem()
 						.toString());
 				Room room = new Room();
-				room.setTypeName(Integer.parseInt(cboxRoomType.getSelectedItem().toString()));
+				room.setTypeName(Integer.parseInt(cboxRoomType
+						.getSelectedItem().toString()));
 
 				try {
 
-					ArrayList<Integer> list = conn.displayRoomNo(dorm,room);
-					for (int i = 0; i < list.size(); i++)
+					ArrayList<Integer> list = new ArrayList<Integer>();
+
+					accoInfoRoomComboBox.removeAllItems();
+					list = conn.displayRoomNo(dorm, room);
+					for (int i = 0; i < list.size(); i++) {
+
 						accoInfoRoomComboBox.addItem(list.get(i));
+					}
+
 				} catch (SQLException ev) {
 
 					ev.printStackTrace();
@@ -689,125 +696,323 @@ public class StudentWindow extends javax.swing.JFrame {
 		accoInfoAddButton.setBackground(new java.awt.Color(204, 255, 204));
 		accoInfoAddButton.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
 		accoInfoAddButton.setText("ADD");
-		
+
 		JLabel lblType = new JLabel();
 		lblType.setText("Type :");
 		lblType.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		
-				cboxRoomType.addMouseListener(new MouseAdapter() {
+
+		cboxRoomType.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent me) {
 				displayCBoxRoomType(me);
 			}
+
 			private void displayCBoxRoomType(MouseEvent me) {
-				DBConnection conn =new DBConnection();
-				
+				DBConnection conn = new DBConnection();
+
 				try {
-				
-					ArrayList<Integer> list=conn.displayRoomType();
-					for(int i =0;i<list.size();i++)
-					 cboxRoomType.addItem(list.get(i));
+					cboxRoomType.removeAllItems();
+
+					ArrayList<Integer> list = conn.displayRoomType();
+					for (int i = 0; i < list.size(); i++)
+						cboxRoomType.addItem(list.get(i));
 				} catch (SQLException e) {
-		
+
 					e.printStackTrace();
 				}
-				
+
 			}
 		});
 
-
 		javax.swing.GroupLayout gl_accoInfoPanel = new javax.swing.GroupLayout(
 				accoInfoPanel);
-		gl_accoInfoPanel.setHorizontalGroup(
-			gl_accoInfoPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_accoInfoPanel.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_accoInfoPanel.createParallelGroup(Alignment.LEADING)
-						.addComponent(accoInfoLabel, GroupLayout.PREFERRED_SIZE, 165, GroupLayout.PREFERRED_SIZE)
-						.addGroup(gl_accoInfoPanel.createSequentialGroup()
-							.addGroup(gl_accoInfoPanel.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_accoInfoPanel.createParallelGroup(Alignment.TRAILING, false)
-									.addComponent(accoInfoRoomLabel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE)
-									.addComponent(accoInfoDormLabel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-								.addComponent(lblType, GroupLayout.PREFERRED_SIZE, 55, GroupLayout.PREFERRED_SIZE))
-							.addGap(29)
-							.addGroup(gl_accoInfoPanel.createParallelGroup(Alignment.LEADING, false)
-								.addGroup(gl_accoInfoPanel.createSequentialGroup()
-									.addGroup(gl_accoInfoPanel.createParallelGroup(Alignment.LEADING, false)
-										.addComponent(accoInfoDormComboBox, 0, 92, Short.MAX_VALUE)
-										.addComponent(accoInfoRoomComboBox, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-									.addGap(78)
-									.addComponent(accoInfoStartDateLabel, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE))
-								.addGroup(gl_accoInfoPanel.createSequentialGroup()
-									.addComponent(cboxRoomType, GroupLayout.PREFERRED_SIZE, 92, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-									.addComponent(accoInfoEndDateLabel, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)))
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addGroup(gl_accoInfoPanel.createParallelGroup(Alignment.LEADING)
-								.addComponent(accoInfoStartDateText, GroupLayout.PREFERRED_SIZE, 215, GroupLayout.PREFERRED_SIZE)
-								.addGroup(Alignment.TRAILING, gl_accoInfoPanel.createSequentialGroup()
-									.addComponent(accoInfoEndDateText, GroupLayout.PREFERRED_SIZE, 215, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
-									.addComponent(accoInfoAddButton, GroupLayout.PREFERRED_SIZE, 86, GroupLayout.PREFERRED_SIZE)))))
-					.addGap(20))
-		);
-		gl_accoInfoPanel.setVerticalGroup(
-			gl_accoInfoPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_accoInfoPanel.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_accoInfoPanel.createParallelGroup(Alignment.TRAILING)
-						.addGroup(gl_accoInfoPanel.createSequentialGroup()
-							.addComponent(accoInfoLabel)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addGroup(gl_accoInfoPanel.createParallelGroup(Alignment.BASELINE)
-								.addComponent(accoInfoDormLabel)
-								.addComponent(accoInfoDormComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(accoInfoStartDateLabel)
-								.addComponent(accoInfoStartDateText, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-							.addGap(8)
-							.addGroup(gl_accoInfoPanel.createParallelGroup(Alignment.BASELINE)
-								.addComponent(cboxRoomType, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblType, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE)
-								.addComponent(accoInfoEndDateLabel)
-								.addComponent(accoInfoEndDateText, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-							.addPreferredGap(ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
-							.addGroup(gl_accoInfoPanel.createParallelGroup(Alignment.BASELINE)
-								.addComponent(accoInfoRoomLabel)
-								.addComponent(accoInfoRoomComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-						.addGroup(gl_accoInfoPanel.createSequentialGroup()
-							.addGap(0, 58, Short.MAX_VALUE)
-							.addComponent(accoInfoAddButton, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)))
-					.addContainerGap())
-		);
+		gl_accoInfoPanel
+				.setHorizontalGroup(gl_accoInfoPanel
+						.createParallelGroup(Alignment.LEADING)
+						.addGroup(
+								gl_accoInfoPanel
+										.createSequentialGroup()
+										.addContainerGap()
+										.addGroup(
+												gl_accoInfoPanel
+														.createParallelGroup(
+																Alignment.LEADING)
+														.addComponent(
+																accoInfoLabel,
+																GroupLayout.PREFERRED_SIZE,
+																165,
+																GroupLayout.PREFERRED_SIZE)
+														.addGroup(
+																gl_accoInfoPanel
+																		.createSequentialGroup()
+																		.addGroup(
+																				gl_accoInfoPanel
+																						.createParallelGroup(
+																								Alignment.LEADING)
+																						.addGroup(
+																								gl_accoInfoPanel
+																										.createParallelGroup(
+																												Alignment.TRAILING,
+																												false)
+																										.addComponent(
+																												accoInfoRoomLabel,
+																												Alignment.LEADING,
+																												GroupLayout.DEFAULT_SIZE,
+																												55,
+																												Short.MAX_VALUE)
+																										.addComponent(
+																												accoInfoDormLabel,
+																												Alignment.LEADING,
+																												GroupLayout.DEFAULT_SIZE,
+																												GroupLayout.DEFAULT_SIZE,
+																												Short.MAX_VALUE))
+																						.addComponent(
+																								lblType,
+																								GroupLayout.PREFERRED_SIZE,
+																								55,
+																								GroupLayout.PREFERRED_SIZE))
+																		.addGap(29)
+																		.addGroup(
+																				gl_accoInfoPanel
+																						.createParallelGroup(
+																								Alignment.LEADING,
+																								false)
+																						.addGroup(
+																								gl_accoInfoPanel
+																										.createSequentialGroup()
+																										.addGroup(
+																												gl_accoInfoPanel
+																														.createParallelGroup(
+																																Alignment.LEADING,
+																																false)
+																														.addComponent(
+																																accoInfoDormComboBox,
+																																0,
+																																92,
+																																Short.MAX_VALUE)
+																														.addComponent(
+																																accoInfoRoomComboBox,
+																																0,
+																																GroupLayout.DEFAULT_SIZE,
+																																Short.MAX_VALUE))
+																										.addGap(78)
+																										.addComponent(
+																												accoInfoStartDateLabel,
+																												GroupLayout.PREFERRED_SIZE,
+																												83,
+																												GroupLayout.PREFERRED_SIZE))
+																						.addGroup(
+																								gl_accoInfoPanel
+																										.createSequentialGroup()
+																										.addComponent(
+																												cboxRoomType,
+																												GroupLayout.PREFERRED_SIZE,
+																												92,
+																												GroupLayout.PREFERRED_SIZE)
+																										.addPreferredGap(
+																												ComponentPlacement.RELATED,
+																												GroupLayout.DEFAULT_SIZE,
+																												Short.MAX_VALUE)
+																										.addComponent(
+																												accoInfoEndDateLabel,
+																												GroupLayout.PREFERRED_SIZE,
+																												83,
+																												GroupLayout.PREFERRED_SIZE)))
+																		.addPreferredGap(
+																				ComponentPlacement.UNRELATED)
+																		.addGroup(
+																				gl_accoInfoPanel
+																						.createParallelGroup(
+																								Alignment.LEADING)
+																						.addComponent(
+																								accoInfoStartDateText,
+																								GroupLayout.PREFERRED_SIZE,
+																								215,
+																								GroupLayout.PREFERRED_SIZE)
+																						.addGroup(
+																								Alignment.TRAILING,
+																								gl_accoInfoPanel
+																										.createSequentialGroup()
+																										.addComponent(
+																												accoInfoEndDateText,
+																												GroupLayout.PREFERRED_SIZE,
+																												215,
+																												GroupLayout.PREFERRED_SIZE)
+																										.addPreferredGap(
+																												ComponentPlacement.RELATED,
+																												40,
+																												Short.MAX_VALUE)
+																										.addComponent(
+																												accoInfoAddButton,
+																												GroupLayout.PREFERRED_SIZE,
+																												86,
+																												GroupLayout.PREFERRED_SIZE)))))
+										.addGap(20)));
+		gl_accoInfoPanel
+				.setVerticalGroup(gl_accoInfoPanel
+						.createParallelGroup(Alignment.LEADING)
+						.addGroup(
+								gl_accoInfoPanel
+										.createSequentialGroup()
+										.addContainerGap()
+										.addGroup(
+												gl_accoInfoPanel
+														.createParallelGroup(
+																Alignment.TRAILING)
+														.addGroup(
+																gl_accoInfoPanel
+																		.createSequentialGroup()
+																		.addComponent(
+																				accoInfoLabel)
+																		.addPreferredGap(
+																				ComponentPlacement.UNRELATED)
+																		.addGroup(
+																				gl_accoInfoPanel
+																						.createParallelGroup(
+																								Alignment.BASELINE)
+																						.addComponent(
+																								accoInfoDormLabel)
+																						.addComponent(
+																								accoInfoDormComboBox,
+																								GroupLayout.PREFERRED_SIZE,
+																								GroupLayout.DEFAULT_SIZE,
+																								GroupLayout.PREFERRED_SIZE)
+																						.addComponent(
+																								accoInfoStartDateLabel)
+																						.addComponent(
+																								accoInfoStartDateText,
+																								GroupLayout.PREFERRED_SIZE,
+																								GroupLayout.DEFAULT_SIZE,
+																								GroupLayout.PREFERRED_SIZE))
+																		.addGap(8)
+																		.addGroup(
+																				gl_accoInfoPanel
+																						.createParallelGroup(
+																								Alignment.BASELINE)
+																						.addComponent(
+																								cboxRoomType,
+																								GroupLayout.PREFERRED_SIZE,
+																								GroupLayout.DEFAULT_SIZE,
+																								GroupLayout.PREFERRED_SIZE)
+																						.addComponent(
+																								lblType,
+																								GroupLayout.PREFERRED_SIZE,
+																								15,
+																								GroupLayout.PREFERRED_SIZE)
+																						.addComponent(
+																								accoInfoEndDateLabel)
+																						.addComponent(
+																								accoInfoEndDateText,
+																								GroupLayout.PREFERRED_SIZE,
+																								GroupLayout.DEFAULT_SIZE,
+																								GroupLayout.PREFERRED_SIZE))
+																		.addPreferredGap(
+																				ComponentPlacement.RELATED,
+																				10,
+																				Short.MAX_VALUE)
+																		.addGroup(
+																				gl_accoInfoPanel
+																						.createParallelGroup(
+																								Alignment.BASELINE)
+																						.addComponent(
+																								accoInfoRoomLabel)
+																						.addComponent(
+																								accoInfoRoomComboBox,
+																								GroupLayout.PREFERRED_SIZE,
+																								GroupLayout.DEFAULT_SIZE,
+																								GroupLayout.PREFERRED_SIZE)))
+														.addGroup(
+																gl_accoInfoPanel
+																		.createSequentialGroup()
+																		.addGap(0,
+																				58,
+																				Short.MAX_VALUE)
+																		.addComponent(
+																				accoInfoAddButton,
+																				GroupLayout.PREFERRED_SIZE,
+																				32,
+																				GroupLayout.PREFERRED_SIZE)))
+										.addContainerGap()));
 		accoInfoPanel.setLayout(gl_accoInfoPanel);
 
 		javax.swing.GroupLayout gl_studentWindowSubPanel = new javax.swing.GroupLayout(
 				studentWindowSubPanel);
-		gl_studentWindowSubPanel.setHorizontalGroup(
-			gl_studentWindowSubPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, gl_studentWindowSubPanel.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_studentWindowSubPanel.createParallelGroup(Alignment.TRAILING)
-						.addComponent(accoInfoPanel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(personalInfoPanel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addGroup(Alignment.LEADING, gl_studentWindowSubPanel.createSequentialGroup()
-							.addComponent(emergencyContactPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(schoolInfoPanel, GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE)))
-					.addContainerGap())
-		);
-		gl_studentWindowSubPanel.setVerticalGroup(
-			gl_studentWindowSubPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_studentWindowSubPanel.createSequentialGroup()
-					.addComponent(personalInfoPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_studentWindowSubPanel.createParallelGroup(Alignment.LEADING, false)
-						.addComponent(emergencyContactPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(schoolInfoPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(accoInfoPanel, GroupLayout.PREFERRED_SIZE, 129, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-		);
+		gl_studentWindowSubPanel
+				.setHorizontalGroup(gl_studentWindowSubPanel
+						.createParallelGroup(Alignment.LEADING)
+						.addGroup(
+								Alignment.TRAILING,
+								gl_studentWindowSubPanel
+										.createSequentialGroup()
+										.addContainerGap()
+										.addGroup(
+												gl_studentWindowSubPanel
+														.createParallelGroup(
+																Alignment.TRAILING)
+														.addComponent(
+																accoInfoPanel,
+																Alignment.LEADING,
+																GroupLayout.DEFAULT_SIZE,
+																GroupLayout.DEFAULT_SIZE,
+																Short.MAX_VALUE)
+														.addComponent(
+																personalInfoPanel,
+																Alignment.LEADING,
+																GroupLayout.DEFAULT_SIZE,
+																GroupLayout.DEFAULT_SIZE,
+																Short.MAX_VALUE)
+														.addGroup(
+																Alignment.LEADING,
+																gl_studentWindowSubPanel
+																		.createSequentialGroup()
+																		.addComponent(
+																				emergencyContactPanel,
+																				GroupLayout.PREFERRED_SIZE,
+																				GroupLayout.DEFAULT_SIZE,
+																				GroupLayout.PREFERRED_SIZE)
+																		.addPreferredGap(
+																				ComponentPlacement.RELATED)
+																		.addComponent(
+																				schoolInfoPanel,
+																				GroupLayout.DEFAULT_SIZE,
+																				361,
+																				Short.MAX_VALUE)))
+										.addContainerGap()));
+		gl_studentWindowSubPanel
+				.setVerticalGroup(gl_studentWindowSubPanel
+						.createParallelGroup(Alignment.LEADING)
+						.addGroup(
+								gl_studentWindowSubPanel
+										.createSequentialGroup()
+										.addComponent(personalInfoPanel,
+												GroupLayout.PREFERRED_SIZE,
+												GroupLayout.DEFAULT_SIZE,
+												GroupLayout.PREFERRED_SIZE)
+										.addPreferredGap(
+												ComponentPlacement.RELATED)
+										.addGroup(
+												gl_studentWindowSubPanel
+														.createParallelGroup(
+																Alignment.LEADING,
+																false)
+														.addComponent(
+																emergencyContactPanel,
+																GroupLayout.DEFAULT_SIZE,
+																GroupLayout.DEFAULT_SIZE,
+																Short.MAX_VALUE)
+														.addComponent(
+																schoolInfoPanel,
+																GroupLayout.DEFAULT_SIZE,
+																GroupLayout.DEFAULT_SIZE,
+																Short.MAX_VALUE))
+										.addPreferredGap(
+												ComponentPlacement.RELATED)
+										.addComponent(accoInfoPanel,
+												GroupLayout.PREFERRED_SIZE,
+												129, GroupLayout.PREFERRED_SIZE)
+										.addContainerGap(
+												GroupLayout.DEFAULT_SIZE,
+												Short.MAX_VALUE)));
 		studentWindowSubPanel.setLayout(gl_studentWindowSubPanel);
 
 		javax.swing.GroupLayout gl_studentWindowMainPanel = new javax.swing.GroupLayout(

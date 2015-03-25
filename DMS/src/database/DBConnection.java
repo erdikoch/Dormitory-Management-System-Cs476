@@ -106,6 +106,7 @@ public class DBConnection {
 
 	public ArrayList<Integer> displayRoomNo(Dorm dorm,Room room) throws SQLException {
 		ArrayList<Integer> roomNoList = new ArrayList<Integer>();
+	
 		proc_stmt = connect().prepareCall("{ call Get_Room(?,?) }");
 		proc_stmt.setString(1, dorm.getDormName());
 		proc_stmt.setInt(2, room.getTypeName());

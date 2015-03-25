@@ -90,17 +90,18 @@ public class RoomWindow extends javax.swing.JFrame {
 			}
 
 			private void displayRoomTypeMouseClicked(MouseEvent evt) {
-				DBConnection conn =new DBConnection();
-				
-						try {
-						
-							ArrayList<Integer> list=conn.displayRoomType();
-							for(int i =0;i<list.size();i++)
-							 cboxRoomType.addItem(list.get(i));
-						} catch (SQLException e) {
-				
-							e.printStackTrace();
-						}
+					DBConnection conn =new DBConnection();
+					
+							try {
+								cboxRoomType.removeAllItems();
+							
+								ArrayList<Integer> list=conn.displayRoomType();
+								for(int i =0;i<list.size();i++)
+								 cboxRoomType.addItem(list.get(i));
+							} catch (SQLException e) {
+					
+								e.printStackTrace();
+							}
 						
 					}
 				
@@ -119,6 +120,7 @@ public class RoomWindow extends javax.swing.JFrame {
 				DBConnection conn =new DBConnection();
 		
 				try {
+					cboxDorm.removeAllItems();
 				
 					ArrayList<String> list=conn.displayDorm();
 					for(int i =0;i<list.size();i++)

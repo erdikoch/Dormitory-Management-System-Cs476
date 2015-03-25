@@ -1,6 +1,4 @@
-/**
- * @author erdi.koc
- */
+
 package test;
 
 import static org.junit.Assert.assertTrue;

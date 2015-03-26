@@ -946,63 +946,118 @@ public class StudentWindow extends javax.swing.JFrame {
 
 		javax.swing.GroupLayout gl_studentWindowSubPanel = new javax.swing.GroupLayout(
 				studentWindowSubPanel);
-		gl_studentWindowSubPanel.setHorizontalGroup(
-			gl_studentWindowSubPanel.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_studentWindowSubPanel.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_studentWindowSubPanel.createParallelGroup(Alignment.TRAILING)
-						.addComponent(accoInfoPanel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(personalInfoPanel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addGroup(Alignment.LEADING, gl_studentWindowSubPanel.createSequentialGroup()
-							.addComponent(emergencyContactPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(schoolInfoPanel, GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE)))
-					.addContainerGap())
-		);
-		gl_studentWindowSubPanel.setVerticalGroup(
-			gl_studentWindowSubPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_studentWindowSubPanel.createSequentialGroup()
-					.addComponent(personalInfoPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_studentWindowSubPanel.createParallelGroup(Alignment.LEADING, false)
-						.addComponent(emergencyContactPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(schoolInfoPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(accoInfoPanel, GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
-					.addContainerGap())
-		);
+		gl_studentWindowSubPanel
+				.setHorizontalGroup(gl_studentWindowSubPanel
+						.createParallelGroup(Alignment.TRAILING)
+						.addGroup(
+								gl_studentWindowSubPanel
+										.createSequentialGroup()
+										.addContainerGap()
+										.addGroup(
+												gl_studentWindowSubPanel
+														.createParallelGroup(
+																Alignment.TRAILING)
+														.addComponent(
+																accoInfoPanel,
+																Alignment.LEADING,
+																GroupLayout.DEFAULT_SIZE,
+																GroupLayout.DEFAULT_SIZE,
+																Short.MAX_VALUE)
+														.addComponent(
+																personalInfoPanel,
+																Alignment.LEADING,
+																GroupLayout.DEFAULT_SIZE,
+																GroupLayout.DEFAULT_SIZE,
+																Short.MAX_VALUE)
+														.addGroup(
+																Alignment.LEADING,
+																gl_studentWindowSubPanel
+																		.createSequentialGroup()
+																		.addComponent(
+																				emergencyContactPanel,
+																				GroupLayout.PREFERRED_SIZE,
+																				GroupLayout.DEFAULT_SIZE,
+																				GroupLayout.PREFERRED_SIZE)
+																		.addPreferredGap(
+																				ComponentPlacement.RELATED)
+																		.addComponent(
+																				schoolInfoPanel,
+																				GroupLayout.DEFAULT_SIZE,
+																				361,
+																				Short.MAX_VALUE)))
+										.addContainerGap()));
+		gl_studentWindowSubPanel
+				.setVerticalGroup(gl_studentWindowSubPanel
+						.createParallelGroup(Alignment.LEADING)
+						.addGroup(
+								gl_studentWindowSubPanel
+										.createSequentialGroup()
+										.addComponent(personalInfoPanel,
+												GroupLayout.PREFERRED_SIZE,
+												GroupLayout.DEFAULT_SIZE,
+												GroupLayout.PREFERRED_SIZE)
+										.addPreferredGap(
+												ComponentPlacement.RELATED)
+										.addGroup(
+												gl_studentWindowSubPanel
+														.createParallelGroup(
+																Alignment.LEADING,
+																false)
+														.addComponent(
+																emergencyContactPanel,
+																GroupLayout.DEFAULT_SIZE,
+																GroupLayout.DEFAULT_SIZE,
+																Short.MAX_VALUE)
+														.addComponent(
+																schoolInfoPanel,
+																GroupLayout.DEFAULT_SIZE,
+																GroupLayout.DEFAULT_SIZE,
+																Short.MAX_VALUE))
+										.addPreferredGap(
+												ComponentPlacement.RELATED)
+										.addComponent(accoInfoPanel,
+												GroupLayout.DEFAULT_SIZE, 163,
+												Short.MAX_VALUE)
+										.addContainerGap()));
 		studentWindowSubPanel.setLayout(gl_studentWindowSubPanel);
 
 		javax.swing.GroupLayout gl_studentWindowMainPanel = new javax.swing.GroupLayout(
 				studentWindowMainPanel);
-		gl_studentWindowMainPanel.setHorizontalGroup(
-			gl_studentWindowMainPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_studentWindowMainPanel.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(studentWindowSubPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-		);
-		gl_studentWindowMainPanel.setVerticalGroup(
-			gl_studentWindowMainPanel.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_studentWindowMainPanel.createSequentialGroup()
-					.addContainerGap(41, Short.MAX_VALUE)
-					.addComponent(studentWindowSubPanel, GroupLayout.PREFERRED_SIZE, 512, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap())
-		);
+		gl_studentWindowMainPanel.setHorizontalGroup(gl_studentWindowMainPanel
+				.createParallelGroup(Alignment.LEADING).addGroup(
+						gl_studentWindowMainPanel
+								.createSequentialGroup()
+								.addContainerGap()
+								.addComponent(studentWindowSubPanel,
+										GroupLayout.PREFERRED_SIZE,
+										GroupLayout.DEFAULT_SIZE,
+										GroupLayout.PREFERRED_SIZE)
+								.addContainerGap(GroupLayout.DEFAULT_SIZE,
+										Short.MAX_VALUE)));
+		gl_studentWindowMainPanel.setVerticalGroup(gl_studentWindowMainPanel
+				.createParallelGroup(Alignment.TRAILING).addGroup(
+						gl_studentWindowMainPanel
+								.createSequentialGroup()
+								.addContainerGap(41, Short.MAX_VALUE)
+								.addComponent(studentWindowSubPanel,
+										GroupLayout.PREFERRED_SIZE, 512,
+										GroupLayout.PREFERRED_SIZE)
+								.addContainerGap()));
 		studentWindowMainPanel.setLayout(gl_studentWindowMainPanel);
 
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(
 				getContentPane());
-		layout.setHorizontalGroup(
-			layout.createParallelGroup(Alignment.LEADING)
-				.addComponent(studentWindowMainPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-		);
-		layout.setVerticalGroup(
-			layout.createParallelGroup(Alignment.LEADING)
-				.addGroup(layout.createSequentialGroup()
-					.addComponent(studentWindowMainPanel, GroupLayout.PREFERRED_SIZE, 543, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-		);
+		layout.setHorizontalGroup(layout.createParallelGroup(Alignment.LEADING)
+				.addComponent(studentWindowMainPanel, GroupLayout.DEFAULT_SIZE,
+						GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
+		layout.setVerticalGroup(layout.createParallelGroup(Alignment.LEADING)
+				.addGroup(
+						layout.createSequentialGroup()
+								.addComponent(studentWindowMainPanel,
+										GroupLayout.PREFERRED_SIZE, 543,
+										GroupLayout.PREFERRED_SIZE)
+								.addContainerGap(GroupLayout.DEFAULT_SIZE,
+										Short.MAX_VALUE)));
 		getContentPane().setLayout(layout);
 
 		pack();
@@ -1020,13 +1075,14 @@ public class StudentWindow extends javax.swing.JFrame {
 			Dorm dorm = new Dorm();
 			dorm.setDormName(accoInfoDormComboBox.getSelectedItem().toString());
 			Room room = getRoomFromText();
+
 			Hostel hostel = getStartEndDateFromText();
 			DBConnection conn = new DBConnection();
 			try {
 				int type = Integer.parseInt(cboxRoomType.getSelectedItem()
 						.toString());
 				int studentNumber = conn.GetStudentNumber(hostel, dorm, room);
-				if (studentNumber<type) {
+				if (studentNumber < type) {
 					if (conn.insertStudent(student, emgContact, school, dorm,
 							room, hostel)) {
 						JOptionPane.showMessageDialog(getContentPane(),
@@ -1049,13 +1105,6 @@ public class StudentWindow extends javax.swing.JFrame {
 
 	private Hostel getStartEndDateFromText() throws ParseException {
 		Hostel hostel = new Hostel();
-		if (accoInfoStartDateText.getText().isEmpty()
-				|| accoInfoEndDateText.getText().isEmpty()) {
-			JOptionPane.showMessageDialog(getContentPane(),
-					"Please enter start/end date");
-			hostel.setStartDate(null);
-			hostel.setEndDate(null);
-		}
 		Date start = convertStringToDatetime(accoInfoStartDateText.getText());
 		hostel.setStartDate(start);
 		Date end = convertStringToDatetime(accoInfoEndDateText.getText());
@@ -1113,7 +1162,6 @@ public class StudentWindow extends javax.swing.JFrame {
 		return student;
 	}
 
-
 	private Date convertStringToDatetime(String dt) throws ParseException {
 		java.util.Date date = new java.util.Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -1129,7 +1177,9 @@ public class StudentWindow extends javax.swing.JFrame {
 				|| schoolInfoDepartmentText.getText().isEmpty()
 				|| emergencyContactNameText.getText().isEmpty()
 				|| emergencyContactSurnameText.getText().isEmpty()
-				|| emergencyContactPhoneText.getText().isEmpty();
+				|| emergencyContactPhoneText.getText().isEmpty()
+				|| accoInfoStartDateText.getText().isEmpty()
+				|| accoInfoEndDateText.getText().isEmpty();
 	}
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables

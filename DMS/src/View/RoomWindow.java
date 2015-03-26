@@ -247,6 +247,7 @@ public class RoomWindow extends javax.swing.JFrame {
 	}
 
 	private void displayDormBoxAction(ActionEvent evt) {
+		iscBoxDormClicked = true;
 		int startId = 0;
 		if (cboxDorm.getSelectedItem().toString().equals("Dorm 1")) {
 			startId = 100;
@@ -283,31 +284,27 @@ public class RoomWindow extends javax.swing.JFrame {
 	private void addRoomButtonActionPerformed(java.awt.event.ActionEvent evt)
 			throws SQLException {
 		Room room = new Room();
-		if (roomNoLst.getModel().equals(null)) {
-			JOptionPane.showMessageDialog(getContentPane(), "No room");
-		} else {
-			int roomNo = (int) roomNoLst.getModel().getElementAt(0);
-			room.setRoomNo(roomNo);
-		}
-
-		if (iscBoxRoomClicked) {
+		Dorm dorm = new Dorm();
+		if (iscBoxRoomClicked || iscBoxDormClicked
+				|| roomNoLst.getModel().getSize() != 0) {
 			String type = cboxRoomType.getSelectedItem().toString();
 			int roomType = Integer.parseInt(type);
 			room.setTypeName(roomType);
-		} else {
-			JOptionPane.showMessageDialog(getContentPane(),
-					"Please choose a room type!");
-		}
-
-		Dorm dorm = new Dorm();
-		if (cboxDorm.getSelectedItem().toString().isEmpty()) {
-			JOptionPane.showMessageDialog(getContentPane(),
-					"Please choose a dorm!");
-		} else {
 			String dormName = cboxDorm.getSelectedItem().toString();
 			dorm.setDormName(dormName);
+			int roomNo = (int) roomNoLst.getModel().getElementAt(0);
+			room.setRoomNo(roomNo);
+			DBConnection connection = new DBConnection();
+			checkInsertRoom(room, dorm, connection);
+		} else {
+			JOptionPane.showMessageDialog(getContentPane(),
+					"Please fill the fields!");
 		}
-		DBConnection connection = new DBConnection();
+
+	}
+
+	private void checkInsertRoom(Room room, Dorm dorm, DBConnection connection)
+			throws SQLException {
 		if (connection.insertRoom(room, dorm)) {
 			JOptionPane.showMessageDialog(getContentPane(),
 					"Registration is completed");
@@ -329,4 +326,5 @@ public class RoomWindow extends javax.swing.JFrame {
 	private ArrayList<String> roomNos;
 	private DefaultListModel listModelRoom;
 	private Boolean iscBoxRoomClicked = false;
+	private Boolean iscBoxDormClicked = false;
 }

@@ -1,7 +1,12 @@
 package background;
 
+import java.util.ArrayList;
+
 
 public class Dorm {
+	
+	private ArrayList<Dorm> dormList;
+	
 	private String dormName;
 	private String location;
 	
@@ -16,6 +21,13 @@ public class Dorm {
 	}
 	public void setLocation(String location) {
 		this.location = location;
+	}
+	public void addDorm(Dorm dorm){
+		dormList.add(dorm);
+	}
+	
+	public int getDormSize(){
+		return dormList.size();
 	}
 	
 }

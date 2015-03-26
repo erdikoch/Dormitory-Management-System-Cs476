@@ -42,9 +42,9 @@ public class DBConnection {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		String url = "jdbc:sqlserver://192.168.234.1:1433;instance=MSSQLSERVER;DatabaseName=DormManagement";
+		String url = "jdbc:sqlserver://192.168.113.1:1433;instance=MSSQLSERVER;DatabaseName=DormManagement";
 
-		con = DriverManager.getConnection(url, "sa", "123456");
+		con = DriverManager.getConnection(url, "sa", "cenkerdi752");
 		return con;
 	}
 
@@ -53,7 +53,7 @@ public class DBConnection {
 			proc_stmt = connect().prepareCall("{ call Insert_RoomType(?,?) }");
 			proc_stmt.setInt(1, room.getTypeName());
 			proc_stmt.setDouble(2, room.getRoomPrice());
-
+		
 			proc_stmt.executeUpdate();
 			return true;
 		} catch (SQLException e) {
@@ -69,7 +69,7 @@ public class DBConnection {
 			proc_stmt = connect().prepareCall("{ call Insert_Dorm(?,?) }");
 			proc_stmt.setString(1, dorm.getDormName());
 			proc_stmt.setString(2, dorm.getLocation());
-
+			
 			proc_stmt.executeUpdate();
 			return true;
 		} catch (SQLException e) {

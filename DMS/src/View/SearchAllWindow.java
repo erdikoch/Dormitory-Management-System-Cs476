@@ -35,7 +35,7 @@ import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.UIManager;
 
-import org.jdatepicker.impl.UtilDateModel;
+// import org.jdatepicker.impl.UtilDateModel;
 
 import com.toedter.calendar.JCalendar;
 

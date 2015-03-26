@@ -5,10 +5,12 @@ import java.util.ArrayList;
 
 public class Dorm {
 	
-	private ArrayList<Dorm> dormList;
 	
 	private String dormName;
 	private String location;
+	private int dormSize;
+	private int filledDormSize;
+	
 	
 	public String getDormName() {
 		return dormName;
@@ -22,12 +24,18 @@ public class Dorm {
 	public void setLocation(String location) {
 		this.location = location;
 	}
-	public void addDorm(Dorm dorm){
-		dormList.add(dorm);
+	public int getDormSize() {
+		return dormSize;
 	}
-	
-	public int getDormSize(){
-		return dormList.size();
+	public void setDormSize(int dormSize) {
+		dormSize+=1;
 	}
+	public int getFilledDormSize() {
+		return filledDormSize;
+	}
+	public void setFilledDormSize(int filledDormSize) {
+		this.filledDormSize = filledDormSize;
+	}
+
 	
 }

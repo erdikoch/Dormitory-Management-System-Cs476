@@ -290,4 +290,16 @@ public class DormListWindow extends javax.swing.JFrame {
 	private javax.swing.JPanel dormListWindowPanel;
 	private JScrollPane scrollPane_1;
 	private JScrollPane scrollPane;
+
+	public JList getDormList() {
+		return dormList;
+	}
+
+	public JList getRoomList() {
+		return roomList;
+	}
+
+	public static String getSelectedDorm() {
+		return selectedDorm;
+	}
 }

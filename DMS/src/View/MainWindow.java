@@ -1133,17 +1133,20 @@ public class MainWindow extends javax.swing.JFrame {
 		menuBar.add(otherMenu);
 		
 		lostItemsMenuItem = new JMenuItem("Lost Items");
+		lostItemsMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				new AddLostItemWindow().setVisible(true);
+			}
+		});
 		otherMenu.add(lostItemsMenuItem);
 		
-				addRoomMenuItem = new JMenuItem("Show Capacity");
+				addRoomMenuItem = new JMenuItem("Show Capacity of Dorms");
 				addRoomMenuItem.addActionListener(new ActionListener() {
 					public void actionPerformed(java.awt.event.ActionEvent evt) {
-						CapacityWindow capacityChart = new CapacityWindow(
-								"Mobile Sales");
-						capacityChart.setSize(560, 367);
-						RefineryUtilities.centerFrameOnScreen(capacityChart);
-						capacityChart.setVisible(true);
-						capacityChart.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+						ChartChooserView chooser = new ChartChooserView();
+						chooser.setVisible(true);
+						
+						
 					}
 				});
 				otherMenu.add(addRoomMenuItem);

@@ -50,7 +50,7 @@ public class StudentWindow extends javax.swing.JFrame {
 	 */
 	@SuppressWarnings("unchecked")
 	// <editor-fold defaultstate="collapsed"
-	// desc="Generated Code">//GEN-BEGIN:initComponents
+	// desc="Generated Code">//GEN-BEGIN:initComponent
 	private void initComponents() {
 
 		studentWindowMainPanel = new javax.swing.JPanel();

@@ -7,13 +7,17 @@ package view;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import background.Dorm;
 import background.Room;
 import database.DBConnection;
 
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.GroupLayout;
+import javax.swing.JOptionPane;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -26,9 +30,12 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.Toolkit;
 
+import javax.swing.JList;
+
 public class RoomWindow extends javax.swing.JFrame {
 	final JComboBox cboxDorm = new JComboBox();
 	final JComboBox cboxRoomType = new JComboBox();
+
 	/**
 	 * Creates new form StudentWindow
 	 */
@@ -51,7 +58,6 @@ public class RoomWindow extends javax.swing.JFrame {
 		roomDormNumberLabel = new javax.swing.JLabel();
 		roomRoomNumberLabel = new javax.swing.JLabel();
 		roomRoomTypeLabel = new javax.swing.JLabel();
-		txtRoomNo = new javax.swing.JTextField();
 		roomAddButton = new javax.swing.JButton();
 
 		dormAddDutton.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -81,121 +87,235 @@ public class RoomWindow extends javax.swing.JFrame {
 				}
 			}
 		});
-		
-
-		cboxRoomType.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent evt) {
-				displayRoomTypeMouseClicked(evt);
-			}
-
-			private void displayRoomTypeMouseClicked(MouseEvent evt) {
-					DBConnection conn =new DBConnection();
-					
-							try {
-								cboxRoomType.removeAllItems();
-							
-								ArrayList<Integer> list=conn.displayRoomType();
-								for(int i =0;i<list.size();i++)
-								 cboxRoomType.addItem(list.get(i));
-							} catch (SQLException e) {
-					
-								e.printStackTrace();
-							}
-						
-					}
-				
-			
-		});
-		
-
-		cboxDorm.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent me) {
-				displayDormMouseClicked(me);
-			}
-
-			private void displayDormMouseClicked(MouseEvent me) {
-				// TODO Auto-generated method stub
-				DBConnection conn =new DBConnection();
-		
-				try {
-					cboxDorm.removeAllItems();
-				
-					ArrayList<String> list=conn.displayDorm();
-					for(int i =0;i<list.size();i++)
-					 cboxDorm.addItem(list.get(i));
-				} catch (SQLException e) {
-		
-					e.printStackTrace();
-				}
-				
+		fillCBoxRoomType();
+		cboxRoomType.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				displayRoomTypeAction(evt);
 			}
 		});
+
+		fillCBoxDorm();
+		roomNos = new ArrayList<String>();
+		cboxDorm.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				displayDormBoxAction(evt);
+			}
+		});
+
+		listModelRoom = new DefaultListModel();
+		roomNoLst = new JList(listModelRoom);
+		roomNoLst.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(
 				getContentPane());
-		layout.setHorizontalGroup(
-			layout.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, layout.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(layout.createParallelGroup(Alignment.TRAILING)
-						.addComponent(roomAddButton, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE)
-						.addGroup(layout.createSequentialGroup()
-							.addGroup(layout.createParallelGroup(Alignment.LEADING)
-								.addComponent(roomDormNumberLabel, GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)
-								.addComponent(roomRoomNumberLabel, GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE))
-							.addGroup(layout.createParallelGroup(Alignment.LEADING)
-								.addComponent(cboxRoomType, 0, 120, Short.MAX_VALUE)
-								.addComponent(cboxDorm, Alignment.TRAILING, 0, 120, Short.MAX_VALUE)))
-						.addGroup(Alignment.LEADING, layout.createSequentialGroup()
-							.addComponent(roomRoomTypeLabel, GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(txtRoomNo, GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)))
-					.addGap(34))
-		);
-		layout.setVerticalGroup(
-			layout.createParallelGroup(Alignment.LEADING)
-				.addGroup(layout.createSequentialGroup()
-					.addGap(22)
-					.addGroup(layout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(roomDormNumberLabel)
-						.addComponent(cboxDorm, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(21)
-					.addGroup(layout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(roomRoomNumberLabel)
-						.addComponent(cboxRoomType, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-					.addGroup(layout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(roomRoomTypeLabel)
-						.addComponent(txtRoomNo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(32)
-					.addComponent(roomAddButton)
-					.addGap(41))
-		);
+		layout.setHorizontalGroup(layout
+				.createParallelGroup(Alignment.TRAILING)
+				.addGroup(
+						layout.createSequentialGroup()
+								.addContainerGap()
+								.addGroup(
+										layout.createParallelGroup(
+												Alignment.LEADING)
+												.addGroup(
+														layout.createSequentialGroup()
+																.addGroup(
+																		layout.createParallelGroup(
+																				Alignment.LEADING)
+																				.addComponent(
+																						roomDormNumberLabel,
+																						GroupLayout.DEFAULT_SIZE,
+																						143,
+																						Short.MAX_VALUE)
+																				.addComponent(
+																						roomRoomNumberLabel,
+																						GroupLayout.DEFAULT_SIZE,
+																						143,
+																						Short.MAX_VALUE))
+																.addGroup(
+																		layout.createParallelGroup(
+																				Alignment.LEADING)
+																				.addComponent(
+																						cboxRoomType,
+																						0,
+																						120,
+																						Short.MAX_VALUE)
+																				.addComponent(
+																						cboxDorm,
+																						Alignment.TRAILING,
+																						0,
+																						120,
+																						Short.MAX_VALUE)))
+												.addGroup(
+														Alignment.TRAILING,
+														layout.createSequentialGroup()
+																.addGroup(
+																		layout.createParallelGroup(
+																				Alignment.TRAILING)
+																				.addComponent(
+																						roomAddButton,
+																						GroupLayout.PREFERRED_SIZE,
+																						66,
+																						GroupLayout.PREFERRED_SIZE)
+																				.addGroup(
+																						layout.createSequentialGroup()
+																								.addComponent(
+																										roomRoomTypeLabel,
+																										GroupLayout.DEFAULT_SIZE,
+																										139,
+																										Short.MAX_VALUE)
+																								.addPreferredGap(
+																										ComponentPlacement.RELATED)
+																								.addComponent(
+																										roomNoLst,
+																										GroupLayout.PREFERRED_SIZE,
+																										120,
+																										GroupLayout.PREFERRED_SIZE)))
+																.addPreferredGap(
+																		ComponentPlacement.RELATED)))
+								.addGap(34)));
+		layout.setVerticalGroup(layout
+				.createParallelGroup(Alignment.LEADING)
+				.addGroup(
+						layout.createSequentialGroup()
+								.addGap(22)
+								.addGroup(
+										layout.createParallelGroup(
+												Alignment.BASELINE)
+												.addComponent(
+														roomDormNumberLabel)
+												.addComponent(
+														cboxDorm,
+														GroupLayout.PREFERRED_SIZE,
+														GroupLayout.DEFAULT_SIZE,
+														GroupLayout.PREFERRED_SIZE))
+								.addGap(21)
+								.addGroup(
+										layout.createParallelGroup(
+												Alignment.BASELINE)
+												.addComponent(
+														roomRoomNumberLabel)
+												.addComponent(
+														cboxRoomType,
+														GroupLayout.PREFERRED_SIZE,
+														GroupLayout.DEFAULT_SIZE,
+														GroupLayout.PREFERRED_SIZE))
+								.addPreferredGap(ComponentPlacement.RELATED,
+										22, Short.MAX_VALUE)
+								.addGroup(
+										layout.createParallelGroup(
+												Alignment.TRAILING)
+												.addComponent(roomRoomTypeLabel)
+												.addComponent(
+														roomNoLst,
+														GroupLayout.PREFERRED_SIZE,
+														22,
+														GroupLayout.PREFERRED_SIZE))
+								.addGap(28).addComponent(roomAddButton)
+								.addGap(45)));
 		getContentPane().setLayout(layout);
 
 		pack();
 	}// </editor-fold>//GEN-END:initComponents
 
+	private void fillCBoxRoomType() {
+		DBConnection conn = new DBConnection();
+		ArrayList<Integer> list;
+		try {
+			list = conn.displayRoomType();
+			for (int i = 0; i < list.size(); i++)
+				cboxRoomType.addItem(list.get(i));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	private void displayRoomTypeAction(ActionEvent evt) {
+		iscBoxRoomClicked = true;
+	}
+
+	private void fillCBoxDorm() {
+		DBConnection conn = new DBConnection();
+		ArrayList<String> list = null;
+		try {
+			list = conn.displayDorm();
+			for (int i = 0; i < list.size(); i++)
+				cboxDorm.addItem(list.get(i));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void displayDormBoxAction(ActionEvent evt) {
+		int startId = 0;
+		if (cboxDorm.getSelectedItem().toString().equals("Dorm 1")) {
+			startId = 100;
+			generateIdForRooms(startId);
+		} else if (cboxDorm.getSelectedItem().toString().equals("Dorm 2")) {
+			startId = 200;
+			generateIdForRooms(startId);
+		} else if (cboxDorm.getSelectedItem().toString().equals("Dorm 3")) {
+			startId = 300;
+			generateIdForRooms(startId);
+		}
+	}
+
+	private void generateIdForRooms(int startId) {
+		DBConnection conn = new DBConnection();
+		AtomicInteger nextId;
+		int id = 0;
+		conn.retrieveRoomNo(cboxDorm.getSelectedItem().toString());
+		roomNos = conn.getRoomNoList();
+		nextId = new AtomicInteger(startId);
+		id = nextId.incrementAndGet();
+		String idS = Integer.toString(id);
+		int i = 0;
+		while (roomNos.toString().contains(idS)) {
+			id = nextId.incrementAndGet();
+			idS = Integer.toString(id);
+			i++;
+			if (i == roomNos.size())
+				break;
+		}
+		listModelRoom.addElement(id);
+	}
+
 	private void addRoomButtonActionPerformed(java.awt.event.ActionEvent evt)
 			throws SQLException {
-		Room room = new Room();	
-		int roomNo = Integer.parseInt(txtRoomNo.getText());
-		int roomType = Integer.parseInt(cboxRoomType.getSelectedItem().toString());
-		room.setRoomNo(roomNo);
-		room.setTypeName(roomType);
-		Dorm dorm = new Dorm();
-		String dormName=cboxDorm.getSelectedItem().toString();	
-	
-		dorm.setDormName(dormName);
-	
-		System.out.println(roomNo);
-		DBConnection connection = new DBConnection();
-		if (connection.insertRoom(room,dorm)) {
-			System.out.println("Kayit basarili");
+		Room room = new Room();
+		if (roomNoLst.getModel().equals(null)) {
+			JOptionPane.showMessageDialog(getContentPane(), "No room");
 		} else {
-			System.out.println("Kayit basarisiz");
+			int roomNo = (int) roomNoLst.getModel().getElementAt(0);
+			room.setRoomNo(roomNo);
+		}
+
+		if (iscBoxRoomClicked) {
+			String type = cboxRoomType.getSelectedItem().toString();
+			int roomType = Integer.parseInt(type);
+			room.setTypeName(roomType);
+		} else {
+			JOptionPane.showMessageDialog(getContentPane(),
+					"Please choose a room type!");
+		}
+
+		Dorm dorm = new Dorm();
+		if (cboxDorm.getSelectedItem().toString().isEmpty()) {
+			JOptionPane.showMessageDialog(getContentPane(),
+					"Please choose a dorm!");
+		} else {
+			String dormName = cboxDorm.getSelectedItem().toString();
+			dorm.setDormName(dormName);
+		}
+		DBConnection connection = new DBConnection();
+		if (connection.insertRoom(room, dorm)) {
+			JOptionPane.showMessageDialog(getContentPane(),
+					"Registration is completed");
+			roomNos = null;
+			listModelRoom.clear();
+		} else {
+			JOptionPane.showMessageDialog(getContentPane(),
+					"Registration is not completed, try again!");
 		}
 	}
 
@@ -205,5 +325,8 @@ public class RoomWindow extends javax.swing.JFrame {
 	private javax.swing.JLabel roomDormNumberLabel;
 	private javax.swing.JLabel roomRoomNumberLabel;
 	private javax.swing.JLabel roomRoomTypeLabel;
-	private javax.swing.JTextField txtRoomNo;
+	private JList roomNoLst;
+	private ArrayList<String> roomNos;
+	private DefaultListModel listModelRoom;
+	private Boolean iscBoxRoomClicked = false;
 }

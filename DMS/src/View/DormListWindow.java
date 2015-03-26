@@ -34,6 +34,7 @@ import javax.swing.border.TitledBorder;
 import javax.swing.UIManager;
 
 import java.awt.event.MouseMotionAdapter;
+import javax.swing.JScrollBar;
 
 public class DormListWindow extends javax.swing.JFrame {
 	private JList dormList;
@@ -66,30 +67,14 @@ public class DormListWindow extends javax.swing.JFrame {
 		JLabel label = new JLabel("Dorm List");
 		label.setFont(new Font("Tahoma", Font.BOLD, 12));
 
-		JScrollPane scrollPane = new JScrollPane();
+		scrollPane = new JScrollPane();
 
 		listModelRooms = new DefaultListModel();
-		roomList = new JList(listModelRooms);
-		roomList.addMouseMotionListener(new MouseMotionAdapter() {
-			public void mouseMoved(MouseEvent evt) {
-				// moveMouseOnList(evt);
-			}
-		});
-		roomList.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent evt) {
-				clickRoomList(evt);
-			}
-		});
-
-		roomList.setBorder(new BevelBorder(BevelBorder.LOWERED, new Color(0, 0,
-				128), new Color(176, 224, 230), new Color(0, 0, 128),
-				new Color(176, 224, 230)));
-		roomList.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		roomList.setForeground(Color.BLACK);
 
 		JLabel lblRooms = new JLabel("Rooms");
 		lblRooms.setFont(new Font("Tahoma", Font.BOLD, 12));
+
+		scrollPane_1 = new JScrollPane();
 
 		javax.swing.GroupLayout gl_dormWindowPanel = new javax.swing.GroupLayout(
 				dormListWindowPanel);
@@ -105,14 +90,14 @@ public class DormListWindow extends javax.swing.JFrame {
 														.createParallelGroup(
 																Alignment.LEADING)
 														.addComponent(
-																scrollPane,
-																GroupLayout.PREFERRED_SIZE,
-																194,
-																GroupLayout.PREFERRED_SIZE)
-														.addComponent(
 																label,
 																GroupLayout.PREFERRED_SIZE,
 																69,
+																GroupLayout.PREFERRED_SIZE)
+														.addComponent(
+																scrollPane,
+																GroupLayout.PREFERRED_SIZE,
+																194,
 																GroupLayout.PREFERRED_SIZE))
 										.addGap(41)
 										.addGroup(
@@ -125,14 +110,14 @@ public class DormListWindow extends javax.swing.JFrame {
 																51,
 																GroupLayout.PREFERRED_SIZE)
 														.addComponent(
-																roomList,
+																scrollPane_1,
 																GroupLayout.PREFERRED_SIZE,
-																172,
+																176,
 																GroupLayout.PREFERRED_SIZE))
-										.addContainerGap(37, Short.MAX_VALUE)));
+										.addContainerGap(76, Short.MAX_VALUE)));
 		gl_dormWindowPanel
 				.setVerticalGroup(gl_dormWindowPanel
-						.createParallelGroup(Alignment.LEADING)
+						.createParallelGroup(Alignment.TRAILING)
 						.addGroup(
 								gl_dormWindowPanel
 										.createSequentialGroup()
@@ -151,18 +136,37 @@ public class DormListWindow extends javax.swing.JFrame {
 										.addGroup(
 												gl_dormWindowPanel
 														.createParallelGroup(
-																Alignment.BASELINE)
+																Alignment.LEADING)
 														.addComponent(
-																scrollPane,
+																scrollPane_1,
 																GroupLayout.DEFAULT_SIZE,
 																202,
 																Short.MAX_VALUE)
 														.addComponent(
-																roomList,
-																GroupLayout.PREFERRED_SIZE,
-																201,
-																GroupLayout.PREFERRED_SIZE))
+																scrollPane,
+																GroupLayout.DEFAULT_SIZE,
+																202,
+																Short.MAX_VALUE))
 										.addContainerGap()));
+		roomList = new JList(listModelRooms);
+		scrollPane_1.setViewportView(roomList);
+		roomList.addMouseMotionListener(new MouseMotionAdapter() {
+			public void mouseMoved(MouseEvent evt) {
+				// moveMouseOnList(evt);
+			}
+		});
+		roomList.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent evt) {
+				clickRoomList(evt);
+			}
+		});
+
+		roomList.setBorder(new BevelBorder(BevelBorder.LOWERED, new Color(0, 0,
+				128), new Color(176, 224, 230), new Color(0, 0, 128),
+				new Color(176, 224, 230)));
+		roomList.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		roomList.setForeground(Color.BLACK);
 		DBConnection conn = new DBConnection();
 		fillDormList(conn);
 		dormList.setBorder(new BevelBorder(BevelBorder.LOWERED, new Color(0, 0,
@@ -192,7 +196,8 @@ public class DormListWindow extends javax.swing.JFrame {
 
 		pack();
 	}// </editor-fold>//GEN-END:initComponents
-
+	
+    // Belki bunu kullanýrým, silmedim o yüzden -Nazli (silmeyin)
 	private void moveMouseOnList(MouseEvent evt) {
 		String info = null;
 		DBConnection conn = new DBConnection();
@@ -219,6 +224,17 @@ public class DormListWindow extends javax.swing.JFrame {
 			e.printStackTrace();
 		}
 
+	}
+
+	private void clickDormList(MouseEvent evt) {
+		listModelRooms.clear();
+		if (evt.getClickCount() == 2) {
+			System.out.println(dormList.getSelectedValue());
+			String sel = (String) dormList.getSelectedValue();
+			selectedDorm = sel.substring(0, sel.indexOf(" -"));
+			DBConnection conn = new DBConnection();
+			fillRooms(conn, selectedDorm);
+		}
 	}
 
 	private void clickRoomList(MouseEvent evt) {
@@ -249,17 +265,6 @@ public class DormListWindow extends javax.swing.JFrame {
 		}
 	}
 
-	private void clickDormList(MouseEvent evt) {
-		listModelRooms.clear();
-		if (evt.getClickCount() == 2) {
-			System.out.println(dormList.getSelectedValue());
-			String sel = (String) dormList.getSelectedValue();
-			selectedDorm = sel.substring(0, sel.indexOf(" -"));
-			DBConnection conn = new DBConnection();
-			fillRooms(conn, selectedDorm);
-		}
-	}
-
 	private void fillRooms(DBConnection conn, String selectedDorm) {
 		conn.retrieveRoomNo(selectedDorm);
 		String rooms[] = new String[conn.getRoomNoList().size()];
@@ -283,4 +288,6 @@ public class DormListWindow extends javax.swing.JFrame {
 	}
 
 	private javax.swing.JPanel dormListWindowPanel;
+	private JScrollPane scrollPane_1;
+	private JScrollPane scrollPane;
 }

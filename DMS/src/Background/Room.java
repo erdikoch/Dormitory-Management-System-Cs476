@@ -1,8 +1,10 @@
 package background;
 
+import java.util.ArrayList;
+
 public class Room {
 	private int typeName;
-	
+	private ArrayList<Room> roomList;
 	private int roomNo;
 	private double roomPrice;
 
@@ -26,6 +28,14 @@ public class Room {
 	}
 	public void setRoomPrice(double roomPice) {
 		this.roomPrice = roomPice;
+	}
+	
+	public void addRoom(Room room){
+		roomList.add(room);
+	}
+	
+	public int getRoomSize(){
+		return roomList.size();
 	}
 	
 	

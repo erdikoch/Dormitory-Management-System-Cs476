@@ -1,35 +1,7 @@
-/*
  * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package view;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.concurrent.atomic.AtomicInteger;
-
-import background.Dorm;
-import background.Room;
-import database.DBConnection;
-
-import javax.swing.DefaultListModel;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.GroupLayout;
-import javax.swing.JOptionPane;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-
-import java.awt.Font;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.Toolkit;
-
-import javax.swing.JList;
 
 public class RoomWindow extends javax.swing.JFrame {
 	final JComboBox cboxDorm = new JComboBox();
@@ -86,35 +58,17 @@ public class RoomWindow extends javax.swing.JFrame {
 				}
 			}
 		});
-
-		cboxRoomType.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent evt) {
-				displayRoomTypeMouseClicked(evt);
+		fillCBoxRoomType();
+		cboxRoomType.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				displayRoomTypeAction(evt);
 			}
-
-			private void displayRoomTypeMouseClicked(MouseEvent evt) {
-				DBConnection conn = new DBConnection();
-
-				try {
-					cboxRoomType.removeAllItems();
-
-					ArrayList<Integer> list = conn.displayRoomType();
-					for (int i = 0; i < list.size(); i++)
-						cboxRoomType.addItem(list.get(i));
-				} catch (SQLException e) {
-
-					e.printStackTrace();
-				}
-
-			}
-
 		});
 
-		cboxDorm.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent evt) {
-				displayDormMouseClicked(evt);
+		fillCBoxDorm();
+		cboxDorm.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				displayDormBoxAction(evt);
 			}
 		});
 
@@ -233,37 +187,59 @@ public class RoomWindow extends javax.swing.JFrame {
 		pack();
 	}// </editor-fold>//GEN-END:initComponents
 
-	private void displayDormMouseClicked(MouseEvent evt) {
+	private void fillCBoxRoomType() {
 		DBConnection conn = new DBConnection();
-		AtomicInteger nextId = null;
-		int id;
+		ArrayList<Integer> list;
 		try {
-			cboxDorm.removeAllItems();
-
-			ArrayList<String> list = conn.displayDorm();
+			list = conn.displayRoomType();
 			for (int i = 0; i < list.size(); i++)
-				cboxDorm.addItem(list.get(i));
-
-			generateIdForRooms(conn);
+				cboxRoomType.addItem(list.get(i));
 		} catch (SQLException e) {
-
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+	}
+	
+	private void displayRoomTypeAction(ActionEvent evt) {
+		iscBoxRoomClicked = true;
+		System.out.println("Selected Room: " + cboxRoomType.getSelectedItem().toString());
 	}
 
-	private void generateIdForRooms(DBConnection conn) {
+	private void fillCBoxDorm() {
+		DBConnection conn = new DBConnection();
+		ArrayList<String> list = null;
+		try {
+			list = conn.displayDorm();
+			for (int i = 0; i < list.size(); i++)
+				cboxDorm.addItem(list.get(i));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	private void displayDormBoxAction(ActionEvent evt) {
+		System.out.println("click");
+		System.out.println(cboxDorm.getSelectedItem().toString());
+		if (cboxDorm.getSelectedItem().toString().equals("Dorm 1")) {
+			System.out.println(cboxDorm.getSelectedItem().toString());
+			generateIdForRooms();
+		}
+	}
+
+	private void generateIdForRooms() {
+		DBConnection conn = new DBConnection();
 		AtomicInteger nextId;
-		ArrayList<Integer> roomNoList = new ArrayList<>();
+		ArrayList<String> roomNoList = new ArrayList<>();
 		int id;
 		conn.retrieveRoomNo(cboxDorm.getSelectedItem().toString());
 		roomNoList = conn.getRoomNoList();
-		if (cboxDorm.getSelectedItem().equals("Dorm 2")) {
+		System.out.println(cboxDorm.getSelectedItem().toString());
+		if (cboxDorm.getSelectedItem().toString().equals("Dorm 1")) {
 			nextId = new AtomicInteger(100);
 			id = nextId.incrementAndGet();
 			System.out.println(id);
-
-			while (roomNoList.contains(id)) {
+			while (roomNoList.contains("id")) {
 				id = nextId.incrementAndGet();
 				System.out.println(id + "bu");
 			}
@@ -275,17 +251,21 @@ public class RoomWindow extends javax.swing.JFrame {
 	private void addRoomButtonActionPerformed(java.awt.event.ActionEvent evt)
 			throws SQLException {
 		Room room = new Room();
-		// int roomNo = Integer.parseInt(txtRoomNo.getText());
-		int roomNo = (int) roomNoLst.getModel().getElementAt(0);
-		if (cboxRoomType.getSelectedItem().toString().isEmpty()) {
-			JOptionPane.showMessageDialog(getContentPane(),
-					"Please choose a room type!");
+		if (roomNoLst.getModel().equals(null)) {
+			JOptionPane.showMessageDialog(getContentPane(), "No room");
 		} else {
+			int roomNo = (int) roomNoLst.getModel().getElementAt(0);
+			room.setRoomNo(roomNo);
+		}
+
+		if (iscBoxRoomClicked) {
 			String type = cboxRoomType.getSelectedItem().toString();
 			int roomType = Integer.parseInt(type);
 			room.setTypeName(roomType);
+		} else {
+			JOptionPane.showMessageDialog(getContentPane(),
+					"Please choose a room type!");
 		}
-		room.setRoomNo(roomNo);
 
 		Dorm dorm = new Dorm();
 		if (cboxDorm.getSelectedItem().toString().isEmpty()) {
@@ -295,7 +275,6 @@ public class RoomWindow extends javax.swing.JFrame {
 			String dormName = cboxDorm.getSelectedItem().toString();
 			dorm.setDormName(dormName);
 		}
-		System.out.println(roomNo);
 		DBConnection connection = new DBConnection();
 		if (connection.insertRoom(room, dorm)) {
 			JOptionPane.showMessageDialog(getContentPane(),
@@ -315,4 +294,5 @@ public class RoomWindow extends javax.swing.JFrame {
 	private javax.swing.JLabel roomRoomTypeLabel;
 	private JList roomNoLst;
 	private DefaultListModel listModelRoom;
+	private Boolean iscBoxRoomClicked = false;
 }

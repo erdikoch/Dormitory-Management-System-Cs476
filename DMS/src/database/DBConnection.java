@@ -269,7 +269,7 @@ public class DBConnection {
 		return dorms;
 	}
 
-	public ArrayList getRoomNoList() {
+	public ArrayList<String> getRoomNoList() {
 		return roomNoList;
 	}
 

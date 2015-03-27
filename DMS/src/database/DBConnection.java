@@ -29,7 +29,10 @@ public class DBConnection {
 	private ArrayList dorms;
 	private ArrayList roomNoList;
 	private DormListWindow dormListW;
-	private ArrayList studentsInRooms;
+	private ArrayList studentsInRooms, students, studentInfo, stdName,
+			stdSurname, stdTC, stdGender, stdPhone, stdMail, stdBirthdate,
+			emgName, emgSurname, emgPhone, schUniName, schDeptName, schGrade,
+			accDormName, accTypeName, accRoomNo, accStartDate, accEndDate;
 
 	public DBConnection() {
 
@@ -42,9 +45,8 @@ public class DBConnection {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		String url = "jdbc:sqlserver://192.168.113.1:1433;instance=MSSQLSERVER;DatabaseName=DormManagement";
-
-		con = DriverManager.getConnection(url, "sa", "cenkerdi752");
+		String url = "jdbc:sqlserver://192.168.234.1:1433;instance=MSSQLSERVER;DatabaseName=DormManagement";
+		con = DriverManager.getConnection(url, "sa", "123456");
 		return con;
 	}
 
@@ -53,7 +55,7 @@ public class DBConnection {
 			proc_stmt = connect().prepareCall("{ call Insert_RoomType(?,?) }");
 			proc_stmt.setInt(1, room.getTypeName());
 			proc_stmt.setDouble(2, room.getRoomPrice());
-		
+
 			proc_stmt.executeUpdate();
 			return true;
 		} catch (SQLException e) {
@@ -69,7 +71,7 @@ public class DBConnection {
 			proc_stmt = connect().prepareCall("{ call Insert_Dorm(?,?) }");
 			proc_stmt.setString(1, dorm.getDormName());
 			proc_stmt.setString(2, dorm.getLocation());
-			
+
 			proc_stmt.executeUpdate();
 			return true;
 		} catch (SQLException e) {
@@ -104,9 +106,10 @@ public class DBConnection {
 
 	}
 
-	public ArrayList<Integer> displayRoomNo(Dorm dorm,Room room) throws SQLException {
+	public ArrayList<Integer> displayRoomNo(Dorm dorm, Room room)
+			throws SQLException {
 		ArrayList<Integer> roomNoList = new ArrayList<Integer>();
-	
+
 		proc_stmt = connect().prepareCall("{ call Get_Room(?,?) }");
 		proc_stmt.setString(1, dorm.getDormName());
 		proc_stmt.setInt(2, room.getTypeName());
@@ -118,7 +121,6 @@ public class DBConnection {
 		return roomNoList;
 
 	}
-	
 
 	public boolean insertRoom(Room room, Dorm dorm) throws SQLException {
 
@@ -151,18 +153,21 @@ public class DBConnection {
 		return studenList;
 
 	}
-	public int GetStudentNumber(Hostel hostel,Dorm dorm,Room room) throws SQLException {
-		int studentNumber=0;
+
+	public int GetStudentNumber(Hostel hostel, Dorm dorm, Room room)
+			throws SQLException {
+		int studentNumber = 0;
 		connect();
-		proc_stmt=con.prepareCall("{ call Get_StudentBetweenStartEndDate(?,?,?,?) }");
-		proc_stmt.setDate(1, (Date) hostel.getStartDate() );
+		proc_stmt = con
+				.prepareCall("{ call Get_StudentBetweenStartEndDate(?,?,?,?) }");
+		proc_stmt.setDate(1, (Date) hostel.getStartDate());
 		proc_stmt.setDate(2, (Date) hostel.getEndDate());
 		proc_stmt.setString(3, dorm.getDormName());
 		proc_stmt.setInt(4, room.getRoomNo());
-		rs=proc_stmt.executeQuery();
-			while(rs.next()){
-				studentNumber=rs.getInt(1);
-			}
+		rs = proc_stmt.executeQuery();
+		while (rs.next()) {
+			studentNumber = rs.getInt(1);
+		}
 		return studentNumber;
 	}
 
@@ -208,7 +213,8 @@ public class DBConnection {
 			ResultSet rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				dorms.add(rs.getString("DormName") + " - "+ rs.getString("Location"));
+				dorms.add(rs.getString("DormName") + " - "
+						+ rs.getString("Location"));
 			}
 
 			pstmt.close();
@@ -249,10 +255,63 @@ public class DBConnection {
 			String stdSurname = rs.getString("StudentSurname");
 			studentsInRooms.add(stdName + " " + stdSurname);
 		}
-		for (int i = 0; i < studentsInRooms.size(); i++) {
-			System.out.println(studentsInRooms.get(i));
-		}
 		return studentsInRooms;
+	}
+
+	public void retrieveStudentInfo(String name, String surname) {
+		students = new ArrayList<String>();
+		studentInfo = new ArrayList<String>();
+		stdName = new ArrayList<String>();
+		stdSurname = new ArrayList<String>();
+		stdTC = new ArrayList<String>();
+		stdGender = new ArrayList<String>();
+		stdPhone = new ArrayList<String>();
+		stdMail = new ArrayList<String>();
+		stdBirthdate = new ArrayList<String>();
+		emgName = new ArrayList<String>();
+		emgSurname = new ArrayList<String>();
+		emgPhone = new ArrayList<String>();
+		schUniName = new ArrayList<String>();
+		schDeptName = new ArrayList<String>();
+		schGrade = new ArrayList<String>();
+		accDormName = new ArrayList<String>();
+		accTypeName = new ArrayList<String>();
+		accRoomNo = new ArrayList<String>();
+		accStartDate = new ArrayList<String>();
+		accEndDate = new ArrayList<String>();
+		try {
+			proc_stmt = connect().prepareCall("{ call Get_StudentInfo(?, ?) }");
+			proc_stmt.setString(1, name);
+			proc_stmt.setString(2, surname);
+			rs = proc_stmt.executeQuery();
+			while (rs.next()) {
+				String stdName = rs.getString("StudentName");
+				String stdSurname = rs.getString("StudentSurname");
+				students.add(stdName + " " + stdSurname);
+				studentInfo.add(rs.getString("StudentName") + " "
+						+ rs.getString("StudentSurname") + " "
+						+ rs.getString("TC_ID") + " " + rs.getString("Gender")
+						+ " " + rs.getString("Phone") + " "
+						+ rs.getString("Mail") + " "
+						+ rs.getDate("Birthdate") + " "
+						+ rs.getString("Name") + " " + rs.getString("Surname")
+						+ " " + rs.getString("University") + " "
+						+ rs.getString("DepName") + " " + rs.getString("Grade")
+						+ " " + rs.getString("DormName") + " "
+						+ rs.getString("TypeName") + " "
+						+ rs.getString("RoomNo") + " "
+						+ rs.getDate("StartDate") + " "
+						+ rs.getDate("EndDate"));
+			}
+
+			for (int i = 0; i < studentInfo.size(); i++) {
+				System.out.println(studentInfo.get(i));
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public static void closeStatement(Statement statement) {
@@ -271,6 +330,14 @@ public class DBConnection {
 
 	public ArrayList<String> getRoomNoList() {
 		return roomNoList;
+	}
+
+	public ArrayList getStudentInfo() {
+		return studentInfo;
+	}
+
+	public ArrayList getStudents() {
+		return students;
 	}
 
 }

@@ -203,7 +203,6 @@ public class DormListWindow extends javax.swing.JFrame {
 		DBConnection conn = new DBConnection();
 		String rNo = (String) roomList.getSelectedValue();
 		String room = rNo.substring(7);
-		System.out.println(room);
 		int roomNo = Integer.parseInt(room);
 		try {
 			ArrayList<Integer> studentsinRooms = conn.retrieveStudentsinRooms(
@@ -212,7 +211,6 @@ public class DormListWindow extends javax.swing.JFrame {
 			for (int i = 0; i < studentsinRooms.size(); i++) {
 				info += studentsinRooms.get(i) + ", ";
 			}
-			System.out.println(info);
 			int index = roomList.locationToIndex(evt.getPoint());
 			if (index > -1) {
 				roomList.setToolTipText(null);
@@ -229,7 +227,6 @@ public class DormListWindow extends javax.swing.JFrame {
 	private void clickDormList(MouseEvent evt) {
 		listModelRooms.clear();
 		if (evt.getClickCount() == 2) {
-			System.out.println(dormList.getSelectedValue());
 			String sel = (String) dormList.getSelectedValue();
 			selectedDorm = sel.substring(0, sel.indexOf(" -"));
 			DBConnection conn = new DBConnection();
@@ -242,7 +239,6 @@ public class DormListWindow extends javax.swing.JFrame {
 		DBConnection conn = new DBConnection();
 		String rNo = (String) roomList.getSelectedValue();
 		String room = rNo.substring(7);
-		System.out.println(room);
 		int roomNo = Integer.parseInt(room);
 		try {
 			ArrayList<Integer> studentsinRooms = conn.retrieveStudentsinRooms(

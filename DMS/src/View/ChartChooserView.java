@@ -69,7 +69,7 @@ public class ChartChooserView extends javax.swing.JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(dormCapacityCheckBox.isSelected()){
-					new CapacityWindow("Dorm Capacity", ) // burayacombobax get dorm gelecek
+					//new CapacityWindow("Dorm Capacity", ); // burayacombobax get dorm gelecek
 				}
 			}
 		});

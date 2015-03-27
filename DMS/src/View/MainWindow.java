@@ -26,6 +26,10 @@ import java.awt.Font;
 import java.awt.Color;
 import javax.swing.JMenu;
 import java.awt.Toolkit;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.JLabel;
+import javax.swing.JComboBox;
 
 public class MainWindow extends javax.swing.JFrame {
 
@@ -101,7 +105,13 @@ public class MainWindow extends javax.swing.JFrame {
 		mainSearchPanel = new javax.swing.JPanel();
 		searchStudentLabel = new javax.swing.JLabel();
 		searchScrollPane = new javax.swing.JScrollPane();
-		searchScrollList = new javax.swing.JList();
+		searchSearchList = new javax.swing.JList();
+		searchSearchList.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent evt) {
+				clickStudentSearchList(evt);
+			}
+		});
 		searchStudentText = new javax.swing.JTextField();
 		searchButton = new javax.swing.JButton();
 		mainPanePanel = new javax.swing.JPanel();
@@ -191,8 +201,8 @@ public class MainWindow extends javax.swing.JFrame {
 		searchStudentLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 		searchStudentLabel.setText("             Search Student");
 
-		searchScrollList.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-		searchScrollList.setModel(new javax.swing.AbstractListModel() {
+		searchSearchList.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+		searchSearchList.setModel(new javax.swing.AbstractListModel() {
 			public String[] getList() {
 				DBConnection conn = new DBConnection();
 				String studentArray[] = null;
@@ -202,16 +212,13 @@ public class MainWindow extends javax.swing.JFrame {
 					studentArray = new String[studenNameSurname.size()];
 					for (int i = 0; i < studentArray.length; i++) {
 						studentArray[i] = studenNameSurname.get(i);
-
 					}
 
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 				return studentArray;
-
 			}
-
 			String[] strings = getList();
 
 			public int getSize() {
@@ -222,7 +229,7 @@ public class MainWindow extends javax.swing.JFrame {
 				return strings[i];
 			}
 		});
-		searchScrollPane.setViewportView(searchScrollList);
+		searchScrollPane.setViewportView(searchSearchList);
 
 		searchStudentText.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
@@ -328,13 +335,6 @@ public class MainWindow extends javax.swing.JFrame {
 
 		personalInfoBirthdayLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 		personalInfoBirthdayLabel.setText("Birthday:");
-
-		personalInfoNationalIDText
-				.addActionListener(new java.awt.event.ActionListener() {
-					public void actionPerformed(java.awt.event.ActionEvent evt) {
-						pTCidActionPerformed(evt);
-					}
-				});
 
 		personalInfoDayComBox.setModel(new javax.swing.DefaultComboBoxModel(
 				new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -901,33 +901,38 @@ public class MainWindow extends javax.swing.JFrame {
 					.addGroup(gl_accoInfoPanel.createParallelGroup(Alignment.LEADING)
 						.addComponent(accoInfoLabel, GroupLayout.PREFERRED_SIZE, 165, GroupLayout.PREFERRED_SIZE)
 						.addGroup(gl_accoInfoPanel.createSequentialGroup()
-							.addGroup(gl_accoInfoPanel.createParallelGroup(Alignment.TRAILING, false)
-								.addComponent(accoInfoRoomLabel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE)
-								.addComponent(accoInfoDormLabel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-							.addGap(29)
+							.addGroup(gl_accoInfoPanel.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_accoInfoPanel.createSequentialGroup()
+									.addComponent(accoInfoDormLabel)
+									.addGap(29))
+								.addGroup(gl_accoInfoPanel.createSequentialGroup()
+									.addComponent(accoInfoRoomLabel, GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE)
+									.addPreferredGap(ComponentPlacement.RELATED)))
 							.addGroup(gl_accoInfoPanel.createParallelGroup(Alignment.LEADING, false)
-								.addComponent(accoInfoDormComboBox, 0, 92, Short.MAX_VALUE)
-								.addComponent(accoInfoRoomComboBox, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-							.addGap(78)
+								.addComponent(accoInfoRoomComboBox, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(accoInfoDormComboBox, 0, 92, Short.MAX_VALUE))
+							.addGap(70)
 							.addGroup(gl_accoInfoPanel.createParallelGroup(Alignment.TRAILING)
 								.addComponent(accoInfoStartDateLabel, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
 								.addComponent(accoInfoEndDateLabel, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE))
-							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addGap(18)
 							.addGroup(gl_accoInfoPanel.createParallelGroup(Alignment.LEADING)
-								.addComponent(accoInfoEndDateText, GroupLayout.PREFERRED_SIZE, 215, GroupLayout.PREFERRED_SIZE)
-								.addComponent(accoInfoStartDateText, GroupLayout.PREFERRED_SIZE, 215, GroupLayout.PREFERRED_SIZE))
-							.addGap(65)
-							.addGroup(gl_accoInfoPanel.createParallelGroup(Alignment.LEADING)
-								.addComponent(editButton, GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE)
-								.addComponent(saveButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+								.addGroup(gl_accoInfoPanel.createSequentialGroup()
+									.addComponent(accoInfoStartDateText, GroupLayout.PREFERRED_SIZE, 215, GroupLayout.PREFERRED_SIZE)
+									.addGap(65)
+									.addComponent(editButton, GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE))
+								.addGroup(gl_accoInfoPanel.createSequentialGroup()
+									.addComponent(accoInfoEndDateText, GroupLayout.PREFERRED_SIZE, 215, GroupLayout.PREFERRED_SIZE)
+									.addGap(65)
+									.addComponent(saveButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
 					.addGap(20))
 		);
 		gl_accoInfoPanel.setVerticalGroup(
 			gl_accoInfoPanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_accoInfoPanel.createSequentialGroup()
-					.addGroup(gl_accoInfoPanel.createParallelGroup(Alignment.TRAILING)
+					.addContainerGap()
+					.addGroup(gl_accoInfoPanel.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_accoInfoPanel.createSequentialGroup()
-							.addContainerGap()
 							.addComponent(accoInfoLabel)
 							.addPreferredGap(ComponentPlacement.UNRELATED)
 							.addGroup(gl_accoInfoPanel.createParallelGroup(Alignment.BASELINE)
@@ -935,98 +940,54 @@ public class MainWindow extends javax.swing.JFrame {
 								.addComponent(accoInfoDormComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 								.addComponent(accoInfoStartDateLabel)
 								.addComponent(accoInfoStartDateText, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-							.addPreferredGap(ComponentPlacement.RELATED, 20, Short.MAX_VALUE))
+							.addGroup(gl_accoInfoPanel.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_accoInfoPanel.createSequentialGroup()
+									.addGap(17)
+									.addGroup(gl_accoInfoPanel.createParallelGroup(Alignment.BASELINE)
+										.addComponent(accoInfoRoomComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+										.addComponent(accoInfoRoomLabel)))
+								.addGroup(gl_accoInfoPanel.createSequentialGroup()
+									.addGap(18)
+									.addGroup(gl_accoInfoPanel.createParallelGroup(Alignment.BASELINE)
+										.addComponent(accoInfoEndDateText, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+										.addComponent(accoInfoEndDateLabel)))))
 						.addGroup(gl_accoInfoPanel.createSequentialGroup()
-							.addContainerGap()
+							.addGap(19)
 							.addComponent(editButton)
-							.addPreferredGap(ComponentPlacement.RELATED)))
-					.addGroup(gl_accoInfoPanel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(accoInfoRoomLabel)
-						.addComponent(accoInfoRoomComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(accoInfoEndDateLabel)
-						.addComponent(accoInfoEndDateText, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(saveButton, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap())
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(saveButton, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE)))
+					.addGap(29))
 		);
 		accoInfoPanel.setLayout(gl_accoInfoPanel);
 
 		javax.swing.GroupLayout gl_mainPaneSubPanel = new javax.swing.GroupLayout(
 				mainPaneSubPanel);
+		gl_mainPaneSubPanel.setHorizontalGroup(
+			gl_mainPaneSubPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(Alignment.TRAILING, gl_mainPaneSubPanel.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(gl_mainPaneSubPanel.createParallelGroup(Alignment.TRAILING)
+						.addComponent(accoInfoPanel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(personalInfoPanel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 722, Short.MAX_VALUE)
+						.addGroup(Alignment.LEADING, gl_mainPaneSubPanel.createSequentialGroup()
+							.addComponent(emergencyContactPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(schoolInfoPanel, GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE)))
+					.addContainerGap())
+		);
+		gl_mainPaneSubPanel.setVerticalGroup(
+			gl_mainPaneSubPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_mainPaneSubPanel.createSequentialGroup()
+					.addComponent(personalInfoPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_mainPaneSubPanel.createParallelGroup(Alignment.LEADING, false)
+						.addComponent(emergencyContactPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(schoolInfoPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(accoInfoPanel, GroupLayout.PREFERRED_SIZE, 120, Short.MAX_VALUE)
+					.addContainerGap())
+		);
 		mainPaneSubPanel.setLayout(gl_mainPaneSubPanel);
-		gl_mainPaneSubPanel
-				.setHorizontalGroup(gl_mainPaneSubPanel
-						.createParallelGroup(
-								javax.swing.GroupLayout.Alignment.LEADING)
-						.addGroup(
-								gl_mainPaneSubPanel
-										.createSequentialGroup()
-										.addContainerGap()
-										.addGroup(
-												gl_mainPaneSubPanel
-														.createParallelGroup(
-																javax.swing.GroupLayout.Alignment.LEADING)
-														.addComponent(
-																accoInfoPanel,
-																javax.swing.GroupLayout.DEFAULT_SIZE,
-																javax.swing.GroupLayout.DEFAULT_SIZE,
-																Short.MAX_VALUE)
-														.addComponent(
-																personalInfoPanel,
-																javax.swing.GroupLayout.DEFAULT_SIZE,
-																javax.swing.GroupLayout.DEFAULT_SIZE,
-																Short.MAX_VALUE)
-														.addGroup(
-																gl_mainPaneSubPanel
-																		.createSequentialGroup()
-																		.addComponent(
-																				emergencyContactPanel,
-																				javax.swing.GroupLayout.PREFERRED_SIZE,
-																				javax.swing.GroupLayout.DEFAULT_SIZE,
-																				javax.swing.GroupLayout.PREFERRED_SIZE)
-																		.addPreferredGap(
-																				javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-																		.addComponent(
-																				schoolInfoPanel,
-																				javax.swing.GroupLayout.DEFAULT_SIZE,
-																				javax.swing.GroupLayout.DEFAULT_SIZE,
-																				Short.MAX_VALUE)))
-										.addContainerGap()));
-		gl_mainPaneSubPanel
-				.setVerticalGroup(gl_mainPaneSubPanel
-						.createParallelGroup(
-								javax.swing.GroupLayout.Alignment.LEADING)
-						.addGroup(
-								gl_mainPaneSubPanel
-										.createSequentialGroup()
-										.addComponent(
-												personalInfoPanel,
-												javax.swing.GroupLayout.PREFERRED_SIZE,
-												javax.swing.GroupLayout.DEFAULT_SIZE,
-												javax.swing.GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(
-												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-										.addGroup(
-												gl_mainPaneSubPanel
-														.createParallelGroup(
-																javax.swing.GroupLayout.Alignment.LEADING,
-																false)
-														.addComponent(
-																emergencyContactPanel,
-																javax.swing.GroupLayout.DEFAULT_SIZE,
-																javax.swing.GroupLayout.DEFAULT_SIZE,
-																Short.MAX_VALUE)
-														.addComponent(
-																schoolInfoPanel,
-																javax.swing.GroupLayout.DEFAULT_SIZE,
-																javax.swing.GroupLayout.DEFAULT_SIZE,
-																Short.MAX_VALUE))
-										.addPreferredGap(
-												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-										.addComponent(
-												accoInfoPanel,
-												javax.swing.GroupLayout.DEFAULT_SIZE,
-												javax.swing.GroupLayout.DEFAULT_SIZE,
-												Short.MAX_VALUE)));
 
 		tabbedPane.addTab("Profile", mainPaneSubPanel);
 
@@ -1066,7 +1027,7 @@ public class MainWindow extends javax.swing.JFrame {
 		addStudentMenuItem
 				.addActionListener(new java.awt.event.ActionListener() {
 					public void actionPerformed(java.awt.event.ActionEvent evt) {
-						jMenuItem1ActionPerformed(evt);
+						addStudentActionPerformed(evt);
 					}
 				});
 		homeMenu.add(addStudentMenuItem);
@@ -1081,7 +1042,7 @@ public class MainWindow extends javax.swing.JFrame {
 		addDormMenuItem.setText("Add Dorm");
 		addDormMenuItem.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jMenuItem2ActionPerformed(evt);
+				addDormActionPerformed(evt);
 			}
 		});
 		dormMenu.add(addDormMenuItem);
@@ -1104,7 +1065,7 @@ public class MainWindow extends javax.swing.JFrame {
 		addRoomMenuItem.setText("Add Room");
 		addRoomMenuItem.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jMenuItem3ActionPerformed(evt);
+				addRoomActionPerformed(evt);
 			}
 		});
 		roomMenu.add(addRoomMenuItem);
@@ -1155,39 +1116,39 @@ public class MainWindow extends javax.swing.JFrame {
 
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(
 				getContentPane());
+		layout.setHorizontalGroup(
+			layout.createParallelGroup(Alignment.LEADING)
+				.addGroup(layout.createSequentialGroup()
+					.addComponent(mainSearchPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGroup(layout.createParallelGroup(Alignment.LEADING)
+						.addGroup(layout.createSequentialGroup()
+							.addComponent(jSeparator1, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE)
+							.addContainerGap(781, Short.MAX_VALUE))
+						.addComponent(mainPanePanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+		);
+		layout.setVerticalGroup(
+			layout.createParallelGroup(Alignment.LEADING)
+				.addComponent(jSeparator1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+				.addComponent(mainSearchPanel, GroupLayout.DEFAULT_SIZE, 540, Short.MAX_VALUE)
+				.addComponent(mainPanePanel, GroupLayout.DEFAULT_SIZE, 540, Short.MAX_VALUE)
+		);
 		getContentPane().setLayout(layout);
-		layout.setHorizontalGroup(layout
-				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(
-						layout.createSequentialGroup()
-								.addComponent(mainSearchPanel,
-										javax.swing.GroupLayout.PREFERRED_SIZE,
-										javax.swing.GroupLayout.DEFAULT_SIZE,
-										javax.swing.GroupLayout.PREFERRED_SIZE)
-								.addPreferredGap(
-										javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-								.addComponent(jSeparator1,
-										javax.swing.GroupLayout.PREFERRED_SIZE,
-										15,
-										javax.swing.GroupLayout.PREFERRED_SIZE)
-								.addPreferredGap(
-										javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-								.addComponent(mainPanePanel,
-										javax.swing.GroupLayout.DEFAULT_SIZE,
-										javax.swing.GroupLayout.DEFAULT_SIZE,
-										Short.MAX_VALUE)));
-		layout.setVerticalGroup(layout
-				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addComponent(jSeparator1)
-				.addComponent(mainSearchPanel,
-						javax.swing.GroupLayout.DEFAULT_SIZE,
-						javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-				.addComponent(mainPanePanel,
-						javax.swing.GroupLayout.DEFAULT_SIZE,
-						javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
 
 		pack();
 	}// </editor-fold>//GEN-END:initComponents
+	
+	private void clickStudentSearchList(MouseEvent evt) {
+		DBConnection conn = new DBConnection();
+		conn.retrieveStudentInfo("Nazli", "Karalar");
+		if (evt.getClickCount() == 2) {
+			if(searchSearchList.getSelectedValue().toString().equals(conn.getStudents().get(0))) {
+				System.out.println(searchSearchList.getSelectedValue().toString());
+			}
+			
+		}
+		
+	}
 	
 	private void clickEditButton(ActionEvent evt) {
 		setEditableTrue();
@@ -1199,19 +1160,15 @@ public class MainWindow extends javax.swing.JFrame {
 		
 	}
 
-	private void pTCidActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_pTCidActionPerformed
-		// TODO add your handling code here:
-	}// GEN-LAST:event_pTCidActionPerformed
-
-	private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jMenuItem1ActionPerformed
+	private void addStudentActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jMenuItem1ActionPerformed
 		new StudentWindow().setVisible(true);
 	}// GEN-LAST:event_jMenuItem1ActionPerformed
 
-	private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jMenuItem2ActionPerformed
+	private void addDormActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jMenuItem2ActionPerformed
 		new DormWindow().setVisible(true);
 	}// GEN-LAST:event_jMenuItem2ActionPerformed
 
-	private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jMenuItem3ActionPerformed
+	private void addRoomActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jMenuItem3ActionPerformed
 		new RoomWindow().setVisible(true);
 	}// GEN-LAST:event_jMenuItem3ActionPerformed
 
@@ -1273,7 +1230,7 @@ public class MainWindow extends javax.swing.JFrame {
 	private javax.swing.ButtonGroup buttonGroup2;
 	private javax.swing.JButton searchButton;
 	private javax.swing.JComboBox personalInfoGenderComboBox;
-	private javax.swing.JList searchScrollList;
+	private javax.swing.JList searchSearchList;
 	private javax.swing.JMenu homeMenu;
 	private javax.swing.JMenu dormMenu;
 	private javax.swing.JMenu jMenu3;

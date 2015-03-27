@@ -1,4 +1,4 @@
-package test;
+﻿package test;
 
 import static org.junit.Assert.assertEquals;
 
@@ -11,19 +11,19 @@ public class TestDorm {
 	@Test
 	public void testDormName() {
 		Dorm dorm = new Dorm();
-		dorm.setDormName("Nazlı's Home");
-		assertEquals("Nazlı's Home", dorm.getDormName());
+		dorm.setDormName("NazlÄ±'s Home");
+		assertEquals("NazlÄ±'s Home", dorm.getDormName());
 	}
 	
 	@Test
-	public void testDormName2() {
+	public void testDormNameEmpty() {
 		Dorm dorm = new Dorm();
 		dorm.setDormName("");
 		assertEquals("", dorm.getDormName());
 	}
 	
 	@Test
-	public void testDormName3() {
+	public void testDormNameBlank() {
 		Dorm dorm = new Dorm();
 		dorm.setDormName(" ");
 		assertEquals(" ", dorm.getDormName());
@@ -34,6 +34,20 @@ public class TestDorm {
 		Dorm dorm = new Dorm();
 		dorm.setLocation("Cekmekoy");
 		assertEquals("Cekmekoy", dorm.getLocation());
+	}
+	
+	@Test
+	public void testDormLocationEmpty() {
+		Dorm dorm = new Dorm();
+		dorm.setLocation("");
+		assertEquals("", dorm.getLocation());
+	}
+	
+	@Test
+	public void testDormLocationBlank() {
+		Dorm dorm = new Dorm();
+		dorm.setLocation(" ");
+		assertEquals(" ", dorm.getLocation());
 	}
 	
 	@Test

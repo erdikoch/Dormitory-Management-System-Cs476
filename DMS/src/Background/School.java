@@ -11,7 +11,13 @@ public class School {
 	}
 
 	public void setUniName(String uniName) {
-		this.uniName = uniName;
+		if(uniName.equals("")) {
+			uniName = "N/A";
+		} else if (uniName.equals(" ")) {
+			uniName = "N/A";
+		} else {
+			this.uniName = uniName;
+		}
 	}
 
 	public String getDepartment() {
@@ -19,7 +25,13 @@ public class School {
 	}
 
 	public void setDepartment(String department) {
-		this.department = department;
+		if(department.equals("")) {
+			department = "N/A";
+		} else if (department.equals(" ")) {
+			department = "N/A";
+		} else {
+			this.department = department;
+		}	
 	}
 
 	public int getGrade() {
@@ -27,8 +39,8 @@ public class School {
 	}
 
 	public void setGrade(int grade) {
-		this.grade = grade;
-	}
-	
-	
+		if(grade>=0 || grade<=100) {
+			this.grade = grade; 
+		}
+	}	
 }

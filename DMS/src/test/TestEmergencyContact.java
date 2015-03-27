@@ -16,10 +16,17 @@ public class TestEmergencyContact {
 	}
 	
 	@Test
-	public void testName2() {
+	public void testNameEmpty() {
 		EmergencyContact emergencyContact = new EmergencyContact();
 		emergencyContact.setName("");
 		assertEquals("", emergencyContact.getName());
+	}
+	
+	@Test
+	public void testNameBlank() {
+		EmergencyContact emergencyContact = new EmergencyContact();
+		emergencyContact.setName(" ");
+		assertEquals(" ", emergencyContact.getName());
 	}
 	
 	@Test
@@ -27,13 +34,20 @@ public class TestEmergencyContact {
 		EmergencyContact emergencyContact = new EmergencyContact();
 		emergencyContact.setSurname("Koç");
 		assertEquals("Koç", emergencyContact.getSurname());
-	}
+	} 
 	
 	@Test
-	public void testSurname2() {
+	public void testSurnameEmpty() {
 		EmergencyContact emergencyContact = new EmergencyContact();
 		emergencyContact.setSurname("");
 		assertEquals("", emergencyContact.getSurname());
+	}
+	
+	@Test
+	public void testSurnameBlank() {
+		EmergencyContact emergencyContact = new EmergencyContact();
+		emergencyContact.setSurname(" ");
+		assertEquals(" ", emergencyContact.getSurname());
 	}
 	
 	@Test
@@ -44,10 +58,25 @@ public class TestEmergencyContact {
 	}
 	
 	@Test
-	public void testPhone2() {
+	public void testPhoneWithDash() {
+		EmergencyContact emergencyContact = new EmergencyContact();
+		emergencyContact.setPhone("111/111/1111");
+		assertEquals("111/111/1111", emergencyContact.getPhone());
+	}
+	
+	@Test
+	public void testPhoneEmpty() {
 		EmergencyContact emergencyContact = new EmergencyContact();
 		emergencyContact.setPhone("");
 		assertEquals("", emergencyContact.getPhone());
+	}
+
+
+	@Test
+	public void testPhoneBlank() {
+		EmergencyContact emergencyContact = new EmergencyContact();
+		emergencyContact.setPhone(" ");
+		assertEquals(" ", emergencyContact.getPhone());
 	}
 
 }

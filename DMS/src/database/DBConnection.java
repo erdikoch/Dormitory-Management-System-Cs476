@@ -29,10 +29,10 @@ public class DBConnection {
 	private ArrayList dorms;
 	private ArrayList roomNoList;
 	private DormListWindow dormListW;
-	private ArrayList studentsInRooms, students, studentInfo, stdName,
-			stdSurname, stdTC, stdGender, stdPhone, stdMail, stdBirthdate,
-			emgName, emgSurname, emgPhone, schUniName, schDeptName, schGrade,
-			accDormName, accTypeName, accRoomNo, accStartDate, accEndDate;
+	private ArrayList student, studentsInRooms, stdName, stdSurname, stdTC, stdGender,
+			stdPhone, stdMail, stdBirthdate, emgName, emgSurname, emgPhone,
+			schUniName, schDeptName, schGrade, accDormName, accTypeName,
+			accRoomNo, accStartDate, accEndDate;
 
 	public DBConnection() {
 
@@ -259,8 +259,43 @@ public class DBConnection {
 	}
 
 	public void retrieveStudentInfo(String name, String surname) {
-		students = new ArrayList<String>();
-		studentInfo = new ArrayList<String>();
+		initializeLists();
+		try {
+			proc_stmt = connect().prepareCall("{ call Get_StudentInfo(?, ?) }");
+			proc_stmt.setString(1, name);
+			proc_stmt.setString(2, surname);
+			rs = proc_stmt.executeQuery();
+			while (rs.next()) {
+				String sName = rs.getString("StudentName");
+				String sSurname = rs.getString("StudentSurname");
+				stdName.add(rs.getString("StudentName"));
+				student.add(sName + " " + sSurname);
+				stdSurname.add(rs.getString("StudentSurname"));
+				stdTC.add(rs.getString("TC_ID"));
+				stdGender.add(rs.getString("Gender"));
+				stdPhone.add(rs.getString("Phone"));
+				stdMail.add(rs.getString("Mail"));
+				stdBirthdate.add(rs.getDate("Birthdate"));
+				emgName.add(rs.getString("Name"));
+				emgSurname.add(rs.getString("Surname"));
+				emgPhone.add(rs.getString("Phone"));
+				schUniName.add(rs.getString("University"));
+				schDeptName.add(rs.getString("DepName"));
+				schGrade.add(rs.getString("Grade"));
+				accDormName.add(rs.getString("DormName"));
+				accTypeName.add(rs.getString("TypeName"));
+				accRoomNo.add(rs.getString("RoomNo"));
+				accStartDate.add(rs.getDate("StartDate"));
+				accEndDate.add(rs.getDate("EndDate"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	private void initializeLists() {
+		student = new ArrayList<String>();
 		stdName = new ArrayList<String>();
 		stdSurname = new ArrayList<String>();
 		stdTC = new ArrayList<String>();
@@ -279,39 +314,6 @@ public class DBConnection {
 		accRoomNo = new ArrayList<String>();
 		accStartDate = new ArrayList<String>();
 		accEndDate = new ArrayList<String>();
-		try {
-			proc_stmt = connect().prepareCall("{ call Get_StudentInfo(?, ?) }");
-			proc_stmt.setString(1, name);
-			proc_stmt.setString(2, surname);
-			rs = proc_stmt.executeQuery();
-			while (rs.next()) {
-				String stdName = rs.getString("StudentName");
-				String stdSurname = rs.getString("StudentSurname");
-				students.add(stdName + " " + stdSurname);
-				studentInfo.add(rs.getString("StudentName") + " "
-						+ rs.getString("StudentSurname") + " "
-						+ rs.getString("TC_ID") + " " + rs.getString("Gender")
-						+ " " + rs.getString("Phone") + " "
-						+ rs.getString("Mail") + " "
-						+ rs.getDate("Birthdate") + " "
-						+ rs.getString("Name") + " " + rs.getString("Surname")
-						+ " " + rs.getString("University") + " "
-						+ rs.getString("DepName") + " " + rs.getString("Grade")
-						+ " " + rs.getString("DormName") + " "
-						+ rs.getString("TypeName") + " "
-						+ rs.getString("RoomNo") + " "
-						+ rs.getDate("StartDate") + " "
-						+ rs.getDate("EndDate"));
-			}
-
-			for (int i = 0; i < studentInfo.size(); i++) {
-				System.out.println(studentInfo.get(i));
-			}
-
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 
 	public static void closeStatement(Statement statement) {
@@ -332,12 +334,80 @@ public class DBConnection {
 		return roomNoList;
 	}
 
-	public ArrayList getStudentInfo() {
-		return studentInfo;
+	public ArrayList<String> getStdName() {
+		return stdName;
 	}
 
-	public ArrayList getStudents() {
-		return students;
+	public ArrayList<String> getStdSurname() {
+		return stdSurname;
+	}
+
+	public ArrayList<String> getStdTC() {
+		return stdTC;
+	}
+
+	public ArrayList<String> getStdGender() {
+		return stdGender;
+	}
+
+	public ArrayList<String> getStdPhone() {
+		return stdPhone;
+	}
+
+	public ArrayList<String> getStdMail() {
+		return stdMail;
+	}
+
+	public ArrayList<String> getStdBirthdate() {
+		return stdBirthdate;
+	}
+
+	public ArrayList<String> getEmgName() {
+		return emgName;
+	}
+
+	public ArrayList<String> getEmgSurname() {
+		return emgSurname;
+	}
+
+	public ArrayList<String> getEmgPhone() {
+		return emgPhone;
+	}
+
+	public ArrayList<String> getSchUniName() {
+		return schUniName;
+	}
+
+	public ArrayList<String> getSchDeptName() {
+		return schDeptName;
+	}
+
+	public ArrayList<String> getSchGrade() {
+		return schGrade;
+	}
+
+	public ArrayList<String> getAccDormName() {
+		return accDormName;
+	}
+
+	public ArrayList<String> getAccTypeName() {
+		return accTypeName;
+	}
+
+	public ArrayList<String> getAccRoomNo() {
+		return accRoomNo;
+	}
+
+	public ArrayList<String> getAccStartDate() {
+		return accStartDate;
+	}
+
+	public ArrayList<String> getAccEndDate() {
+		return accEndDate;
+	}
+	
+	public ArrayList<String> getStudent() {
+		return student;
 	}
 
 }

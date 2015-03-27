@@ -1,15 +1,21 @@
 package view;
-import java.awt.GridBagLayout;
-import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
-import javax.swing.JComboBox;
+import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.Font;
-import javax.swing.SwingConstants;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
+import javax.swing.ButtonGroup;
+import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+
+import org.jfree.ui.RefineryUtilities;
+
+import background.Dorm;
+import database.DBConnection;
 
 public class ChartChooserView extends javax.swing.JFrame {
 	private JCheckBox maleFemaleCapacity;
@@ -29,7 +35,16 @@ public class ChartChooserView extends javax.swing.JFrame {
 		gbc_lblDorm.gridy = 4;
 		getContentPane().add(lblDorm, gbc_lblDorm);
 		
-		JComboBox comboBox = new JComboBox();
+		final JComboBox comboBox = new JComboBox();
+		DBConnection connection = new DBConnection();
+		ArrayList<Dorm> dorms = connection.getDorms();
+		
+		for (int i = 0; i < dorms.size(); i++) {
+			comboBox.addItem(dorms.get(i));
+		}
+		
+		
+		
 		GridBagConstraints gbc_comboBox = new GridBagConstraints();
 		gbc_comboBox.insets = new Insets(0, 0, 5, 5);
 		gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;
@@ -46,11 +61,14 @@ public class ChartChooserView extends javax.swing.JFrame {
 		gbc_lblChartType.gridy = 6;
 		getContentPane().add(lblChartType, gbc_lblChartType);
 		
+		ButtonGroup group = new ButtonGroup();
+		
 		final JCheckBox dormCapacityCheckBox = new JCheckBox("Dorm Capacity");
 		GridBagConstraints gbc_dormCapacityCheckBox = new GridBagConstraints();
 		gbc_dormCapacityCheckBox.insets = new Insets(0, 0, 5, 5);
 		gbc_dormCapacityCheckBox.gridx = 2;
 		gbc_dormCapacityCheckBox.gridy = 6;
+		group.add(dormCapacityCheckBox);
 		getContentPane().add(dormCapacityCheckBox, gbc_dormCapacityCheckBox);
 		
 		maleFemaleCapacity = new JCheckBox("Male/Female Capacity");
@@ -59,6 +77,7 @@ public class ChartChooserView extends javax.swing.JFrame {
 		gbc_maleFemaleCapacity.insets = new Insets(0, 0, 5, 5);
 		gbc_maleFemaleCapacity.gridx = 2;
 		gbc_maleFemaleCapacity.gridy = 7;
+		group.add(maleFemaleCapacity);
 		getContentPane().add(maleFemaleCapacity, gbc_maleFemaleCapacity);
 		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
 		gbc_btnNewButton.insets = new Insets(0, 0, 5, 5);
@@ -69,7 +88,15 @@ public class ChartChooserView extends javax.swing.JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(dormCapacityCheckBox.isSelected()){
-					//new CapacityWindow("Dorm Capacity", ); // burayacombobax get dorm gelecek
+					final CapacityWindow dormCapacity = new CapacityWindow("Dorm Capacity",(Dorm) comboBox.getSelectedItem());
+					dormCapacity.pack();
+			        RefineryUtilities.centerFrameOnScreen(dormCapacity);
+			        dormCapacity.setVisible(true);
+				}else if(maleFemaleCapacity.isSelected()){
+					final MaleFemaleCapacityWindow capacity = new MaleFemaleCapacityWindow("Dorm Male/Female Capacity");
+					capacity.pack();
+			        RefineryUtilities.centerFrameOnScreen(capacity);
+			        capacity.setVisible(true);
 				}
 			}
 		});

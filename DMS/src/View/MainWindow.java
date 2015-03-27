@@ -1244,8 +1244,9 @@ public class MainWindow extends javax.swing.JFrame {
 		addRoomMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				ChartChooserView chooser = new ChartChooserView();
-				chooser.setVisible(true);
-
+				chooser.pack();
+		        RefineryUtilities.centerFrameOnScreen(chooser);
+		        chooser.setVisible(true);
 			}
 		});
 		otherMenu.add(addRoomMenuItem);

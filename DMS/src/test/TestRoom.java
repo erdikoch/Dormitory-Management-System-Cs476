@@ -78,12 +78,28 @@ public class TestRoom {
 		assertEquals(1000, room.getRoomNo());
 	}
 	
+	@Test
+	public void testFourDigitRoomNegative() {
+		Room room = new Room();
+		room.setRoomNo(-1000);
+		assertEquals(-1000, room.getRoomNo());
+	}
+	
+	
 	@SuppressWarnings("deprecation")
 	@Test
 	public void testOneDigitRoomPrice() {
 		Room room = new Room();
 		room.setRoomPrice((double) 6.0);
 		assertEquals(6.0, room.getRoomPrice());
+	}
+	
+	@SuppressWarnings("deprecation")
+	@Test
+	public void testRoomPriceNegative() {
+		Room room = new Room();
+		room.setRoomPrice((double) -6.0);
+		assertEquals(-6.0, room.getRoomPrice());
 	}
 	
 	@SuppressWarnings("deprecation")

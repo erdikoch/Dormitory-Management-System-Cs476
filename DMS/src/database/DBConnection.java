@@ -257,8 +257,9 @@ public class DBConnection {
 		return studentsInRooms;
 	}
 
-	public void retrieveStudentInfo(String name, String surname) {
+	public Student retrieveStudentInfo(String name, String surname) {
 		initializeLists();
+		Student std = new Student();
 		try {
 			proc_stmt = connect().prepareCall("{ call Get_StudentInfo(?, ?) }");
 			proc_stmt.setString(1, name);
@@ -267,30 +268,112 @@ public class DBConnection {
 			while (rs.next()) {
 				String sName = rs.getString("StudentName");
 				String sSurname = rs.getString("StudentSurname");
-				stdName.add(rs.getString("StudentName"));
 				student.add(sName + " " + sSurname);
-				stdSurname.add(rs.getString("StudentSurname"));
-				stdTC.add(rs.getString("TC_ID"));
-				stdGender.add(rs.getString("Gender"));
-				stdPhone.add(rs.getString("Phone"));
-				stdMail.add(rs.getString("Mail"));
-				stdBirthdate.add(rs.getDate("Birthdate"));
-				emgName.add(rs.getString("Name"));
-				emgSurname.add(rs.getString("Surname"));
-				emgPhone.add(rs.getString("Phone"));
-				schUniName.add(rs.getString("University"));
-				schDeptName.add(rs.getString("DepName"));
-				schGrade.add(rs.getString("Grade"));
-				accDormName.add(rs.getString("DormName"));
-				accTypeName.add(rs.getString("TypeName"));
-				accRoomNo.add(rs.getString("RoomNo"));
-				accStartDate.add(rs.getDate("StartDate"));
-				accEndDate.add(rs.getDate("EndDate"));
+				std.setName(rs.getString("StudentName"));
+				std.setSurname(rs.getString("StudentSurname"));
+				std.setGender(rs.getString("Gender"));
+				std.setEmail(rs.getString("Mail"));
+				std.setPhone(rs.getString("Phone"));
+				std.setTC(rs.getString("TC_ID"));
+				std.setBirthday(rs.getDate("Birthdate"));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return std;
+	}
+
+	public EmergencyContact retrieveEmergencyInfo(String name, String surname) {
+		EmergencyContact emg = new EmergencyContact();
+		try {
+			proc_stmt = connect().prepareCall("{ call Get_StudentInfo(?, ?) }");
+			proc_stmt.setString(1, name);
+			proc_stmt.setString(2, surname);
+			rs = proc_stmt.executeQuery();
+			while (rs.next()) {
+				emg.setName(rs.getString("Name"));
+				emg.setSurname(rs.getString("Surname"));
+				emg.setPhone(rs.getString("Phone"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return emg;
+	}
+
+	public School retrieveSchoolInfo(String name, String surname) {
+		School sch = new School();
+		try {
+			proc_stmt = connect().prepareCall("{ call Get_StudentInfo(?, ?) }");
+			proc_stmt.setString(1, name);
+			proc_stmt.setString(2, surname);
+			rs = proc_stmt.executeQuery();
+			while (rs.next()) {
+				sch.setUniName(rs.getString("University"));
+				sch.setDepartment(rs.getString("DepName"));
+				sch.setGrade(rs.getInt("Grade"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return sch;
+	}
+
+	public Hostel retrieveHostelInfo(String name, String surname) {
+		Hostel host = new Hostel();
+		try {
+			proc_stmt = connect().prepareCall("{ call Get_StudentInfo(?, ?) }");
+			proc_stmt.setString(1, name);
+			proc_stmt.setString(2, surname);
+			rs = proc_stmt.executeQuery();
+			while (rs.next()) {
+				host.setStartDate(rs.getDate("StartDate"));
+				host.setEndDate(rs.getDate("EndDate"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return host;
+	}
+
+	public Dorm retrieveDormInfo(String name, String surname) {
+		Dorm dorm = new Dorm();
+		try {
+			proc_stmt = connect().prepareCall("{ call Get_StudentInfo(?, ?) }");
+			proc_stmt.setString(1, name);
+			proc_stmt.setString(2, surname);
+			rs = proc_stmt.executeQuery();
+			while (rs.next()) {
+				dorm.setDormName(rs.getString("DormName"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return dorm;
+	}
+
+	public Room retrieveRoomInfo(String name, String surname) {
+		Room room = new Room();
+		try {
+			proc_stmt = connect().prepareCall("{ call Get_StudentInfo(?, ?) }");
+			proc_stmt.setString(1, name);
+			proc_stmt.setString(2, surname);
+			rs = proc_stmt.executeQuery();
+			while (rs.next()) {
+				room.setTypeName(rs.getInt("TypeName"));
+				room.setRoomNo(rs.getInt("RoomNo"));
+
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return room;
 	}
 
 	private void initializeLists() {

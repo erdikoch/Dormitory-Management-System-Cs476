@@ -29,6 +29,7 @@ public class DBConnection {
 	private ArrayList dorms, roomNoList, studentsInRooms;
 	private DormListWindow dormListW;
 	private ArrayList<String> student;
+
 	public DBConnection() {
 
 	}
@@ -199,7 +200,9 @@ public class DBConnection {
 		}
 
 	}
-	public void updateStudent(Student std,EmergencyContact emg,Dorm dorm, Room room,Hostel host, School sch,String Name,String Surname ){
+
+	public void updateStudent(Student std, EmergencyContact emg, Dorm dorm,
+			Room room, Hostel host, School sch, String Name, String Surname) {
 		try {
 			proc_stmt = con
 					.prepareCall("{ call Update_StudentPersonalInfo(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) }");
@@ -210,28 +213,25 @@ public class DBConnection {
 			proc_stmt.setString(5, std.getEmail());
 			proc_stmt.setString(6, std.getPhone());
 			proc_stmt.setString(7, std.getGender());
-			proc_stmt.setDate(8, (Date)std.getBirthday());
+			proc_stmt.setDate(8, (Date) std.getBirthday());
 			proc_stmt.setString(9, std.getTC());
 			proc_stmt.setString(10, emg.getName());
-			proc_stmt.setString(11, emg.getSurname() );
+			proc_stmt.setString(11, emg.getSurname());
 			proc_stmt.setString(12, emg.getPhone());
 			proc_stmt.setString(13, sch.getDepartment());
 			proc_stmt.setString(14, sch.getUniName());
-			proc_stmt.setInt(15,sch.getGrade());
-			proc_stmt.setDate(16,(Date)host.getStartDate());
-			proc_stmt.setDate(17,(Date) host.getEndDate());
-			proc_stmt.setString(18,dorm.getDormName());
+			proc_stmt.setInt(15, sch.getGrade());
+			proc_stmt.setDate(16, (Date) host.getStartDate());
+			proc_stmt.setDate(17, (Date) host.getEndDate());
+			proc_stmt.setString(18, dorm.getDormName());
 			proc_stmt.setInt(19, room.getTypeName());
 			proc_stmt.setInt(20, room.getRoomNo());
-			
-			
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	
-		
+
 	}
 
 	public void retrieveDormInfo() {
@@ -288,9 +288,9 @@ public class DBConnection {
 	}
 
 	public Student retrieveStudentInfo(String name, String surname) {
-		
+
 		student = new ArrayList<String>();
-		
+
 		Student std = new Student();
 		try {
 			proc_stmt = connect().prepareCall("{ call Get_StudentInfo(?, ?) }");
@@ -408,8 +408,6 @@ public class DBConnection {
 		return room;
 	}
 
-
-
 	public static void closeStatement(Statement statement) {
 		// TODO Auto-generated method stub
 
@@ -427,8 +425,6 @@ public class DBConnection {
 	public ArrayList<String> getRoomNoList() {
 		return roomNoList;
 	}
-
-	
 
 	public ArrayList<String> getStudent() {
 		return student;

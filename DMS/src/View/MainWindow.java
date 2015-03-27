@@ -13,14 +13,17 @@ import javax.swing.JMenuItem;
 //import org.jfree.chart.JFreeChart;
 //import org.jfree.ui.RefineryUtilities;
 
-
-
-
 import javax.swing.JOptionPane;
 import javax.swing.ListModel;
 
 import org.jfree.ui.RefineryUtilities;
 
+import background.Dorm;
+import background.EmergencyContact;
+import background.Hostel;
+import background.Room;
+import background.School;
+import background.Student;
 import database.DBConnection;
 
 import java.awt.event.ActionListener;
@@ -138,7 +141,7 @@ public class MainWindow extends javax.swing.JFrame {
 				clickSearchButton(evt);
 			}
 		});
-		
+
 		mainPanePanel = new javax.swing.JPanel();
 		tabbedPane = new javax.swing.JTabbedPane();
 		mainPaneSubPanel = new javax.swing.JPanel();
@@ -224,34 +227,34 @@ public class MainWindow extends javax.swing.JFrame {
 		searchStudentLabel.setText("             Search Student");
 
 		searchStudentList.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-		
-//		searchStudentList.setModel(new javax.swing.AbstractListModel() {
-//			public String[] getList() {
-//				DBConnection conn = new DBConnection();
-//				String studentArray[] = null;
-//				try {
-//					ArrayList<String> studenNameSurname = conn
-//							.displayStudentNameSurname();
-//					studentArray = new String[studenNameSurname.size()];
-//					for (int i = 0; i < studentArray.length; i++) {
-//						studentArray[i] = studenNameSurname.get(i);
-//					}
-//
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//				return studentArray;
-//			}
-//			String[] strings = getList();
-//
-//			public int getSize() {
-//				return strings.length;
-//			}
-//
-//			public Object getElementAt(int i) {
-//				return strings[i];
-//			}
-//		});
+
+		// searchStudentList.setModel(new javax.swing.AbstractListModel() {
+		// public String[] getList() {
+		// DBConnection conn = new DBConnection();
+		// String studentArray[] = null;
+		// try {
+		// ArrayList<String> studenNameSurname = conn
+		// .displayStudentNameSurname();
+		// studentArray = new String[studenNameSurname.size()];
+		// for (int i = 0; i < studentArray.length; i++) {
+		// studentArray[i] = studenNameSurname.get(i);
+		// }
+		//
+		// } catch (Exception e) {
+		// e.printStackTrace();
+		// }
+		// return studentArray;
+		// }
+		// String[] strings = getList();
+		//
+		// public int getSize() {
+		// return strings.length;
+		// }
+		//
+		// public Object getElementAt(int i) {
+		// return strings[i];
+		// }
+		// });
 		searchScrollPane.setViewportView(searchStudentList);
 
 		searchStudentText.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -358,78 +361,212 @@ public class MainWindow extends javax.swing.JFrame {
 
 		personalInfoBirthdayLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 		personalInfoBirthdayLabel.setText("Birthday:");
-		
+
 		stdBirthdayText = new JTextField();
 		stdBirthdayText.setColumns(10);
 
-
 		javax.swing.GroupLayout gl_personalInfoPanel = new javax.swing.GroupLayout(
 				personalInfoPanel);
-		gl_personalInfoPanel.setHorizontalGroup(
-			gl_personalInfoPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_personalInfoPanel.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_personalInfoPanel.createParallelGroup(Alignment.LEADING)
-						.addComponent(personalInfoLabel, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
-						.addGroup(gl_personalInfoPanel.createSequentialGroup()
-							.addGroup(gl_personalInfoPanel.createParallelGroup(Alignment.LEADING, false)
-								.addGroup(gl_personalInfoPanel.createSequentialGroup()
-									.addGroup(gl_personalInfoPanel.createParallelGroup(Alignment.TRAILING, false)
-										.addComponent(personalInfoGenderLabel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-										.addComponent(personalInfoNationalIDLabel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 63, Short.MAX_VALUE)
-										.addComponent(personalInfoSurnameLabel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-									.addGap(18)
-									.addGroup(gl_personalInfoPanel.createParallelGroup(Alignment.LEADING)
-										.addComponent(stdSurnameTExt)
-										.addComponent(stdTCText)
-										.addGroup(gl_personalInfoPanel.createSequentialGroup()
-											.addComponent(stdGenderCBox, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)
-											.addGap(0, 115, Short.MAX_VALUE))))
-								.addGroup(gl_personalInfoPanel.createSequentialGroup()
-									.addComponent(personalInfoNameLabel, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE)
-									.addGap(18)
-									.addComponent(stdNameText)))
-							.addGap(61)
-							.addGroup(gl_personalInfoPanel.createParallelGroup(Alignment.LEADING, false)
-								.addComponent(personalInfoPhoneLabel, GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
-								.addComponent(personalInfoMailLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(personalInfoBirthdayLabel))
-							.addGap(37)
-							.addGroup(gl_personalInfoPanel.createParallelGroup(Alignment.LEADING, false)
-								.addComponent(stdBirthdayText)
-								.addComponent(stdPhoneText, GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
-								.addComponent(stdMailText))))
-					.addContainerGap(69, Short.MAX_VALUE))
-		);
-		gl_personalInfoPanel.setVerticalGroup(
-			gl_personalInfoPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_personalInfoPanel.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(personalInfoLabel)
-					.addGap(11)
-					.addGroup(gl_personalInfoPanel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(personalInfoNameLabel, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE)
-						.addComponent(personalInfoPhoneLabel)
-						.addComponent(stdNameText, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(stdPhoneText, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_personalInfoPanel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(personalInfoSurnameLabel)
-						.addComponent(personalInfoMailLabel)
-						.addComponent(stdSurnameTExt, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(stdMailText, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_personalInfoPanel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(personalInfoNationalIDLabel)
-						.addComponent(personalInfoBirthdayLabel)
-						.addComponent(stdTCText, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(stdBirthdayText, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
-					.addGroup(gl_personalInfoPanel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(personalInfoGenderLabel)
-						.addComponent(stdGenderCBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap())
-		);
+		gl_personalInfoPanel
+				.setHorizontalGroup(gl_personalInfoPanel
+						.createParallelGroup(Alignment.LEADING)
+						.addGroup(
+								gl_personalInfoPanel
+										.createSequentialGroup()
+										.addContainerGap()
+										.addGroup(
+												gl_personalInfoPanel
+														.createParallelGroup(
+																Alignment.LEADING)
+														.addComponent(
+																personalInfoLabel,
+																GroupLayout.PREFERRED_SIZE,
+																123,
+																GroupLayout.PREFERRED_SIZE)
+														.addGroup(
+																gl_personalInfoPanel
+																		.createSequentialGroup()
+																		.addGroup(
+																				gl_personalInfoPanel
+																						.createParallelGroup(
+																								Alignment.LEADING,
+																								false)
+																						.addGroup(
+																								gl_personalInfoPanel
+																										.createSequentialGroup()
+																										.addGroup(
+																												gl_personalInfoPanel
+																														.createParallelGroup(
+																																Alignment.TRAILING,
+																																false)
+																														.addComponent(
+																																personalInfoGenderLabel,
+																																Alignment.LEADING,
+																																GroupLayout.DEFAULT_SIZE,
+																																GroupLayout.DEFAULT_SIZE,
+																																Short.MAX_VALUE)
+																														.addComponent(
+																																personalInfoNationalIDLabel,
+																																Alignment.LEADING,
+																																GroupLayout.DEFAULT_SIZE,
+																																63,
+																																Short.MAX_VALUE)
+																														.addComponent(
+																																personalInfoSurnameLabel,
+																																Alignment.LEADING,
+																																GroupLayout.DEFAULT_SIZE,
+																																GroupLayout.DEFAULT_SIZE,
+																																Short.MAX_VALUE))
+																										.addGap(18)
+																										.addGroup(
+																												gl_personalInfoPanel
+																														.createParallelGroup(
+																																Alignment.LEADING)
+																														.addComponent(
+																																stdSurnameTExt)
+																														.addComponent(
+																																stdTCText)
+																														.addGroup(
+																																gl_personalInfoPanel
+																																		.createSequentialGroup()
+																																		.addComponent(
+																																				stdGenderCBox,
+																																				GroupLayout.PREFERRED_SIZE,
+																																				97,
+																																				GroupLayout.PREFERRED_SIZE)
+																																		.addGap(0,
+																																				115,
+																																				Short.MAX_VALUE))))
+																						.addGroup(
+																								gl_personalInfoPanel
+																										.createSequentialGroup()
+																										.addComponent(
+																												personalInfoNameLabel,
+																												GroupLayout.PREFERRED_SIZE,
+																												63,
+																												GroupLayout.PREFERRED_SIZE)
+																										.addGap(18)
+																										.addComponent(
+																												stdNameText)))
+																		.addGap(61)
+																		.addGroup(
+																				gl_personalInfoPanel
+																						.createParallelGroup(
+																								Alignment.LEADING,
+																								false)
+																						.addComponent(
+																								personalInfoPhoneLabel,
+																								GroupLayout.DEFAULT_SIZE,
+																								50,
+																								Short.MAX_VALUE)
+																						.addComponent(
+																								personalInfoMailLabel,
+																								GroupLayout.DEFAULT_SIZE,
+																								GroupLayout.DEFAULT_SIZE,
+																								Short.MAX_VALUE)
+																						.addComponent(
+																								personalInfoBirthdayLabel))
+																		.addGap(37)
+																		.addGroup(
+																				gl_personalInfoPanel
+																						.createParallelGroup(
+																								Alignment.LEADING,
+																								false)
+																						.addComponent(
+																								stdBirthdayText)
+																						.addComponent(
+																								stdPhoneText,
+																								GroupLayout.DEFAULT_SIZE,
+																								223,
+																								Short.MAX_VALUE)
+																						.addComponent(
+																								stdMailText))))
+										.addContainerGap(69, Short.MAX_VALUE)));
+		gl_personalInfoPanel
+				.setVerticalGroup(gl_personalInfoPanel
+						.createParallelGroup(Alignment.LEADING)
+						.addGroup(
+								gl_personalInfoPanel
+										.createSequentialGroup()
+										.addContainerGap()
+										.addComponent(personalInfoLabel)
+										.addGap(11)
+										.addGroup(
+												gl_personalInfoPanel
+														.createParallelGroup(
+																Alignment.BASELINE)
+														.addComponent(
+																personalInfoNameLabel,
+																GroupLayout.PREFERRED_SIZE,
+																15,
+																GroupLayout.PREFERRED_SIZE)
+														.addComponent(
+																personalInfoPhoneLabel)
+														.addComponent(
+																stdNameText,
+																GroupLayout.PREFERRED_SIZE,
+																GroupLayout.DEFAULT_SIZE,
+																GroupLayout.PREFERRED_SIZE)
+														.addComponent(
+																stdPhoneText,
+																GroupLayout.PREFERRED_SIZE,
+																GroupLayout.DEFAULT_SIZE,
+																GroupLayout.PREFERRED_SIZE))
+										.addPreferredGap(
+												ComponentPlacement.UNRELATED)
+										.addGroup(
+												gl_personalInfoPanel
+														.createParallelGroup(
+																Alignment.BASELINE)
+														.addComponent(
+																personalInfoSurnameLabel)
+														.addComponent(
+																personalInfoMailLabel)
+														.addComponent(
+																stdSurnameTExt,
+																GroupLayout.PREFERRED_SIZE,
+																GroupLayout.DEFAULT_SIZE,
+																GroupLayout.PREFERRED_SIZE)
+														.addComponent(
+																stdMailText,
+																GroupLayout.PREFERRED_SIZE,
+																GroupLayout.DEFAULT_SIZE,
+																GroupLayout.PREFERRED_SIZE))
+										.addPreferredGap(
+												ComponentPlacement.UNRELATED)
+										.addGroup(
+												gl_personalInfoPanel
+														.createParallelGroup(
+																Alignment.BASELINE)
+														.addComponent(
+																personalInfoNationalIDLabel)
+														.addComponent(
+																personalInfoBirthdayLabel)
+														.addComponent(
+																stdTCText,
+																GroupLayout.PREFERRED_SIZE,
+																GroupLayout.DEFAULT_SIZE,
+																GroupLayout.PREFERRED_SIZE)
+														.addComponent(
+																stdBirthdayText,
+																GroupLayout.PREFERRED_SIZE,
+																GroupLayout.DEFAULT_SIZE,
+																GroupLayout.PREFERRED_SIZE))
+										.addPreferredGap(
+												ComponentPlacement.RELATED, 18,
+												Short.MAX_VALUE)
+										.addGroup(
+												gl_personalInfoPanel
+														.createParallelGroup(
+																Alignment.BASELINE)
+														.addComponent(
+																personalInfoGenderLabel)
+														.addComponent(
+																stdGenderCBox,
+																GroupLayout.PREFERRED_SIZE,
+																GroupLayout.DEFAULT_SIZE,
+																GroupLayout.PREFERRED_SIZE))
+										.addContainerGap()));
 		personalInfoPanel.setLayout(gl_personalInfoPanel);
 
 		emergencyContactPanel.setBorder(javax.swing.BorderFactory
@@ -703,7 +840,6 @@ public class MainWindow extends javax.swing.JFrame {
 		accoInfoRoomLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 		accoInfoRoomLabel.setText("Room:");
 
-
 		accoInfoStartDateLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 		accoInfoStartDateLabel.setText("Start Date:");
 
@@ -725,99 +861,271 @@ public class MainWindow extends javax.swing.JFrame {
 
 		javax.swing.GroupLayout gl_accoInfoPanel = new javax.swing.GroupLayout(
 				accoInfoPanel);
-		gl_accoInfoPanel.setHorizontalGroup(
-			gl_accoInfoPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_accoInfoPanel.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_accoInfoPanel.createParallelGroup(Alignment.LEADING)
-						.addComponent(accoInfoLabel, GroupLayout.PREFERRED_SIZE, 165, GroupLayout.PREFERRED_SIZE)
-						.addGroup(gl_accoInfoPanel.createSequentialGroup()
-							.addGroup(gl_accoInfoPanel.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_accoInfoPanel.createSequentialGroup()
-									.addComponent(accoInfoDormLabel)
-									.addGap(29))
-								.addGroup(gl_accoInfoPanel.createSequentialGroup()
-									.addComponent(accoInfoRoomLabel, GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE)
-									.addPreferredGap(ComponentPlacement.RELATED)))
-							.addGroup(gl_accoInfoPanel.createParallelGroup(Alignment.LEADING, false)
-								.addComponent(accRoomCBox, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(accDormCBox, 0, 92, Short.MAX_VALUE))
-							.addGap(70)
-							.addGroup(gl_accoInfoPanel.createParallelGroup(Alignment.TRAILING)
-								.addComponent(accoInfoStartDateLabel, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
-								.addComponent(accoInfoEndDateLabel, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE))
-							.addGap(18)
-							.addGroup(gl_accoInfoPanel.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_accoInfoPanel.createSequentialGroup()
-									.addComponent(accStartDateText, GroupLayout.PREFERRED_SIZE, 215, GroupLayout.PREFERRED_SIZE)
-									.addGap(65)
-									.addComponent(editButton, GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE))
-								.addGroup(gl_accoInfoPanel.createSequentialGroup()
-									.addComponent(accEndDateText, GroupLayout.PREFERRED_SIZE, 215, GroupLayout.PREFERRED_SIZE)
-									.addGap(65)
-									.addComponent(saveButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-					.addGap(20))
-		);
-		gl_accoInfoPanel.setVerticalGroup(
-			gl_accoInfoPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_accoInfoPanel.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_accoInfoPanel.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_accoInfoPanel.createSequentialGroup()
-							.addComponent(accoInfoLabel)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addGroup(gl_accoInfoPanel.createParallelGroup(Alignment.BASELINE)
-								.addComponent(accoInfoDormLabel)
-								.addComponent(accDormCBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(accoInfoStartDateLabel)
-								.addComponent(accStartDateText, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-							.addGroup(gl_accoInfoPanel.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_accoInfoPanel.createSequentialGroup()
-									.addGap(17)
-									.addGroup(gl_accoInfoPanel.createParallelGroup(Alignment.BASELINE)
-										.addComponent(accRoomCBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-										.addComponent(accoInfoRoomLabel)))
-								.addGroup(gl_accoInfoPanel.createSequentialGroup()
-									.addGap(18)
-									.addGroup(gl_accoInfoPanel.createParallelGroup(Alignment.BASELINE)
-										.addComponent(accEndDateText, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-										.addComponent(accoInfoEndDateLabel)))))
-						.addGroup(gl_accoInfoPanel.createSequentialGroup()
-							.addGap(19)
-							.addComponent(editButton)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(saveButton, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE)))
-					.addGap(29))
-		);
+		gl_accoInfoPanel
+				.setHorizontalGroup(gl_accoInfoPanel
+						.createParallelGroup(Alignment.LEADING)
+						.addGroup(
+								gl_accoInfoPanel
+										.createSequentialGroup()
+										.addContainerGap()
+										.addGroup(
+												gl_accoInfoPanel
+														.createParallelGroup(
+																Alignment.LEADING)
+														.addComponent(
+																accoInfoLabel,
+																GroupLayout.PREFERRED_SIZE,
+																165,
+																GroupLayout.PREFERRED_SIZE)
+														.addGroup(
+																gl_accoInfoPanel
+																		.createSequentialGroup()
+																		.addGroup(
+																				gl_accoInfoPanel
+																						.createParallelGroup(
+																								Alignment.LEADING)
+																						.addGroup(
+																								gl_accoInfoPanel
+																										.createSequentialGroup()
+																										.addComponent(
+																												accoInfoDormLabel)
+																										.addGap(29))
+																						.addGroup(
+																								gl_accoInfoPanel
+																										.createSequentialGroup()
+																										.addComponent(
+																												accoInfoRoomLabel,
+																												GroupLayout.DEFAULT_SIZE,
+																												55,
+																												Short.MAX_VALUE)
+																										.addPreferredGap(
+																												ComponentPlacement.RELATED)))
+																		.addGroup(
+																				gl_accoInfoPanel
+																						.createParallelGroup(
+																								Alignment.LEADING,
+																								false)
+																						.addComponent(
+																								accRoomCBox,
+																								0,
+																								GroupLayout.DEFAULT_SIZE,
+																								Short.MAX_VALUE)
+																						.addComponent(
+																								accDormCBox,
+																								0,
+																								92,
+																								Short.MAX_VALUE))
+																		.addGap(70)
+																		.addGroup(
+																				gl_accoInfoPanel
+																						.createParallelGroup(
+																								Alignment.TRAILING)
+																						.addComponent(
+																								accoInfoStartDateLabel,
+																								GroupLayout.PREFERRED_SIZE,
+																								83,
+																								GroupLayout.PREFERRED_SIZE)
+																						.addComponent(
+																								accoInfoEndDateLabel,
+																								GroupLayout.PREFERRED_SIZE,
+																								83,
+																								GroupLayout.PREFERRED_SIZE))
+																		.addGap(18)
+																		.addGroup(
+																				gl_accoInfoPanel
+																						.createParallelGroup(
+																								Alignment.LEADING)
+																						.addGroup(
+																								gl_accoInfoPanel
+																										.createSequentialGroup()
+																										.addComponent(
+																												accStartDateText,
+																												GroupLayout.PREFERRED_SIZE,
+																												215,
+																												GroupLayout.PREFERRED_SIZE)
+																										.addGap(65)
+																										.addComponent(
+																												editButton,
+																												GroupLayout.DEFAULT_SIZE,
+																												61,
+																												Short.MAX_VALUE))
+																						.addGroup(
+																								gl_accoInfoPanel
+																										.createSequentialGroup()
+																										.addComponent(
+																												accEndDateText,
+																												GroupLayout.PREFERRED_SIZE,
+																												215,
+																												GroupLayout.PREFERRED_SIZE)
+																										.addGap(65)
+																										.addComponent(
+																												saveButton,
+																												GroupLayout.DEFAULT_SIZE,
+																												GroupLayout.DEFAULT_SIZE,
+																												Short.MAX_VALUE)))))
+										.addGap(20)));
+		gl_accoInfoPanel
+				.setVerticalGroup(gl_accoInfoPanel
+						.createParallelGroup(Alignment.LEADING)
+						.addGroup(
+								gl_accoInfoPanel
+										.createSequentialGroup()
+										.addContainerGap()
+										.addGroup(
+												gl_accoInfoPanel
+														.createParallelGroup(
+																Alignment.LEADING)
+														.addGroup(
+																gl_accoInfoPanel
+																		.createSequentialGroup()
+																		.addComponent(
+																				accoInfoLabel)
+																		.addPreferredGap(
+																				ComponentPlacement.UNRELATED)
+																		.addGroup(
+																				gl_accoInfoPanel
+																						.createParallelGroup(
+																								Alignment.BASELINE)
+																						.addComponent(
+																								accoInfoDormLabel)
+																						.addComponent(
+																								accDormCBox,
+																								GroupLayout.PREFERRED_SIZE,
+																								GroupLayout.DEFAULT_SIZE,
+																								GroupLayout.PREFERRED_SIZE)
+																						.addComponent(
+																								accoInfoStartDateLabel)
+																						.addComponent(
+																								accStartDateText,
+																								GroupLayout.PREFERRED_SIZE,
+																								GroupLayout.DEFAULT_SIZE,
+																								GroupLayout.PREFERRED_SIZE))
+																		.addGroup(
+																				gl_accoInfoPanel
+																						.createParallelGroup(
+																								Alignment.LEADING)
+																						.addGroup(
+																								gl_accoInfoPanel
+																										.createSequentialGroup()
+																										.addGap(17)
+																										.addGroup(
+																												gl_accoInfoPanel
+																														.createParallelGroup(
+																																Alignment.BASELINE)
+																														.addComponent(
+																																accRoomCBox,
+																																GroupLayout.PREFERRED_SIZE,
+																																GroupLayout.DEFAULT_SIZE,
+																																GroupLayout.PREFERRED_SIZE)
+																														.addComponent(
+																																accoInfoRoomLabel)))
+																						.addGroup(
+																								gl_accoInfoPanel
+																										.createSequentialGroup()
+																										.addGap(18)
+																										.addGroup(
+																												gl_accoInfoPanel
+																														.createParallelGroup(
+																																Alignment.BASELINE)
+																														.addComponent(
+																																accEndDateText,
+																																GroupLayout.PREFERRED_SIZE,
+																																GroupLayout.DEFAULT_SIZE,
+																																GroupLayout.PREFERRED_SIZE)
+																														.addComponent(
+																																accoInfoEndDateLabel)))))
+														.addGroup(
+																gl_accoInfoPanel
+																		.createSequentialGroup()
+																		.addGap(19)
+																		.addComponent(
+																				editButton)
+																		.addPreferredGap(
+																				ComponentPlacement.UNRELATED)
+																		.addComponent(
+																				saveButton,
+																				GroupLayout.PREFERRED_SIZE,
+																				23,
+																				GroupLayout.PREFERRED_SIZE)))
+										.addGap(29)));
 		accoInfoPanel.setLayout(gl_accoInfoPanel);
 
 		javax.swing.GroupLayout gl_mainPaneSubPanel = new javax.swing.GroupLayout(
 				mainPaneSubPanel);
-		gl_mainPaneSubPanel.setHorizontalGroup(
-			gl_mainPaneSubPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, gl_mainPaneSubPanel.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_mainPaneSubPanel.createParallelGroup(Alignment.TRAILING)
-						.addComponent(accoInfoPanel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(personalInfoPanel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 722, Short.MAX_VALUE)
-						.addGroup(Alignment.LEADING, gl_mainPaneSubPanel.createSequentialGroup()
-							.addComponent(emergencyContactPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(schoolInfoPanel, GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE)))
-					.addContainerGap())
-		);
-		gl_mainPaneSubPanel.setVerticalGroup(
-			gl_mainPaneSubPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_mainPaneSubPanel.createSequentialGroup()
-					.addComponent(personalInfoPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_mainPaneSubPanel.createParallelGroup(Alignment.LEADING, false)
-						.addComponent(emergencyContactPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(schoolInfoPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(accoInfoPanel, GroupLayout.PREFERRED_SIZE, 120, Short.MAX_VALUE)
-					.addContainerGap())
-		);
+		gl_mainPaneSubPanel
+				.setHorizontalGroup(gl_mainPaneSubPanel
+						.createParallelGroup(Alignment.LEADING)
+						.addGroup(
+								Alignment.TRAILING,
+								gl_mainPaneSubPanel
+										.createSequentialGroup()
+										.addContainerGap()
+										.addGroup(
+												gl_mainPaneSubPanel
+														.createParallelGroup(
+																Alignment.TRAILING)
+														.addComponent(
+																accoInfoPanel,
+																Alignment.LEADING,
+																GroupLayout.DEFAULT_SIZE,
+																GroupLayout.DEFAULT_SIZE,
+																Short.MAX_VALUE)
+														.addComponent(
+																personalInfoPanel,
+																Alignment.LEADING,
+																GroupLayout.DEFAULT_SIZE,
+																722,
+																Short.MAX_VALUE)
+														.addGroup(
+																Alignment.LEADING,
+																gl_mainPaneSubPanel
+																		.createSequentialGroup()
+																		.addComponent(
+																				emergencyContactPanel,
+																				GroupLayout.PREFERRED_SIZE,
+																				GroupLayout.DEFAULT_SIZE,
+																				GroupLayout.PREFERRED_SIZE)
+																		.addPreferredGap(
+																				ComponentPlacement.RELATED)
+																		.addComponent(
+																				schoolInfoPanel,
+																				GroupLayout.DEFAULT_SIZE,
+																				361,
+																				Short.MAX_VALUE)))
+										.addContainerGap()));
+		gl_mainPaneSubPanel
+				.setVerticalGroup(gl_mainPaneSubPanel
+						.createParallelGroup(Alignment.LEADING)
+						.addGroup(
+								gl_mainPaneSubPanel
+										.createSequentialGroup()
+										.addComponent(personalInfoPanel,
+												GroupLayout.PREFERRED_SIZE,
+												GroupLayout.DEFAULT_SIZE,
+												GroupLayout.PREFERRED_SIZE)
+										.addPreferredGap(
+												ComponentPlacement.RELATED)
+										.addGroup(
+												gl_mainPaneSubPanel
+														.createParallelGroup(
+																Alignment.LEADING,
+																false)
+														.addComponent(
+																emergencyContactPanel,
+																GroupLayout.DEFAULT_SIZE,
+																GroupLayout.DEFAULT_SIZE,
+																Short.MAX_VALUE)
+														.addComponent(
+																schoolInfoPanel,
+																GroupLayout.DEFAULT_SIZE,
+																GroupLayout.DEFAULT_SIZE,
+																Short.MAX_VALUE))
+										.addPreferredGap(
+												ComponentPlacement.RELATED)
+										.addComponent(accoInfoPanel,
+												GroupLayout.PREFERRED_SIZE,
+												120, Short.MAX_VALUE)
+										.addContainerGap()));
 		mainPaneSubPanel.setLayout(gl_mainPaneSubPanel);
 
 		tabbedPane.addTab("Profile", mainPaneSubPanel);
@@ -914,16 +1222,16 @@ public class MainWindow extends javax.swing.JFrame {
 			}
 		});
 		roomMenu.add(mntmAddRoomType);
-		
+
 		searchMenu = new JMenu("Search");
 		menuBar.add(searchMenu);
-		
+
 		searchAllMenuItem = new JMenuItem("Search All   Ctrl+F");
 		searchMenu.add(searchAllMenuItem);
 
 		otherMenu.setText("Other");
 		menuBar.add(otherMenu);
-		
+
 		lostItemsMenuItem = new JMenuItem("Lost Items");
 		lostItemsMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -931,44 +1239,61 @@ public class MainWindow extends javax.swing.JFrame {
 			}
 		});
 		otherMenu.add(lostItemsMenuItem);
-		
-				addRoomMenuItem = new JMenuItem("Show Capacity of Dorms");
-				addRoomMenuItem.addActionListener(new ActionListener() {
-					public void actionPerformed(java.awt.event.ActionEvent evt) {
-						ChartChooserView chooser = new ChartChooserView();
-						chooser.setVisible(true);
-						
-						
-					}
-				});
-				otherMenu.add(addRoomMenuItem);
+
+		addRoomMenuItem = new JMenuItem("Show Capacity of Dorms");
+		addRoomMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				ChartChooserView chooser = new ChartChooserView();
+				chooser.setVisible(true);
+
+			}
+		});
+		otherMenu.add(addRoomMenuItem);
 
 		setJMenuBar(menuBar);
 
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(
 				getContentPane());
-		layout.setHorizontalGroup(
-			layout.createParallelGroup(Alignment.LEADING)
-				.addGroup(layout.createSequentialGroup()
-					.addComponent(mainSearchPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(layout.createParallelGroup(Alignment.LEADING)
-						.addGroup(layout.createSequentialGroup()
-							.addComponent(jSeparator1, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE)
-							.addContainerGap(781, Short.MAX_VALUE))
-						.addComponent(mainPanePanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-		);
-		layout.setVerticalGroup(
-			layout.createParallelGroup(Alignment.LEADING)
-				.addComponent(jSeparator1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-				.addComponent(mainSearchPanel, GroupLayout.DEFAULT_SIZE, 540, Short.MAX_VALUE)
-				.addComponent(mainPanePanel, GroupLayout.DEFAULT_SIZE, 540, Short.MAX_VALUE)
-		);
+		layout.setHorizontalGroup(layout
+				.createParallelGroup(Alignment.LEADING)
+				.addGroup(
+						layout.createSequentialGroup()
+								.addComponent(mainSearchPanel,
+										GroupLayout.PREFERRED_SIZE,
+										GroupLayout.DEFAULT_SIZE,
+										GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.UNRELATED)
+								.addGroup(
+										layout.createParallelGroup(
+												Alignment.LEADING)
+												.addGroup(
+														layout.createSequentialGroup()
+																.addComponent(
+																		jSeparator1,
+																		GroupLayout.PREFERRED_SIZE,
+																		15,
+																		GroupLayout.PREFERRED_SIZE)
+																.addContainerGap(
+																		781,
+																		Short.MAX_VALUE))
+												.addComponent(
+														mainPanePanel,
+														GroupLayout.DEFAULT_SIZE,
+														GroupLayout.DEFAULT_SIZE,
+														Short.MAX_VALUE))));
+		layout.setVerticalGroup(layout
+				.createParallelGroup(Alignment.LEADING)
+				.addComponent(jSeparator1, GroupLayout.PREFERRED_SIZE,
+						GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+				.addComponent(mainSearchPanel, GroupLayout.DEFAULT_SIZE, 540,
+						Short.MAX_VALUE)
+				.addComponent(mainPanePanel, GroupLayout.DEFAULT_SIZE, 540,
+						Short.MAX_VALUE));
 		getContentPane().setLayout(layout);
 
 		pack();
 	}// </editor-fold>//GEN-END:initComponents
-	
+
 	public void fillStudentList() {
 		DBConnection conn = new DBConnection();
 		String studentArray[] = null;
@@ -985,59 +1310,73 @@ public class MainWindow extends javax.swing.JFrame {
 			e.printStackTrace();
 		}
 	}
-	
+
 	private void clickStudentSearchList(MouseEvent evt) {
 		accDormCBox.removeAllItems();
 		accRoomCBox.removeAllItems();
 		stdGenderCBox.removeAllItems();
 		DBConnection conn = new DBConnection();
+		Student std = new Student();
+		EmergencyContact emg = new EmergencyContact();
+		School sch = new School();
+		Hostel host = new Hostel();
+		Dorm dorm = new Dorm();
+		Room room = new Room();
 		String[] name = new String[2];
 		String selected = searchStudentList.getSelectedValue().toString();
 		for (int j = 0; j < name.length; j++) {
-			name = searchStudentList.getSelectedValue().toString().split("\\s+");
+			name = searchStudentList.getSelectedValue().toString()
+					.split("\\s+");
 		}
 		if (!name[0].equals(null) && !name[1].equals(null)) {
-			conn.retrieveStudentInfo(name[0], name[1]);
+			std = conn.retrieveStudentInfo(name[0], name[1]);
+			emg = conn.retrieveEmergencyInfo(name[0], name[1]);
+			sch = conn.retrieveSchoolInfo(name[0], name[1]);
+			dorm = conn.retrieveDormInfo(name[0], name[1]);
+			room = conn.retrieveRoomInfo(name[0], name[1]);
+			host = conn.retrieveHostelInfo(name[0], name[1]);
 		}
-		//conn.retrieveStudentInfo(name[0], name[1]);
+
 		if (evt.getClickCount() == 2) {
-			fillProfileTab(conn, selected);
-			
-			
+			fillStudentInfo(std);
+			fillEmergencyContact(emg);
+			fillSchoolInfo(sch);
+			fillAccInfo(dorm, room);
 		}
-		
 	}
 
-	private void fillProfileTab(DBConnection conn, String selected) {
-		for (int i = 0; i < conn.getStudent().size(); i++) {
-			if (selected.equals(conn.getStudent().get(i))) {
-				stdNameText.setText(conn.getStdName().get(i));
-				stdSurnameTExt.setText(conn.getStdSurname().get(i));
-				stdMailText.setText(conn.getStdMail().get(i));
-				stdGenderCBox.addItem(conn.getStdGender().get(i));
-				//stdBirthdayText.setText(conn.getStdBirthdate().get(i)); 
-				int tc = Integer.parseInt(conn.getStdTC().get(i));
-				if (tc != 0)
-					stdTCText.setText(conn.getStdTC().get(i));
-				stdPhoneText.setText(conn.getStdPhone().get(i));
-				emgNameText.setText(conn.getEmgName().get(i));
-				emgSurnameText.setText(conn.getEmgSurname().get(i));
-				emgPhoneText.setText(conn.getEmgPhone().get(i));
-				schUniNameText.setText(conn.getSchUniName().get(i));
-				schDeptNameText.setText(conn.getSchDeptName().get(i));
-				int grade = Integer.parseInt(conn.getSchGrade().get(i));
-				if (grade != 0)
-					schGradeText.setText(conn.getSchGrade().get(i));
-				accDormCBox.addItem(conn.getAccDormName().get(i));
-				//room type profile da yok, ekleyemedim (benim palet sapýttý)
-				accRoomCBox.addItem(conn.getAccRoomNo().get(i));
-				//accStartDateText.setText(conn.getAccStartDate().get(i));
-				//accEndDateText.setText(conn.getAccEndDate().get(i));
-			}
-				
-		}
+	private void fillAccInfo(Dorm dorm, Room room) {
+		accDormCBox.addItem(dorm.getDormName());
+		// accRoomType.addItem(room.getTypeName());
+		accRoomCBox.addItem(room.getRoomNo());
+		// accStartDateText.setText(host.getStartDate());
+		// accEndDateText.setText(host.getEndDate());
 	}
-	
+
+	private void fillSchoolInfo(School sch) {
+		schUniNameText.setText(sch.getUniName());
+		schDeptNameText.setText(sch.getDepartment());
+		if (sch.getGrade() != 0)
+			schGradeText.setText(Integer.toString(sch.getGrade()));
+	}
+
+	private void fillStudentInfo(Student std) {
+		stdNameText.setText(std.getName());
+		stdSurnameTExt.setText(std.getSurname());
+		stdMailText.setText(std.getEmail());
+		stdGenderCBox.addItem(std.getGender());
+		// stdBirthdayText.setText(std.getBirthday().toString());
+		if (!std.getTC().equals("0"))
+			stdTCText.setText(std.getTC());
+		stdPhoneText.setText(std.getPhone());
+	}
+
+	private void fillEmergencyContact(EmergencyContact emg) {
+		emgNameText.setText(emg.getName());
+		emgSurnameText.setText(emg.getSurname());
+		emgPhoneText.setText(emg.getPhone());
+	}
+
 	private void clickSearchButton(MouseEvent evt) {
 		int pos = 0;
 		if (searchStudentText.getText().isEmpty()) {
@@ -1048,9 +1387,11 @@ public class MainWindow extends javax.swing.JFrame {
 		try {
 			studentList = conn.displayStudentNameSurname();
 			ArrayList<String> st = new ArrayList<String>();
-			String [] stdAll = new String[studentList.size()*2];
+			String[] stdAll = new String[studentList.size() * 2];
 			if (searchStudentText.getText().isEmpty()) {
-				JOptionPane.showMessageDialog(getContentPane(), "Please type a name!");
+
+				// JOptionPane.showMessageDialog(getContentPane(),
+				// "Please type a name!");
 			} else {
 				String seachText = searchStudentText.getText();
 				for (int i = 0; i < studentList.size(); i++) {
@@ -1059,13 +1400,13 @@ public class MainWindow extends javax.swing.JFrame {
 					st.add(stdAll[1]);
 					stdAll = null;
 				}
-				if(st.contains(seachText)) {
+				if (st.contains(seachText)) {
 					searchModel.removeAllElements();
 					int position = st.indexOf(seachText);
 					pos = position / 2;
 					searchModel.addElement(studentList.get(pos));
-					
-					//searchModel.addElement(seachText);
+
+					// searchModel.addElement(seachText);
 				} else if (studentList.contains(seachText)) {
 					searchModel.removeAllElements();
 					searchModel.addElement(seachText);
@@ -1074,17 +1415,17 @@ public class MainWindow extends javax.swing.JFrame {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}	
+		}
 	}
-	
+
 	private void clickEditButton(ActionEvent evt) {
 		setEditableTrue();
-		
+
 	}
-	
+
 	private void clickSaveButton(ActionEvent evt) {
 		setEditableFalse();
-		
+
 	}
 
 	private void addStudentActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jMenuItem1ActionPerformed
@@ -1121,7 +1462,7 @@ public class MainWindow extends javax.swing.JFrame {
 		accStartDateText.setEditable(false);
 		accEndDateText.setEditable(false);
 	}
-	
+
 	private void setEditableTrue() {
 		stdNameText.setEditable(true);
 		stdSurnameTExt.setEditable(true);
@@ -1138,7 +1479,7 @@ public class MainWindow extends javax.swing.JFrame {
 		accDormCBox.setEnabled(true);
 		accRoomCBox.setEnabled(true);
 		accStartDateText.setEditable(true);
-		accEndDateText.setEditable(true);	
+		accEndDateText.setEditable(true);
 	}
 
 	/**

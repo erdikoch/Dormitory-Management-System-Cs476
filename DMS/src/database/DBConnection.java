@@ -26,13 +26,12 @@ public class DBConnection {
 	ResultSet rs = null;
 	PreparedStatement ps;
 	DormWindow dormWin;
-	private ArrayList dorms;
-	private ArrayList roomNoList;
+	private ArrayList dorms, roomNoList, studentsInRooms, stdBirthdate,
+			accStartDate, accEndDate;
 	private DormListWindow dormListW;
-	private ArrayList student, studentsInRooms, stdName, stdSurname, stdTC, stdGender,
-			stdPhone, stdMail, stdBirthdate, emgName, emgSurname, emgPhone,
-			schUniName, schDeptName, schGrade, accDormName, accTypeName,
-			accRoomNo, accStartDate, accEndDate;
+	private ArrayList<String> student, stdName, stdSurname, stdTC, stdGender,
+			stdPhone, stdMail, emgName, emgSurname, emgPhone, schUniName,
+			schDeptName, schGrade, accDormName, accTypeName, accRoomNo;
 
 	public DBConnection() {
 
@@ -140,17 +139,17 @@ public class DBConnection {
 	}
 
 	public ArrayList<String> displayStudentNameSurname() throws SQLException {
-		ArrayList<String> studenList = new ArrayList<String>();
+		ArrayList<String> studentList = new ArrayList<String>();
 		Statement st = connect().createStatement();
 		String sql = "select StudentName,StudentSurname from Student";
 		rs = st.executeQuery(sql);
 		while (rs.next()) {
 			String name = rs.getString("StudentName");
 			String surname = rs.getString("StudentSurname");
-			studenList.add(name + " " + surname);
+			studentList.add(name + " " + surname);
 
 		}
-		return studenList;
+		return studentList;
 
 	}
 
@@ -405,7 +404,7 @@ public class DBConnection {
 	public ArrayList<String> getAccEndDate() {
 		return accEndDate;
 	}
-	
+
 	public ArrayList<String> getStudent() {
 		return student;
 	}

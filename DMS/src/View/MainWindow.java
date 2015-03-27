@@ -5,7 +5,9 @@
  */
 package view;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
+import javax.swing.JList;
 import javax.swing.JMenuItem;
 
 //import org.jfree.chart.JFreeChart;
@@ -14,12 +16,16 @@ import javax.swing.JMenuItem;
 
 
 
+import javax.swing.JOptionPane;
+import javax.swing.ListModel;
+
 import org.jfree.ui.RefineryUtilities;
 
 import database.DBConnection;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -115,6 +121,9 @@ public class MainWindow extends javax.swing.JFrame {
 		searchStudentLabel = new javax.swing.JLabel();
 		searchScrollPane = new javax.swing.JScrollPane();
 		searchStudentList = new javax.swing.JList();
+		searchModel = new DefaultListModel();
+		fillStudentList();
+		searchStudentList = new JList(searchModel);
 		searchStudentList.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent evt) {
@@ -123,6 +132,13 @@ public class MainWindow extends javax.swing.JFrame {
 		});
 		searchStudentText = new javax.swing.JTextField();
 		searchButton = new javax.swing.JButton();
+		searchButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent evt) {
+				clickSearchButton(evt);
+			}
+		});
+		
 		mainPanePanel = new javax.swing.JPanel();
 		tabbedPane = new javax.swing.JTabbedPane();
 		mainPaneSubPanel = new javax.swing.JPanel();
@@ -208,33 +224,34 @@ public class MainWindow extends javax.swing.JFrame {
 		searchStudentLabel.setText("             Search Student");
 
 		searchStudentList.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-		searchStudentList.setModel(new javax.swing.AbstractListModel() {
-			public String[] getList() {
-				DBConnection conn = new DBConnection();
-				String studentArray[] = null;
-				try {
-					ArrayList<String> studenNameSurname = conn
-							.displayStudentNameSurname();
-					studentArray = new String[studenNameSurname.size()];
-					for (int i = 0; i < studentArray.length; i++) {
-						studentArray[i] = studenNameSurname.get(i);
-					}
-
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-				return studentArray;
-			}
-			String[] strings = getList();
-
-			public int getSize() {
-				return strings.length;
-			}
-
-			public Object getElementAt(int i) {
-				return strings[i];
-			}
-		});
+		
+//		searchStudentList.setModel(new javax.swing.AbstractListModel() {
+//			public String[] getList() {
+//				DBConnection conn = new DBConnection();
+//				String studentArray[] = null;
+//				try {
+//					ArrayList<String> studenNameSurname = conn
+//							.displayStudentNameSurname();
+//					studentArray = new String[studenNameSurname.size()];
+//					for (int i = 0; i < studentArray.length; i++) {
+//						studentArray[i] = studenNameSurname.get(i);
+//					}
+//
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//				return studentArray;
+//			}
+//			String[] strings = getList();
+//
+//			public int getSize() {
+//				return strings.length;
+//			}
+//
+//			public Object getElementAt(int i) {
+//				return strings[i];
+//			}
+//		});
 		searchScrollPane.setViewportView(searchStudentList);
 
 		searchStudentText.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -952,6 +969,23 @@ public class MainWindow extends javax.swing.JFrame {
 		pack();
 	}// </editor-fold>//GEN-END:initComponents
 	
+	public void fillStudentList() {
+		DBConnection conn = new DBConnection();
+		String studentArray[] = null;
+		try {
+			ArrayList<String> studenNameSurname = conn
+					.displayStudentNameSurname();
+			studentArray = new String[studenNameSurname.size()];
+			for (int i = 0; i < studentArray.length; i++) {
+				studentArray[i] = studenNameSurname.get(i);
+				searchModel.addElement(studenNameSurname.get(i));
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	private void clickStudentSearchList(MouseEvent evt) {
 		accDormCBox.removeAllItems();
 		accRoomCBox.removeAllItems();
@@ -962,7 +996,10 @@ public class MainWindow extends javax.swing.JFrame {
 		for (int j = 0; j < name.length; j++) {
 			name = searchStudentList.getSelectedValue().toString().split("\\s+");
 		}
-		conn.retrieveStudentInfo(name[0], name[1]);
+		if (!name[0].equals(null) && !name[1].equals(null)) {
+			conn.retrieveStudentInfo(name[0], name[1]);
+		}
+		//conn.retrieveStudentInfo(name[0], name[1]);
 		if (evt.getClickCount() == 2) {
 			fillProfileTab(conn, selected);
 			
@@ -999,6 +1036,45 @@ public class MainWindow extends javax.swing.JFrame {
 			}
 				
 		}
+	}
+	
+	private void clickSearchButton(MouseEvent evt) {
+		int pos = 0;
+		if (searchStudentText.getText().isEmpty()) {
+			fillStudentList();
+		}
+		DBConnection conn = new DBConnection();
+		studentList = new ArrayList<String>();
+		try {
+			studentList = conn.displayStudentNameSurname();
+			ArrayList<String> st = new ArrayList<String>();
+			String [] stdAll = new String[studentList.size()*2];
+			if (searchStudentText.getText().isEmpty()) {
+				JOptionPane.showMessageDialog(getContentPane(), "Please type a name!");
+			} else {
+				String seachText = searchStudentText.getText();
+				for (int i = 0; i < studentList.size(); i++) {
+					stdAll = studentList.get(i).split("\\s+");
+					st.add(stdAll[0]);
+					st.add(stdAll[1]);
+					stdAll = null;
+				}
+				if(st.contains(seachText)) {
+					searchModel.removeAllElements();
+					int position = st.indexOf(seachText);
+					pos = position / 2;
+					searchModel.addElement(studentList.get(pos));
+					
+					//searchModel.addElement(seachText);
+				} else if (studentList.contains(seachText)) {
+					searchModel.removeAllElements();
+					searchModel.addElement(seachText);
+				}
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
 	}
 	
 	private void clickEditButton(ActionEvent evt) {
@@ -1147,4 +1223,6 @@ public class MainWindow extends javax.swing.JFrame {
 	private javax.swing.JLabel personalInfoNationalIDLabel;
 	private javax.swing.JLabel personalInfoGenderLabel;
 	private JTextField stdBirthdayText;
+	private ArrayList<String> studentList;
+	private DefaultListModel searchModel;
 }

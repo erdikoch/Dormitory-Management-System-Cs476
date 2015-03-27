@@ -26,12 +26,9 @@ public class DBConnection {
 	ResultSet rs = null;
 	PreparedStatement ps;
 	DormWindow dormWin;
-	private ArrayList dorms, roomNoList, studentsInRooms, stdBirthdate,
-			accStartDate, accEndDate;
+	private ArrayList dorms, roomNoList, studentsInRooms;
 	private DormListWindow dormListW;
-	private ArrayList<String> student, stdName, stdSurname, stdTC, stdGender,
-			stdPhone, stdMail, emgName, emgSurname, emgPhone, schUniName,
-			schDeptName, schGrade, accDormName, accTypeName, accRoomNo;
+	private ArrayList<String> student;
 
 	public DBConnection() {
 
@@ -204,6 +201,39 @@ public class DBConnection {
 
 	}
 
+	public void updateStudent(Student std, EmergencyContact emg, Dorm dorm,
+			Room room, Hostel host, School sch, String Name, String Surname) {
+		try {
+			proc_stmt = con
+					.prepareCall("{ call Update_StudentPersonalInfo(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) }");
+			proc_stmt.setString(1, std.getName());
+			proc_stmt.setString(2, std.getSurname());
+			proc_stmt.setString(3, Name);
+			proc_stmt.setString(4, Surname);
+			proc_stmt.setString(5, std.getEmail());
+			proc_stmt.setString(6, std.getPhone());
+			proc_stmt.setString(7, std.getGender());
+			proc_stmt.setDate(8, (Date) std.getBirthday());
+			proc_stmt.setString(9, std.getTC());
+			proc_stmt.setString(10, emg.getName());
+			proc_stmt.setString(11, emg.getSurname());
+			proc_stmt.setString(12, emg.getPhone());
+			proc_stmt.setString(13, sch.getDepartment());
+			proc_stmt.setString(14, sch.getUniName());
+			proc_stmt.setInt(15, sch.getGrade());
+			proc_stmt.setDate(16, (Date) host.getStartDate());
+			proc_stmt.setDate(17, (Date) host.getEndDate());
+			proc_stmt.setString(18, dorm.getDormName());
+			proc_stmt.setInt(19, room.getTypeName());
+			proc_stmt.setInt(20, room.getRoomNo());
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
 	public void retrieveDormInfo() {
 		PreparedStatement pstmt = null;
 		try {
@@ -257,8 +287,11 @@ public class DBConnection {
 		return studentsInRooms;
 	}
 
-	public void retrieveStudentInfo(String name, String surname) {
-		initializeLists();
+	public Student retrieveStudentInfo(String name, String surname) {
+
+		student = new ArrayList<String>();
+
+		Student std = new Student();
 		try {
 			proc_stmt = connect().prepareCall("{ call Get_StudentInfo(?, ?) }");
 			proc_stmt.setString(1, name);
@@ -267,52 +300,112 @@ public class DBConnection {
 			while (rs.next()) {
 				String sName = rs.getString("StudentName");
 				String sSurname = rs.getString("StudentSurname");
-				stdName.add(rs.getString("StudentName"));
 				student.add(sName + " " + sSurname);
-				stdSurname.add(rs.getString("StudentSurname"));
-				stdTC.add(rs.getString("TC_ID"));
-				stdGender.add(rs.getString("Gender"));
-				stdPhone.add(rs.getString("Phone"));
-				stdMail.add(rs.getString("Mail"));
-				stdBirthdate.add(rs.getDate("Birthdate"));
-				emgName.add(rs.getString("Name"));
-				emgSurname.add(rs.getString("Surname"));
-				emgPhone.add(rs.getString("Phone"));
-				schUniName.add(rs.getString("University"));
-				schDeptName.add(rs.getString("DepName"));
-				schGrade.add(rs.getString("Grade"));
-				accDormName.add(rs.getString("DormName"));
-				accTypeName.add(rs.getString("TypeName"));
-				accRoomNo.add(rs.getString("RoomNo"));
-				accStartDate.add(rs.getDate("StartDate"));
-				accEndDate.add(rs.getDate("EndDate"));
+				std.setName(rs.getString("StudentName"));
+				std.setSurname(rs.getString("StudentSurname"));
+				std.setGender(rs.getString("Gender"));
+				std.setEmail(rs.getString("Mail"));
+				std.setPhone(rs.getString("Phone"));
+				std.setTC(rs.getString("TC_ID"));
+				std.setBirthday(rs.getDate("Birthdate"));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return std;
 	}
 
-	private void initializeLists() {
-		student = new ArrayList<String>();
-		stdName = new ArrayList<String>();
-		stdSurname = new ArrayList<String>();
-		stdTC = new ArrayList<String>();
-		stdGender = new ArrayList<String>();
-		stdPhone = new ArrayList<String>();
-		stdMail = new ArrayList<String>();
-		stdBirthdate = new ArrayList<String>();
-		emgName = new ArrayList<String>();
-		emgSurname = new ArrayList<String>();
-		emgPhone = new ArrayList<String>();
-		schUniName = new ArrayList<String>();
-		schDeptName = new ArrayList<String>();
-		schGrade = new ArrayList<String>();
-		accDormName = new ArrayList<String>();
-		accTypeName = new ArrayList<String>();
-		accRoomNo = new ArrayList<String>();
-		accStartDate = new ArrayList<String>();
-		accEndDate = new ArrayList<String>();
+	public EmergencyContact retrieveEmergencyInfo(String name, String surname) {
+		EmergencyContact emg = new EmergencyContact();
+		try {
+			proc_stmt = connect().prepareCall("{ call Get_StudentInfo(?, ?) }");
+			proc_stmt.setString(1, name);
+			proc_stmt.setString(2, surname);
+			rs = proc_stmt.executeQuery();
+			while (rs.next()) {
+				emg.setName(rs.getString("Name"));
+				emg.setSurname(rs.getString("Surname"));
+				emg.setPhone(rs.getString("Phone"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return emg;
+	}
+
+	public School retrieveSchoolInfo(String name, String surname) {
+		School sch = new School();
+		try {
+			proc_stmt = connect().prepareCall("{ call Get_StudentInfo(?, ?) }");
+			proc_stmt.setString(1, name);
+			proc_stmt.setString(2, surname);
+			rs = proc_stmt.executeQuery();
+			while (rs.next()) {
+				sch.setUniName(rs.getString("University"));
+				sch.setDepartment(rs.getString("DepName"));
+				sch.setGrade(rs.getInt("Grade"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return sch;
+	}
+
+	public Hostel retrieveHostelInfo(String name, String surname) {
+		Hostel host = new Hostel();
+		try {
+			proc_stmt = connect().prepareCall("{ call Get_StudentInfo(?, ?) }");
+			proc_stmt.setString(1, name);
+			proc_stmt.setString(2, surname);
+			rs = proc_stmt.executeQuery();
+			while (rs.next()) {
+				host.setStartDate(rs.getDate("StartDate"));
+				host.setEndDate(rs.getDate("EndDate"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return host;
+	}
+
+	public Dorm retrieveDormInfo(String name, String surname) {
+		Dorm dorm = new Dorm();
+		try {
+			proc_stmt = connect().prepareCall("{ call Get_StudentInfo(?, ?) }");
+			proc_stmt.setString(1, name);
+			proc_stmt.setString(2, surname);
+			rs = proc_stmt.executeQuery();
+			while (rs.next()) {
+				dorm.setDormName(rs.getString("DormName"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return dorm;
+	}
+
+	public Room retrieveRoomInfo(String name, String surname) {
+		Room room = new Room();
+		try {
+			proc_stmt = connect().prepareCall("{ call Get_StudentInfo(?, ?) }");
+			proc_stmt.setString(1, name);
+			proc_stmt.setString(2, surname);
+			rs = proc_stmt.executeQuery();
+			while (rs.next()) {
+				room.setTypeName(rs.getInt("TypeName"));
+				room.setRoomNo(rs.getInt("RoomNo"));
+
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return room;
 	}
 
 	public static void closeStatement(Statement statement) {
@@ -331,78 +424,6 @@ public class DBConnection {
 
 	public ArrayList<String> getRoomNoList() {
 		return roomNoList;
-	}
-
-	public ArrayList<String> getStdName() {
-		return stdName;
-	}
-
-	public ArrayList<String> getStdSurname() {
-		return stdSurname;
-	}
-
-	public ArrayList<String> getStdTC() {
-		return stdTC;
-	}
-
-	public ArrayList<String> getStdGender() {
-		return stdGender;
-	}
-
-	public ArrayList<String> getStdPhone() {
-		return stdPhone;
-	}
-
-	public ArrayList<String> getStdMail() {
-		return stdMail;
-	}
-
-	public ArrayList<String> getStdBirthdate() {
-		return stdBirthdate;
-	}
-
-	public ArrayList<String> getEmgName() {
-		return emgName;
-	}
-
-	public ArrayList<String> getEmgSurname() {
-		return emgSurname;
-	}
-
-	public ArrayList<String> getEmgPhone() {
-		return emgPhone;
-	}
-
-	public ArrayList<String> getSchUniName() {
-		return schUniName;
-	}
-
-	public ArrayList<String> getSchDeptName() {
-		return schDeptName;
-	}
-
-	public ArrayList<String> getSchGrade() {
-		return schGrade;
-	}
-
-	public ArrayList<String> getAccDormName() {
-		return accDormName;
-	}
-
-	public ArrayList<String> getAccTypeName() {
-		return accTypeName;
-	}
-
-	public ArrayList<String> getAccRoomNo() {
-		return accRoomNo;
-	}
-
-	public ArrayList<String> getAccStartDate() {
-		return accStartDate;
-	}
-
-	public ArrayList<String> getAccEndDate() {
-		return accEndDate;
 	}
 
 	public ArrayList<String> getStudent() {

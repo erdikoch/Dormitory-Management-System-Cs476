@@ -1352,23 +1352,25 @@ public class MainWindow extends javax.swing.JFrame {
 			fillStudentInfo(std);
 			fillEmergencyContact(emg);
 			fillSchoolInfo(sch);
-			fillAccInfo(dorm, room);
+			fillAccInfo(dorm, room, host);
 		}
 	}
 
-	private void fillAccInfo(Dorm dorm, Room room) {
+	private void fillAccInfo(Dorm dorm, Room room, Hostel host) {
 		accDormCBox.addItem(dorm.getDormName());
 		// accRoomType.addItem(room.getTypeName());
 		accRoomCBox.addItem(room.getRoomNo());
-		// accStartDateText.setText(host.getStartDate());
-		// accEndDateText.setText(host.getEndDate());
+		accStartDateText.setText(convertDateToString(host.getStartDate()));
+		accEndDateText.setText(convertDateToString(host.getEndDate()));
 	}
 
 	private void fillSchoolInfo(School sch) {
 		schUniNameText.setText(sch.getUniName());
-		schDeptNameText.setText(sch.getDepartment());
-		if (sch.getGrade() != 0)
+		if (sch.getGrade() != 0) 
 			schGradeText.setText(Integer.toString(sch.getGrade()));
+		else 
+			schGradeText.setText(null);
+		schDeptNameText.setText(sch.getDepartment());
 	}
 
 	private void fillStudentInfo(Student std) {
@@ -1376,7 +1378,7 @@ public class MainWindow extends javax.swing.JFrame {
 		stdSurnameTExt.setText(std.getSurname());
 		stdMailText.setText(std.getEmail());
 		stdGenderCBox.addItem(std.getGender());
-		// stdBirthdayText.setText(std.getBirthday().toString());
+		stdBirthdayText.setText(convertDateToString(std.getBirthday()));
 		if (!std.getTC().equals("0"))
 			stdTCText.setText(std.getTC());
 		stdPhoneText.setText(std.getPhone());
@@ -1386,6 +1388,16 @@ public class MainWindow extends javax.swing.JFrame {
 		emgNameText.setText(emg.getName());
 		emgSurnameText.setText(emg.getSurname());
 		emgPhoneText.setText(emg.getPhone());
+	}
+
+	private String convertDateToString(Date sqlDate) {
+		String dt = null;
+		if (sqlDate != null) {
+			java.sql.Date date = new java.sql.Date(sqlDate.getTime());
+			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+			dt = sdf.format(date);
+		}
+		return dt;
 	}
 
 	private void clickSearchButton(MouseEvent evt) {
@@ -1400,9 +1412,8 @@ public class MainWindow extends javax.swing.JFrame {
 			ArrayList<String> st = new ArrayList<String>();
 			String[] stdAll = new String[studentList.size() * 2];
 			if (searchStudentText.getText().isEmpty()) {
-
-				// JOptionPane.showMessageDialog(getContentPane(),
-				// "Please type a name!");
+				searchModel.removeAllElements();
+				fillStudentList();
 			} else {
 				String seachText = searchStudentText.getText();
 				for (int i = 0; i < studentList.size(); i++) {

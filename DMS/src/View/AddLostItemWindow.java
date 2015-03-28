@@ -5,36 +5,40 @@ import java.awt.Button;
 import java.awt.Font;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.JButton;
+import javax.swing.JTextField;
 
 public class AddLostItemWindow extends javax.swing.JFrame {
+	private JTextField lostItemIDTextField;
+	private JTextField lostItemNameTextField;
 	public AddLostItemWindow() {
-		setTitle("Add Lost Item");
-		
-		JLabel lostItemLabel = new JLabel("Lost Item ID:");
-		lostItemLabel.setBounds(10, 43, 104, 22);
-		lostItemLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		
-		JLabel lostItemNameLabel = new JLabel("Lost Item Name:");
-		lostItemNameLabel.setBounds(10, 91, 104, 22);
-		lostItemNameLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		
-		TextField lostItemIDTextField = new TextField();
-		lostItemIDTextField.setBounds(120, 43, 83, 22);
-		
-		TextField lostItemNameTextField = new TextField();
-		lostItemNameTextField.setBounds(120, 91, 83, 22);
-		
-		Button lostItemAddButton = new Button("Add");
-		lostItemAddButton.setBounds(155, 133, 70, 22);
+		setResizable(false);
 		getContentPane().setLayout(null);
-		getContentPane().add(lostItemLabel);
-		getContentPane().add(lostItemNameLabel);
-		getContentPane().add(lostItemIDTextField);
-		getContentPane().add(lostItemNameTextField);
+		setBounds(0,0,248,159);
+		JLabel lostItemIDLabel = new JLabel("Item ID:");
+		lostItemIDLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lostItemIDLabel.setBounds(10, 31, 66, 14);
+		getContentPane().add(lostItemIDLabel);
+		
+		JButton lostItemAddButton = new JButton("Add");
+		lostItemAddButton.setBounds(136, 92, 89, 23);
 		getContentPane().add(lostItemAddButton);
-		getContentPane().setBounds(0, 0, 100, 100);
+		
+		lostItemIDTextField = new JTextField();
+		lostItemIDTextField.setBounds(96, 28, 86, 20);
+		getContentPane().add(lostItemIDTextField);
+		lostItemIDTextField.setColumns(10);
+		
+		lostItemNameTextField = new JTextField();
+		lostItemNameTextField.setBounds(96, 61, 86, 20);
+		getContentPane().add(lostItemNameTextField);
+		lostItemNameTextField.setColumns(10);
+		
+		JLabel lostItemNameLabel = new JLabel("Item Name:");
+		lostItemNameLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lostItemNameLabel.setBounds(10, 64, 66, 14);
+		getContentPane().add(lostItemNameLabel);
 		
 		
 	}
-
 }

@@ -94,7 +94,9 @@ public class ChartChooserView extends javax.swing.JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(dormCapacityCheckBox.isSelected()){
-					final CapacityWindow dormCapacity = new CapacityWindow("Dorm Capacity",(Dorm) comboBox.getSelectedItem());
+					Dorm dorm =new Dorm();
+					dorm.setDormName(comboBox.getSelectedItem().toString());
+					final CapacityWindow dormCapacity = new CapacityWindow("Dorm Capacity",dorm);
 					dormCapacity.pack();
 			        RefineryUtilities.centerFrameOnScreen(dormCapacity);
 			        dormCapacity.setVisible(true);

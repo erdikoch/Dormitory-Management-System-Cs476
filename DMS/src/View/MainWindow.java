@@ -29,7 +29,10 @@ import database.DBConnection;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.GroupLayout.Alignment;
@@ -189,7 +192,12 @@ public class MainWindow extends javax.swing.JFrame {
 		saveButton = new javax.swing.JButton();
 		saveButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
-				clickSaveButton(evt);
+				try {
+					clickSaveButton(evt);
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
 		paymentPanel = new javax.swing.JPanel();
@@ -1244,10 +1252,11 @@ public class MainWindow extends javax.swing.JFrame {
 		addRoomMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				ChartChooserView chooser = new ChartChooserView();
-				//chooser.setVisible(true);
+				// chooser.setVisible(true);
 				chooser.pack();
 				RefineryUtilities.centerFrameOnScreen(chooser);
 				chooser.setVisible(true);
+
 			}
 		});
 		otherMenu.add(addRoomMenuItem);
@@ -1324,7 +1333,7 @@ public class MainWindow extends javax.swing.JFrame {
 		Hostel host = new Hostel();
 		Dorm dorm = new Dorm();
 		Room room = new Room();
-		String[] name = new String[2];
+		name = new String[2];
 		String selected = searchStudentList.getSelectedValue().toString();
 		for (int j = 0; j < name.length; j++) {
 			name = searchStudentList.getSelectedValue().toString()
@@ -1425,9 +1434,90 @@ public class MainWindow extends javax.swing.JFrame {
 
 	}
 
-	private void clickSaveButton(ActionEvent evt) {
+	private void clickSaveButton(ActionEvent evt) throws ParseException {
+		DBConnection db = new DBConnection();
+		Student student = getStudentInfoFromText();
+		EmergencyContact emgContact = getContactInfoFromText();
+		School school = getSchoolInfoFromText();
+		Dorm dorm = new Dorm();
+		dorm.setDormName(accDormCBox.getSelectedItem().toString());
+		Room room = getRoomFromText();
+
+		Hostel hostel = getStartEndDateFromText();
+		String Name = name[0];
+
+		String Surname = name[1];
+		db.updateStudent(student, emgContact, dorm, room, hostel, school, Name,
+				Surname);
+
 		setEditableFalse();
 
+	}
+
+	private Hostel getStartEndDateFromText() throws ParseException {
+		Hostel hostel = new Hostel();
+		Date start = convertStringToDatetime(accStartDateText.getText());
+		hostel.setStartDate(start);
+		Date end = convertStringToDatetime(accEndDateText.getText());
+		hostel.setEndDate(end);
+
+		return hostel;
+
+	}
+
+	private Room getRoomFromText() {
+		Room room = new Room();
+		int roomNo = Integer.parseInt(accRoomCBox.getSelectedItem().toString());
+		room.setRoomNo(roomNo);
+		return room;
+	}
+
+	private School getSchoolInfoFromText() {
+		School school = new School();
+		school.setUniName(schUniNameText.getText());
+		school.setDepartment(schDeptNameText.getText());
+		if (schGradeText.getText().isEmpty()) {
+			school.setGrade(0);
+		} else {
+			int grade = Integer.parseInt(schGradeText.getText());
+			school.setGrade(grade);
+		}
+		return school;
+	}
+
+	private EmergencyContact getContactInfoFromText() {
+		EmergencyContact emgContact = new EmergencyContact();
+		emgContact.setName(emgNameText.getText());
+		emgContact.setSurname(emgSurnameText.getText());
+		emgContact.setPhone(emgSurnameText.getText());
+		return emgContact;
+	}
+
+	private Student getStudentInfoFromText() throws ParseException {
+		Student student = new Student();
+		if (stdBirthdayText.getText().isEmpty()) {
+			student.setBirthday(null);
+		} else {
+			Date birthday = convertStringToDatetime(stdBirthdayText.getText());
+			student.setBirthday(birthday);
+		}
+
+		student.setName(stdNameText.getText());
+		student.setSurname(stdSurnameTExt.getText());
+		student.setEmail(stdMailText.getText());
+		student.setGender(stdGenderCBox.getSelectedItem().toString());
+		student.setTC(stdTCText.getText());
+		student.setPhone(stdPhoneText.getText());
+
+		return student;
+	}
+
+	private Date convertStringToDatetime(String dt) throws ParseException {
+		java.util.Date date = new java.util.Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		date = sdf.parse(dt);
+		Date sqlDate = new java.sql.Date(date.getTime());
+		return sqlDate;
 	}
 
 	private void addStudentActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jMenuItem1ActionPerformed
@@ -1568,4 +1658,5 @@ public class MainWindow extends javax.swing.JFrame {
 	private JTextField stdBirthdayText;
 	private ArrayList<String> studentList;
 	private DefaultListModel searchModel;
+	private String[] name;
 }

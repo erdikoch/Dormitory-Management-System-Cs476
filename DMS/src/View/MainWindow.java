@@ -1366,9 +1366,9 @@ public class MainWindow extends javax.swing.JFrame {
 
 	private void fillSchoolInfo(School sch) {
 		schUniNameText.setText(sch.getUniName());
-		if (sch.getGrade() != 0) 
+		if (sch.getGrade() != 0)
 			schGradeText.setText(Integer.toString(sch.getGrade()));
-		else 
+		else
 			schGradeText.setText(null);
 		schDeptNameText.setText(sch.getDepartment());
 	}
@@ -1458,9 +1458,20 @@ public class MainWindow extends javax.swing.JFrame {
 		String Name = name[0];
 
 		String Surname = name[1];
-		db.updateStudent(student, emgContact, dorm, room, hostel, school, Name,
-				Surname);
-
+		if (!student.equals(null) && !emgContact.equals(null)
+				&& !Name.equals(null) && !Surname.equals(null)
+				&& !school.equals(null) && !dorm.equals(null)
+				&& !hostel.equals(null) && !room.equals(null))
+			if(db.updateStudent(student, emgContact, dorm, room, hostel, school,
+					Name, Surname)){
+				JOptionPane.showMessageDialog(getContentPane(), "Basarili");
+				
+			}else{
+				JOptionPane.showMessageDialog(getContentPane(), "Basarili olmadi");
+			}
+		else{
+			System.out.println("S** var");
+		}
 		setEditableFalse();
 
 	}
@@ -1479,6 +1490,8 @@ public class MainWindow extends javax.swing.JFrame {
 	private Room getRoomFromText() {
 		Room room = new Room();
 		int roomNo = Integer.parseInt(accRoomCBox.getSelectedItem().toString());
+		System.out.println(room.getTypeName());
+		int roomType = room.getTypeName();
 		room.setRoomNo(roomNo);
 		return room;
 	}
@@ -1500,7 +1513,7 @@ public class MainWindow extends javax.swing.JFrame {
 		EmergencyContact emgContact = new EmergencyContact();
 		emgContact.setName(emgNameText.getText());
 		emgContact.setSurname(emgSurnameText.getText());
-		emgContact.setPhone(emgSurnameText.getText());
+		emgContact.setPhone(emgPhoneText.getText());
 		return emgContact;
 	}
 

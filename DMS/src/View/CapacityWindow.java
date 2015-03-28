@@ -42,7 +42,7 @@ public class CapacityWindow extends ApplicationFrame {
 	}
 
 	private static JFreeChart createChart(PieDataset dataset) {
-		JFreeChart chart = ChartFactory.createPieChart("Dorm Capacity", // chart
+		JFreeChart chart = ChartFactory.createPieChart("Dorm Capacity", // chart	
 																		// title
 				dataset, // data
 				true, // include legend

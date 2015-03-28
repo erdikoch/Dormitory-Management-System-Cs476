@@ -41,7 +41,7 @@ public class DBConnection {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		String url = "jdbc:sqlserver://192.168.234.1:1433;instance=MSSQLSERVER;DatabaseName=DormManagement";
+		String url = "jdbc:sqlserver://192.168.230.1:1433;instance=MSSQLSERVER;DatabaseName=DormManagement";
 		con = DriverManager.getConnection(url, "sa", "123456");
 		return con;
 	}
@@ -201,11 +201,14 @@ public class DBConnection {
 
 	}
 
-	public void updateStudent(Student std, EmergencyContact emg, Dorm dorm,
+	public boolean updateStudent(Student std, EmergencyContact emg, Dorm dorm,
 			Room room, Hostel host, School sch, String Name, String Surname) {
+		
 		try {
+			connect();
+			
 			proc_stmt = con
-					.prepareCall("{ call Update_StudentPersonalInfo(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) }");
+					.prepareCall("{ call Update_StudentPersonalInfo(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) }");
 			proc_stmt.setString(1, std.getName());
 			proc_stmt.setString(2, std.getSurname());
 			proc_stmt.setString(3, Name);
@@ -226,10 +229,14 @@ public class DBConnection {
 			proc_stmt.setString(18, dorm.getDormName());
 			proc_stmt.setInt(19, room.getTypeName());
 			proc_stmt.setInt(20, room.getRoomNo());
+			
+			proc_stmt.executeUpdate();
+			return true;
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return false;
 		}
 
 	}

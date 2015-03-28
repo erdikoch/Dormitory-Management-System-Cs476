@@ -230,10 +230,6 @@ public class RoomWindow extends javax.swing.JFrame {
 		}
 	}
 
-	private void displayRoomTypeAction(ActionEvent evt) {
-		iscBoxRoomClicked = true;
-	}
-
 	private void fillCBoxDorm() {
 		DBConnection conn = new DBConnection();
 		ArrayList<String> list = null;
@@ -246,19 +242,31 @@ public class RoomWindow extends javax.swing.JFrame {
 		}
 	}
 
-	private void displayDormBoxAction(ActionEvent evt) {
-		iscBoxDormClicked = true;
+	private void displayRoomTypeAction(ActionEvent evt) {
+		iscBoxRoomClicked = true;
 		int startId = 0;
-		if (cboxDorm.getSelectedItem().toString().equals("Dorm 1")) {
+		if (cboxRoomType.getSelectedItem().toString().equals("1")) {
 			startId = 100;
 			generateIdForRooms(startId);
-		} else if (cboxDorm.getSelectedItem().toString().equals("Dorm 2")) {
+		} else if (cboxRoomType.getSelectedItem().toString().equals("2")) {
 			startId = 200;
 			generateIdForRooms(startId);
-		} else if (cboxDorm.getSelectedItem().toString().equals("Dorm 3")) {
+		} else if (cboxRoomType.getSelectedItem().toString().equals("3")) {
 			startId = 300;
 			generateIdForRooms(startId);
+		} else if (cboxRoomType.getSelectedItem().toString().equals("4")) {
+			startId = 400;
+			generateIdForRooms(startId);
+		} else if (cboxRoomType.getSelectedItem().toString().equals("5")) {
+			startId = 500;
+			generateIdForRooms(startId);
+		} else {
+			JOptionPane.showMessageDialog(getContentPane(), "Bu ne lan!");
 		}
+	}
+
+	private void displayDormBoxAction(ActionEvent evt) {
+		iscBoxDormClicked = true;
 	}
 
 	private void generateIdForRooms(int startId) {

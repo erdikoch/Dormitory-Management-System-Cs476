@@ -36,12 +36,22 @@ public class ChartChooserView extends javax.swing.JFrame {
 		getContentPane().add(lblDorm, gbc_lblDorm);
 		
 		final JComboBox comboBox = new JComboBox();
-		DBConnection connection = new DBConnection();
-		ArrayList<Dorm> dorms = connection.getDorms();
+		comboBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				clickDormAction(evt);
+			}
+
+			private void clickDormAction(ActionEvent evt) {
+				DBConnection connection = new DBConnection();
+				ArrayList<Dorm> dorms = connection.getDorms();
+				
+				
+				for (int i = 0; i < dorms.size(); i++) {
+					comboBox.addItem(dorms.get(i));
+				}
+			}
+		});
 		
-		for (int i = 0; i < dorms.size(); i++) {
-			comboBox.addItem(dorms.get(i));
-		}
 		
 		
 		

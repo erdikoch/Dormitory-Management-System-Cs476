@@ -4,6 +4,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.swing.ButtonGroup;
@@ -35,23 +36,18 @@ public class ChartChooserView extends javax.swing.JFrame {
 		gbc_lblDorm.gridy = 4;
 		getContentPane().add(lblDorm, gbc_lblDorm);
 		
-		final JComboBox comboBox = new JComboBox();
-		comboBox.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent evt) {
-				clickDormAction(evt);
-			}
-
-			private void clickDormAction(ActionEvent evt) {
-				DBConnection connection = new DBConnection();
-				ArrayList<Dorm> dorms = connection.getDorms();
-				
-				
-				for (int i = 0; i < dorms.size(); i++) {
-					comboBox.addItem(dorms.get(i));
-				}
-			}
-		});
-		
+		final JComboBox<String> comboBox = new JComboBox<String>();
+		DBConnection connection = new DBConnection();
+		ArrayList<String> list;
+		try {
+			comboBox.removeAllItems();
+			list = connection.displayDorm();
+			for (int i = 0; i < list.size(); i++)
+				comboBox.addItem(list.get(i));
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		
 		
 		

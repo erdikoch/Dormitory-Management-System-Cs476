@@ -6,7 +6,6 @@ import java.util.Random;
 
 public class Dorm {
 	
-	
 	private String dormName;
 	private String location;
 	private int dormSize;
@@ -17,13 +16,17 @@ public class Dorm {
 		return dormName;
 	}
 	public void setDormName(String dormName) {
-		this.dormName = dormName;
+		if(!dormName.equals("") || !dormName.equals(" ")) {
+			this.dormName = dormName;
+		}
 	}
 	public String getLocation() {
 		return location;
 	}
 	public void setLocation(String location) {
-		this.location = location;
+		if(!location.equals("") || !location.equals(" ")) {
+			this.location = location;
+		}
 	}
 	public int getDormSize() {
 		return dormSize;
@@ -42,7 +45,5 @@ public class Dorm {
 		int R = random.nextInt(High-Low) + Low;
 		filledDormSize = R;
 		this.filledDormSize = filledDormSize;
-	}
-
-	
+	}	
 }

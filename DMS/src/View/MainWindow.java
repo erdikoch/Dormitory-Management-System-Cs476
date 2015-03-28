@@ -371,6 +371,7 @@ public class MainWindow extends javax.swing.JFrame {
 		personalInfoBirthdayLabel.setText("Birthday:");
 
 		stdBirthdayText = new JTextField();
+		stdBirthdayText.setEditable(false);
 		stdBirthdayText.setColumns(10);
 
 		javax.swing.GroupLayout gl_personalInfoPanel = new javax.swing.GroupLayout(
@@ -867,6 +868,14 @@ public class MainWindow extends javax.swing.JFrame {
 		editButton.setBackground(new Color(204, 255, 204));
 		editButton.setFont(new Font("Tahoma", Font.BOLD, 12));
 
+		JLabel lblType = new JLabel();
+		lblType.setText("Type:");
+		lblType.setFont(new Font("Tahoma", Font.PLAIN, 12));
+
+		cboxType = new JComboBox();
+
+		cboxType.setEnabled(false);
+
 		javax.swing.GroupLayout gl_accoInfoPanel = new javax.swing.GroupLayout(
 				accoInfoPanel);
 		gl_accoInfoPanel
@@ -880,11 +889,6 @@ public class MainWindow extends javax.swing.JFrame {
 												gl_accoInfoPanel
 														.createParallelGroup(
 																Alignment.LEADING)
-														.addComponent(
-																accoInfoLabel,
-																GroupLayout.PREFERRED_SIZE,
-																165,
-																GroupLayout.PREFERRED_SIZE)
 														.addGroup(
 																gl_accoInfoPanel
 																		.createSequentialGroup()
@@ -892,86 +896,111 @@ public class MainWindow extends javax.swing.JFrame {
 																				gl_accoInfoPanel
 																						.createParallelGroup(
 																								Alignment.LEADING)
-																						.addGroup(
-																								gl_accoInfoPanel
-																										.createSequentialGroup()
-																										.addComponent(
-																												accoInfoDormLabel)
-																										.addGap(29))
-																						.addGroup(
-																								gl_accoInfoPanel
-																										.createSequentialGroup()
-																										.addComponent(
-																												accoInfoRoomLabel,
-																												GroupLayout.DEFAULT_SIZE,
-																												55,
-																												Short.MAX_VALUE)
-																										.addPreferredGap(
-																												ComponentPlacement.RELATED)))
-																		.addGroup(
-																				gl_accoInfoPanel
-																						.createParallelGroup(
-																								Alignment.LEADING,
-																								false)
 																						.addComponent(
-																								accRoomCBox,
-																								0,
-																								GroupLayout.DEFAULT_SIZE,
-																								Short.MAX_VALUE)
-																						.addComponent(
-																								accDormCBox,
-																								0,
-																								92,
-																								Short.MAX_VALUE))
-																		.addGap(70)
-																		.addGroup(
-																				gl_accoInfoPanel
-																						.createParallelGroup(
-																								Alignment.TRAILING)
-																						.addComponent(
-																								accoInfoStartDateLabel,
+																								accoInfoLabel,
 																								GroupLayout.PREFERRED_SIZE,
-																								83,
+																								165,
 																								GroupLayout.PREFERRED_SIZE)
-																						.addComponent(
-																								accoInfoEndDateLabel,
-																								GroupLayout.PREFERRED_SIZE,
-																								83,
-																								GroupLayout.PREFERRED_SIZE))
-																		.addGap(18)
-																		.addGroup(
-																				gl_accoInfoPanel
-																						.createParallelGroup(
-																								Alignment.LEADING)
 																						.addGroup(
 																								gl_accoInfoPanel
 																										.createSequentialGroup()
-																										.addComponent(
-																												accStartDateText,
-																												GroupLayout.PREFERRED_SIZE,
-																												215,
-																												GroupLayout.PREFERRED_SIZE)
-																										.addGap(65)
-																										.addComponent(
-																												editButton,
-																												GroupLayout.DEFAULT_SIZE,
-																												61,
-																												Short.MAX_VALUE))
-																						.addGroup(
-																								gl_accoInfoPanel
-																										.createSequentialGroup()
-																										.addComponent(
-																												accEndDateText,
-																												GroupLayout.PREFERRED_SIZE,
-																												215,
-																												GroupLayout.PREFERRED_SIZE)
-																										.addGap(65)
-																										.addComponent(
-																												saveButton,
-																												GroupLayout.DEFAULT_SIZE,
-																												GroupLayout.DEFAULT_SIZE,
-																												Short.MAX_VALUE)))))
-										.addGap(20)));
+																										.addGroup(
+																												gl_accoInfoPanel
+																														.createParallelGroup(
+																																Alignment.LEADING)
+																														.addComponent(
+																																accoInfoDormLabel)
+																														.addComponent(
+																																lblType,
+																																GroupLayout.PREFERRED_SIZE,
+																																82,
+																																GroupLayout.PREFERRED_SIZE))
+																										.addPreferredGap(
+																												ComponentPlacement.RELATED)
+																										.addGroup(
+																												gl_accoInfoPanel
+																														.createParallelGroup(
+																																Alignment.LEADING)
+																														.addGroup(
+																																gl_accoInfoPanel
+																																		.createParallelGroup(
+																																				Alignment.TRAILING,
+																																				false)
+																																		.addComponent(
+																																				accRoomCBox,
+																																				Alignment.LEADING,
+																																				0,
+																																				GroupLayout.DEFAULT_SIZE,
+																																				Short.MAX_VALUE)
+																																		.addComponent(
+																																				accDormCBox,
+																																				Alignment.LEADING,
+																																				0,
+																																				92,
+																																				Short.MAX_VALUE))
+																														.addComponent(
+																																cboxType,
+																																GroupLayout.PREFERRED_SIZE,
+																																92,
+																																GroupLayout.PREFERRED_SIZE))
+																										.addGap(70)
+																										.addGroup(
+																												gl_accoInfoPanel
+																														.createParallelGroup(
+																																Alignment.TRAILING)
+																														.addComponent(
+																																accoInfoStartDateLabel,
+																																GroupLayout.PREFERRED_SIZE,
+																																83,
+																																GroupLayout.PREFERRED_SIZE)
+																														.addComponent(
+																																accoInfoEndDateLabel,
+																																GroupLayout.PREFERRED_SIZE,
+																																83,
+																																GroupLayout.PREFERRED_SIZE))
+																										.addGap(18)
+																										.addGroup(
+																												gl_accoInfoPanel
+																														.createParallelGroup(
+																																Alignment.LEADING)
+																														.addGroup(
+																																gl_accoInfoPanel
+																																		.createSequentialGroup()
+																																		.addComponent(
+																																				accStartDateText,
+																																				GroupLayout.PREFERRED_SIZE,
+																																				215,
+																																				GroupLayout.PREFERRED_SIZE)
+																																		.addGap(65)
+																																		.addComponent(
+																																				editButton,
+																																				GroupLayout.DEFAULT_SIZE,
+																																				96,
+																																				Short.MAX_VALUE))
+																														.addGroup(
+																																gl_accoInfoPanel
+																																		.createSequentialGroup()
+																																		.addComponent(
+																																				accEndDateText,
+																																				GroupLayout.PREFERRED_SIZE,
+																																				215,
+																																				GroupLayout.PREFERRED_SIZE)
+																																		.addGap(65)
+																																		.addComponent(
+																																				saveButton,
+																																				GroupLayout.DEFAULT_SIZE,
+																																				96,
+																																				Short.MAX_VALUE)))))
+																		.addGap(20))
+														.addGroup(
+																gl_accoInfoPanel
+																		.createSequentialGroup()
+																		.addComponent(
+																				accoInfoRoomLabel,
+																				GroupLayout.DEFAULT_SIZE,
+																				106,
+																				Short.MAX_VALUE)
+																		.addGap(639)))));
 		gl_accoInfoPanel
 				.setVerticalGroup(gl_accoInfoPanel
 						.createParallelGroup(Alignment.LEADING)
@@ -982,7 +1011,7 @@ public class MainWindow extends javax.swing.JFrame {
 										.addGroup(
 												gl_accoInfoPanel
 														.createParallelGroup(
-																Alignment.LEADING)
+																Alignment.TRAILING)
 														.addGroup(
 																gl_accoInfoPanel
 																		.createSequentialGroup()
@@ -1008,63 +1037,73 @@ public class MainWindow extends javax.swing.JFrame {
 																								GroupLayout.PREFERRED_SIZE,
 																								GroupLayout.DEFAULT_SIZE,
 																								GroupLayout.PREFERRED_SIZE))
-																		.addGroup(
-																				gl_accoInfoPanel
-																						.createParallelGroup(
-																								Alignment.LEADING)
-																						.addGroup(
-																								gl_accoInfoPanel
-																										.createSequentialGroup()
-																										.addGap(17)
-																										.addGroup(
-																												gl_accoInfoPanel
-																														.createParallelGroup(
-																																Alignment.BASELINE)
-																														.addComponent(
-																																accRoomCBox,
-																																GroupLayout.PREFERRED_SIZE,
-																																GroupLayout.DEFAULT_SIZE,
-																																GroupLayout.PREFERRED_SIZE)
-																														.addComponent(
-																																accoInfoRoomLabel)))
-																						.addGroup(
-																								gl_accoInfoPanel
-																										.createSequentialGroup()
-																										.addGap(18)
-																										.addGroup(
-																												gl_accoInfoPanel
-																														.createParallelGroup(
-																																Alignment.BASELINE)
-																														.addComponent(
-																																accEndDateText,
-																																GroupLayout.PREFERRED_SIZE,
-																																GroupLayout.DEFAULT_SIZE,
-																																GroupLayout.PREFERRED_SIZE)
-																														.addComponent(
-																																accoInfoEndDateLabel)))))
+																		.addGap(17))
 														.addGroup(
 																gl_accoInfoPanel
 																		.createSequentialGroup()
-																		.addGap(19)
 																		.addComponent(
 																				editButton)
 																		.addPreferredGap(
-																				ComponentPlacement.UNRELATED)
+																				ComponentPlacement.UNRELATED)))
+										.addGroup(
+												gl_accoInfoPanel
+														.createParallelGroup(
+																Alignment.TRAILING)
+														.addGroup(
+																gl_accoInfoPanel
+																		.createParallelGroup(
+																				Alignment.BASELINE)
+																		.addComponent(
+																				accEndDateText,
+																				GroupLayout.PREFERRED_SIZE,
+																				GroupLayout.DEFAULT_SIZE,
+																				GroupLayout.PREFERRED_SIZE)
+																		.addComponent(
+																				accoInfoEndDateLabel)
 																		.addComponent(
 																				saveButton,
 																				GroupLayout.PREFERRED_SIZE,
 																				23,
-																				GroupLayout.PREFERRED_SIZE)))
-										.addGap(29)));
+																				GroupLayout.PREFERRED_SIZE))
+														.addGroup(
+																gl_accoInfoPanel
+																		.createSequentialGroup()
+																		.addGroup(
+																				gl_accoInfoPanel
+																						.createParallelGroup(
+																								Alignment.BASELINE)
+																						.addComponent(
+																								lblType,
+																								GroupLayout.PREFERRED_SIZE,
+																								15,
+																								GroupLayout.PREFERRED_SIZE)
+																						.addComponent(
+																								cboxType,
+																								GroupLayout.PREFERRED_SIZE,
+																								GroupLayout.DEFAULT_SIZE,
+																								GroupLayout.PREFERRED_SIZE))
+																		.addGap(6)))
+										.addGap(5)
+										.addGroup(
+												gl_accoInfoPanel
+														.createParallelGroup(
+																Alignment.BASELINE)
+														.addComponent(
+																accoInfoRoomLabel)
+														.addComponent(
+																accRoomCBox,
+																GroupLayout.PREFERRED_SIZE,
+																GroupLayout.DEFAULT_SIZE,
+																GroupLayout.PREFERRED_SIZE))
+										.addGap(22)));
 		accoInfoPanel.setLayout(gl_accoInfoPanel);
 
 		javax.swing.GroupLayout gl_mainPaneSubPanel = new javax.swing.GroupLayout(
 				mainPaneSubPanel);
 		gl_mainPaneSubPanel
 				.setHorizontalGroup(gl_mainPaneSubPanel
-						.createParallelGroup(Alignment.LEADING)
+						.createParallelGroup(Alignment.TRAILING)
 						.addGroup(
-								Alignment.TRAILING,
 								gl_mainPaneSubPanel
 										.createSequentialGroup()
 										.addContainerGap()
@@ -1082,7 +1121,7 @@ public class MainWindow extends javax.swing.JFrame {
 																personalInfoPanel,
 																Alignment.LEADING,
 																GroupLayout.DEFAULT_SIZE,
-																722,
+																759,
 																Short.MAX_VALUE)
 														.addGroup(
 																Alignment.LEADING,
@@ -1098,7 +1137,7 @@ public class MainWindow extends javax.swing.JFrame {
 																		.addComponent(
 																				schoolInfoPanel,
 																				GroupLayout.DEFAULT_SIZE,
-																				361,
+																				398,
 																				Short.MAX_VALUE)))
 										.addContainerGap()));
 		gl_mainPaneSubPanel
@@ -1131,9 +1170,8 @@ public class MainWindow extends javax.swing.JFrame {
 										.addPreferredGap(
 												ComponentPlacement.RELATED)
 										.addComponent(accoInfoPanel,
-												GroupLayout.PREFERRED_SIZE,
-												120, Short.MAX_VALUE)
-										.addContainerGap()));
+												GroupLayout.DEFAULT_SIZE, 153,
+												Short.MAX_VALUE)));
 		mainPaneSubPanel.setLayout(gl_mainPaneSubPanel);
 
 		tabbedPane.addTab("Profile", mainPaneSubPanel);
@@ -1152,18 +1190,25 @@ public class MainWindow extends javax.swing.JFrame {
 
 		javax.swing.GroupLayout gl_mainPanePanel = new javax.swing.GroupLayout(
 				mainPanePanel);
-		mainPanePanel.setLayout(gl_mainPanePanel);
 		gl_mainPanePanel.setHorizontalGroup(gl_mainPanePanel
-				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(
-						javax.swing.GroupLayout.Alignment.TRAILING,
-						gl_mainPanePanel.createSequentialGroup()
-								.addContainerGap().addComponent(tabbedPane)
+				.createParallelGroup(Alignment.TRAILING).addGroup(
+						Alignment.LEADING,
+						gl_mainPanePanel
+								.createSequentialGroup()
+								.addContainerGap()
+								.addComponent(tabbedPane,
+										GroupLayout.PREFERRED_SIZE,
+										GroupLayout.DEFAULT_SIZE,
+										GroupLayout.PREFERRED_SIZE)
 								.addContainerGap()));
 		gl_mainPanePanel.setVerticalGroup(gl_mainPanePanel.createParallelGroup(
-				javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-				gl_mainPanePanel.createSequentialGroup().addGap(20, 20, 20)
-						.addComponent(tabbedPane).addContainerGap()));
+				Alignment.LEADING).addGroup(
+				gl_mainPanePanel
+						.createSequentialGroup()
+						.addGap(20)
+						.addComponent(tabbedPane, GroupLayout.DEFAULT_SIZE,
+								520, Short.MAX_VALUE)));
+		mainPanePanel.setLayout(gl_mainPanePanel);
 
 		homeMenu.setText("Home");
 
@@ -1326,6 +1371,7 @@ public class MainWindow extends javax.swing.JFrame {
 		accDormCBox.removeAllItems();
 		accRoomCBox.removeAllItems();
 		stdGenderCBox.removeAllItems();
+		cboxType.removeAllItems();
 		DBConnection conn = new DBConnection();
 		Student std = new Student();
 		EmergencyContact emg = new EmergencyContact();
@@ -1358,7 +1404,7 @@ public class MainWindow extends javax.swing.JFrame {
 
 	private void fillAccInfo(Dorm dorm, Room room, Hostel host) {
 		accDormCBox.addItem(dorm.getDormName());
-		// accRoomType.addItem(room.getTypeName());
+		cboxType.addItem(room.getTypeName());
 		accRoomCBox.addItem(room.getRoomNo());
 		accStartDateText.setText(convertDateToString(host.getStartDate()));
 		accEndDateText.setText(convertDateToString(host.getEndDate()));
@@ -1441,6 +1487,7 @@ public class MainWindow extends javax.swing.JFrame {
 	}
 
 	private void clickEditButton(ActionEvent evt) {
+
 		setEditableTrue();
 
 	}
@@ -1462,14 +1509,15 @@ public class MainWindow extends javax.swing.JFrame {
 				&& !Name.equals(null) && !Surname.equals(null)
 				&& !school.equals(null) && !dorm.equals(null)
 				&& !hostel.equals(null) && !room.equals(null))
-			if(db.updateStudent(student, emgContact, dorm, room, hostel, school,
-					Name, Surname)){
+			if (db.updateStudent(student, emgContact, dorm, room, hostel,
+					school, Name, Surname)) {
 				JOptionPane.showMessageDialog(getContentPane(), "Basarili");
-				
-			}else{
-				JOptionPane.showMessageDialog(getContentPane(), "Basarili olmadi");
+
+			} else {
+				JOptionPane.showMessageDialog(getContentPane(),
+						"Basarili olmadi");
 			}
-		else{
+		else {
 			System.out.println("S** var");
 		}
 		setEditableFalse();
@@ -1490,8 +1538,8 @@ public class MainWindow extends javax.swing.JFrame {
 	private Room getRoomFromText() {
 		Room room = new Room();
 		int roomNo = Integer.parseInt(accRoomCBox.getSelectedItem().toString());
-		System.out.println(room.getTypeName());
-		int roomType = room.getTypeName();
+		room.setTypeName(Integer
+				.parseInt(cboxType.getSelectedItem().toString()));
 		room.setRoomNo(roomNo);
 		return room;
 	}
@@ -1564,6 +1612,7 @@ public class MainWindow extends javax.swing.JFrame {
 		stdNameText.setEditable(false);
 		stdSurnameTExt.setEditable(false);
 		stdTCText.setEditable(false);
+	//	stdBirthdayText.setEditable(false);
 		stdPhoneText.setEditable(false);
 		stdMailText.setEditable(false);
 		stdGenderCBox.setEnabled(false);
@@ -1577,6 +1626,7 @@ public class MainWindow extends javax.swing.JFrame {
 		accRoomCBox.setEnabled(false);
 		accStartDateText.setEditable(false);
 		accEndDateText.setEditable(false);
+		
 	}
 
 	private void setEditableTrue() {
@@ -1596,6 +1646,8 @@ public class MainWindow extends javax.swing.JFrame {
 		accRoomCBox.setEnabled(true);
 		accStartDateText.setEditable(true);
 		accEndDateText.setEditable(true);
+		cboxType.setEditable(true);
+		stdBirthdayText.setEditable(true);
 	}
 
 	/**
@@ -1682,5 +1734,6 @@ public class MainWindow extends javax.swing.JFrame {
 	private JTextField stdBirthdayText;
 	private ArrayList<String> studentList;
 	private DefaultListModel searchModel;
+	private JComboBox cboxType;
 	private String[] name;
 }

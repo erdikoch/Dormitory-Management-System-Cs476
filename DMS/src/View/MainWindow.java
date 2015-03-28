@@ -54,6 +54,7 @@ import javax.swing.JTextField;
 
 public class MainWindow extends javax.swing.JFrame {
 
+
 	/**
 	 * Creates new form MainWindow
 	 */
@@ -1234,8 +1235,20 @@ public class MainWindow extends javax.swing.JFrame {
 		searchMenu = new JMenu("Search");
 		menuBar.add(searchMenu);
 
+		
+		
 		searchAllMenuItem = new JMenuItem("Search All   Ctrl+F");
 		searchMenu.add(searchAllMenuItem);
+		searchAllMenuItem.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+			   searchAllWindow = new SearchAllWindow();
+			   searchAllWindow.setVisible(true);
+			}
+		});
+		
+		
 
 		otherMenu.setText("Other");
 		menuBar.add(otherMenu);
@@ -1252,7 +1265,6 @@ public class MainWindow extends javax.swing.JFrame {
 		addRoomMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				ChartChooserView chooser = new ChartChooserView();
-				// chooser.setVisible(true);
 				chooser.pack();
 				RefineryUtilities.centerFrameOnScreen(chooser);
 				chooser.setVisible(true);
@@ -1352,25 +1364,23 @@ public class MainWindow extends javax.swing.JFrame {
 			fillStudentInfo(std);
 			fillEmergencyContact(emg);
 			fillSchoolInfo(sch);
-			fillAccInfo(dorm, room, host);
+			fillAccInfo(dorm, room);
 		}
 	}
 
-	private void fillAccInfo(Dorm dorm, Room room, Hostel host) {
+	private void fillAccInfo(Dorm dorm, Room room) {
 		accDormCBox.addItem(dorm.getDormName());
 		// accRoomType.addItem(room.getTypeName());
 		accRoomCBox.addItem(room.getRoomNo());
-		accStartDateText.setText(convertDateToString(host.getStartDate()));
-		accEndDateText.setText(convertDateToString(host.getEndDate()));
+		// accStartDateText.setText(host.getStartDate());
+		// accEndDateText.setText(host.getEndDate());
 	}
 
 	private void fillSchoolInfo(School sch) {
 		schUniNameText.setText(sch.getUniName());
+		schDeptNameText.setText(sch.getDepartment());
 		if (sch.getGrade() != 0)
 			schGradeText.setText(Integer.toString(sch.getGrade()));
-		else
-			schGradeText.setText(null);
-		schDeptNameText.setText(sch.getDepartment());
 	}
 
 	private void fillStudentInfo(Student std) {
@@ -1378,7 +1388,7 @@ public class MainWindow extends javax.swing.JFrame {
 		stdSurnameTExt.setText(std.getSurname());
 		stdMailText.setText(std.getEmail());
 		stdGenderCBox.addItem(std.getGender());
-		stdBirthdayText.setText(convertDateToString(std.getBirthday()));
+		// stdBirthdayText.setText(std.getBirthday().toString());
 		if (!std.getTC().equals("0"))
 			stdTCText.setText(std.getTC());
 		stdPhoneText.setText(std.getPhone());
@@ -1388,16 +1398,6 @@ public class MainWindow extends javax.swing.JFrame {
 		emgNameText.setText(emg.getName());
 		emgSurnameText.setText(emg.getSurname());
 		emgPhoneText.setText(emg.getPhone());
-	}
-
-	private String convertDateToString(Date sqlDate) {
-		String dt = null;
-		if (sqlDate != null) {
-			java.sql.Date date = new java.sql.Date(sqlDate.getTime());
-			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-			dt = sdf.format(date);
-		}
-		return dt;
 	}
 
 	private void clickSearchButton(MouseEvent evt) {
@@ -1412,8 +1412,9 @@ public class MainWindow extends javax.swing.JFrame {
 			ArrayList<String> st = new ArrayList<String>();
 			String[] stdAll = new String[studentList.size() * 2];
 			if (searchStudentText.getText().isEmpty()) {
-				searchModel.removeAllElements();
-				fillStudentList();
+
+				// JOptionPane.showMessageDialog(getContentPane(),
+				// "Please type a name!");
 			} else {
 				String seachText = searchStudentText.getText();
 				for (int i = 0; i < studentList.size(); i++) {
@@ -1458,20 +1459,9 @@ public class MainWindow extends javax.swing.JFrame {
 		String Name = name[0];
 
 		String Surname = name[1];
-		if (!student.equals(null) && !emgContact.equals(null)
-				&& !Name.equals(null) && !Surname.equals(null)
-				&& !school.equals(null) && !dorm.equals(null)
-				&& !hostel.equals(null) && !room.equals(null))
-			if(db.updateStudent(student, emgContact, dorm, room, hostel, school,
-					Name, Surname)){
-				JOptionPane.showMessageDialog(getContentPane(), "Basarili");
-				
-			}else{
-				JOptionPane.showMessageDialog(getContentPane(), "Basarili olmadi");
-			}
-		else{
-			System.out.println("S** var");
-		}
+		db.updateStudent(student, emgContact, dorm, room, hostel, school, Name,
+				Surname);
+
 		setEditableFalse();
 
 	}
@@ -1490,8 +1480,6 @@ public class MainWindow extends javax.swing.JFrame {
 	private Room getRoomFromText() {
 		Room room = new Room();
 		int roomNo = Integer.parseInt(accRoomCBox.getSelectedItem().toString());
-		System.out.println(room.getTypeName());
-		int roomType = room.getTypeName();
 		room.setRoomNo(roomNo);
 		return room;
 	}
@@ -1513,7 +1501,7 @@ public class MainWindow extends javax.swing.JFrame {
 		EmergencyContact emgContact = new EmergencyContact();
 		emgContact.setName(emgNameText.getText());
 		emgContact.setSurname(emgSurnameText.getText());
-		emgContact.setPhone(emgPhoneText.getText());
+		emgContact.setPhone(emgSurnameText.getText());
 		return emgContact;
 	}
 
@@ -1683,4 +1671,6 @@ public class MainWindow extends javax.swing.JFrame {
 	private ArrayList<String> studentList;
 	private DefaultListModel searchModel;
 	private String[] name;
+	private SearchAllWindow searchAllWindow;
+	
 }

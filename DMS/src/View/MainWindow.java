@@ -5,17 +5,11 @@
  */
 package view;
 
+import javax.sql.ConnectionEvent;
 import javax.swing.DefaultListModel;
-import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JMenuItem;
-
-//import org.jfree.chart.JFreeChart;
-//import org.jfree.ui.RefineryUtilities;
-
 import javax.swing.JOptionPane;
-import javax.swing.ListModel;
-
 import org.jfree.ui.RefineryUtilities;
 
 import background.Dorm;
@@ -26,13 +20,16 @@ import background.School;
 import background.Student;
 import database.DBConnection;
 
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
 
 import javax.swing.JButton;
 import javax.swing.GroupLayout.Alignment;
@@ -44,13 +41,15 @@ import java.awt.Color;
 
 import javax.swing.JMenu;
 
-import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
+
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class MainWindow extends javax.swing.JFrame {
 
@@ -126,17 +125,32 @@ public class MainWindow extends javax.swing.JFrame {
 		mainSearchPanel = new javax.swing.JPanel();
 		searchStudentLabel = new javax.swing.JLabel();
 		searchScrollPane = new javax.swing.JScrollPane();
-		searchStudentList = new javax.swing.JList();
+		studentSearchList = new javax.swing.JList();
 		searchModel = new DefaultListModel();
 		fillStudentList();
-		searchStudentList = new JList(searchModel);
-		searchStudentList.addMouseListener(new MouseAdapter() {
+		studentSearchList = new JList(searchModel);
+		studentSearchList.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent evt) {
 				clickStudentSearchList(evt);
 			}
 		});
 		searchStudentText = new javax.swing.JTextField();
+		searchStudentText.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent evt) {
+				if (fieldLength > searchStudentText.getText().length()) {
+					studentSearchList.setModel(searchModel);
+					filterList();
+				} else {
+					filterList();
+				}
+			}
+
+			public void keyPressed(KeyEvent evt) {
+				fieldLength = searchStudentText.getText().length();
+			}
+		});
 		searchButton = new javax.swing.JButton();
 		searchButton.addMouseListener(new MouseAdapter() {
 			@Override
@@ -233,40 +247,9 @@ public class MainWindow extends javax.swing.JFrame {
 
 		searchStudentLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 		searchStudentLabel.setText("             Search Student");
-
-		searchStudentList.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-
-		// searchStudentList.setModel(new javax.swing.AbstractListModel() {
-		// public String[] getList() {
-		// DBConnection conn = new DBConnection();
-		// String studentArray[] = null;
-		// try {
-		// ArrayList<String> studenNameSurname = conn
-		// .displayStudentNameSurname();
-		// studentArray = new String[studenNameSurname.size()];
-		// for (int i = 0; i < studentArray.length; i++) {
-		// studentArray[i] = studenNameSurname.get(i);
-		// }
-		//
-		// } catch (Exception e) {
-		// e.printStackTrace();
-		// }
-		// return studentArray;
-		// }
-		// String[] strings = getList();
-		//
-		// public int getSize() {
-		// return strings.length;
-		// }
-		//
-		// public Object getElementAt(int i) {
-		// return strings[i];
-		// }
-		// });
-		searchScrollPane.setViewportView(searchStudentList);
-
+		studentSearchList.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+		searchScrollPane.setViewportView(studentSearchList);
 		searchStudentText.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-
 		searchButton.setBackground(new java.awt.Color(204, 255, 204));
 		searchButton.setText("Q");
 
@@ -1356,6 +1339,46 @@ public class MainWindow extends javax.swing.JFrame {
 		pack();
 	}// </editor-fold>//GEN-END:initComponents
 
+	private void filterList() {
+		ArrayList<String> std = new ArrayList<String>();
+		String[] stdNmaeSurname = new String[studentList.size() * 2];
+		for (int i = 0; i < studentList.size(); i++) {
+			stdNmaeSurname = studentList.get(i).split("\\s+");
+			std.add(stdNmaeSurname[0]);
+			std.add(stdNmaeSurname[1]);
+			stdNmaeSurname = null;
+		}
+		int start = 0;
+		int itemIx = 0;
+		Set resultSet = new HashSet();
+		filteredModel = new DefaultListModel();
+		String prefix = searchStudentText.getText();
+		javax.swing.text.Position.Bias direction = javax.swing.text.Position.Bias.Forward;
+		for (int i = 0; i < studentSearchList.getModel().getSize(); i++) {
+			itemIx = studentSearchList.getNextMatch(prefix, start, direction);
+
+			try {
+				resultSet
+						.add(studentSearchList.getModel().getElementAt(itemIx));
+			} catch (ArrayIndexOutOfBoundsException e) {
+				searchStudentText.setText("");
+				return;
+			}
+
+			start++;
+		}
+
+		Iterator itr = resultSet.iterator();
+
+		// Adding the filtered results to the new model
+		while (itr.hasNext()) {
+			filteredModel.addElement(itr.next());
+		}
+
+		// Setting the model to the list again
+		studentSearchList.setModel(filteredModel);
+	}
+
 	public void fillStudentList() {
 		DBConnection conn = new DBConnection();
 		String studentArray[] = null;
@@ -1386,9 +1409,9 @@ public class MainWindow extends javax.swing.JFrame {
 		Dorm dorm = new Dorm();
 		Room room = new Room();
 		name = new String[2];
-		String selected = searchStudentList.getSelectedValue().toString();
+		String selected = studentSearchList.getSelectedValue().toString();
 		for (int j = 0; j < name.length; j++) {
-			name = searchStudentList.getSelectedValue().toString()
+			name = studentSearchList.getSelectedValue().toString()
 					.split("\\s+");
 		}
 		if (!name[0].equals(null) && !name[1].equals(null)) {
@@ -1453,43 +1476,9 @@ public class MainWindow extends javax.swing.JFrame {
 	}
 
 	private void clickSearchButton(MouseEvent evt) {
-		int pos = 0;
-		if (searchStudentText.getText().isEmpty()) {
-			fillStudentList();
-		}
-		DBConnection conn = new DBConnection();
-		studentList = new ArrayList<String>();
-		try {
-			studentList = conn.displayStudentNameSurname();
-			ArrayList<String> st = new ArrayList<String>();
-			String[] stdAll = new String[studentList.size() * 2];
-			if (searchStudentText.getText().isEmpty()) {
-				searchModel.removeAllElements();
-				fillStudentList();
-			} else {
-				String seachText = searchStudentText.getText();
-				for (int i = 0; i < studentList.size(); i++) {
-					stdAll = studentList.get(i).split("\\s+");
-					st.add(stdAll[0]);
-					st.add(stdAll[1]);
-					stdAll = null;
-				}
-				if (st.contains(seachText)) {
-					searchModel.removeAllElements();
-					int position = st.indexOf(seachText);
-					pos = position / 2;
-					searchModel.addElement(studentList.get(pos));
-
-					// searchModel.addElement(seachText);
-				} else if (studentList.contains(seachText)) {
-					searchModel.removeAllElements();
-					searchModel.addElement(seachText);
-				}
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		searchModel.clear();
+		fillStudentList();
+		
 	}
 
 	private void clickEditButton(ActionEvent evt) {
@@ -1524,7 +1513,8 @@ public class MainWindow extends javax.swing.JFrame {
 						"Basarili olmadi");
 			}
 		else {
-			System.out.println("S** var");
+			JOptionPane.showMessageDialog(getContentPane(),
+					"Basarili olmadi");
 		}
 		setEditableFalse();
 
@@ -1648,8 +1638,8 @@ public class MainWindow extends javax.swing.JFrame {
 		schUniNameText.setEditable(true);
 		schDeptNameText.setEditable(true);
 		schGradeText.setEditable(true);
-		//accDormCBox.setEnabled(true);
-		//accRoomCBox.setEnabled(true);
+		// accDormCBox.setEnabled(true);
+		// accRoomCBox.setEnabled(true);
 		accStartDateText.setEditable(true);
 		accEndDateText.setEditable(true);
 		cboxType.setEditable(true);
@@ -1666,7 +1656,7 @@ public class MainWindow extends javax.swing.JFrame {
 	private javax.swing.ButtonGroup buttonGroup2;
 	private javax.swing.JButton searchButton;
 	private javax.swing.JComboBox stdGenderCBox;
-	private javax.swing.JList searchStudentList;
+	private javax.swing.JList studentSearchList;
 	private javax.swing.JMenu homeMenu;
 	private javax.swing.JMenu dormMenu;
 	private javax.swing.JMenu jMenu3;
@@ -1739,8 +1729,10 @@ public class MainWindow extends javax.swing.JFrame {
 	private javax.swing.JLabel personalInfoGenderLabel;
 	private JTextField stdBirthdayText;
 	private ArrayList<String> studentList;
-	private DefaultListModel searchModel;
+	private DefaultListModel searchModel = null;
 	private JComboBox cboxType;
 	private String[] name;
 	private SearchAllWindow searchAllWindow;
+	private DefaultListModel filteredModel = null;
+	private int fieldLength = 0;
 }

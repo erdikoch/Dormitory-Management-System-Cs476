@@ -25,7 +25,7 @@ public class LostItemView extends javax.swing.JFrame {
 		table.setBounds(10, 32, 603, 346);
 		getContentPane().add(table);
 		
-		final AddLostItemWindow addLostItemWindow = new AddLostItemWindow();
+		final LostItemWindow addLostItemWindow = new LostItemWindow();
 		final RemoveLostItemWindow removeLostItemWindow = new RemoveLostItemWindow();
 		
 		JMenuBar lostItemsMenuBar = new JMenuBar();

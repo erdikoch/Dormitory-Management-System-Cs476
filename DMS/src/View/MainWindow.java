@@ -1275,13 +1275,13 @@ public class MainWindow extends javax.swing.JFrame {
 		otherMenu.setText("Other");
 		menuBar.add(otherMenu);
 
-		lostItemsMenuItem = new JMenuItem("Lost Items");
-		lostItemsMenuItem.addActionListener(new ActionListener() {
+		lostItems = new JMenuItem("Lost Items");
+		lostItems.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				new AddLostItemWindow().setVisible(true);
+				new LostItemWindow().setVisible(true);
 			}
 		});
-		otherMenu.add(lostItemsMenuItem);
+		otherMenu.add(lostItems);
 
 		addRoomMenuItem = new JMenuItem("Show Capacity of Dorms");
 		addRoomMenuItem.addActionListener(new ActionListener() {
@@ -1293,6 +1293,14 @@ public class MainWindow extends javax.swing.JFrame {
 
 			}
 		});
+		
+		damagedItems = new JMenuItem("Damaged Items");
+		damagedItems.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				new DamagedItemWindow().setVisible(true);
+			}
+		});
+		otherMenu.add(damagedItems);
 		otherMenu.add(addRoomMenuItem);
 
 		setJMenuBar(menuBar);
@@ -1340,14 +1348,8 @@ public class MainWindow extends javax.swing.JFrame {
 	}// </editor-fold>//GEN-END:initComponents
 
 	private void filterList() {
-		ArrayList<String> std = new ArrayList<String>();
-		String[] stdNmaeSurname = new String[studentList.size() * 2];
-		for (int i = 0; i < studentList.size(); i++) {
-			stdNmaeSurname = studentList.get(i).split("\\s+");
-			std.add(stdNmaeSurname[0]);
-			std.add(stdNmaeSurname[1]);
-			stdNmaeSurname = null;
-		}
+		System.out.println(studentSearchList.getModel());
+		
 		int start = 0;
 		int itemIx = 0;
 		Set resultSet = new HashSet();
@@ -1364,18 +1366,12 @@ public class MainWindow extends javax.swing.JFrame {
 				searchStudentText.setText("");
 				return;
 			}
-
 			start++;
 		}
-
 		Iterator itr = resultSet.iterator();
-
-		// Adding the filtered results to the new model
 		while (itr.hasNext()) {
 			filteredModel.addElement(itr.next());
 		}
-
-		// Setting the model to the list again
 		studentSearchList.setModel(filteredModel);
 	}
 
@@ -1696,7 +1692,7 @@ public class MainWindow extends javax.swing.JFrame {
 	private JMenuItem viewDormMenuItem;
 	private JMenu searchMenu;
 	private JMenuItem searchAllMenuItem;
-	private JMenuItem lostItemsMenuItem;
+	private JMenuItem lostItems;
 	private javax.swing.JPanel mainSearchPanel;
 	private javax.swing.JPanel mainPanePanel;
 	private javax.swing.JPanel mainPaneSubPanel;
@@ -1735,4 +1731,5 @@ public class MainWindow extends javax.swing.JFrame {
 	private SearchAllWindow searchAllWindow;
 	private DefaultListModel filteredModel = null;
 	private int fieldLength = 0;
+	private JMenuItem damagedItems;
 }

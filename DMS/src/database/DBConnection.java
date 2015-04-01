@@ -41,9 +41,24 @@ public class DBConnection {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		String url = "jdbc:sqlserver://192.168.113.1:1433;instance=MSSQLSERVER;DatabaseName=DormManagement";
-		con = DriverManager.getConnection(url, "sa", "cenkerdi752");
+		String url = "jdbc:sqlserver://192.168.230.1:1433;instance=MSSQLSERVER;DatabaseName=DormManagement";
+		con = DriverManager.getConnection(url, "sa", "123456");
 		return con;
+	}
+
+	public int getDormCapacity(Dorm dorm) throws SQLException {
+		int capacity = 0;
+		connect();
+		proc_stmt = con.prepareCall("{ call Get_DormCapacity(?) }");
+
+		proc_stmt.setString(1, dorm.getDormName());
+
+		rs = proc_stmt.executeQuery();
+		while (rs.next()) {
+			capacity = rs.getInt(1);
+		}
+
+		return capacity;
 	}
 
 	public boolean insertRoomType(Room room) {
@@ -203,10 +218,10 @@ public class DBConnection {
 
 	public boolean updateStudent(Student std, EmergencyContact emg, Dorm dorm,
 			Room room, Hostel host, School sch, String Name, String Surname) {
-		
+
 		try {
 			connect();
-			
+
 			proc_stmt = con
 					.prepareCall("{ call Update_StudentPersonalInfo(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) }");
 			proc_stmt.setString(1, std.getName());
@@ -229,7 +244,7 @@ public class DBConnection {
 			proc_stmt.setString(18, dorm.getDormName());
 			proc_stmt.setInt(19, room.getTypeName());
 			proc_stmt.setInt(20, room.getRoomNo());
-			
+
 			proc_stmt.executeUpdate();
 			return true;
 

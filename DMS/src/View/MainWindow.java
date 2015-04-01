@@ -1648,8 +1648,8 @@ public class MainWindow extends javax.swing.JFrame {
 		schUniNameText.setEditable(true);
 		schDeptNameText.setEditable(true);
 		schGradeText.setEditable(true);
-		accDormCBox.setEnabled(true);
-		accRoomCBox.setEnabled(true);
+		//accDormCBox.setEnabled(true);
+		//accRoomCBox.setEnabled(true);
 		accStartDateText.setEditable(true);
 		accEndDateText.setEditable(true);
 		cboxType.setEditable(true);

@@ -1,53 +1,19 @@
 package view;
 
-import javax.swing.DefaultListModel;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.GroupLayout;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.ListModel;
-
+import java.awt.Button;
 import java.awt.Font;
-import java.util.ArrayList;
-import java.util.Calendar;
-
-import javax.swing.JList;
-import javax.swing.JScrollPane;
-
-import database.DBConnection;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
-import javax.swing.JPanel;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.JTabbedPane;
-
-import java.awt.Color;
-
-import javax.swing.border.BevelBorder;
-import javax.swing.border.EtchedBorder;
-import javax.swing.border.MatteBorder;
-import javax.swing.border.LineBorder;
-import javax.swing.border.SoftBevelBorder;
-import javax.swing.border.TitledBorder;
-import javax.swing.UIManager;
-
-// import org.jdatepicker.impl.UtilDateModel;
-
-import com.toedter.calendar.JCalendar;
-
-import java.awt.Button;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+// import org.jdatepicker.impl.UtilDateModel;
 
 public class SearchAllWindow extends javax.swing.JFrame {
 	private JTable searchTable;
-	private JTextField startDateTextField;
 	private JTextField endDateTextField;
 	private Button enterButton;
+	private JTextField startDateLabel;
 
 	/**
 	 * Creates new form DormWindow
@@ -55,9 +21,10 @@ public class SearchAllWindow extends javax.swing.JFrame {
 	public SearchAllWindow() {
 		setTitle("Search");
 		getContentPane().setLayout(null);
+		setBounds(0,0,525,368);
 		
 		Button endDateButton = new Button("End Date");
-		endDateButton.setBounds(191, 10, 70, 22);
+		endDateButton.setBounds(202, 10, 70, 22);
 		getContentPane().add(endDateButton);
 		
 		Button startDateButton = new Button("Start Date");
@@ -69,13 +36,8 @@ public class SearchAllWindow extends javax.swing.JFrame {
 		searchTable.setBounds(10, 52, 462, 237);
 		getContentPane().add(searchTable);
 		
-		startDateTextField = new JTextField();
-		startDateTextField.setBounds(86, 10, 86, 20);
-		getContentPane().add(startDateTextField);
-		startDateTextField.setColumns(10);
-		
 		endDateTextField = new JTextField();
-		endDateTextField.setBounds(267, 10, 86, 20);
+		endDateTextField.setBounds(278, 10, 108, 22);
 		getContentPane().add(endDateTextField);
 		endDateTextField.setColumns(10);
 		
@@ -88,21 +50,32 @@ public class SearchAllWindow extends javax.swing.JFrame {
 		enterButton.setBounds(392, 10, 80, 22);
 		getContentPane().add(enterButton);
 		
+		startDateLabel = new JTextField();
+		startDateLabel.setColumns(10);
+		startDateLabel.setBounds(86, 10, 110, 22);
+		getContentPane().add(startDateLabel);
+		
 		startDateButton.addActionListener(new ActionListener() {
-			StartDatePopup startDatePopup = new StartDatePopup();
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
-				startDatePopup.setVisible(true);
+				StartDatePopUpView startdate = new StartDatePopUpView();
+				startdate.setVisible(true);
+				startDateLabel.setText(startdate.getCalendar());
+				
+				
+				
 			}
 		});
 		
 		endDateButton.addActionListener(new ActionListener() {
-			EndDatePopup endDatePopup = new EndDatePopup();
+			EndDatePopUpView endDatePopup = new EndDatePopUpView();
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
-				endDatePopup.setVisible(true);
+				EndDatePopUpView endDate = new EndDatePopUpView();
+				endDate.setVisible(true);
+				endDateTextField.setText(endDate.getCalendar());
+				
+				
 			}
 		});
 		

@@ -14,29 +14,29 @@ public class AddLostItemWindow extends javax.swing.JFrame {
 	public AddLostItemWindow() {
 		setResizable(false);
 		getContentPane().setLayout(null);
-		setBounds(0,0,248,159);
+		setBounds(0,0,278,176);
 		JLabel lostItemIDLabel = new JLabel("Item ID:");
 		lostItemIDLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lostItemIDLabel.setBounds(10, 31, 66, 14);
 		getContentPane().add(lostItemIDLabel);
 		
 		JButton lostItemAddButton = new JButton("Add");
-		lostItemAddButton.setBounds(136, 92, 89, 23);
+		lostItemAddButton.setBounds(157, 100, 89, 23);
 		getContentPane().add(lostItemAddButton);
 		
 		lostItemIDTextField = new JTextField();
-		lostItemIDTextField.setBounds(96, 28, 86, 20);
+		lostItemIDTextField.setBounds(86, 27, 89, 23);
 		getContentPane().add(lostItemIDTextField);
 		lostItemIDTextField.setColumns(10);
 		
 		lostItemNameTextField = new JTextField();
-		lostItemNameTextField.setBounds(96, 61, 86, 20);
+		lostItemNameTextField.setBounds(86, 66, 89, 23);
 		getContentPane().add(lostItemNameTextField);
 		lostItemNameTextField.setColumns(10);
 		
 		JLabel lostItemNameLabel = new JLabel("Item Name:");
 		lostItemNameLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lostItemNameLabel.setBounds(10, 64, 66, 14);
+		lostItemNameLabel.setBounds(10, 70, 66, 14);
 		getContentPane().add(lostItemNameLabel);
 		
 		

@@ -48,9 +48,9 @@ import org.jfree.ui.ApplicationFrame;
 	    private CategoryDataset createDataset() {
 	        
 	        // row keys...
-	        final String series1 = "First";
-	        final String series2 = "Second";
-	        final String series3 = "Third";
+	        final String series1 = "Male";
+	        final String series2 = "Female";
+	        final String series3 = "Empty Spaces";
 
 	        // column keys...
 	        final String category1 = "Dorm 1";

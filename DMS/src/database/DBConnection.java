@@ -41,8 +41,8 @@ public class DBConnection {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		String url = "jdbc:sqlserver://192.168.230.1:1433;instance=MSSQLSERVER;DatabaseName=DormManagement";
-		con = DriverManager.getConnection(url, "sa", "123456");
+		String url = "jdbc:sqlserver://192.168.113.1:1433;instance=MSSQLSERVER;DatabaseName=DormManagement";
+		con = DriverManager.getConnection(url, "sa", "cenkerdi752");
 		return con;
 	}
 

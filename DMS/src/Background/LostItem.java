@@ -9,43 +9,43 @@ public class LostItem {
 	private String note;
 	private String dormName;
 	
-	public String getLostItemName() {
+	public String getLostName() {
 		return lostItemName;
 	}
 
-	public void setLostItemName(String lostItemName) {
+	public void setLostName(String lostItemName) {
 		this.lostItemName = lostItemName;
 	}
 	
-	public String getNote() {
+	public String getLostNote() {
 		return note;
 	}
 
-	public void setNote(String note) {
+	public void setLostNote(String note) {
 		this.note = note;
 	}
 	
-	public Date getLostItemDate() {
+	public Date getLostDate() {
 		return entryDate;
 	}
 
-	public void setLostItemDate(Date entryDate) {
+	public void setLostDate(Date entryDate) {
 		this.entryDate = entryDate;
 	}
 	
-	public String getStatus() {
+	public String getLostStatus() {
 		return status;
 	}
 	
-	public void setStatus(String status) {
+	public void setLostStatus(String status) {
 		this.status = status;
 	}
 
-	public String getDorm() {
+	public String getLostDorm() {
 		return dormName;
 	}
 
-	public void setDorm(String dormName) {
+	public void setLostDorm(String dormName) {
 		this.dormName = dormName;
 	}
 	

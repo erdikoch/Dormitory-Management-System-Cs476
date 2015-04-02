@@ -11,29 +11,29 @@ public class TestLostItem {
 	@Test
 	public void testLostItemName() {
 		LostItem item = new LostItem();
-		item.setLostItemName("IPhone");;
-		assertEquals("IPhone", item.getLostItemName());
+		item.setLostName("IPhone");;
+		assertEquals("IPhone", item.getLostName());
 	}
 	
 	@Test
 	public void testLostItemNameWithTwoWords() {
 		LostItem item = new LostItem();
-		item.setLostItemName("IPhone Charge");
-		assertEquals("IPhone Charge", item.getLostItemName());
+		item.setLostName("IPhone Charge");
+		assertEquals("IPhone Charge", item.getLostName());
 	}
 	
 	@Test
 	public void testEmptyLostItemName() {
 		LostItem item = new LostItem();
-		item.setLostItemName("");
-		assertEquals("", item.getLostItemName());
+		item.setLostName("");
+		assertEquals("", item.getLostName());
 	}
 	
 	@Test
 	public void testBlankLostItemName() {
 		LostItem item = new LostItem();
-		item.setLostItemName(" ");
-		assertEquals(" ", item.getLostItemName());
+		item.setLostName(" ");
+		assertEquals(" ", item.getLostName());
 	}
 	
 //	@Test

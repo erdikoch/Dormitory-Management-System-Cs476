@@ -34,7 +34,7 @@ public class LostItemWindow extends javax.swing.JFrame {
 	private JRadioButton inProgressButton, closeButton;
 	private JTextArea noteTextArea;
 	private JComboBox cBoxDorm;
-	private boolean isDormCliked = false;
+	private boolean isDormSelected = false;
 	private DBConnection conn = new DBConnection();
 
 	public LostItemWindow() {
@@ -44,7 +44,7 @@ public class LostItemWindow extends javax.swing.JFrame {
 	private void initComponents() {
 		setResizable(false);
 		getContentPane().setLayout(null);
-		setBounds(0, 0, 299, 324);
+		setBounds(0, 0, 299, 308);
 
 		JButton lostItemAddButton = new JButton("Add");
 		lostItemAddButton.addActionListener(new ActionListener() {
@@ -52,7 +52,7 @@ public class LostItemWindow extends javax.swing.JFrame {
 				clickAddButton(evt);
 			}
 		});
-		lostItemAddButton.setBounds(180, 261, 89, 23);
+		lostItemAddButton.setBounds(180, 243, 89, 23);
 		getContentPane().add(lostItemAddButton);
 
 		lostItemTextField = new JTextField();
@@ -61,7 +61,7 @@ public class LostItemWindow extends javax.swing.JFrame {
 		lostItemTextField.setColumns(10);
 
 		entryDateTextField = new JTextField();
-		entryDateTextField.setBounds(98, 139, 136, 29);
+		entryDateTextField.setBounds(98, 133, 136, 29);
 		getContentPane().add(entryDateTextField);
 		entryDateTextField.setColumns(10);
 
@@ -77,11 +77,11 @@ public class LostItemWindow extends javax.swing.JFrame {
 
 		inProgressButton = new JRadioButton("In progress");
 		inProgressButton.setSelected(true);
-		inProgressButton.setBounds(99, 231, 89, 23);
+		inProgressButton.setBounds(98, 213, 89, 23);
 		getContentPane().add(inProgressButton);
 
 		closeButton = new JRadioButton("Close");
-		closeButton.setBounds(189, 231, 80, 23);
+		closeButton.setBounds(189, 213, 80, 23);
 		closeButton.setEnabled(false);
 		getContentPane().add(closeButton);
 		radioButtonGroup = new ButtonGroup();
@@ -90,7 +90,7 @@ public class LostItemWindow extends javax.swing.JFrame {
 
 		JLabel lblStatus = new JLabel("Status:");
 		lblStatus.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblStatus.setBounds(10, 240, 46, 14);
+		lblStatus.setBounds(10, 216, 46, 14);
 		getContentPane().add(lblStatus);
 
 		JLabel lblNewLabel = new JLabel("Note:");
@@ -99,27 +99,28 @@ public class LostItemWindow extends javax.swing.JFrame {
 		getContentPane().add(lblNewLabel);
 
 		noteTextArea = new JTextArea();
-		noteTextArea.setBounds(98, 68, 136, 62);
+		noteTextArea.setBounds(98, 68, 136, 51);
 		getContentPane().add(noteTextArea);
 
 		cBoxDorm = new JComboBox();
-		cBoxDorm.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent evt) {
-				clickDormCBox(evt);
+		cBoxDorm.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				actionCBoxDorm(evt);
 			}
 
-			private void clickDormCBox(MouseEvent evt) {
-				isDormCliked = true;
+			private void actionCBoxDorm(ActionEvent evt) {
+				isDormSelected = true;
+
 			}
 		});
+
 		fillCBoxDorm();
-		cBoxDorm.setBounds(100, 189, 134, 29);
+		cBoxDorm.setBounds(98, 173, 136, 29);
 		getContentPane().add(cBoxDorm);
 
 		JLabel lblDorm = new JLabel("Dorm:");
 		lblDorm.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblDorm.setBounds(10, 194, 46, 14);
+		lblDorm.setBounds(10, 179, 46, 14);
 		getContentPane().add(lblDorm);
 	}
 
@@ -129,17 +130,17 @@ public class LostItemWindow extends javax.swing.JFrame {
 
 			if (entryDateTextField.getText().isEmpty()
 					|| lostItemTextField.getText().isEmpty()
-					|| noteTextArea.getText().isEmpty()) {
+					|| noteTextArea.getText().isEmpty() || !isDormSelected) {
 				JOptionPane.showMessageDialog(getContentPane(),
-						"Please enter empty fields");
+						"Please fill the empty fields");
 			} else {
-				item.setLostItemName(lostItemTextField.getText());
-				item.setNote(noteTextArea.getText());
+				item.setLostName(lostItemTextField.getText());
+				item.setLostNote(noteTextArea.getText());
 				Date entryDate = convertStringToDatetime(entryDateTextField
 						.getText());
-				item.setLostItemDate(entryDate);
-				item.setStatus(inProgressButton.getText());
-				item.setDorm(cBoxDorm.getSelectedItem().toString());
+				item.setLostDate(entryDate);
+				item.setLostStatus(inProgressButton.getText());
+				item.setLostDorm(cBoxDorm.getSelectedItem().toString());
 				if (conn.insertLostItem(item)) {
 					JOptionPane.showMessageDialog(getContentPane(),
 							"Registration is completed");
@@ -166,7 +167,6 @@ public class LostItemWindow extends javax.swing.JFrame {
 	}
 
 	private void fillCBoxDorm() {
-		DBConnection conn = new DBConnection();
 		ArrayList<String> dormList = null;
 		try {
 			dormList = conn.displayDorm();

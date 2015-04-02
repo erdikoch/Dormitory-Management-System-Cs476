@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 import view.DormListWindow;
 import view.DormWindow;
+import background.DamagedItem;
 import background.Dorm;
 import background.EmergencyContact;
 import background.Hostel;
@@ -153,17 +154,34 @@ public class DBConnection {
 	public boolean insertLostItem(LostItem item) {
 		try {
 			proc_stmt = connect().prepareCall("{ call Insert_LostItem(?,?,?,?,?) }");
-			proc_stmt.setString(1, item.getLostItemName());
-			proc_stmt.setString(2, item.getNote());
-			proc_stmt.setDate(3, (Date) item.getLostItemDate());
-			proc_stmt.setString(4, item.getStatus());
-			proc_stmt.setString(5, item.getDorm());
+			proc_stmt.setString(1, item.getLostName());
+			proc_stmt.setString(2, item.getLostNote());
+			proc_stmt.setDate(3, (Date) item.getLostDate());
+			proc_stmt.setString(4, item.getLostStatus());
+			proc_stmt.setString(5, item.getLostDorm());
 			proc_stmt.executeUpdate();
 			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return false;
 		}
+	}
+	
+	public boolean insertDamagedItem(DamagedItem item) {
+		try {
+			proc_stmt = connect().prepareCall("{ call Insert_DamagedItem(?,?,?,?,?) }");
+			proc_stmt.setString(1, item.getDamagedName());
+			proc_stmt.setString(2, item.getDamagedNote());
+			proc_stmt.setDate(3, (Date) item.getDamagedDate());
+			proc_stmt.setString(4, item.getDamagedStatus());
+			proc_stmt.setString(5, item.getDamagedDorm());
+			proc_stmt.executeUpdate();
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		
 	}
 
 	public ArrayList<String> displayStudentNameSurname() throws SQLException {

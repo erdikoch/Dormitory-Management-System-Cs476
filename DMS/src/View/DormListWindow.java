@@ -196,8 +196,8 @@ public class DormListWindow extends javax.swing.JFrame {
 
 		pack();
 	}// </editor-fold>//GEN-END:initComponents
-	
-    // Belki bunu kullanýrým, silmedim o yüzden -Nazli (silmeyin)
+
+	// Belki bunu kullanýrým, silmedim o yüzden -Nazli (silmeyin)
 	private void moveMouseOnList(MouseEvent evt) {
 		String info = null;
 		DBConnection conn = new DBConnection();
@@ -243,9 +243,15 @@ public class DormListWindow extends javax.swing.JFrame {
 		try {
 			ArrayList<Integer> studentsinRooms = conn.retrieveStudentsinRooms(
 					selectedDorm, roomNo);
-			for (int i = 0; i < studentsinRooms.size(); i++) {
-				info += studentsinRooms.get(i) + ", ";
+			if (studentsinRooms.size() > 1) {
+				for (int i = 0; i < studentsinRooms.size() - 1; i++) {
+					info += studentsinRooms.get(i) + ", ";
+				}
+				info += studentsinRooms.get(studentsinRooms.size() - 1);
+			} else if (studentsinRooms.size() == 1) {
+				info += studentsinRooms.get(0);
 			}
+
 			if (evt.getClickCount() == 1) {
 				if (studentsinRooms.isEmpty()) {
 					roomList.setToolTipText("No student enrolled in this room");

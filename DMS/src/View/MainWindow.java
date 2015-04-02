@@ -1301,6 +1301,14 @@ public class MainWindow extends javax.swing.JFrame {
 			}
 		});
 		otherMenu.add(damagedItems);
+		
+		viewItemListMenu = new JMenuItem("View Item List");
+		viewItemListMenu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				new ItemsListWindow().setVisible(true);
+			}
+		});
+		otherMenu.add(viewItemListMenu);
 		otherMenu.add(addRoomMenuItem);
 
 		setJMenuBar(menuBar);
@@ -1732,4 +1740,5 @@ public class MainWindow extends javax.swing.JFrame {
 	private DefaultListModel filteredModel = null;
 	private int fieldLength = 0;
 	private JMenuItem damagedItems;
+	private JMenuItem viewItemListMenu;
 }

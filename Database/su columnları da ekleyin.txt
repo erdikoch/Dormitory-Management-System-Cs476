@@ -3,3 +3,6 @@ ADD Note nvarchar(200) not null
 
 ALTER TABLE DamagedItem
 ADD ItemName nvarchar(50) not null
+
+
+Damaged item daki room_id foreign key ini de silin yoksa hata verir

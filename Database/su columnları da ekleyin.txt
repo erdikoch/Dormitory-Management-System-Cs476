@@ -1,0 +1,5 @@
+ALTER TABLE LostItem 
+ADD Note nvarchar(200) not null
+
+ALTER TABLE DamagedItem
+ADD ItemName nvarchar(50) not null

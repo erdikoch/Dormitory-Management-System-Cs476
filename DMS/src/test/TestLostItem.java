@@ -36,24 +36,24 @@ public class TestLostItem {
 		assertEquals(" ", item.getLostItemName());
 	}
 	
-	@Test
-	public void testLostItemID() {
-		LostItem item = new LostItem();
-		item.setLostItemID(123456789);
-		assertEquals(123456789, item.getLostItemID());
-	}
-	
-	@Test
-	public void testZeroLostItemID() {
-		LostItem item = new LostItem();
-		item.setLostItemID(000000000);
-		assertEquals(000000000, item.getLostItemID());
-	}
-	
-	@Test
-	public void testMinusLostItemID() {
-		LostItem item = new LostItem();
-		item.setLostItemID(-111111111);
-		assertEquals(-111111111, item.getLostItemID());
-	}
+//	@Test
+//	public void testLostItemID() {
+//		LostItem item = new LostItem();
+//		item.setLostItemID(123456789);
+//		assertEquals(123456789, item.getLostItemID());
+//	}
+//	
+//	@Test
+//	public void testZeroLostItemID() {
+//		LostItem item = new LostItem();
+//		item.setLostItemID(000000000);
+//		assertEquals(000000000, item.getLostItemID());
+//	}
+//	
+//	@Test
+//	public void testMinusLostItemID() {
+//		LostItem item = new LostItem();
+//		item.setLostItemID(-111111111);
+//		assertEquals(-111111111, item.getLostItemID());
+//	}
 }

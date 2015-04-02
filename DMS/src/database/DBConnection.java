@@ -16,6 +16,7 @@ import view.DormWindow;
 import background.Dorm;
 import background.EmergencyContact;
 import background.Hostel;
+import background.LostItem;
 import background.Room;
 import background.School;
 import background.Student;
@@ -41,7 +42,7 @@ public class DBConnection {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		String url = "jdbc:sqlserver://192.168.230.1:1433;instance=MSSQLSERVER;DatabaseName=DormManagement";
+		String url = "jdbc:sqlserver://192.168.234.1:1433;instance=MSSQLSERVER;DatabaseName=DormManagement";
 		con = DriverManager.getConnection(url, "sa", "123456");
 		return con;
 	}
@@ -147,7 +148,22 @@ public class DBConnection {
 			e.printStackTrace();
 			return false;
 		}
-
+	}
+	
+	public boolean insertLostItem(LostItem item) {
+		try {
+			proc_stmt = connect().prepareCall("{ call Insert_LostItem(?,?,?,?,?) }");
+			proc_stmt.setString(1, item.getLostItemName());
+			proc_stmt.setString(2, item.getNote());
+			proc_stmt.setDate(3, (Date) item.getLostItemDate());
+			proc_stmt.setString(4, item.getStatus());
+			proc_stmt.setString(5, item.getDorm());
+			proc_stmt.executeUpdate();
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 
 	public ArrayList<String> displayStudentNameSurname() throws SQLException {

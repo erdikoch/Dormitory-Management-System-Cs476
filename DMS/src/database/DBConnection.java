@@ -31,6 +31,9 @@ public class DBConnection {
 	private ArrayList dorms, roomNoList, studentsInRooms;
 	private DormListWindow dormListW;
 	private ArrayList<String> student;
+	ArrayList<String> lostName = null, lostStatus = null, damagedName = null,
+			damagedStatus = null;
+	ArrayList<Integer> lostId = null, damagedId = null;
 
 	public DBConnection() {
 
@@ -150,10 +153,11 @@ public class DBConnection {
 			return false;
 		}
 	}
-	
+
 	public boolean insertLostItem(LostItem item) {
 		try {
-			proc_stmt = connect().prepareCall("{ call Insert_LostItem(?,?,?,?,?) }");
+			proc_stmt = connect().prepareCall(
+					"{ call Insert_LostItem(?,?,?,?,?) }");
 			proc_stmt.setString(1, item.getLostName());
 			proc_stmt.setString(2, item.getLostNote());
 			proc_stmt.setDate(3, (Date) item.getLostDate());
@@ -166,10 +170,11 @@ public class DBConnection {
 			return false;
 		}
 	}
-	
+
 	public boolean insertDamagedItem(DamagedItem item) {
 		try {
-			proc_stmt = connect().prepareCall("{ call Insert_DamagedItem(?,?,?,?,?) }");
+			proc_stmt = connect().prepareCall(
+					"{ call Insert_DamagedItem(?,?,?,?,?) }");
 			proc_stmt.setString(1, item.getDamagedName());
 			proc_stmt.setString(2, item.getDamagedNote());
 			proc_stmt.setDate(3, (Date) item.getDamagedDate());
@@ -181,7 +186,7 @@ public class DBConnection {
 			e.printStackTrace();
 			return false;
 		}
-		
+
 	}
 
 	public ArrayList<String> displayStudentNameSurname() throws SQLException {
@@ -464,6 +469,42 @@ public class DBConnection {
 		return room;
 	}
 
+	public void retrieveLostItems() {
+		lostId = new ArrayList<Integer>();
+		lostName = new ArrayList<String>();
+		lostStatus = new ArrayList<String>();
+		try {
+			proc_stmt = connect().prepareCall("{ call Get_LostItems() }");
+			rs = proc_stmt.executeQuery();
+			while (rs.next()) {
+				lostId.add(rs.getInt("LostItem_ID"));
+				lostName.add(rs.getString("ItemName"));
+				lostStatus.add(rs.getString("Status"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public void retrieveDamagedItems() {
+		damagedId = new ArrayList<Integer>();
+		damagedName = new ArrayList<String>();
+		damagedStatus = new ArrayList<String>();
+		try {
+			proc_stmt = connect().prepareCall("{ call Get_DamagedItems() }");
+			rs = proc_stmt.executeQuery();
+			while (rs.next()) {
+				damagedId.add(rs.getInt("DamagedItem_ID"));
+				damagedName.add(rs.getString("ItemName"));
+				damagedStatus.add(rs.getString("Status"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 	public static void closeStatement(Statement statement) {
 		// TODO Auto-generated method stub
 
@@ -485,5 +526,31 @@ public class DBConnection {
 	public ArrayList<String> getStudent() {
 		return student;
 	}
+
+	public ArrayList<String> getLostName() {
+		return lostName;
+	}
+
+	public ArrayList<String> getLostStatus() {
+		return lostStatus;
+	}
+
+	public ArrayList<Integer> getLostId() {
+		return lostId;
+	}
+
+	public ArrayList<String> getDamagedName() {
+		return damagedName;
+	}
+
+	public ArrayList<String> getDamagedStatus() {
+		return damagedStatus;
+	}
+
+	public ArrayList<Integer> getDamagedId() {
+		return damagedId;
+	}
+	
+	
 
 }

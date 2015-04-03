@@ -36,6 +36,10 @@ public class DamagedItemWindow extends javax.swing.JFrame {
 	private DBConnection conn = new DBConnection();
 
 	public DamagedItemWindow() {
+		initComponents();
+	}
+
+	private void initComponents() {
 		setResizable(false);
 		getContentPane().setLayout(null);
 		setBounds(0, 0, 298, 317);
@@ -142,7 +146,8 @@ public class DamagedItemWindow extends javax.swing.JFrame {
 						.getText()));
 				item.setDamagedNote(noteTextArea.getText());
 				item.setDamagedDorm(cBoxDorm.getSelectedItem().toString());
-				item.setDamagedStatus(inProgressButton.getText());
+				item.setDamagedStatus(inProgressButton.getText().toString());
+
 				if (conn.insertDamagedItem(item)) {
 					JOptionPane.showMessageDialog(getContentPane(),
 							"Registration is completed");

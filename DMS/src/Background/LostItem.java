@@ -8,7 +8,17 @@ public class LostItem {
 	private String status;
 	private String note;
 	private String dormName;
+	private int lostID;
 	
+	
+	public int getLostID() {
+		return lostID;
+	}
+
+	public void setLostID(int lostID) {
+		this.lostID = lostID;
+	}
+
 	public String getLostName() {
 		return lostItemName;
 	}

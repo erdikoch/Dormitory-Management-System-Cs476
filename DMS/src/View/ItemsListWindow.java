@@ -7,6 +7,8 @@ import java.awt.Color;
 import javax.swing.JLabel;
 
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JScrollPane;
 import javax.swing.border.TitledBorder;
@@ -14,11 +16,15 @@ import javax.swing.JList;
 import javax.swing.border.EtchedBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JPopupMenu;
 import javax.swing.UIManager;
 import javax.swing.JTable;
 
 import database.DBConnection;
 import background.LostItem;
+
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.BevelBorder;
 
@@ -26,6 +32,7 @@ public class ItemsListWindow extends javax.swing.JFrame {
 	private JTable lostItemTable;
 	private DBConnection conn = new DBConnection();
 	private JTable damagedItemTable;
+	
 
 	// private Object[][] lostTableData = new Object[8][8];
 
@@ -45,6 +52,19 @@ public class ItemsListWindow extends javax.swing.JFrame {
 		String[] lostItemColumns = { "ItemNo", "Item", "Status" };
 		fillLostTable();
 		lostItemTable = new JTable();
+		final JPopupMenu popupMenu = new JPopupMenu();
+		
+		 JMenuItem deleteItem = new JMenuItem("Close");
+	        deleteItem.addActionListener(new ActionListener() {
+
+	            @Override
+	            public void actionPerformed(ActionEvent e) {
+	               RemoveLostItemWindow r = new RemoveLostItemWindow();
+	               r.setVisible(true);
+	            }
+	        });
+	        popupMenu.add(deleteItem);
+	        lostItemTable.setComponentPopupMenu(popupMenu);
 		lostItemTable.setModel(new javax.swing.table.DefaultTableModel(
 				new Object[][] { {}, {}, {}, {} }, new String[] {
 				}));

@@ -240,6 +240,7 @@ public class RoomWindow extends javax.swing.JFrame {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
 	}
 
 	private void displayRoomTypeAction(ActionEvent evt) {

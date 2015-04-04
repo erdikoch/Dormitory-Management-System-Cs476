@@ -121,6 +121,11 @@ public class StudentWindow extends javax.swing.JFrame {
 			}
 
 			private void displayRoomNoMouseClicked(MouseEvent e) {
+				displayRoomNo();
+
+			}
+
+			private void displayRoomNo() {
 				DBConnection conn = new DBConnection();
 				Dorm dorm = new Dorm();
 
@@ -145,7 +150,6 @@ public class StudentWindow extends javax.swing.JFrame {
 
 					ev.printStackTrace();
 				}
-
 			}
 		});
 		accoInfoStartDateLabel = new javax.swing.JLabel();

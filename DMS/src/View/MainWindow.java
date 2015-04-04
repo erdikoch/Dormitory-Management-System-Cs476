@@ -10,6 +10,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+
 import org.jfree.ui.RefineryUtilities;
 
 import background.Dorm;
@@ -199,6 +200,13 @@ public class MainWindow extends javax.swing.JFrame {
 		accoInfoRoomLabel = new javax.swing.JLabel();
 		accDormCBox = new javax.swing.JComboBox();
 		accRoomCBox = new javax.swing.JComboBox();
+		accRoomCBox.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent me) {
+				getRoomMoClicked(me);
+			}
+
+		});
 		accoInfoStartDateLabel = new javax.swing.JLabel();
 		accoInfoEndDateLabel = new javax.swing.JLabel();
 		accStartDateText = new javax.swing.JTextField();
@@ -1293,7 +1301,7 @@ public class MainWindow extends javax.swing.JFrame {
 
 			}
 		});
-		
+
 		damagedItems = new JMenuItem("Damaged Items");
 		damagedItems.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
@@ -1301,7 +1309,7 @@ public class MainWindow extends javax.swing.JFrame {
 			}
 		});
 		otherMenu.add(damagedItems);
-		
+
 		viewItemListMenu = new JMenuItem("View Item List");
 		viewItemListMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
@@ -1357,7 +1365,7 @@ public class MainWindow extends javax.swing.JFrame {
 
 	private void filterList() {
 		System.out.println(studentSearchList.getModel());
-		
+
 		int start = 0;
 		int itemIx = 0;
 		Set resultSet = new HashSet();
@@ -1482,13 +1490,72 @@ public class MainWindow extends javax.swing.JFrame {
 	private void clickSearchButton(MouseEvent evt) {
 		searchModel.clear();
 		fillStudentList();
-		
+
 	}
 
 	private void clickEditButton(ActionEvent evt) {
 
 		setEditableTrue();
+		fillCBoxDorm();
+		fillCBoxRoomType();
+		// displayRoomNo();
 
+	}
+
+	private void getRoomMoClicked(MouseEvent me) {
+		displayRoomNo();
+
+	}
+
+	private void fillCBoxRoomType() {
+		DBConnection conn = new DBConnection();
+		ArrayList<Integer> list;
+		try {
+			list = conn.displayRoomType();
+			for (int i = 0; i < list.size(); i++)
+				cboxType.addItem(list.get(i));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	private void fillCBoxDorm() {
+		DBConnection conn = new DBConnection();
+		ArrayList<String> list = null;
+		try {
+			list = conn.displayDorm();
+			for (int i = 0; i < list.size(); i++)
+				accDormCBox.addItem(list.get(i));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void displayRoomNo() {
+		DBConnection conn = new DBConnection();
+		Dorm dorm = new Dorm();
+
+		dorm.setDormName(accDormCBox.getSelectedItem().toString());
+		Room room = new Room();
+		room.setTypeName(Integer
+				.parseInt(cboxType.getSelectedItem().toString()));
+
+		try {
+
+			ArrayList<Integer> list = new ArrayList<Integer>();
+
+			accRoomCBox.removeAllItems();
+			list = conn.displayRoomNo(dorm, room);
+			for (int i = 0; i < list.size(); i++) {
+
+				accRoomCBox.addItem(list.get(i));
+			}
+
+		} catch (SQLException ev) {
+
+			ev.printStackTrace();
+		}
 	}
 
 	private void clickSaveButton(ActionEvent evt) throws ParseException {
@@ -1507,18 +1574,31 @@ public class MainWindow extends javax.swing.JFrame {
 		if (!student.equals(null) && !emgContact.equals(null)
 				&& !Name.equals(null) && !Surname.equals(null)
 				&& !school.equals(null) && !dorm.equals(null)
-				&& !hostel.equals(null) && !room.equals(null))
-			if (db.updateStudent(student, emgContact, dorm, room, hostel,
-					school, Name, Surname)) {
-				JOptionPane.showMessageDialog(getContentPane(), "Basarili");
+				&& !hostel.equals(null) && !room.equals(null)) {
+			int type1 = Integer.parseInt(cboxType.getSelectedItem().toString());
+			int studentNumber;
+			try {
+				studentNumber = db.GetStudentNumber(hostel, dorm, room);
+				if (studentNumber < type1) {
+					if (db.updateStudent(student, emgContact, dorm, room, hostel,
+							school, Name, Surname)) {
+						JOptionPane.showMessageDialog(getContentPane(), "Basarili");
 
-			} else {
-				JOptionPane.showMessageDialog(getContentPane(),
-						"Basarili olmadi");
+					} else {
+						JOptionPane.showMessageDialog(getContentPane(),
+								"Basarili olmadi");
+					}
+				}else{
+					JOptionPane.showMessageDialog(getContentPane(),
+							"This Room is Full");
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-		else {
-			JOptionPane.showMessageDialog(getContentPane(),
-					"Basarili olmadi");
+
+		} else {
+			JOptionPane.showMessageDialog(getContentPane(), "Basarili olmadi");
 		}
 		setEditableFalse();
 
@@ -1642,8 +1722,9 @@ public class MainWindow extends javax.swing.JFrame {
 		schUniNameText.setEditable(true);
 		schDeptNameText.setEditable(true);
 		schGradeText.setEditable(true);
-		// accDormCBox.setEnabled(true);
-		// accRoomCBox.setEnabled(true);
+		accDormCBox.setEnabled(true);
+		accRoomCBox.setEnabled(true);
+		cboxType.setEnabled(true);
 		accStartDateText.setEditable(true);
 		accEndDateText.setEditable(true);
 		cboxType.setEditable(true);

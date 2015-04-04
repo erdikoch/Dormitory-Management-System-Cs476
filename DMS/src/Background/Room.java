@@ -10,9 +10,7 @@ public class Room {
 	}
 
 	public void setTypeName(int typeName) {
-		if(typeName > 0 && typeName < 10) {
-			this.typeName = typeName;
-		}		
+		this.typeName = typeName;
 	}
 
 	public int getRoomNo() {
@@ -20,18 +18,14 @@ public class Room {
 	}
 
 	public void setRoomNo(int roomNo) {
-		if(roomNo >= 0) {
-			this.roomNo = roomNo;
-		}
+		this.roomNo = roomNo;
 	}
 
 	public double getRoomPrice() {
 		return roomPrice;
 	}
 
-	public void setRoomPrice(double roomPrice) {
-		if(roomPrice >= 0) {
-			this.roomPrice = roomPrice;
-		}
+	public void setRoomPrice(double roomPice) {
+		this.roomPrice = roomPice;
 	}
 }

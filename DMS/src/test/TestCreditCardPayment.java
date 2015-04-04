@@ -28,7 +28,4 @@ public class TestCreditCardPayment {
 //		creditCardPayment.setcardName(" ");
 		assertEquals(" ", creditCardPayment.getCardName());
 	}
-	
-	
-
 }

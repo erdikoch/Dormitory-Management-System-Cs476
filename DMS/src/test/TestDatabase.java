@@ -19,7 +19,7 @@ import database.DBConnection;
  */
 public class TestDatabase {
 
-	  Connection connection;
+	  private Connection connection;
 
 	    @Before
 	    public void before() {

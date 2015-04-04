@@ -1,34 +1,33 @@
 package test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
 import background.CreditCardPayment;
 
 public class TestCreditCardPayment {
+	private CreditCardPayment creditCardPayment;
 
 	@Test
 	public void testCreditCardName() {
-		CreditCardPayment creditCardPayment = new CreditCardPayment();
-//		creditCardPayment.setcardName("Visa");
+		creditCardPayment = new CreditCardPayment();
+		// creditCardPayment.setcardName("Visa");
 		assertEquals("Visa", creditCardPayment.getCardName());
 	}
-	
+
 	@Test
 	public void testEmptyCreditCardName() {
-		CreditCardPayment creditCardPayment = new CreditCardPayment();
-//		creditCardPayment.setcardName("");
+		creditCardPayment = new CreditCardPayment();
+		// creditCardPayment.setcardName("");
 		assertEquals("", creditCardPayment.getCardName());
 	}
-	
+
 	@Test
 	public void testBlankCreditCardName() {
-		CreditCardPayment creditCardPayment = new CreditCardPayment();
-//		creditCardPayment.setcardName(" ");
+		creditCardPayment = new CreditCardPayment();
+		// creditCardPayment.setcardName(" ");
 		assertEquals(" ", creditCardPayment.getCardName());
 	}
-	
-	
 
 }

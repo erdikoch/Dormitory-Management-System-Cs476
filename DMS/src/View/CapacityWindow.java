@@ -1,54 +1,39 @@
 package view;
 
 import java.sql.SQLException;
-import java.util.Calendar;
 
+import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.text.html.HTMLEditorKit.Parser;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.general.PieDataset;
-import org.jfree.ui.ApplicationFrame;
-import org.xml.sax.helpers.ParserFactory;
 
-import background.Dorm;
-import background.EmergencyContact;
-import background.Hostel;
-import background.Room;
-import background.School;
-import background.Student;
 import database.DBConnection;
+import background.Dorm;
 
-public class CapacityWindow extends ApplicationFrame {
+public class CapacityWindow {
 	private Dorm dorm;
+	private DBConnection connection;
 	
-	public CapacityWindow(String title,Dorm dorm) {
-		super(title);
-		
-		setTitle("Dorm Capacity");
-		setContentPane(createDemoPanel(dorm));
+	public CapacityWindow(Dorm dorm) throws SQLException {
+		super();
+		this.dorm = dorm;
+		connection = new DBConnection();
+		connection.connect();
+		JFrame capacityFrame = new JFrame("Dorm Capacity");
+		capacityFrame.setBounds(0, 0, 500, 300);
+		capacityFrame.setContentPane(createDemoPanel(dorm,connection.getDormCapacity(dorm),connection.getTotalStudenNumberInDorm(dorm)));
+		capacityFrame.setVisible(true);
 	}
 
-	private static PieDataset createDataset(Dorm dorm) {
+	private static PieDataset createDataset(Dorm dorm, int capacity, int totalStudentNumberInDorm) {
 		DefaultPieDataset dataset = new DefaultPieDataset();
-		dataset.setValue("Filled Dorm Space", new Double(getFilledDormSize(dorm)));
-		dataset.setValue("Dorm Empty Spaces", new Double(getDormSize(dorm)));
+		dataset.setValue("Filled Dorm Space", new Double(totalStudentNumberInDorm));
+		dataset.setValue("Dorm Empty Spaces", new Double(capacity));
 		return dataset;
-	}
-
-	private static String getDormSize(Dorm dorm) {
-		// TODO Auto-generated method stub
-		String dormSize = Integer.toString(dorm.getDormSize());
-		return dormSize;
-	}
-
-	private static String getFilledDormSize(Dorm dorm) {
-		// TODO Auto-generated method stub
-		String filledDormSize = Integer.toString(dorm.getFilledDormSize());
-		return filledDormSize;
 	}
 
 	private static JFreeChart createChart(PieDataset dataset) {
@@ -61,8 +46,8 @@ public class CapacityWindow extends ApplicationFrame {
 		return chart;
 	}
 
-	public static JPanel createDemoPanel(Dorm dorm) {
-		JFreeChart chart = createChart(createDataset(dorm));
+	public static JPanel createDemoPanel(Dorm dorm, int capacity, int totalStudentNumberInDorm) {
+		JFreeChart chart = createChart(createDataset(dorm,capacity,totalStudentNumberInDorm));
 		return new ChartPanel(chart);
 	}
 }

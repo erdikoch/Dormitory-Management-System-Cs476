@@ -51,6 +51,9 @@ import javax.swing.JTextField;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import javax.swing.JPanel;
+import javax.swing.ImageIcon;
+import javax.swing.JRadioButton;
 
 public class MainWindow extends javax.swing.JFrame {
 
@@ -1167,17 +1170,92 @@ public class MainWindow extends javax.swing.JFrame {
 
 		tabbedPane.addTab("Profile", mainPaneSubPanel);
 
-		javax.swing.GroupLayout gl_paymentPanel = new javax.swing.GroupLayout(
-				paymentPanel);
-		paymentPanel.setLayout(gl_paymentPanel);
-		gl_paymentPanel.setHorizontalGroup(gl_paymentPanel.createParallelGroup(
-				javax.swing.GroupLayout.Alignment.LEADING).addGap(0, 746,
-				Short.MAX_VALUE));
-		gl_paymentPanel.setVerticalGroup(gl_paymentPanel.createParallelGroup(
-				javax.swing.GroupLayout.Alignment.LEADING).addGap(0, 454,
-				Short.MAX_VALUE));
-
 		tabbedPane.addTab("Payment", paymentPanel);
+		paymentPanel.setLayout(null);
+		
+		lblPayment = new JLabel("Payment");
+		lblPayment.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblPayment.setBounds(142, 11, 155, 25);
+		paymentPanel.add(lblPayment);
+		
+		label = new JLabel("");
+		label.setIcon(new ImageIcon("C:\\Users\\user\\Desktop\\workspace\\DMS\\url.jpg"));
+		label.setBounds(405, 11, 46, 469);
+		paymentPanel.add(label);
+		
+		lblNewLabel = new JLabel("Room Price:");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblNewLabel.setBounds(10, 83, 91, 14);
+		paymentPanel.add(lblNewLabel);
+		
+		textField_1 = new JTextField();
+		textField_1.setBounds(155, 82, 197, 20);
+		paymentPanel.add(textField_1);
+		textField_1.setColumns(10);
+		
+		JLabel lblTotalDebt = new JLabel("Total Debt:");
+		lblTotalDebt.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblTotalDebt.setBounds(10, 129, 91, 14);
+		paymentPanel.add(lblTotalDebt);
+		
+		JLabel lblDisbursement = new JLabel("Disbursement:");
+		lblDisbursement.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblDisbursement.setBounds(10, 173, 111, 14);
+		paymentPanel.add(lblDisbursement);
+		
+		JLabel lblAccomodationTimemonthly = new JLabel("Accomodation Time:");
+		lblAccomodationTimemonthly.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblAccomodationTimemonthly.setBounds(10, 215, 202, 14);
+		paymentPanel.add(lblAccomodationTimemonthly);
+		
+		textField_2 = new JTextField();
+		textField_2.setColumns(10);
+		textField_2.setBounds(155, 128, 197, 20);
+		paymentPanel.add(textField_2);
+		
+		textField_3 = new JTextField();
+		textField_3.setColumns(10);
+		textField_3.setBounds(155, 172, 197, 20);
+		paymentPanel.add(textField_3);
+		
+		textField_4 = new JTextField();
+		textField_4.setColumns(10);
+		textField_4.setBounds(561, 89, 197, 20);
+		paymentPanel.add(textField_4);
+		
+		textField_5 = new JTextField();
+		textField_5.setColumns(10);
+		textField_5.setBounds(155, 214, 197, 20);
+		paymentPanel.add(textField_5);
+		
+		JLabel lblPayment_1 = new JLabel("Details");
+		lblPayment_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblPayment_1.setBounds(538, 11, 155, 25);
+		paymentPanel.add(lblPayment_1);
+		
+		JLabel lblPaymentType = new JLabel("Payment Type:");
+		lblPaymentType.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblPaymentType.setBounds(10, 268, 122, 25);
+		paymentPanel.add(lblPaymentType);
+		
+		JRadioButton rdbtnNewRadioButton = new JRadioButton("Cash");
+		rdbtnNewRadioButton.setBounds(142, 271, 79, 23);
+		paymentPanel.add(rdbtnNewRadioButton);
+		
+		JRadioButton rdbtnCreditCard = new JRadioButton("Credit Card");
+		rdbtnCreditCard.setBounds(243, 271, 109, 23);
+		paymentPanel.add(rdbtnCreditCard);
+		
+		JLabel label_1 = new JLabel("Remaining Debt:");
+		label_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		label_1.setBounds(446, 85, 111, 25);
+		paymentPanel.add(label_1);
+		
+		JButton btnEnter = new JButton("Enter");
+		btnEnter.setBounds(288, 389, 89, 23);
+		paymentPanel.add(btnEnter);
+		
+
 
 		javax.swing.GroupLayout gl_mainPanePanel = new javax.swing.GroupLayout(
 				mainPanePanel);
@@ -1822,4 +1900,13 @@ public class MainWindow extends javax.swing.JFrame {
 	private int fieldLength = 0;
 	private JMenuItem damagedItems;
 	private JMenuItem viewItemListMenu;
+	private JLabel lblPayment;
+	private JLabel label;
+	private JLabel lblNewLabel;
+	private JTextField textField;
+	private JTextField textField_1;
+	private JTextField textField_2;
+	private JTextField textField_3;
+	private JTextField textField_4;
+	private JTextField textField_5;
 }

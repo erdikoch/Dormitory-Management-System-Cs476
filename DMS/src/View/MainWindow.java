@@ -1259,7 +1259,7 @@ public class MainWindow extends javax.swing.JFrame {
 				int price = Integer.parseInt(roomPrice.getText());
 				int months = Integer.parseInt(accomodation.getText());
 				int total = price * months;
-				// Geri total'ı totalDebt'in olduğu String'e yazamadım :S 
+				// Geri total'ıs totalDebt'in olduğu String'e yazamadım :S 
 				totalDebt.setEditable(false);
 				
 				int money = Integer.parseInt(disbursement.getText());

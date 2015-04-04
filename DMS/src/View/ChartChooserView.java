@@ -37,7 +37,7 @@ public class ChartChooserView extends javax.swing.JFrame {
 		getContentPane().add(lblDorm, gbc_lblDorm);
 		
 		final JComboBox<String> comboBox = new JComboBox<String>();
-		DBConnection connection = new DBConnection();
+		final DBConnection connection = new DBConnection();
 		ArrayList<String> list;
 		try {
 			comboBox.removeAllItems();
@@ -96,10 +96,14 @@ public class ChartChooserView extends javax.swing.JFrame {
 				if(dormCapacityCheckBox.isSelected()){
 					Dorm dorm =new Dorm();
 					dorm.setDormName(comboBox.getSelectedItem().toString());
-					final CapacityWindow dormCapacity = new CapacityWindow("Dorm Capacity",dorm);
-					dormCapacity.pack();
-			        RefineryUtilities.centerFrameOnScreen(dormCapacity);
-			        dormCapacity.setVisible(true);
+					try {
+						int dormSize = connection.getDormCapacity(dorm);
+						CapacityWindow dormCapacity = new CapacityWindow(dorm,dormSize);
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					
 				}else if(maleFemaleCapacity.isSelected()){
 					final MaleFemaleCapacityWindow capacity = new MaleFemaleCapacityWindow("Dorm Male/Female Capacity");
 					capacity.pack();

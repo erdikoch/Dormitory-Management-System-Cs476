@@ -268,74 +268,74 @@ public class MainWindow extends javax.swing.JFrame {
 				mainSearchPanel);
 		mainSearchPanel.setLayout(gl_mainSearchPanel);
 		gl_mainSearchPanel
-				.setHorizontalGroup(gl_mainSearchPanel
-						.createParallelGroup(
-								javax.swing.GroupLayout.Alignment.LEADING)
+		.setHorizontalGroup(gl_mainSearchPanel
+				.createParallelGroup(
+						javax.swing.GroupLayout.Alignment.LEADING)
 						.addGroup(
 								gl_mainSearchPanel
-										.createSequentialGroup()
-										.addContainerGap()
-										.addGroup(
-												gl_mainSearchPanel
-														.createParallelGroup(
-																javax.swing.GroupLayout.Alignment.LEADING,
-																false)
-														.addComponent(
-																searchScrollPane)
+								.createSequentialGroup()
+								.addContainerGap()
+								.addGroup(
+										gl_mainSearchPanel
+										.createParallelGroup(
+												javax.swing.GroupLayout.Alignment.LEADING,
+												false)
+												.addComponent(
+														searchScrollPane)
 														.addGroup(
 																javax.swing.GroupLayout.Alignment.TRAILING,
 																gl_mainSearchPanel
-																		.createSequentialGroup()
-																		.addComponent(
-																				searchStudentText)
+																.createSequentialGroup()
+																.addComponent(
+																		searchStudentText)
 																		.addPreferredGap(
 																				javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-																		.addComponent(
-																				searchButton))
-														.addComponent(
-																searchStudentLabel,
-																javax.swing.GroupLayout.DEFAULT_SIZE,
-																212,
-																Short.MAX_VALUE))
-										.addContainerGap(22, Short.MAX_VALUE)));
+																				.addComponent(
+																						searchButton))
+																						.addComponent(
+																								searchStudentLabel,
+																								javax.swing.GroupLayout.DEFAULT_SIZE,
+																								212,
+																								Short.MAX_VALUE))
+																								.addContainerGap(22, Short.MAX_VALUE)));
 		gl_mainSearchPanel
-				.setVerticalGroup(gl_mainSearchPanel
-						.createParallelGroup(
-								javax.swing.GroupLayout.Alignment.LEADING)
+		.setVerticalGroup(gl_mainSearchPanel
+				.createParallelGroup(
+						javax.swing.GroupLayout.Alignment.LEADING)
 						.addGroup(
 								gl_mainSearchPanel
-										.createSequentialGroup()
-										.addContainerGap()
-										.addComponent(
-												searchStudentLabel,
-												javax.swing.GroupLayout.PREFERRED_SIZE,
-												27,
-												javax.swing.GroupLayout.PREFERRED_SIZE)
+								.createSequentialGroup()
+								.addContainerGap()
+								.addComponent(
+										searchStudentLabel,
+										javax.swing.GroupLayout.PREFERRED_SIZE,
+										27,
+										javax.swing.GroupLayout.PREFERRED_SIZE)
 										.addPreferredGap(
 												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-										.addGroup(
-												gl_mainSearchPanel
+												.addGroup(
+														gl_mainSearchPanel
 														.createParallelGroup(
 																javax.swing.GroupLayout.Alignment.LEADING,
 																false)
-														.addComponent(
-																searchStudentText)
-														.addComponent(
-																searchButton,
-																javax.swing.GroupLayout.DEFAULT_SIZE,
-																34,
-																Short.MAX_VALUE))
-										.addPreferredGap(
-												javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-										.addComponent(searchScrollPane)
-										.addContainerGap()));
+																.addComponent(
+																		searchStudentText)
+																		.addComponent(
+																				searchButton,
+																				javax.swing.GroupLayout.DEFAULT_SIZE,
+																				34,
+																				Short.MAX_VALUE))
+																				.addPreferredGap(
+																						javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+																						.addComponent(searchScrollPane)
+																						.addContainerGap()));
 
 		tabbedPane.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
 		mainPaneSubPanel.setBorder(javax.swing.BorderFactory.createBevelBorder(
 				javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51,
 						204, 0), new java.awt.Color(51, 153, 0),
-				new java.awt.Color(0, 153, 0), new java.awt.Color(51, 153, 0)));
+						new java.awt.Color(0, 153, 0), new java.awt.Color(51, 153, 0)));
 
 		personalInfoPanel.setBorder(javax.swing.BorderFactory
 				.createEtchedBorder());
@@ -371,205 +371,205 @@ public class MainWindow extends javax.swing.JFrame {
 		javax.swing.GroupLayout gl_personalInfoPanel = new javax.swing.GroupLayout(
 				personalInfoPanel);
 		gl_personalInfoPanel
-				.setHorizontalGroup(gl_personalInfoPanel
-						.createParallelGroup(Alignment.LEADING)
+		.setHorizontalGroup(gl_personalInfoPanel
+				.createParallelGroup(Alignment.LEADING)
+				.addGroup(
+						gl_personalInfoPanel
+						.createSequentialGroup()
+						.addContainerGap()
 						.addGroup(
 								gl_personalInfoPanel
-										.createSequentialGroup()
-										.addContainerGap()
-										.addGroup(
-												gl_personalInfoPanel
-														.createParallelGroup(
-																Alignment.LEADING)
-														.addComponent(
-																personalInfoLabel,
-																GroupLayout.PREFERRED_SIZE,
-																123,
-																GroupLayout.PREFERRED_SIZE)
+								.createParallelGroup(
+										Alignment.LEADING)
+										.addComponent(
+												personalInfoLabel,
+												GroupLayout.PREFERRED_SIZE,
+												123,
+												GroupLayout.PREFERRED_SIZE)
+												.addGroup(
+														gl_personalInfoPanel
+														.createSequentialGroup()
 														.addGroup(
 																gl_personalInfoPanel
-																		.createSequentialGroup()
+																.createParallelGroup(
+																		Alignment.LEADING,
+																		false)
 																		.addGroup(
 																				gl_personalInfoPanel
+																				.createSequentialGroup()
+																				.addGroup(
+																						gl_personalInfoPanel
 																						.createParallelGroup(
-																								Alignment.LEADING,
+																								Alignment.TRAILING,
 																								false)
-																						.addGroup(
-																								gl_personalInfoPanel
-																										.createSequentialGroup()
-																										.addGroup(
-																												gl_personalInfoPanel
-																														.createParallelGroup(
-																																Alignment.TRAILING,
-																																false)
-																														.addComponent(
-																																personalInfoGenderLabel,
-																																Alignment.LEADING,
-																																GroupLayout.DEFAULT_SIZE,
-																																GroupLayout.DEFAULT_SIZE,
-																																Short.MAX_VALUE)
-																														.addComponent(
-																																personalInfoNationalIDLabel,
-																																Alignment.LEADING,
-																																GroupLayout.DEFAULT_SIZE,
-																																63,
-																																Short.MAX_VALUE)
-																														.addComponent(
-																																personalInfoSurnameLabel,
-																																Alignment.LEADING,
-																																GroupLayout.DEFAULT_SIZE,
-																																GroupLayout.DEFAULT_SIZE,
-																																Short.MAX_VALUE))
-																										.addGap(18)
-																										.addGroup(
-																												gl_personalInfoPanel
-																														.createParallelGroup(
-																																Alignment.LEADING)
-																														.addComponent(
-																																stdSurnameTExt)
-																														.addComponent(
-																																stdTCText)
+																								.addComponent(
+																										personalInfoGenderLabel,
+																										Alignment.LEADING,
+																										GroupLayout.DEFAULT_SIZE,
+																										GroupLayout.DEFAULT_SIZE,
+																										Short.MAX_VALUE)
+																										.addComponent(
+																												personalInfoNationalIDLabel,
+																												Alignment.LEADING,
+																												GroupLayout.DEFAULT_SIZE,
+																												63,
+																												Short.MAX_VALUE)
+																												.addComponent(
+																														personalInfoSurnameLabel,
+																														Alignment.LEADING,
+																														GroupLayout.DEFAULT_SIZE,
+																														GroupLayout.DEFAULT_SIZE,
+																														Short.MAX_VALUE))
+																														.addGap(18)
 																														.addGroup(
 																																gl_personalInfoPanel
-																																		.createSequentialGroup()
+																																.createParallelGroup(
+																																		Alignment.LEADING)
 																																		.addComponent(
-																																				stdGenderCBox,
-																																				GroupLayout.PREFERRED_SIZE,
-																																				97,
-																																				GroupLayout.PREFERRED_SIZE)
-																																		.addGap(0,
-																																				115,
-																																				Short.MAX_VALUE))))
-																						.addGroup(
-																								gl_personalInfoPanel
-																										.createSequentialGroup()
-																										.addComponent(
-																												personalInfoNameLabel,
-																												GroupLayout.PREFERRED_SIZE,
-																												63,
-																												GroupLayout.PREFERRED_SIZE)
-																										.addGap(18)
-																										.addComponent(
-																												stdNameText)))
-																		.addGap(61)
-																		.addGroup(
-																				gl_personalInfoPanel
-																						.createParallelGroup(
-																								Alignment.LEADING,
-																								false)
-																						.addComponent(
-																								personalInfoPhoneLabel,
-																								GroupLayout.DEFAULT_SIZE,
-																								50,
-																								Short.MAX_VALUE)
-																						.addComponent(
-																								personalInfoMailLabel,
-																								GroupLayout.DEFAULT_SIZE,
-																								GroupLayout.DEFAULT_SIZE,
-																								Short.MAX_VALUE)
-																						.addComponent(
-																								personalInfoBirthdayLabel))
-																		.addGap(37)
-																		.addGroup(
-																				gl_personalInfoPanel
-																						.createParallelGroup(
-																								Alignment.LEADING,
-																								false)
-																						.addComponent(
-																								stdBirthdayText)
-																						.addComponent(
-																								stdPhoneText,
-																								GroupLayout.DEFAULT_SIZE,
-																								223,
-																								Short.MAX_VALUE)
-																						.addComponent(
-																								stdMailText))))
-										.addContainerGap(69, Short.MAX_VALUE)));
+																																				stdSurnameTExt)
+																																				.addComponent(
+																																						stdTCText)
+																																						.addGroup(
+																																								gl_personalInfoPanel
+																																								.createSequentialGroup()
+																																								.addComponent(
+																																										stdGenderCBox,
+																																										GroupLayout.PREFERRED_SIZE,
+																																										97,
+																																										GroupLayout.PREFERRED_SIZE)
+																																										.addGap(0,
+																																												115,
+																																												Short.MAX_VALUE))))
+																																												.addGroup(
+																																														gl_personalInfoPanel
+																																														.createSequentialGroup()
+																																														.addComponent(
+																																																personalInfoNameLabel,
+																																																GroupLayout.PREFERRED_SIZE,
+																																																63,
+																																																GroupLayout.PREFERRED_SIZE)
+																																																.addGap(18)
+																																																.addComponent(
+																																																		stdNameText)))
+																																																		.addGap(61)
+																																																		.addGroup(
+																																																				gl_personalInfoPanel
+																																																				.createParallelGroup(
+																																																						Alignment.LEADING,
+																																																						false)
+																																																						.addComponent(
+																																																								personalInfoPhoneLabel,
+																																																								GroupLayout.DEFAULT_SIZE,
+																																																								50,
+																																																								Short.MAX_VALUE)
+																																																								.addComponent(
+																																																										personalInfoMailLabel,
+																																																										GroupLayout.DEFAULT_SIZE,
+																																																										GroupLayout.DEFAULT_SIZE,
+																																																										Short.MAX_VALUE)
+																																																										.addComponent(
+																																																												personalInfoBirthdayLabel))
+																																																												.addGap(37)
+																																																												.addGroup(
+																																																														gl_personalInfoPanel
+																																																														.createParallelGroup(
+																																																																Alignment.LEADING,
+																																																																false)
+																																																																.addComponent(
+																																																																		stdBirthdayText)
+																																																																		.addComponent(
+																																																																				stdPhoneText,
+																																																																				GroupLayout.DEFAULT_SIZE,
+																																																																				223,
+																																																																				Short.MAX_VALUE)
+																																																																				.addComponent(
+																																																																						stdMailText))))
+																																																																						.addContainerGap(69, Short.MAX_VALUE)));
 		gl_personalInfoPanel
-				.setVerticalGroup(gl_personalInfoPanel
-						.createParallelGroup(Alignment.LEADING)
+		.setVerticalGroup(gl_personalInfoPanel
+				.createParallelGroup(Alignment.LEADING)
+				.addGroup(
+						gl_personalInfoPanel
+						.createSequentialGroup()
+						.addContainerGap()
+						.addComponent(personalInfoLabel)
+						.addGap(11)
 						.addGroup(
 								gl_personalInfoPanel
-										.createSequentialGroup()
-										.addContainerGap()
-										.addComponent(personalInfoLabel)
-										.addGap(11)
-										.addGroup(
-												gl_personalInfoPanel
-														.createParallelGroup(
-																Alignment.BASELINE)
-														.addComponent(
-																personalInfoNameLabel,
-																GroupLayout.PREFERRED_SIZE,
-																15,
-																GroupLayout.PREFERRED_SIZE)
-														.addComponent(
-																personalInfoPhoneLabel)
+								.createParallelGroup(
+										Alignment.BASELINE)
+										.addComponent(
+												personalInfoNameLabel,
+												GroupLayout.PREFERRED_SIZE,
+												15,
+												GroupLayout.PREFERRED_SIZE)
+												.addComponent(
+														personalInfoPhoneLabel)
 														.addComponent(
 																stdNameText,
 																GroupLayout.PREFERRED_SIZE,
 																GroupLayout.DEFAULT_SIZE,
 																GroupLayout.PREFERRED_SIZE)
-														.addComponent(
-																stdPhoneText,
-																GroupLayout.PREFERRED_SIZE,
-																GroupLayout.DEFAULT_SIZE,
-																GroupLayout.PREFERRED_SIZE))
-										.addPreferredGap(
-												ComponentPlacement.UNRELATED)
-										.addGroup(
-												gl_personalInfoPanel
-														.createParallelGroup(
-																Alignment.BASELINE)
-														.addComponent(
-																personalInfoSurnameLabel)
-														.addComponent(
-																personalInfoMailLabel)
-														.addComponent(
-																stdSurnameTExt,
-																GroupLayout.PREFERRED_SIZE,
-																GroupLayout.DEFAULT_SIZE,
-																GroupLayout.PREFERRED_SIZE)
-														.addComponent(
-																stdMailText,
-																GroupLayout.PREFERRED_SIZE,
-																GroupLayout.DEFAULT_SIZE,
-																GroupLayout.PREFERRED_SIZE))
-										.addPreferredGap(
-												ComponentPlacement.UNRELATED)
-										.addGroup(
-												gl_personalInfoPanel
-														.createParallelGroup(
-																Alignment.BASELINE)
-														.addComponent(
-																personalInfoNationalIDLabel)
-														.addComponent(
-																personalInfoBirthdayLabel)
-														.addComponent(
-																stdTCText,
-																GroupLayout.PREFERRED_SIZE,
-																GroupLayout.DEFAULT_SIZE,
-																GroupLayout.PREFERRED_SIZE)
-														.addComponent(
-																stdBirthdayText,
-																GroupLayout.PREFERRED_SIZE,
-																GroupLayout.DEFAULT_SIZE,
-																GroupLayout.PREFERRED_SIZE))
-										.addPreferredGap(
-												ComponentPlacement.RELATED, 18,
-												Short.MAX_VALUE)
-										.addGroup(
-												gl_personalInfoPanel
-														.createParallelGroup(
-																Alignment.BASELINE)
-														.addComponent(
-																personalInfoGenderLabel)
-														.addComponent(
-																stdGenderCBox,
-																GroupLayout.PREFERRED_SIZE,
-																GroupLayout.DEFAULT_SIZE,
-																GroupLayout.PREFERRED_SIZE))
-										.addContainerGap()));
+																.addComponent(
+																		stdPhoneText,
+																		GroupLayout.PREFERRED_SIZE,
+																		GroupLayout.DEFAULT_SIZE,
+																		GroupLayout.PREFERRED_SIZE))
+																		.addPreferredGap(
+																				ComponentPlacement.UNRELATED)
+																				.addGroup(
+																						gl_personalInfoPanel
+																						.createParallelGroup(
+																								Alignment.BASELINE)
+																								.addComponent(
+																										personalInfoSurnameLabel)
+																										.addComponent(
+																												personalInfoMailLabel)
+																												.addComponent(
+																														stdSurnameTExt,
+																														GroupLayout.PREFERRED_SIZE,
+																														GroupLayout.DEFAULT_SIZE,
+																														GroupLayout.PREFERRED_SIZE)
+																														.addComponent(
+																																stdMailText,
+																																GroupLayout.PREFERRED_SIZE,
+																																GroupLayout.DEFAULT_SIZE,
+																																GroupLayout.PREFERRED_SIZE))
+																																.addPreferredGap(
+																																		ComponentPlacement.UNRELATED)
+																																		.addGroup(
+																																				gl_personalInfoPanel
+																																				.createParallelGroup(
+																																						Alignment.BASELINE)
+																																						.addComponent(
+																																								personalInfoNationalIDLabel)
+																																								.addComponent(
+																																										personalInfoBirthdayLabel)
+																																										.addComponent(
+																																												stdTCText,
+																																												GroupLayout.PREFERRED_SIZE,
+																																												GroupLayout.DEFAULT_SIZE,
+																																												GroupLayout.PREFERRED_SIZE)
+																																												.addComponent(
+																																														stdBirthdayText,
+																																														GroupLayout.PREFERRED_SIZE,
+																																														GroupLayout.DEFAULT_SIZE,
+																																														GroupLayout.PREFERRED_SIZE))
+																																														.addPreferredGap(
+																																																ComponentPlacement.RELATED, 18,
+																																																Short.MAX_VALUE)
+																																																.addGroup(
+																																																		gl_personalInfoPanel
+																																																		.createParallelGroup(
+																																																				Alignment.BASELINE)
+																																																				.addComponent(
+																																																						personalInfoGenderLabel)
+																																																						.addComponent(
+																																																								stdGenderCBox,
+																																																								GroupLayout.PREFERRED_SIZE,
+																																																								GroupLayout.DEFAULT_SIZE,
+																																																								GroupLayout.PREFERRED_SIZE))
+																																																								.addContainerGap()));
 		personalInfoPanel.setLayout(gl_personalInfoPanel);
 
 		emergencyContactPanel.setBorder(javax.swing.BorderFactory
@@ -582,7 +582,7 @@ public class MainWindow extends javax.swing.JFrame {
 		emergencyContactNameLabel.setText("Name:");
 
 		emergencyContactSurnameLabel
-				.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+		.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 		emergencyContactSurnameLabel.setText("Surname:");
 
 		emergencyContactPhoneLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -592,115 +592,115 @@ public class MainWindow extends javax.swing.JFrame {
 				emergencyContactPanel);
 		emergencyContactPanel.setLayout(gl_emergencyContactPanel);
 		gl_emergencyContactPanel
-				.setHorizontalGroup(gl_emergencyContactPanel
-						.createParallelGroup(
-								javax.swing.GroupLayout.Alignment.LEADING)
+		.setHorizontalGroup(gl_emergencyContactPanel
+				.createParallelGroup(
+						javax.swing.GroupLayout.Alignment.LEADING)
 						.addGroup(
 								gl_emergencyContactPanel
-										.createSequentialGroup()
-										.addContainerGap()
-										.addGroup(
-												gl_emergencyContactPanel
-														.createParallelGroup(
-																javax.swing.GroupLayout.Alignment.LEADING)
-														.addComponent(
-																emergencyContactLabel,
-																javax.swing.GroupLayout.PREFERRED_SIZE,
-																125,
-																javax.swing.GroupLayout.PREFERRED_SIZE)
+								.createSequentialGroup()
+								.addContainerGap()
+								.addGroup(
+										gl_emergencyContactPanel
+										.createParallelGroup(
+												javax.swing.GroupLayout.Alignment.LEADING)
+												.addComponent(
+														emergencyContactLabel,
+														javax.swing.GroupLayout.PREFERRED_SIZE,
+														125,
+														javax.swing.GroupLayout.PREFERRED_SIZE)
 														.addGroup(
 																gl_emergencyContactPanel
-																		.createSequentialGroup()
-																		.addGroup(
-																				gl_emergencyContactPanel
-																						.createParallelGroup(
-																								javax.swing.GroupLayout.Alignment.TRAILING,
-																								false)
-																						.addComponent(
-																								emergencyContactPhoneLabel,
-																								javax.swing.GroupLayout.Alignment.LEADING,
-																								javax.swing.GroupLayout.DEFAULT_SIZE,
-																								javax.swing.GroupLayout.DEFAULT_SIZE,
-																								Short.MAX_VALUE)
+																.createSequentialGroup()
+																.addGroup(
+																		gl_emergencyContactPanel
+																		.createParallelGroup(
+																				javax.swing.GroupLayout.Alignment.TRAILING,
+																				false)
+																				.addComponent(
+																						emergencyContactPhoneLabel,
+																						javax.swing.GroupLayout.Alignment.LEADING,
+																						javax.swing.GroupLayout.DEFAULT_SIZE,
+																						javax.swing.GroupLayout.DEFAULT_SIZE,
+																						Short.MAX_VALUE)
 																						.addComponent(
 																								emergencyContactSurnameLabel,
 																								javax.swing.GroupLayout.Alignment.LEADING,
 																								javax.swing.GroupLayout.DEFAULT_SIZE,
 																								62,
 																								Short.MAX_VALUE)
-																						.addComponent(
-																								emergencyContactNameLabel,
-																								javax.swing.GroupLayout.Alignment.LEADING,
-																								javax.swing.GroupLayout.DEFAULT_SIZE,
-																								javax.swing.GroupLayout.DEFAULT_SIZE,
-																								Short.MAX_VALUE))
-																		.addGap(18,
-																				18,
-																				18)
-																		.addGroup(
-																				gl_emergencyContactPanel
-																						.createParallelGroup(
-																								javax.swing.GroupLayout.Alignment.LEADING,
-																								false)
-																						.addComponent(
-																								emgSurnameText)
-																						.addComponent(
-																								emgNameText)
-																						.addComponent(
-																								emgPhoneText,
-																								javax.swing.GroupLayout.DEFAULT_SIZE,
-																								214,
-																								Short.MAX_VALUE))))
-										.addContainerGap(47, Short.MAX_VALUE)));
+																								.addComponent(
+																										emergencyContactNameLabel,
+																										javax.swing.GroupLayout.Alignment.LEADING,
+																										javax.swing.GroupLayout.DEFAULT_SIZE,
+																										javax.swing.GroupLayout.DEFAULT_SIZE,
+																										Short.MAX_VALUE))
+																										.addGap(18,
+																												18,
+																												18)
+																												.addGroup(
+																														gl_emergencyContactPanel
+																														.createParallelGroup(
+																																javax.swing.GroupLayout.Alignment.LEADING,
+																																false)
+																																.addComponent(
+																																		emgSurnameText)
+																																		.addComponent(
+																																				emgNameText)
+																																				.addComponent(
+																																						emgPhoneText,
+																																						javax.swing.GroupLayout.DEFAULT_SIZE,
+																																						214,
+																																						Short.MAX_VALUE))))
+																																						.addContainerGap(47, Short.MAX_VALUE)));
 		gl_emergencyContactPanel
-				.setVerticalGroup(gl_emergencyContactPanel
-						.createParallelGroup(
-								javax.swing.GroupLayout.Alignment.LEADING)
+		.setVerticalGroup(gl_emergencyContactPanel
+				.createParallelGroup(
+						javax.swing.GroupLayout.Alignment.LEADING)
 						.addGroup(
 								gl_emergencyContactPanel
-										.createSequentialGroup()
-										.addContainerGap()
-										.addComponent(emergencyContactLabel)
-										.addPreferredGap(
-												javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+								.createSequentialGroup()
+								.addContainerGap()
+								.addComponent(emergencyContactLabel)
+								.addPreferredGap(
+										javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
 										.addGroup(
 												gl_emergencyContactPanel
-														.createParallelGroup(
-																javax.swing.GroupLayout.Alignment.BASELINE)
+												.createParallelGroup(
+														javax.swing.GroupLayout.Alignment.BASELINE)
 														.addComponent(
 																emergencyContactNameLabel)
-														.addComponent(
-																emgNameText,
-																javax.swing.GroupLayout.PREFERRED_SIZE,
-																javax.swing.GroupLayout.DEFAULT_SIZE,
-																javax.swing.GroupLayout.PREFERRED_SIZE))
-										.addGap(18, 18, 18)
-										.addGroup(
-												gl_emergencyContactPanel
-														.createParallelGroup(
-																javax.swing.GroupLayout.Alignment.BASELINE)
-														.addComponent(
-																emergencyContactSurnameLabel)
-														.addComponent(
-																emgSurnameText,
-																javax.swing.GroupLayout.PREFERRED_SIZE,
-																javax.swing.GroupLayout.DEFAULT_SIZE,
-																javax.swing.GroupLayout.PREFERRED_SIZE))
-										.addGap(18, 18, 18)
-										.addGroup(
-												gl_emergencyContactPanel
-														.createParallelGroup(
-																javax.swing.GroupLayout.Alignment.BASELINE)
-														.addComponent(
-																emergencyContactPhoneLabel)
-														.addComponent(
-																emgPhoneText,
-																javax.swing.GroupLayout.PREFERRED_SIZE,
-																javax.swing.GroupLayout.DEFAULT_SIZE,
-																javax.swing.GroupLayout.PREFERRED_SIZE))
-										.addContainerGap(
-												javax.swing.GroupLayout.DEFAULT_SIZE,
-												Short.MAX_VALUE)));
+																.addComponent(
+																		emgNameText,
+																		javax.swing.GroupLayout.PREFERRED_SIZE,
+																		javax.swing.GroupLayout.DEFAULT_SIZE,
+																		javax.swing.GroupLayout.PREFERRED_SIZE))
+																		.addGap(18, 18, 18)
+																		.addGroup(
+																				gl_emergencyContactPanel
+																				.createParallelGroup(
+																						javax.swing.GroupLayout.Alignment.BASELINE)
+																						.addComponent(
+																								emergencyContactSurnameLabel)
+																								.addComponent(
+																										emgSurnameText,
+																										javax.swing.GroupLayout.PREFERRED_SIZE,
+																										javax.swing.GroupLayout.DEFAULT_SIZE,
+																										javax.swing.GroupLayout.PREFERRED_SIZE))
+																										.addGap(18, 18, 18)
+																										.addGroup(
+																												gl_emergencyContactPanel
+																												.createParallelGroup(
+																														javax.swing.GroupLayout.Alignment.BASELINE)
+																														.addComponent(
+																																emergencyContactPhoneLabel)
+																																.addComponent(
+																																		emgPhoneText,
+																																		javax.swing.GroupLayout.PREFERRED_SIZE,
+																																		javax.swing.GroupLayout.DEFAULT_SIZE,
+																																		javax.swing.GroupLayout.PREFERRED_SIZE))
+																																		.addContainerGap(
+																																				javax.swing.GroupLayout.DEFAULT_SIZE,
+																																				Short.MAX_VALUE)));
 
 		schoolInfoPanel.setBorder(javax.swing.BorderFactory
 				.createEtchedBorder());
@@ -721,116 +721,116 @@ public class MainWindow extends javax.swing.JFrame {
 				schoolInfoPanel);
 		schoolInfoPanel.setLayout(gl_schoolInfoPanel);
 		gl_schoolInfoPanel
-				.setHorizontalGroup(gl_schoolInfoPanel
-						.createParallelGroup(
-								javax.swing.GroupLayout.Alignment.LEADING)
+		.setHorizontalGroup(gl_schoolInfoPanel
+				.createParallelGroup(
+						javax.swing.GroupLayout.Alignment.LEADING)
 						.addGroup(
 								gl_schoolInfoPanel
-										.createSequentialGroup()
-										.addContainerGap()
-										.addGroup(
-												gl_schoolInfoPanel
-														.createParallelGroup(
-																javax.swing.GroupLayout.Alignment.LEADING)
-														.addComponent(
-																schoolInfoLabel,
-																javax.swing.GroupLayout.PREFERRED_SIZE,
-																114,
-																javax.swing.GroupLayout.PREFERRED_SIZE)
+								.createSequentialGroup()
+								.addContainerGap()
+								.addGroup(
+										gl_schoolInfoPanel
+										.createParallelGroup(
+												javax.swing.GroupLayout.Alignment.LEADING)
+												.addComponent(
+														schoolInfoLabel,
+														javax.swing.GroupLayout.PREFERRED_SIZE,
+														114,
+														javax.swing.GroupLayout.PREFERRED_SIZE)
 														.addGroup(
 																gl_schoolInfoPanel
-																		.createSequentialGroup()
-																		.addGroup(
-																				gl_schoolInfoPanel
-																						.createParallelGroup(
-																								javax.swing.GroupLayout.Alignment.TRAILING,
-																								false)
-																						.addComponent(
-																								schoolInfoGradeLabel,
-																								javax.swing.GroupLayout.Alignment.LEADING,
-																								javax.swing.GroupLayout.DEFAULT_SIZE,
-																								javax.swing.GroupLayout.DEFAULT_SIZE,
-																								Short.MAX_VALUE)
+																.createSequentialGroup()
+																.addGroup(
+																		gl_schoolInfoPanel
+																		.createParallelGroup(
+																				javax.swing.GroupLayout.Alignment.TRAILING,
+																				false)
+																				.addComponent(
+																						schoolInfoGradeLabel,
+																						javax.swing.GroupLayout.Alignment.LEADING,
+																						javax.swing.GroupLayout.DEFAULT_SIZE,
+																						javax.swing.GroupLayout.DEFAULT_SIZE,
+																						Short.MAX_VALUE)
 																						.addComponent(
 																								schoolInfoDepartmentLabel,
 																								javax.swing.GroupLayout.Alignment.LEADING,
 																								javax.swing.GroupLayout.DEFAULT_SIZE,
 																								79,
 																								Short.MAX_VALUE)
-																						.addComponent(
-																								schoolInfoUniversityLabel,
-																								javax.swing.GroupLayout.Alignment.LEADING,
-																								javax.swing.GroupLayout.DEFAULT_SIZE,
-																								javax.swing.GroupLayout.DEFAULT_SIZE,
-																								Short.MAX_VALUE))
-																		.addPreferredGap(
-																				javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-																		.addGroup(
-																				gl_schoolInfoPanel
-																						.createParallelGroup(
-																								javax.swing.GroupLayout.Alignment.LEADING,
-																								false)
-																						.addComponent(
-																								schUniNameText)
-																						.addComponent(
-																								schDeptNameText)
-																						.addComponent(
-																								schGradeText,
-																								javax.swing.GroupLayout.DEFAULT_SIZE,
-																								220,
-																								Short.MAX_VALUE))))
-										.addContainerGap(
-												javax.swing.GroupLayout.DEFAULT_SIZE,
-												Short.MAX_VALUE)));
+																								.addComponent(
+																										schoolInfoUniversityLabel,
+																										javax.swing.GroupLayout.Alignment.LEADING,
+																										javax.swing.GroupLayout.DEFAULT_SIZE,
+																										javax.swing.GroupLayout.DEFAULT_SIZE,
+																										Short.MAX_VALUE))
+																										.addPreferredGap(
+																												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+																												.addGroup(
+																														gl_schoolInfoPanel
+																														.createParallelGroup(
+																																javax.swing.GroupLayout.Alignment.LEADING,
+																																false)
+																																.addComponent(
+																																		schUniNameText)
+																																		.addComponent(
+																																				schDeptNameText)
+																																				.addComponent(
+																																						schGradeText,
+																																						javax.swing.GroupLayout.DEFAULT_SIZE,
+																																						220,
+																																						Short.MAX_VALUE))))
+																																						.addContainerGap(
+																																								javax.swing.GroupLayout.DEFAULT_SIZE,
+																																								Short.MAX_VALUE)));
 		gl_schoolInfoPanel
-				.setVerticalGroup(gl_schoolInfoPanel
-						.createParallelGroup(
-								javax.swing.GroupLayout.Alignment.LEADING)
+		.setVerticalGroup(gl_schoolInfoPanel
+				.createParallelGroup(
+						javax.swing.GroupLayout.Alignment.LEADING)
 						.addGroup(
 								gl_schoolInfoPanel
-										.createSequentialGroup()
-										.addContainerGap()
-										.addComponent(schoolInfoLabel)
-										.addPreferredGap(
-												javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+								.createSequentialGroup()
+								.addContainerGap()
+								.addComponent(schoolInfoLabel)
+								.addPreferredGap(
+										javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
 										.addGroup(
 												gl_schoolInfoPanel
-														.createParallelGroup(
-																javax.swing.GroupLayout.Alignment.BASELINE)
+												.createParallelGroup(
+														javax.swing.GroupLayout.Alignment.BASELINE)
 														.addComponent(
 																schoolInfoUniversityLabel)
-														.addComponent(
-																schUniNameText,
-																javax.swing.GroupLayout.PREFERRED_SIZE,
-																javax.swing.GroupLayout.DEFAULT_SIZE,
-																javax.swing.GroupLayout.PREFERRED_SIZE))
-										.addGap(18, 18, 18)
-										.addGroup(
-												gl_schoolInfoPanel
-														.createParallelGroup(
-																javax.swing.GroupLayout.Alignment.TRAILING)
-														.addComponent(
-																schDeptNameText,
-																javax.swing.GroupLayout.PREFERRED_SIZE,
-																javax.swing.GroupLayout.DEFAULT_SIZE,
-																javax.swing.GroupLayout.PREFERRED_SIZE)
-														.addComponent(
-																schoolInfoDepartmentLabel))
-										.addGap(18, 18, 18)
-										.addGroup(
-												gl_schoolInfoPanel
-														.createParallelGroup(
-																javax.swing.GroupLayout.Alignment.TRAILING)
-														.addComponent(
-																schGradeText,
-																javax.swing.GroupLayout.PREFERRED_SIZE,
-																javax.swing.GroupLayout.DEFAULT_SIZE,
-																javax.swing.GroupLayout.PREFERRED_SIZE)
-														.addComponent(
-																schoolInfoGradeLabel))
-										.addContainerGap(
-												javax.swing.GroupLayout.DEFAULT_SIZE,
-												Short.MAX_VALUE)));
+																.addComponent(
+																		schUniNameText,
+																		javax.swing.GroupLayout.PREFERRED_SIZE,
+																		javax.swing.GroupLayout.DEFAULT_SIZE,
+																		javax.swing.GroupLayout.PREFERRED_SIZE))
+																		.addGap(18, 18, 18)
+																		.addGroup(
+																				gl_schoolInfoPanel
+																				.createParallelGroup(
+																						javax.swing.GroupLayout.Alignment.TRAILING)
+																						.addComponent(
+																								schDeptNameText,
+																								javax.swing.GroupLayout.PREFERRED_SIZE,
+																								javax.swing.GroupLayout.DEFAULT_SIZE,
+																								javax.swing.GroupLayout.PREFERRED_SIZE)
+																								.addComponent(
+																										schoolInfoDepartmentLabel))
+																										.addGap(18, 18, 18)
+																										.addGroup(
+																												gl_schoolInfoPanel
+																												.createParallelGroup(
+																														javax.swing.GroupLayout.Alignment.TRAILING)
+																														.addComponent(
+																																schGradeText,
+																																javax.swing.GroupLayout.PREFERRED_SIZE,
+																																javax.swing.GroupLayout.DEFAULT_SIZE,
+																																javax.swing.GroupLayout.PREFERRED_SIZE)
+																																.addComponent(
+																																		schoolInfoGradeLabel))
+																																		.addContainerGap(
+																																				javax.swing.GroupLayout.DEFAULT_SIZE,
+																																				Short.MAX_VALUE)));
 
 		accoInfoPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -873,388 +873,416 @@ public class MainWindow extends javax.swing.JFrame {
 		javax.swing.GroupLayout gl_accoInfoPanel = new javax.swing.GroupLayout(
 				accoInfoPanel);
 		gl_accoInfoPanel
-				.setHorizontalGroup(gl_accoInfoPanel
-						.createParallelGroup(Alignment.LEADING)
+		.setHorizontalGroup(gl_accoInfoPanel
+				.createParallelGroup(Alignment.LEADING)
+				.addGroup(
+						gl_accoInfoPanel
+						.createSequentialGroup()
+						.addContainerGap()
 						.addGroup(
 								gl_accoInfoPanel
-										.createSequentialGroup()
-										.addContainerGap()
+								.createParallelGroup(
+										Alignment.LEADING)
 										.addGroup(
 												gl_accoInfoPanel
+												.createSequentialGroup()
+												.addGroup(
+														gl_accoInfoPanel
 														.createParallelGroup(
 																Alignment.LEADING)
-														.addGroup(
-																gl_accoInfoPanel
-																		.createSequentialGroup()
+																.addComponent(
+																		accoInfoLabel,
+																		GroupLayout.PREFERRED_SIZE,
+																		165,
+																		GroupLayout.PREFERRED_SIZE)
 																		.addGroup(
 																				gl_accoInfoPanel
+																				.createSequentialGroup()
+																				.addGroup(
+																						gl_accoInfoPanel
 																						.createParallelGroup(
 																								Alignment.LEADING)
-																						.addComponent(
-																								accoInfoLabel,
-																								GroupLayout.PREFERRED_SIZE,
-																								165,
-																								GroupLayout.PREFERRED_SIZE)
-																						.addGroup(
-																								gl_accoInfoPanel
-																										.createSequentialGroup()
-																										.addGroup(
-																												gl_accoInfoPanel
-																														.createParallelGroup(
-																																Alignment.LEADING)
-																														.addComponent(
-																																accoInfoDormLabel)
-																														.addComponent(
-																																lblType,
-																																GroupLayout.PREFERRED_SIZE,
-																																82,
-																																GroupLayout.PREFERRED_SIZE))
-																										.addPreferredGap(
-																												ComponentPlacement.RELATED)
-																										.addGroup(
-																												gl_accoInfoPanel
-																														.createParallelGroup(
-																																Alignment.LEADING)
+																								.addComponent(
+																										accoInfoDormLabel)
+																										.addComponent(
+																												lblType,
+																												GroupLayout.PREFERRED_SIZE,
+																												82,
+																												GroupLayout.PREFERRED_SIZE))
+																												.addPreferredGap(
+																														ComponentPlacement.RELATED)
 																														.addGroup(
 																																gl_accoInfoPanel
-																																		.createParallelGroup(
-																																				Alignment.TRAILING,
-																																				false)
-																																		.addComponent(
-																																				accRoomCBox,
-																																				Alignment.LEADING,
-																																				0,
-																																				GroupLayout.DEFAULT_SIZE,
-																																				Short.MAX_VALUE)
-																																		.addComponent(
-																																				accDormCBox,
-																																				Alignment.LEADING,
-																																				0,
-																																				92,
-																																				Short.MAX_VALUE))
-																														.addComponent(
-																																cboxType,
-																																GroupLayout.PREFERRED_SIZE,
-																																92,
-																																GroupLayout.PREFERRED_SIZE))
-																										.addGap(70)
-																										.addGroup(
-																												gl_accoInfoPanel
-																														.createParallelGroup(
-																																Alignment.TRAILING)
-																														.addComponent(
-																																accoInfoStartDateLabel,
-																																GroupLayout.PREFERRED_SIZE,
-																																83,
-																																GroupLayout.PREFERRED_SIZE)
-																														.addComponent(
-																																accoInfoEndDateLabel,
-																																GroupLayout.PREFERRED_SIZE,
-																																83,
-																																GroupLayout.PREFERRED_SIZE))
-																										.addGap(18)
-																										.addGroup(
-																												gl_accoInfoPanel
-																														.createParallelGroup(
-																																Alignment.LEADING)
-																														.addGroup(
-																																gl_accoInfoPanel
-																																		.createSequentialGroup()
-																																		.addComponent(
-																																				accStartDateText,
-																																				GroupLayout.PREFERRED_SIZE,
-																																				215,
-																																				GroupLayout.PREFERRED_SIZE)
-																																		.addGap(65)
-																																		.addComponent(
-																																				editButton,
-																																				GroupLayout.DEFAULT_SIZE,
-																																				96,
-																																				Short.MAX_VALUE))
-																														.addGroup(
-																																gl_accoInfoPanel
-																																		.createSequentialGroup()
-																																		.addComponent(
-																																				accEndDateText,
-																																				GroupLayout.PREFERRED_SIZE,
-																																				215,
-																																				GroupLayout.PREFERRED_SIZE)
-																																		.addGap(65)
-																																		.addComponent(
-																																				saveButton,
-																																				GroupLayout.DEFAULT_SIZE,
-																																				96,
-																																				Short.MAX_VALUE)))))
-																		.addGap(20))
-														.addGroup(
-																gl_accoInfoPanel
-																		.createSequentialGroup()
-																		.addComponent(
-																				accoInfoRoomLabel,
-																				GroupLayout.DEFAULT_SIZE,
-																				106,
-																				Short.MAX_VALUE)
-																		.addGap(639)))));
+																																.createParallelGroup(
+																																		Alignment.LEADING)
+																																		.addGroup(
+																																				gl_accoInfoPanel
+																																				.createParallelGroup(
+																																						Alignment.TRAILING,
+																																						false)
+																																						.addComponent(
+																																								accRoomCBox,
+																																								Alignment.LEADING,
+																																								0,
+																																								GroupLayout.DEFAULT_SIZE,
+																																								Short.MAX_VALUE)
+																																								.addComponent(
+																																										accDormCBox,
+																																										Alignment.LEADING,
+																																										0,
+																																										92,
+																																										Short.MAX_VALUE))
+																																										.addComponent(
+																																												cboxType,
+																																												GroupLayout.PREFERRED_SIZE,
+																																												92,
+																																												GroupLayout.PREFERRED_SIZE))
+																																												.addGap(70)
+																																												.addGroup(
+																																														gl_accoInfoPanel
+																																														.createParallelGroup(
+																																																Alignment.TRAILING)
+																																																.addComponent(
+																																																		accoInfoStartDateLabel,
+																																																		GroupLayout.PREFERRED_SIZE,
+																																																		83,
+																																																		GroupLayout.PREFERRED_SIZE)
+																																																		.addComponent(
+																																																				accoInfoEndDateLabel,
+																																																				GroupLayout.PREFERRED_SIZE,
+																																																				83,
+																																																				GroupLayout.PREFERRED_SIZE))
+																																																				.addGap(18)
+																																																				.addGroup(
+																																																						gl_accoInfoPanel
+																																																						.createParallelGroup(
+																																																								Alignment.LEADING)
+																																																								.addGroup(
+																																																										gl_accoInfoPanel
+																																																										.createSequentialGroup()
+																																																										.addComponent(
+																																																												accStartDateText,
+																																																												GroupLayout.PREFERRED_SIZE,
+																																																												215,
+																																																												GroupLayout.PREFERRED_SIZE)
+																																																												.addGap(65)
+																																																												.addComponent(
+																																																														editButton,
+																																																														GroupLayout.DEFAULT_SIZE,
+																																																														96,
+																																																														Short.MAX_VALUE))
+																																																														.addGroup(
+																																																																gl_accoInfoPanel
+																																																																.createSequentialGroup()
+																																																																.addComponent(
+																																																																		accEndDateText,
+																																																																		GroupLayout.PREFERRED_SIZE,
+																																																																		215,
+																																																																		GroupLayout.PREFERRED_SIZE)
+																																																																		.addGap(65)
+																																																																		.addComponent(
+																																																																				saveButton,
+																																																																				GroupLayout.DEFAULT_SIZE,
+																																																																				96,
+																																																																				Short.MAX_VALUE)))))
+																																																																				.addGap(20))
+																																																																				.addGroup(
+																																																																						gl_accoInfoPanel
+																																																																						.createSequentialGroup()
+																																																																						.addComponent(
+																																																																								accoInfoRoomLabel,
+																																																																								GroupLayout.DEFAULT_SIZE,
+																																																																								106,
+																																																																								Short.MAX_VALUE)
+																																																																								.addGap(639)))));
 		gl_accoInfoPanel
-				.setVerticalGroup(gl_accoInfoPanel
-						.createParallelGroup(Alignment.LEADING)
+		.setVerticalGroup(gl_accoInfoPanel
+				.createParallelGroup(Alignment.LEADING)
+				.addGroup(
+						gl_accoInfoPanel
+						.createSequentialGroup()
+						.addContainerGap()
 						.addGroup(
 								gl_accoInfoPanel
-										.createSequentialGroup()
-										.addContainerGap()
+								.createParallelGroup(
+										Alignment.TRAILING)
 										.addGroup(
 												gl_accoInfoPanel
-														.createParallelGroup(
-																Alignment.TRAILING)
-														.addGroup(
-																gl_accoInfoPanel
-																		.createSequentialGroup()
-																		.addComponent(
-																				accoInfoLabel)
-																		.addPreferredGap(
-																				ComponentPlacement.UNRELATED)
-																		.addGroup(
-																				gl_accoInfoPanel
-																						.createParallelGroup(
-																								Alignment.BASELINE)
-																						.addComponent(
-																								accoInfoDormLabel)
+												.createSequentialGroup()
+												.addComponent(
+														accoInfoLabel)
+														.addPreferredGap(
+																ComponentPlacement.UNRELATED)
+																.addGroup(
+																		gl_accoInfoPanel
+																		.createParallelGroup(
+																				Alignment.BASELINE)
+																				.addComponent(
+																						accoInfoDormLabel)
 																						.addComponent(
 																								accDormCBox,
 																								GroupLayout.PREFERRED_SIZE,
 																								GroupLayout.DEFAULT_SIZE,
 																								GroupLayout.PREFERRED_SIZE)
-																						.addComponent(
-																								accoInfoStartDateLabel)
-																						.addComponent(
-																								accStartDateText,
-																								GroupLayout.PREFERRED_SIZE,
-																								GroupLayout.DEFAULT_SIZE,
-																								GroupLayout.PREFERRED_SIZE))
-																		.addGap(17))
-														.addGroup(
-																gl_accoInfoPanel
-																		.createSequentialGroup()
-																		.addComponent(
-																				editButton)
-																		.addPreferredGap(
-																				ComponentPlacement.UNRELATED)))
-										.addGroup(
-												gl_accoInfoPanel
-														.createParallelGroup(
-																Alignment.TRAILING)
-														.addGroup(
-																gl_accoInfoPanel
-																		.createParallelGroup(
-																				Alignment.BASELINE)
-																		.addComponent(
-																				accEndDateText,
-																				GroupLayout.PREFERRED_SIZE,
-																				GroupLayout.DEFAULT_SIZE,
-																				GroupLayout.PREFERRED_SIZE)
-																		.addComponent(
-																				accoInfoEndDateLabel)
-																		.addComponent(
-																				saveButton,
-																				GroupLayout.PREFERRED_SIZE,
-																				23,
-																				GroupLayout.PREFERRED_SIZE))
-														.addGroup(
-																gl_accoInfoPanel
-																		.createSequentialGroup()
-																		.addGroup(
-																				gl_accoInfoPanel
-																						.createParallelGroup(
-																								Alignment.BASELINE)
-																						.addComponent(
-																								lblType,
-																								GroupLayout.PREFERRED_SIZE,
-																								15,
-																								GroupLayout.PREFERRED_SIZE)
-																						.addComponent(
-																								cboxType,
-																								GroupLayout.PREFERRED_SIZE,
-																								GroupLayout.DEFAULT_SIZE,
-																								GroupLayout.PREFERRED_SIZE))
-																		.addGap(6)))
-										.addGap(5)
-										.addGroup(
-												gl_accoInfoPanel
-														.createParallelGroup(
-																Alignment.BASELINE)
-														.addComponent(
-																accoInfoRoomLabel)
-														.addComponent(
-																accRoomCBox,
-																GroupLayout.PREFERRED_SIZE,
-																GroupLayout.DEFAULT_SIZE,
-																GroupLayout.PREFERRED_SIZE))
-										.addGap(22)));
+																								.addComponent(
+																										accoInfoStartDateLabel)
+																										.addComponent(
+																												accStartDateText,
+																												GroupLayout.PREFERRED_SIZE,
+																												GroupLayout.DEFAULT_SIZE,
+																												GroupLayout.PREFERRED_SIZE))
+																												.addGap(17))
+																												.addGroup(
+																														gl_accoInfoPanel
+																														.createSequentialGroup()
+																														.addComponent(
+																																editButton)
+																																.addPreferredGap(
+																																		ComponentPlacement.UNRELATED)))
+																																		.addGroup(
+																																				gl_accoInfoPanel
+																																				.createParallelGroup(
+																																						Alignment.TRAILING)
+																																						.addGroup(
+																																								gl_accoInfoPanel
+																																								.createParallelGroup(
+																																										Alignment.BASELINE)
+																																										.addComponent(
+																																												accEndDateText,
+																																												GroupLayout.PREFERRED_SIZE,
+																																												GroupLayout.DEFAULT_SIZE,
+																																												GroupLayout.PREFERRED_SIZE)
+																																												.addComponent(
+																																														accoInfoEndDateLabel)
+																																														.addComponent(
+																																																saveButton,
+																																																GroupLayout.PREFERRED_SIZE,
+																																																23,
+																																																GroupLayout.PREFERRED_SIZE))
+																																																.addGroup(
+																																																		gl_accoInfoPanel
+																																																		.createSequentialGroup()
+																																																		.addGroup(
+																																																				gl_accoInfoPanel
+																																																				.createParallelGroup(
+																																																						Alignment.BASELINE)
+																																																						.addComponent(
+																																																								lblType,
+																																																								GroupLayout.PREFERRED_SIZE,
+																																																								15,
+																																																								GroupLayout.PREFERRED_SIZE)
+																																																								.addComponent(
+																																																										cboxType,
+																																																										GroupLayout.PREFERRED_SIZE,
+																																																										GroupLayout.DEFAULT_SIZE,
+																																																										GroupLayout.PREFERRED_SIZE))
+																																																										.addGap(6)))
+																																																										.addGap(5)
+																																																										.addGroup(
+																																																												gl_accoInfoPanel
+																																																												.createParallelGroup(
+																																																														Alignment.BASELINE)
+																																																														.addComponent(
+																																																																accoInfoRoomLabel)
+																																																																.addComponent(
+																																																																		accRoomCBox,
+																																																																		GroupLayout.PREFERRED_SIZE,
+																																																																		GroupLayout.DEFAULT_SIZE,
+																																																																		GroupLayout.PREFERRED_SIZE))
+																																																																		.addGap(22)));
 		accoInfoPanel.setLayout(gl_accoInfoPanel);
 
 		javax.swing.GroupLayout gl_mainPaneSubPanel = new javax.swing.GroupLayout(
 				mainPaneSubPanel);
 		gl_mainPaneSubPanel
-				.setHorizontalGroup(gl_mainPaneSubPanel
-						.createParallelGroup(Alignment.TRAILING)
+		.setHorizontalGroup(gl_mainPaneSubPanel
+				.createParallelGroup(Alignment.TRAILING)
+				.addGroup(
+						gl_mainPaneSubPanel
+						.createSequentialGroup()
+						.addContainerGap()
 						.addGroup(
 								gl_mainPaneSubPanel
-										.createSequentialGroup()
-										.addContainerGap()
-										.addGroup(
-												gl_mainPaneSubPanel
-														.createParallelGroup(
-																Alignment.TRAILING)
-														.addComponent(
-																accoInfoPanel,
-																Alignment.LEADING,
-																GroupLayout.DEFAULT_SIZE,
-																GroupLayout.DEFAULT_SIZE,
-																Short.MAX_VALUE)
-														.addComponent(
-																personalInfoPanel,
-																Alignment.LEADING,
-																GroupLayout.DEFAULT_SIZE,
-																759,
-																Short.MAX_VALUE)
+								.createParallelGroup(
+										Alignment.TRAILING)
+										.addComponent(
+												accoInfoPanel,
+												Alignment.LEADING,
+												GroupLayout.DEFAULT_SIZE,
+												GroupLayout.DEFAULT_SIZE,
+												Short.MAX_VALUE)
+												.addComponent(
+														personalInfoPanel,
+														Alignment.LEADING,
+														GroupLayout.DEFAULT_SIZE,
+														759,
+														Short.MAX_VALUE)
 														.addGroup(
 																Alignment.LEADING,
 																gl_mainPaneSubPanel
-																		.createSequentialGroup()
-																		.addComponent(
-																				emergencyContactPanel,
-																				GroupLayout.PREFERRED_SIZE,
-																				GroupLayout.DEFAULT_SIZE,
-																				GroupLayout.PREFERRED_SIZE)
+																.createSequentialGroup()
+																.addComponent(
+																		emergencyContactPanel,
+																		GroupLayout.PREFERRED_SIZE,
+																		GroupLayout.DEFAULT_SIZE,
+																		GroupLayout.PREFERRED_SIZE)
 																		.addPreferredGap(
 																				ComponentPlacement.RELATED)
-																		.addComponent(
-																				schoolInfoPanel,
-																				GroupLayout.DEFAULT_SIZE,
-																				398,
-																				Short.MAX_VALUE)))
-										.addContainerGap()));
+																				.addComponent(
+																						schoolInfoPanel,
+																						GroupLayout.DEFAULT_SIZE,
+																						398,
+																						Short.MAX_VALUE)))
+																						.addContainerGap()));
 		gl_mainPaneSubPanel
-				.setVerticalGroup(gl_mainPaneSubPanel
-						.createParallelGroup(Alignment.LEADING)
-						.addGroup(
-								gl_mainPaneSubPanel
-										.createSequentialGroup()
-										.addComponent(personalInfoPanel,
-												GroupLayout.PREFERRED_SIZE,
-												GroupLayout.DEFAULT_SIZE,
-												GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(
-												ComponentPlacement.RELATED)
+		.setVerticalGroup(gl_mainPaneSubPanel
+				.createParallelGroup(Alignment.LEADING)
+				.addGroup(
+						gl_mainPaneSubPanel
+						.createSequentialGroup()
+						.addComponent(personalInfoPanel,
+								GroupLayout.PREFERRED_SIZE,
+								GroupLayout.DEFAULT_SIZE,
+								GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(
+										ComponentPlacement.RELATED)
 										.addGroup(
 												gl_mainPaneSubPanel
-														.createParallelGroup(
-																Alignment.LEADING,
-																false)
+												.createParallelGroup(
+														Alignment.LEADING,
+														false)
 														.addComponent(
 																emergencyContactPanel,
 																GroupLayout.DEFAULT_SIZE,
 																GroupLayout.DEFAULT_SIZE,
 																Short.MAX_VALUE)
-														.addComponent(
-																schoolInfoPanel,
-																GroupLayout.DEFAULT_SIZE,
-																GroupLayout.DEFAULT_SIZE,
-																Short.MAX_VALUE))
-										.addPreferredGap(
-												ComponentPlacement.RELATED)
-										.addComponent(accoInfoPanel,
-												GroupLayout.DEFAULT_SIZE, 153,
-												Short.MAX_VALUE)));
+																.addComponent(
+																		schoolInfoPanel,
+																		GroupLayout.DEFAULT_SIZE,
+																		GroupLayout.DEFAULT_SIZE,
+																		Short.MAX_VALUE))
+																		.addPreferredGap(
+																				ComponentPlacement.RELATED)
+																				.addComponent(accoInfoPanel,
+																						GroupLayout.DEFAULT_SIZE, 153,
+																						Short.MAX_VALUE)));
 		mainPaneSubPanel.setLayout(gl_mainPaneSubPanel);
 
 		tabbedPane.addTab("Profile", mainPaneSubPanel);
 
 		tabbedPane.addTab("Payment", paymentPanel);
 		paymentPanel.setLayout(null);
-		
+
 		lblPayment = new JLabel("Payment");
 		lblPayment.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblPayment.setBounds(142, 11, 155, 25);
 		paymentPanel.add(lblPayment);
-		
+
 		label = new JLabel("");
 		label.setIcon(new ImageIcon("C:\\Users\\user\\Desktop\\workspace\\DMS\\url.jpg"));
 		label.setBounds(405, 11, 46, 469);
 		paymentPanel.add(label);
-		
+
 		lblNewLabel = new JLabel("Room Price:");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblNewLabel.setBounds(10, 83, 91, 14);
 		paymentPanel.add(lblNewLabel);
-		
-		textField_1 = new JTextField();
-		textField_1.setBounds(155, 82, 197, 20);
-		paymentPanel.add(textField_1);
-		textField_1.setColumns(10);
-		
+
+		roomPrice = new JTextField();
+		roomPrice.setBounds(155, 82, 197, 20);
+		paymentPanel.add(roomPrice);
+		roomPrice.setColumns(10);
+
 		JLabel lblTotalDebt = new JLabel("Total Debt:");
 		lblTotalDebt.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblTotalDebt.setBounds(10, 129, 91, 14);
 		paymentPanel.add(lblTotalDebt);
-		
+
 		JLabel lblDisbursement = new JLabel("Disbursement:");
 		lblDisbursement.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblDisbursement.setBounds(10, 173, 111, 14);
 		paymentPanel.add(lblDisbursement);
-		
+
 		JLabel lblAccomodationTimemonthly = new JLabel("Accomodation Time:");
 		lblAccomodationTimemonthly.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblAccomodationTimemonthly.setBounds(10, 215, 202, 14);
+		lblAccomodationTimemonthly.setBounds(10, 215, 143, 14);
 		paymentPanel.add(lblAccomodationTimemonthly);
-		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(155, 128, 197, 20);
-		paymentPanel.add(textField_2);
-		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(155, 172, 197, 20);
-		paymentPanel.add(textField_3);
-		
+
+		totalDebt = new JTextField();
+		totalDebt.setColumns(10);
+		totalDebt.setBounds(155, 128, 197, 20);
+		paymentPanel.add(totalDebt);
+
+		disbursement = new JTextField();
+		disbursement.setColumns(10);
+		disbursement.setBounds(155, 172, 197, 20);
+		paymentPanel.add(disbursement);
+
 		textField_4 = new JTextField();
 		textField_4.setColumns(10);
 		textField_4.setBounds(561, 89, 197, 20);
 		paymentPanel.add(textField_4);
-		
-		textField_5 = new JTextField();
-		textField_5.setColumns(10);
-		textField_5.setBounds(155, 214, 197, 20);
-		paymentPanel.add(textField_5);
-		
+
+		accomodation = new JTextField();
+		accomodation.setColumns(10);
+		accomodation.setBounds(155, 214, 197, 20);
+		paymentPanel.add(accomodation);
+
 		JLabel lblPayment_1 = new JLabel("Details");
 		lblPayment_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblPayment_1.setBounds(538, 11, 155, 25);
 		paymentPanel.add(lblPayment_1);
-		
+
 		JLabel lblPaymentType = new JLabel("Payment Type:");
 		lblPaymentType.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblPaymentType.setBounds(10, 268, 122, 25);
 		paymentPanel.add(lblPaymentType);
-		
-		JRadioButton rdbtnNewRadioButton = new JRadioButton("Cash");
+
+		final JRadioButton rdbtnNewRadioButton = new JRadioButton("Cash");
 		rdbtnNewRadioButton.setBounds(142, 271, 79, 23);
 		paymentPanel.add(rdbtnNewRadioButton);
-		
-		JRadioButton rdbtnCreditCard = new JRadioButton("Credit Card");
+
+		final JRadioButton rdbtnCreditCard = new JRadioButton("Credit Card");
 		rdbtnCreditCard.setBounds(243, 271, 109, 23);
 		paymentPanel.add(rdbtnCreditCard);
-		
+
 		JLabel label_1 = new JLabel("Remaining Debt:");
 		label_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		label_1.setBounds(446, 85, 111, 25);
 		paymentPanel.add(label_1);
-		
+
+
+
 		JButton btnEnter = new JButton("Enter");
+		btnEnter.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int price = Integer.parseInt(roomPrice.getText());
+				int months = Integer.parseInt(accomodation.getText());
+				int total = price * months;
+				// Geri total'ı totalDebt'in olduğu String'e yazamadım :S 
+				totalDebt.setEditable(false);
+				
+				int money = Integer.parseInt(disbursement.getText());
+				int remain = total - money;
+				// Remaining'i tekrardan remaining textBox'a yazamadım.
+				
+				textField_4.setEditable(false);
+				
+				if(rdbtnCreditCard.isSelected() == true) {
+					textField_4.setText("0");
+					textField_4.setEditable(false);
+				} else if(rdbtnNewRadioButton.isSelected() == true) {
+					textField_4.setText("0");
+					textField_4.setEditable(false);
+				}
+
+
+
+			}
+		});
 		btnEnter.setBounds(288, 389, 89, 23);
 		paymentPanel.add(btnEnter);
-		
+
 
 
 		javax.swing.GroupLayout gl_mainPanePanel = new javax.swing.GroupLayout(
@@ -1263,16 +1291,16 @@ public class MainWindow extends javax.swing.JFrame {
 				.createParallelGroup(Alignment.TRAILING).addGroup(
 						Alignment.LEADING,
 						gl_mainPanePanel
-								.createSequentialGroup()
-								.addContainerGap()
-								.addComponent(tabbedPane,
-										GroupLayout.PREFERRED_SIZE,
-										GroupLayout.DEFAULT_SIZE,
-										GroupLayout.PREFERRED_SIZE)
+						.createSequentialGroup()
+						.addContainerGap()
+						.addComponent(tabbedPane,
+								GroupLayout.PREFERRED_SIZE,
+								GroupLayout.DEFAULT_SIZE,
+								GroupLayout.PREFERRED_SIZE)
 								.addContainerGap()));
 		gl_mainPanePanel.setVerticalGroup(gl_mainPanePanel.createParallelGroup(
 				Alignment.LEADING).addGroup(
-				gl_mainPanePanel
+						gl_mainPanePanel
 						.createSequentialGroup()
 						.addGap(20)
 						.addComponent(tabbedPane, GroupLayout.DEFAULT_SIZE,
@@ -1286,11 +1314,11 @@ public class MainWindow extends javax.swing.JFrame {
 				java.awt.event.InputEvent.SHIFT_MASK));
 		addStudentMenuItem.setText("Add Student");
 		addStudentMenuItem
-				.addActionListener(new java.awt.event.ActionListener() {
-					public void actionPerformed(java.awt.event.ActionEvent evt) {
-						addStudentActionPerformed(evt);
-					}
-				});
+		.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				addStudentActionPerformed(evt);
+			}
+		});
 		homeMenu.add(addStudentMenuItem);
 
 		menuBar.add(homeMenu);
@@ -1405,37 +1433,37 @@ public class MainWindow extends javax.swing.JFrame {
 				.createParallelGroup(Alignment.LEADING)
 				.addGroup(
 						layout.createSequentialGroup()
-								.addComponent(mainSearchPanel,
-										GroupLayout.PREFERRED_SIZE,
-										GroupLayout.DEFAULT_SIZE,
-										GroupLayout.PREFERRED_SIZE)
+						.addComponent(mainSearchPanel,
+								GroupLayout.PREFERRED_SIZE,
+								GroupLayout.DEFAULT_SIZE,
+								GroupLayout.PREFERRED_SIZE)
 								.addPreferredGap(ComponentPlacement.UNRELATED)
 								.addGroup(
 										layout.createParallelGroup(
 												Alignment.LEADING)
 												.addGroup(
 														layout.createSequentialGroup()
-																.addComponent(
-																		jSeparator1,
-																		GroupLayout.PREFERRED_SIZE,
-																		15,
-																		GroupLayout.PREFERRED_SIZE)
+														.addComponent(
+																jSeparator1,
+																GroupLayout.PREFERRED_SIZE,
+																15,
+																GroupLayout.PREFERRED_SIZE)
 																.addContainerGap(
 																		781,
 																		Short.MAX_VALUE))
-												.addComponent(
-														mainPanePanel,
-														GroupLayout.DEFAULT_SIZE,
-														GroupLayout.DEFAULT_SIZE,
-														Short.MAX_VALUE))));
+																		.addComponent(
+																				mainPanePanel,
+																				GroupLayout.DEFAULT_SIZE,
+																				GroupLayout.DEFAULT_SIZE,
+																				Short.MAX_VALUE))));
 		layout.setVerticalGroup(layout
 				.createParallelGroup(Alignment.LEADING)
 				.addComponent(jSeparator1, GroupLayout.PREFERRED_SIZE,
 						GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-				.addComponent(mainSearchPanel, GroupLayout.DEFAULT_SIZE, 540,
-						Short.MAX_VALUE)
-				.addComponent(mainPanePanel, GroupLayout.DEFAULT_SIZE, 540,
-						Short.MAX_VALUE));
+						.addComponent(mainSearchPanel, GroupLayout.DEFAULT_SIZE, 540,
+								Short.MAX_VALUE)
+								.addComponent(mainPanePanel, GroupLayout.DEFAULT_SIZE, 540,
+										Short.MAX_VALUE));
 		getContentPane().setLayout(layout);
 
 		pack();
@@ -1455,7 +1483,7 @@ public class MainWindow extends javax.swing.JFrame {
 
 			try {
 				resultSet
-						.add(studentSearchList.getModel().getElementAt(itemIx));
+				.add(studentSearchList.getModel().getElementAt(itemIx));
 			} catch (ArrayIndexOutOfBoundsException e) {
 				searchStudentText.setText("");
 				return;
@@ -1904,9 +1932,9 @@ public class MainWindow extends javax.swing.JFrame {
 	private JLabel label;
 	private JLabel lblNewLabel;
 	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
+	private JTextField roomPrice;
+	private JTextField totalDebt;
+	private JTextField disbursement;
 	private JTextField textField_4;
-	private JTextField textField_5;
+	private JTextField accomodation;
 }

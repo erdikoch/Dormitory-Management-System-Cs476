@@ -46,7 +46,7 @@ public class DBConnection {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		String url = "jdbc:sqlserver://192.168.230.1:1433;instance=MSSQLSERVER;DatabaseName=DormManagement";
+		String url = "jdbc:sqlserver://192.168.234.1:1433;instance=MSSQLSERVER;DatabaseName=DormManagement";
 		con = DriverManager.getConnection(url, "sa", "123456");
 		return con;
 	}
@@ -65,21 +65,6 @@ public class DBConnection {
 
 		return capacity;
 	}
-	public int getTotalStudenNumberInDorm(Dorm dorm) throws SQLException {
-		int totalStudent = 0;
-		connect();
-		proc_stmt = con.prepareCall("{ call Get_StudentNumberInDorm(?) }");
-
-		proc_stmt.setString(1, dorm.getDormName());
-
-		rs = proc_stmt.executeQuery();
-		while (rs.next()) {
-			totalStudent = rs.getInt(1);
-		}
-
-		return totalStudent;
-	}
-
 
 	public boolean insertRoomType(Room room) {
 		try {

@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GradientPaint;
 
+import javax.swing.JFrame;
+
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -15,37 +17,35 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.renderer.category.BarRenderer;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
-import org.jfree.ui.ApplicationFrame;
 
-	/**
-	 * A simple demonstration application showing how to create a bar chart.
-	 *
-	 */
-	public class MaleFemaleCapacityWindow extends ApplicationFrame {
+import background.Dorm;
 
-	    /**
-	     * Creates a new demo instance.
-	     *
-	     * @param title  the frame title.
-	     */
-	    public MaleFemaleCapacityWindow(final String title) {
-
-	        super(title);
-
-	        final CategoryDataset dataset = createDataset();
+	
+	public class MaleFemaleCapacityWindow {
+			private Dorm dorm;
+	    
+	    public MaleFemaleCapacityWindow(Dorm dorm) {
+	        super();
+	        this.dorm = dorm;
+	        JFrame genderFrame = new JFrame("Gender Rate");
+	        genderFrame.setBounds(0,0,500,300);
+	        final CategoryDataset dataset = createDataset(dorm);
 	        final JFreeChart chart = createChart(dataset);
 	        final ChartPanel chartPanel = new ChartPanel(chart);
 	        chartPanel.setPreferredSize(new Dimension(500, 270));
-	        setContentPane(chartPanel);
+	        genderFrame.setContentPane(chartPanel);
+	        genderFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+	        genderFrame.setVisible(true);
 
 	    }
 
 	    /**
 	     * Returns a sample dataset.
+	     * @param dorm 
 	     * 
 	     * @return The dataset.
 	     */
-	    private CategoryDataset createDataset() {
+	    private CategoryDataset createDataset(Dorm dorm) {
 	        
 	        // row keys...
 	        final String series1 = "Male";
@@ -90,7 +90,7 @@ import org.jfree.ui.ApplicationFrame;
 	        
 	        // create the chart...
 	        final JFreeChart chart = ChartFactory.createBarChart(
-	            "Bar Chart Demo",         // chart title
+	            "Gender Rate Chart",         // chart title
 	            "Category",               // domain axis label
 	            "Value",                  // range axis label
 	            dataset,                  // data

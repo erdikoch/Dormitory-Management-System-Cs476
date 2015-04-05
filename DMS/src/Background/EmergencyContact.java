@@ -27,8 +27,12 @@ public class EmergencyContact {
 	}
 
 	public void setPhone(String phone) {
-		this.phone = phone;
+		if(phone.equals("")) {
+			phone = "N/A";
+		} else if (phone.equals(" ")) {
+			phone = "N/A";
+		} else {
+			this.phone = phone;
+		}
 	}
-	
-	
 }

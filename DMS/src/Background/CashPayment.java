@@ -1,12 +1,13 @@
 package background;
 
 import java.util.Calendar;
+import java.util.Date;
 
 public class CashPayment extends Payment {
 	private int roomPrice;
 	private int totalDebt;
 	private int disbursement;
-	private Calendar accomodationTime;
+	private Date accomodationTime;
 	private int remainingDebt;
 	
 	public int getRoomPrice() {
@@ -33,11 +34,11 @@ public class CashPayment extends Payment {
 		this.disbursement = disbursement;
 	}
 
-	public Calendar getAccomodationTime() {
+	public Date getAccomodationTime() {
 		return accomodationTime;
 	}
 
-	public void setAccomodationTime(Calendar accomodationTime) {
+	public void setAccomodationTime(Date accomodationTime) {
 		this.accomodationTime = accomodationTime;
 	}
 

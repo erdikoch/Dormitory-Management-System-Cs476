@@ -26,7 +26,13 @@ public class Student {
 	}
 
 	public void setName(String name) {
-		this.name = name;
+		if(name.equals("")) {
+			name = "N/A";
+		} else if (name.equals(" ")) {
+			name = "N/A";
+		} else {
+			this.name = name;
+		}
 	}
 
 	public String getSurname() {
@@ -34,15 +40,26 @@ public class Student {
 	}
 
 	public void setSurname(String surname) {
-		this.surname = surname;
+		if(surname.equals("")) {
+			surname = "N/A";
+		} else if (name.equals(" ")) {
+			surname = "N/A";
+		} else {
+			this.surname = surname;
+		}
 	}
-
 	public String getEmail() {
 		return email;
 	}
 
 	public void setEmail(String email) {
+		if(name.equals("")) {
+			name = "N/A";
+		} else if (name.equals(" ")) {
+			name = "N/A";
+		} else {
 		this.email = email;
+		}
 	}
 
 	public String getPhone() {
@@ -50,7 +67,13 @@ public class Student {
 	}
 
 	public void setPhone(String phone) {
-		this.phone = phone;
+		if(phone.equals("")) {
+			phone = "N/A";
+		} else if (name.equals(" ")) {
+			phone = "N/A";
+		} else {
+			this.phone = phone;
+		}
 	}
 
 	public String getGender() {
@@ -58,18 +81,27 @@ public class Student {
 	}
 
 	public void setGender(String gender) {
-		this.gender = gender;
+		if(gender.equals("")) {
+			gender = "N/A";
+		} else if (name.equals(" ")) {
+			gender = "N/A";
+		} else {
+			this.gender = gender;
+		}
 	}
 
 	public String getTC() {
 		return TC;
 	}
 
-	public void setTC(String tC) {
-		TC = tC;
+	public void setTC(String TC) {
+		if(TC.equals("")) {
+			TC = "N/A";
+		} else if (TC.equals(" ")) {
+			TC = "N/A";
+		} else {
+			this.TC = TC;
+		}
 	}
 
-	
-	
-	
 }

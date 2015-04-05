@@ -50,6 +50,21 @@ public class DBConnection {
 		con = DriverManager.getConnection(url, "sa", "123456");
 		return con;
 	}
+	
+	public int getTotalStudenNumberInDorm(Dorm dorm) throws SQLException {
+				int totalStudent = 0;
+				connect();
+				proc_stmt = con.prepareCall("{ call Get_StudentNumberInDorm(?) }");
+		
+				proc_stmt.setString(1, dorm.getDormName());
+		
+				rs = proc_stmt.executeQuery();
+				while (rs.next()) {
+					totalStudent = rs.getInt(1);
+				}
+		
+				return totalStudent;
+			}
 
 	public int getDormCapacity(Dorm dorm) throws SQLException {
 		int capacity = 0;

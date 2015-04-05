@@ -25,7 +25,7 @@ public class CapacityWindow {
 		connection.connect();
 		JFrame capacityFrame = new JFrame("Dorm Capacity");
 		capacityFrame.setBounds(0, 0, 500, 300);
-		capacityFrame.setContentPane(createDemoPanel(dorm,connection.getDormCapacity(dorm),connection.getTotalStudenNumberInDorm(dorm)));
+		//capacityFrame.setContentPane(createDemoPanel(dorm,connection.getDormCapacity(dorm),connection.getTotalStudenNumberInDorm(dorm)));
 		capacityFrame.setVisible(true);
 	}
 

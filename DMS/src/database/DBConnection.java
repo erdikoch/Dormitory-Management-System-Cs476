@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 import view.DormListWindow;
 import view.DormWindow;
+import background.ClosedItem;
 import background.DamagedItem;
 import background.Dorm;
 import background.EmergencyContact;
@@ -43,28 +44,12 @@ public class DBConnection {
 		try {
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		String url = "jdbc:sqlserver://192.168.234.1:1433;instance=MSSQLSERVER;DatabaseName=DormManagement";
 		con = DriverManager.getConnection(url, "sa", "123456");
 		return con;
 	}
-	
-	public int getTotalStudenNumberInDorm(Dorm dorm) throws SQLException {
-				int totalStudent = 0;
-				connect();
-				proc_stmt = con.prepareCall("{ call Get_StudentNumberInDorm(?) }");
-		
-				proc_stmt.setString(1, dorm.getDormName());
-		
-				rs = proc_stmt.executeQuery();
-				while (rs.next()) {
-					totalStudent = rs.getInt(1);
-				}
-		
-				return totalStudent;
-			}
 
 	public int getDormCapacity(Dorm dorm) throws SQLException {
 		int capacity = 0;
@@ -90,7 +75,6 @@ public class DBConnection {
 			proc_stmt.executeUpdate();
 			return true;
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return false;
 		}
@@ -106,7 +90,6 @@ public class DBConnection {
 			proc_stmt.executeUpdate();
 			return true;
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return false;
 		}
@@ -204,6 +187,22 @@ public class DBConnection {
 
 	}
 
+	public boolean insertClosedItem(ClosedItem item) {
+		try {
+			proc_stmt = connect().prepareCall(
+					"{ call Insert_ClosedItem(?,?,?,?) }");
+			proc_stmt.setString(1, item.getcName());
+			proc_stmt.setString(2, item.getcSurname());
+			proc_stmt.setInt(3, item.getLostItemId());
+			proc_stmt.setDate(4, (Date) item.getClosingDate());
+			proc_stmt.executeUpdate();
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
 	public ArrayList<String> displayStudentNameSurname() throws SQLException {
 		ArrayList<String> studentList = new ArrayList<String>();
 		Statement st = connect().createStatement();
@@ -263,7 +262,6 @@ public class DBConnection {
 			proc_stmt.executeUpdate();
 			return true;
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return false;
 		}
@@ -303,7 +301,6 @@ public class DBConnection {
 			return true;
 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return false;
 		}
@@ -324,7 +321,6 @@ public class DBConnection {
 
 			pstmt.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -343,7 +339,6 @@ public class DBConnection {
 			pstmt.close();
 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -386,7 +381,6 @@ public class DBConnection {
 				std.setBirthday(rs.getDate("Birthdate"));
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return std;
@@ -405,7 +399,6 @@ public class DBConnection {
 				emg.setPhone(rs.getString("Phone"));
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return emg;
@@ -424,7 +417,6 @@ public class DBConnection {
 				sch.setGrade(rs.getInt("Grade"));
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return sch;
@@ -442,10 +434,24 @@ public class DBConnection {
 				host.setEndDate(rs.getDate("EndDate"));
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return host;
+	}
+
+	public int getTotalStudenNumberInDorm(Dorm dorm) throws SQLException {
+		int totalStudent = 0;
+		connect();
+		proc_stmt = con.prepareCall("{ call Get_StudentNumberInDorm(?) }");
+
+		proc_stmt.setString(1, dorm.getDormName());
+
+		rs = proc_stmt.executeQuery();
+		while (rs.next()) {
+			totalStudent = rs.getInt(1);
+		}
+
+		return totalStudent;
 	}
 
 	public Dorm retrieveDormInfo(String name, String surname) {
@@ -459,7 +465,6 @@ public class DBConnection {
 				dorm.setDormName(rs.getString("DormName"));
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return dorm;
@@ -478,7 +483,6 @@ public class DBConnection {
 
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return room;
@@ -497,7 +501,6 @@ public class DBConnection {
 				lostStatus.add(rs.getString("Status"));
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -515,18 +518,59 @@ public class DBConnection {
 				damagedStatus.add(rs.getString("Status"));
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public void updateDmgItemStatus(Object status) {
+		int std = (int) status;
+		try {
+			proc_stmt = connect().prepareCall(
+					"{ call Update_DamagedItemStatus(?) }");
+			proc_stmt.setInt(1, std);
+			proc_stmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public LostItem retreiveLostItemInfo(Object lostId) {
+		int id = (int) lostId;
+		System.out.println(id);
+		LostItem item = new LostItem();
+		try {
+			proc_stmt = connect().prepareCall("{ call Get_LostInfo(?) }");
+			proc_stmt.setInt(1, id);
+			rs = proc_stmt.executeQuery();
+			while (rs.next()) {
+				item.setLostName(rs.getString("ItemName"));
+				item.setLostNote(rs.getString("Note"));
+				item.setLostDate(rs.getDate("Date"));
+				item.setLostDorm(rs.getString("DormName"));
+
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return item;
+	}
+
+	public void updateStatus(int id) {
+		try {
+			proc_stmt = connect().prepareCall(
+					"{ call Update_LostItemStatus(?) }");
+			proc_stmt.setInt(1, id);
+			proc_stmt.executeUpdate();
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 
 	public static void closeStatement(Statement statement) {
-		// TODO Auto-generated method stub
 
 	}
 
 	public static void closeConnection(Connection connection) {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -565,7 +609,5 @@ public class DBConnection {
 	public ArrayList<Integer> getDamagedId() {
 		return damagedId;
 	}
-	
-	
 
 }

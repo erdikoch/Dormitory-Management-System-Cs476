@@ -38,8 +38,6 @@ public class ItemsListWindow extends javax.swing.JFrame {
 	private JMenuItem deletedLostItem, deletedDamagedItem;
 	private JPopupMenu popupMenu, popupMenuForD;
 
-	// private Object[][] lostTableData = new Object[8][8];
-
 	public ItemsListWindow() {
 		initComponents();
 
@@ -62,14 +60,13 @@ public class ItemsListWindow extends javax.swing.JFrame {
 		popupMenu = new JPopupMenu();
 		deletedLostItem = new JMenuItem("Closed");
 		deletedLostItem.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent evt) {
+				Object id = lostItemTable.getValueAt(
+						lostItemTable.getSelectedRow(), 0);
 				lostItemTable.getSelectedRow();
-				new RemoveLostItemWindow().setVisible(true);
-				System.out.println(lostItemTable.getSelectedRow());
-				System.out.println(deletedLostItem.getText());
-				
+				new CloseLostItemWindow(id).setVisible(true);
 			}
 		});
 		popupMenu.add(deletedLostItem);
@@ -81,7 +78,6 @@ public class ItemsListWindow extends javax.swing.JFrame {
 			}
 		});
 
-		
 		lostItemTable.setModel(new javax.swing.table.DefaultTableModel(
 				new Object[][] { {}, {}, {}, {} }, new String[] {}));
 
@@ -93,16 +89,30 @@ public class ItemsListWindow extends javax.swing.JFrame {
 				new Color(102, 102, 102), new Color(0, 0, 51)));
 		scrollPane_1.setBounds(498, 37, 246, 224);
 		getContentPane().add(scrollPane_1);
-		
+
 		damagedItemTable = new JTable();
+		damagedItemTable.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent evt) {
+				clickOnDmgTable(evt);
+			}
+		});
 		popupMenuForD = new JPopupMenu();
+
 		deletedDamagedItem = new JMenuItem("Closed");
 		deletedDamagedItem.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				if (!damagedItemTable.getValueAt(
+						damagedItemTable.getSelectedRow(), 2).equals("Closed")) {
+					conn.updateDmgItemStatus(damagedItemTable.getValueAt(
+							damagedItemTable.getSelectedRow(), 0));
+					damagedItemTable.setValueAt("Closed",
+							damagedItemTable.getSelectedRow(), 2);
+				}
 			}
 		});
+
 		popupMenuForD.add(deletedDamagedItem);
 		damagedItemTable.setComponentPopupMenu(popupMenuForD);
 		damagedItemTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -111,12 +121,14 @@ public class ItemsListWindow extends javax.swing.JFrame {
 		scrollPane_1.setViewportView(damagedItemTable);
 
 		JScrollPane scrollPane = new JScrollPane();
+
 		scrollPane.setViewportBorder(new EtchedBorder(EtchedBorder.LOWERED,
 				new Color(102, 102, 102), new Color(0, 0, 51)));
 		scrollPane.setBounds(248, 37, 246, 224);
 		getContentPane().add(scrollPane);
 
 		closedItemTable = new JTable();
+		closedItemTable.setModel(fillClosedTable());
 		scrollPane.setViewportView(closedItemTable);
 
 		JPanel panel = new JPanel();
@@ -162,10 +174,30 @@ public class ItemsListWindow extends javax.swing.JFrame {
 		lostModel.addColumn("Item");
 		lostModel.addColumn("Status");
 		for (int i = 0; i < conn.getLostId().size(); i++) {
-			lostModel.addRow(new Object[] { conn.getLostId().get(i),
-					conn.getLostName().get(i), conn.getLostStatus().get(i) });
+			if (conn.getLostStatus().get(i).equals("In progress")) {
+				lostModel
+						.addRow(new Object[] { conn.getLostId().get(i),
+								conn.getLostName().get(i),
+								conn.getLostStatus().get(i) });
+			}
 		}
 		return lostModel;
+	}
+
+	private TableModel fillClosedTable() {
+		DefaultTableModel closedModel = new DefaultTableModel();
+		closedModel.addColumn("Item ID");
+		closedModel.addColumn("Item");
+		closedModel.addColumn("Status");
+		for (int i = 0; i < conn.getLostId().size(); i++) {
+			if (conn.getLostStatus().get(i).equals("Closed")) {
+				closedModel
+						.addRow(new Object[] { conn.getLostId().get(i),
+								conn.getLostName().get(i),
+								conn.getLostStatus().get(i) });
+			}
+		}
+		return closedModel;
 	}
 
 	private TableModel fillDamagedTable() {
@@ -188,6 +220,13 @@ public class ItemsListWindow extends javax.swing.JFrame {
 		}
 		if (lostItemTable.getSelectedColumn() == 0 && evt.getClickCount() == 2) {
 			System.out.println(lostItemTable.getSelectedRow());
+		}
+	}
+
+	private void clickOnDmgTable(MouseEvent evt) {
+		if (damagedItemTable.getSelectedColumn() == 0
+				&& evt.getClickCount() == 1) {
+			System.out.println("napalim napalim");
 		}
 
 	}

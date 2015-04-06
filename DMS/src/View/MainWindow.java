@@ -1367,7 +1367,7 @@ public class MainWindow extends javax.swing.JFrame {
 		otherMenu.setText("Other");
 		menuBar.add(otherMenu);
 
-		lostItems = new JMenuItem("Lost Items");
+		lostItems = new JMenuItem("Add Lost Item");
 		lostItems.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				new LostItemWindow().setVisible(true);
@@ -1386,7 +1386,7 @@ public class MainWindow extends javax.swing.JFrame {
 			}
 		});
 
-		damagedItems = new JMenuItem("Damaged Items");
+		damagedItems = new JMenuItem("Add Damaged Item");
 		damagedItems.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
 				new DamagedItemWindow().setVisible(true);

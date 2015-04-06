@@ -1,23 +1,71 @@
 package background;
 
+import java.util.Calendar;
+import java.util.Date;
+
 public class CreditCardPayment extends Payment {
-
 	private String cardName;
+	private int roomPrice;
+	private int totalDebt;
+	private int disbursement;
+	private Date accomodationTime;
+	private int remainingDebt;
 
-	public CreditCardPayment(){
-		this.cardName="No card name";
+	public int getRoomPrice() {
+		return roomPrice;
 	}
 
-	public CreditCardPayment(String cardName, String expireDate, String creditCardNum){
-		this.cardName=cardName;
+	public void setRoomPrice(int roomPrice) {
+		this.roomPrice = roomPrice;
 	}
 
-	public void setCardName(String cardName){
-		if(!cardName.equals("") || !cardName.equals(" ")) {
-			this.cardName=cardName;
+	public int getTotalDebt() {
+		return totalDebt;
+	}
+
+	public void setTotalDebt(int totalDebt) {
+		this.totalDebt = totalDebt;
+	}
+
+	public int getDisbursement() {
+		return disbursement;
+	}
+
+	public void setDisbursement(int disbursement) {
+		this.disbursement = disbursement;
+	}
+
+	public Date getAccomodationTime() {
+		return accomodationTime;
+	}
+
+	public void setAccomodationTime(Date accomodationTime) {
+		this.accomodationTime = accomodationTime;
+	}
+
+	public int getRemainingDebt() {
+		return remainingDebt;
+	}
+
+	public void setRemainingDebt(int remainingDebt) {
+		this.remainingDebt = remainingDebt;
+	}
+
+	public CreditCardPayment() {
+		this.cardName = "No card name";
+	}
+
+	public CreditCardPayment(String cardName, String expireDate,
+			String creditCardNum) {
+		this.cardName = cardName;
+	}
+
+	public void setCardName(String cardName) {
+		if (!cardName.equals("") || !cardName.equals(" ")) {
+			this.cardName = cardName;
 		}
 	}
-	
+
 	public String getCardName() {
 		return cardName;
 	}

@@ -6,6 +6,7 @@
 package view;
 
 import javax.sql.ConnectionEvent;
+import javax.swing.ButtonGroup;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JMenuItem;
@@ -51,6 +52,7 @@ import javax.swing.JTextField;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+
 import javax.swing.JPanel;
 import javax.swing.ImageIcon;
 import javax.swing.JRadioButton;
@@ -1188,10 +1190,10 @@ public class MainWindow extends javax.swing.JFrame {
 		lblNewLabel.setBounds(10, 83, 91, 14);
 		paymentPanel.add(lblNewLabel);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(155, 82, 197, 20);
-		paymentPanel.add(textField_1);
-		textField_1.setColumns(10);
+		roomPriceFieldTextField = new JTextField();
+		roomPriceFieldTextField.setBounds(155, 82, 197, 20);
+		paymentPanel.add(roomPriceFieldTextField);
+		roomPriceFieldTextField.setColumns(10);
 		
 		JLabel lblTotalDebt = new JLabel("Total Debt:");
 		lblTotalDebt.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -1208,25 +1210,25 @@ public class MainWindow extends javax.swing.JFrame {
 		lblAccomodationTimemonthly.setBounds(10, 215, 202, 14);
 		paymentPanel.add(lblAccomodationTimemonthly);
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(155, 128, 197, 20);
-		paymentPanel.add(textField_2);
+		totalDebtTextField = new JTextField();
+		totalDebtTextField.setColumns(10);
+		totalDebtTextField.setBounds(155, 128, 197, 20);
+		paymentPanel.add(totalDebtTextField);
 		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(155, 172, 197, 20);
-		paymentPanel.add(textField_3);
+		disbursementTextField = new JTextField();
+		disbursementTextField.setColumns(10);
+		disbursementTextField.setBounds(155, 172, 197, 20);
+		paymentPanel.add(disbursementTextField);
 		
-		textField_4 = new JTextField();
-		textField_4.setColumns(10);
-		textField_4.setBounds(561, 89, 197, 20);
-		paymentPanel.add(textField_4);
+		remainingDebtTextField = new JTextField();
+		remainingDebtTextField.setColumns(10);
+		remainingDebtTextField.setBounds(561, 89, 197, 20);
+		paymentPanel.add(remainingDebtTextField);
 		
-		textField_5 = new JTextField();
-		textField_5.setColumns(10);
-		textField_5.setBounds(155, 214, 197, 20);
-		paymentPanel.add(textField_5);
+		accomodationTextField = new JTextField();
+		accomodationTextField.setColumns(10);
+		accomodationTextField.setBounds(155, 214, 197, 20);
+		paymentPanel.add(accomodationTextField);
 		
 		JLabel lblPayment_1 = new JLabel("Details");
 		lblPayment_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -1245,6 +1247,10 @@ public class MainWindow extends javax.swing.JFrame {
 		JRadioButton rdbtnCreditCard = new JRadioButton("Credit Card");
 		rdbtnCreditCard.setBounds(243, 271, 109, 23);
 		paymentPanel.add(rdbtnCreditCard);
+		
+		ButtonGroup group = new ButtonGroup();
+		group.add(rdbtnCreditCard);
+		group.add(rdbtnNewRadioButton);
 		
 		JLabel label_1 = new JLabel("Remaining Debt:");
 		label_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -1904,9 +1910,9 @@ public class MainWindow extends javax.swing.JFrame {
 	private JLabel label;
 	private JLabel lblNewLabel;
 	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
+	private JTextField roomPriceFieldTextField;
+	private JTextField totalDebtTextField;
+	private JTextField disbursementTextField;
+	private JTextField remainingDebtTextField;
+	private JTextField accomodationTextField;
 }

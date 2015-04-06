@@ -179,10 +179,10 @@ public class StudentWindow extends javax.swing.JFrame {
 		personalInfoLabel.setText("Personal Information");
 
 		personalInfoNameLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-		personalInfoNameLabel.setText("Name(*):");
+		personalInfoNameLabel.setText("Name:");
 
 		personalInfoSurnameLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-		personalInfoSurnameLabel.setText("Surname(*):");
+		personalInfoSurnameLabel.setText("Surname:");
 
 		personalInfoNationalIDLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 		personalInfoNationalIDLabel.setText("TC ID No:");
@@ -191,7 +191,7 @@ public class StudentWindow extends javax.swing.JFrame {
 		personalInfoGenderLabel.setText("Gender:");
 
 		personalInfoPhoneLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-		personalInfoPhoneLabel.setText("Phone(*):");
+		personalInfoPhoneLabel.setText("Phone:");
 
 		personalInfoMailLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 		personalInfoMailLabel.setText("E-mail:");
@@ -417,14 +417,14 @@ public class StudentWindow extends javax.swing.JFrame {
 		emergencyContactLabel.setText("Emergency Contact");
 
 		emergencyContactNameLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-		emergencyContactNameLabel.setText("Name(*):");
+		emergencyContactNameLabel.setText("Name:");
 
 		emergencyContactSurnameLabel
 				.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-		emergencyContactSurnameLabel.setText("Surname(*):");
+		emergencyContactSurnameLabel.setText("Surname:");
 
 		emergencyContactPhoneLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-		emergencyContactPhoneLabel.setText("Phone(*):");
+		emergencyContactPhoneLabel.setText("Phone:");
 
 		javax.swing.GroupLayout gl_emergencyContactPanel = new javax.swing.GroupLayout(
 				emergencyContactPanel);
@@ -676,10 +676,10 @@ public class StudentWindow extends javax.swing.JFrame {
 		accoInfoLabel.setText("Accomadation Information");
 
 		accoInfoDormLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-		accoInfoDormLabel.setText("Dorm(*):");
+		accoInfoDormLabel.setText("Dorm:");
 
 		accoInfoRoomLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-		accoInfoRoomLabel.setText("Room(*):");
+		accoInfoRoomLabel.setText("Room:");
 
 		accoInfoDormComboBox.setModel(new javax.swing.DefaultComboBoxModel(
 				new String[] { "" }));
@@ -688,17 +688,17 @@ public class StudentWindow extends javax.swing.JFrame {
 				new String[] { "" }));
 
 		accoInfoStartDateLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-		accoInfoStartDateLabel.setText("Start Date(*):");
+		accoInfoStartDateLabel.setText("Start Date:");
 
 		accoInfoEndDateLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-		accoInfoEndDateLabel.setText("End Date(*):");
+		accoInfoEndDateLabel.setText("End Date:");
 
 		accoInfoAddButton.setBackground(new java.awt.Color(204, 255, 204));
 		accoInfoAddButton.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
 		accoInfoAddButton.setText("ADD");
 
 		JLabel lblType = new JLabel();
-		lblType.setText("Type(*):");
+		lblType.setText("Type :");
 		lblType.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 		cboxRoomType.addMouseListener(new MouseAdapter() {

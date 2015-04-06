@@ -26,7 +26,6 @@ import javax.swing.JTextArea;
 import javax.swing.JComboBox;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.Color;
 
 public class LostItemWindow extends javax.swing.JFrame {
 	private JTextField lostItemTextField;
@@ -66,14 +65,14 @@ public class LostItemWindow extends javax.swing.JFrame {
 		getContentPane().add(entryDateTextField);
 		entryDateTextField.setColumns(10);
 
-		JLabel lostItemNameLabel = new JLabel("Lost Item(*):");
+		JLabel lostItemNameLabel = new JLabel("Lost Item:");
 		lostItemNameLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lostItemNameLabel.setBounds(10, 31, 89, 14);
+		lostItemNameLabel.setBounds(10, 31, 80, 14);
 		getContentPane().add(lostItemNameLabel);
 
-		JLabel lblDate = new JLabel("Entry Date(*)");
+		JLabel lblDate = new JLabel("Entry Date:");
 		lblDate.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblDate.setBounds(10, 139, 90, 14);
+		lblDate.setBounds(10, 139, 80, 14);
 		getContentPane().add(lblDate);
 
 		inProgressButton = new JRadioButton("In progress");
@@ -89,12 +88,12 @@ public class LostItemWindow extends javax.swing.JFrame {
 		radioButtonGroup.add(inProgressButton);
 		radioButtonGroup.add(closeButton);
 
-		JLabel lblStatus = new JLabel("Status (*):");
+		JLabel lblStatus = new JLabel("Status:");
 		lblStatus.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblStatus.setBounds(10, 216, 80, 14);
+		lblStatus.setBounds(10, 216, 46, 14);
 		getContentPane().add(lblStatus);
 
-		JLabel lblNewLabel = new JLabel("Note (*):");
+		JLabel lblNewLabel = new JLabel("Note:");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblNewLabel.setBounds(10, 68, 89, 14);
 		getContentPane().add(lblNewLabel);
@@ -119,9 +118,9 @@ public class LostItemWindow extends javax.swing.JFrame {
 		cBoxDorm.setBounds(98, 173, 136, 29);
 		getContentPane().add(cBoxDorm);
 
-		JLabel lblDorm = new JLabel("Dorm(*):");
+		JLabel lblDorm = new JLabel("Dorm:");
 		lblDorm.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblDorm.setBounds(10, 179, 80, 14);
+		lblDorm.setBounds(10, 179, 46, 14);
 		getContentPane().add(lblDorm);
 	}
 

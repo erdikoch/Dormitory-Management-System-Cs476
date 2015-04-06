@@ -54,12 +54,12 @@ public class SearchAllWindow extends javax.swing.JFrame {
 	private void initComponents() {
 		setTitle("Search");
 		getContentPane().setLayout(null);
-		setBounds(0, 0, 541, 343);
+		setBounds(0, 0, 603, 327);
 
 		JPanel panel = new JPanel();
 		FlowLayout flowLayout = (FlowLayout) panel.getLayout();
 		flowLayout.setAlignment(FlowLayout.LEFT);
-		panel.setBounds(0, 0, 391, 49);
+		panel.setBounds(0, 0, 346, 49);
 		getContentPane().add(panel);
 
 		JLabel lblStartDate = new JLabel("Start Date:");
@@ -83,7 +83,7 @@ public class SearchAllWindow extends javax.swing.JFrame {
 		JPanel panel_1 = new JPanel();
 		FlowLayout flowLayout_1 = (FlowLayout) panel_1.getLayout();
 		flowLayout_1.setAlignOnBaseline(true);
-		panel_1.setBounds(395, 0, 122, 49);
+		panel_1.setBounds(452, 0, 135, 49);
 		getContentPane().add(panel_1);
 
 		JButton btnEnter = new JButton("ENTER");
@@ -102,7 +102,7 @@ public class SearchAllWindow extends javax.swing.JFrame {
 		EtchedBorder.LOWERED, new Color(102, 102, 102), new Color(0, 0,
 
 		51)));
-		scrollPane.setBounds(10, 60, 499, 222);
+		scrollPane.setBounds(0, 66, 587, 222);
 		getContentPane().add(scrollPane);
 
 		searchTable = new JTable();

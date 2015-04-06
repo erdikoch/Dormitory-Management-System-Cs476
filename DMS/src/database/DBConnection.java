@@ -222,7 +222,6 @@ public class DBConnection {
 	}
 
 	public TableModel getStudentsForDate(Hostel hostel) {
-		Vector<Object> vec = new Vector<Object>();
 		DefaultTableModel searchModel = new DefaultTableModel();
 		fillModelColumn(searchModel);
 		try {
@@ -230,17 +229,13 @@ public class DBConnection {
 					"{ call Get_StudentsForDate(?,?) }");
 			proc_stmt.setDate(1, (Date) hostel.getStartDate());
 			proc_stmt.setDate(2, (Date) hostel.getEndDate());
-			rs = proc_stmt.executeQuery(); 
+			rs = proc_stmt.executeQuery();
 			while (rs.next()) {
-				vec.clear();
-				for (int i = 1; i <= searchModel.getColumnCount(); i++) {
-					vec.add(rs.getObject(i));
-					System.out.println(vec + " bu da i: " + i);
-					if (i == 6) {
-						searchModel.addRow(vec);
-					}
-				}
+				searchModel.addRow(new Object[] { rs.getObject(1),
+						rs.getObject(2), rs.getObject(3), rs.getObject(4),
+						rs.getObject(5), rs.getObject(6) });
 			}
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

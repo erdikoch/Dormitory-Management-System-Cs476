@@ -68,7 +68,7 @@ public class DamagedItemWindow extends javax.swing.JFrame {
 		lostItemNameLabel.setBounds(10, 31, 96, 14);
 		getContentPane().add(lostItemNameLabel);
 
-		JLabel lblDate = new JLabel("Entry Date:");
+		JLabel lblDate = new JLabel("Entry Date(*):");
 		lblDate.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblDate.setBounds(10, 136, 96, 14);
 		getContentPane().add(lblDate);
@@ -86,12 +86,12 @@ public class DamagedItemWindow extends javax.swing.JFrame {
 		radioButtonGroup.add(inProgressButton);
 		radioButtonGroup.add(closeButton);
 
-		JLabel lblStatus = new JLabel("Status:");
+		JLabel lblStatus = new JLabel("Status (*):");
 		lblStatus.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblStatus.setBounds(10, 215, 46, 14);
+		lblStatus.setBounds(10, 215, 74, 14);
 		getContentPane().add(lblStatus);
 
-		JLabel lblNote = new JLabel("Note:");
+		JLabel lblNote = new JLabel("Note (*):");
 		lblNote.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblNote.setBounds(10, 67, 96, 14);
 		getContentPane().add(lblNote);

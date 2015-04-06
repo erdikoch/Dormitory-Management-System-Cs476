@@ -581,14 +581,14 @@ public class MainWindow extends javax.swing.JFrame {
 		emergencyContactLabel.setText("Emergency Contact");
 
 		emergencyContactNameLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-		emergencyContactNameLabel.setText("Name:");
+		emergencyContactNameLabel.setText("Name(*):");
 
 		emergencyContactSurnameLabel
 				.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-		emergencyContactSurnameLabel.setText("Surname:");
+		emergencyContactSurnameLabel.setText("Surname(*):");
 
 		emergencyContactPhoneLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-		emergencyContactPhoneLabel.setText("Phone:");
+		emergencyContactPhoneLabel.setText("Phone(*):");
 
 		javax.swing.GroupLayout gl_emergencyContactPanel = new javax.swing.GroupLayout(
 				emergencyContactPanel);
@@ -840,16 +840,16 @@ public class MainWindow extends javax.swing.JFrame {
 		accoInfoLabel.setText("Accomadation Information");
 
 		accoInfoDormLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-		accoInfoDormLabel.setText("Dorm:");
+		accoInfoDormLabel.setText("Dorm(*):");
 
 		accoInfoRoomLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-		accoInfoRoomLabel.setText("Room:");
+		accoInfoRoomLabel.setText("Room(*):");
 
 		accoInfoStartDateLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-		accoInfoStartDateLabel.setText("Start Date:");
+		accoInfoStartDateLabel.setText("Start Date(*):");
 
 		accoInfoEndDateLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-		accoInfoEndDateLabel.setText("End Date:");
+		accoInfoEndDateLabel.setText("End Date(*):");
 
 		saveButton.setBackground(new Color(204, 255, 204));
 		saveButton.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -865,7 +865,7 @@ public class MainWindow extends javax.swing.JFrame {
 		editButton.setFont(new Font("Tahoma", Font.BOLD, 12));
 
 		JLabel lblType = new JLabel();
-		lblType.setText("Type:");
+		lblType.setText("Type(*):");
 		lblType.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 		cboxType = new JComboBox();
@@ -1177,7 +1177,7 @@ public class MainWindow extends javax.swing.JFrame {
 		
 		lblPayment = new JLabel("Payment");
 		lblPayment.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblPayment.setBounds(142, 11, 155, 25);
+		lblPayment.setBounds(165, 11, 155, 25);
 		paymentPanel.add(lblPayment);
 		
 		label = new JLabel("");
@@ -1189,11 +1189,6 @@ public class MainWindow extends javax.swing.JFrame {
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblNewLabel.setBounds(10, 83, 91, 14);
 		paymentPanel.add(lblNewLabel);
-		
-		roomPriceFieldTextField = new JTextField();
-		roomPriceFieldTextField.setBounds(155, 82, 197, 20);
-		paymentPanel.add(roomPriceFieldTextField);
-		roomPriceFieldTextField.setColumns(10);
 		
 		JLabel lblTotalDebt = new JLabel("Total Debt:");
 		lblTotalDebt.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -1210,56 +1205,61 @@ public class MainWindow extends javax.swing.JFrame {
 		lblAccomodationTimemonthly.setBounds(10, 215, 202, 14);
 		paymentPanel.add(lblAccomodationTimemonthly);
 		
-		totalDebtTextField = new JTextField();
-		totalDebtTextField.setColumns(10);
-		totalDebtTextField.setBounds(155, 128, 197, 20);
-		paymentPanel.add(totalDebtTextField);
-		
-		disbursementTextField = new JTextField();
-		disbursementTextField.setColumns(10);
-		disbursementTextField.setBounds(155, 172, 197, 20);
-		paymentPanel.add(disbursementTextField);
-		
-		remainingDebtTextField = new JTextField();
-		remainingDebtTextField.setColumns(10);
-		remainingDebtTextField.setBounds(561, 89, 197, 20);
-		paymentPanel.add(remainingDebtTextField);
-		
-		accomodationTextField = new JTextField();
-		accomodationTextField.setColumns(10);
-		accomodationTextField.setBounds(155, 214, 197, 20);
-		paymentPanel.add(accomodationTextField);
-		
 		JLabel lblPayment_1 = new JLabel("Details");
 		lblPayment_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblPayment_1.setBounds(538, 11, 155, 25);
+		lblPayment_1.setBounds(569, 11, 155, 25);
 		paymentPanel.add(lblPayment_1);
 		
-		JLabel lblPaymentType = new JLabel("Payment Type:");
+		JLabel lblPaymentType = new JLabel("Payment Type(*):");
 		lblPaymentType.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblPaymentType.setBounds(10, 268, 122, 25);
 		paymentPanel.add(lblPaymentType);
 		
 		JRadioButton rdbtnNewRadioButton = new JRadioButton("Cash");
-		rdbtnNewRadioButton.setBounds(142, 271, 79, 23);
+		rdbtnNewRadioButton.setBounds(187, 271, 79, 23);
 		paymentPanel.add(rdbtnNewRadioButton);
 		
 		JRadioButton rdbtnCreditCard = new JRadioButton("Credit Card");
-		rdbtnCreditCard.setBounds(243, 271, 109, 23);
+		rdbtnCreditCard.setBounds(268, 271, 109, 23);
 		paymentPanel.add(rdbtnCreditCard);
 		
 		ButtonGroup group = new ButtonGroup();
 		group.add(rdbtnCreditCard);
 		group.add(rdbtnNewRadioButton);
 		
-		JLabel label_1 = new JLabel("Remaining Debt:");
-		label_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		label_1.setBounds(446, 85, 111, 25);
-		paymentPanel.add(label_1);
+		JLabel lblRemainingDebt = new JLabel("Remaining Debt(*):");
+		lblRemainingDebt.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblRemainingDebt.setBounds(422, 85, 135, 25);
+		paymentPanel.add(lblRemainingDebt);
 		
 		JButton btnEnter = new JButton("Enter");
 		btnEnter.setBounds(288, 389, 89, 23);
 		paymentPanel.add(btnEnter);
+		
+		textField_1 = new JTextField();
+		textField_1.setEditable(false);
+		textField_1.setBounds(165, 82, 212, 20);
+		paymentPanel.add(textField_1);
+		
+		textField_2 = new JTextField();
+		textField_2.setEditable(false);
+		textField_2.setBounds(166, 128, 212, 20);
+		paymentPanel.add(textField_2);
+		
+		textField_3 = new JTextField();
+		textField_3.setEditable(false);
+		textField_3.setBounds(166, 172, 212, 20);
+		paymentPanel.add(textField_3);
+		
+		textField_4 = new JTextField();
+		textField_4.setEditable(false);
+		textField_4.setBounds(166, 214, 212, 20);
+		paymentPanel.add(textField_4);
+		
+		textField_5 = new JTextField();
+		textField_5.setEditable(false);
+		textField_5.setBounds(568, 89, 212, 20);
+		paymentPanel.add(textField_5);
 		
 
 
@@ -1910,9 +1910,9 @@ public class MainWindow extends javax.swing.JFrame {
 	private JLabel label;
 	private JLabel lblNewLabel;
 	private JTextField textField;
-	private JTextField roomPriceFieldTextField;
-	private JTextField totalDebtTextField;
-	private JTextField disbursementTextField;
-	private JTextField remainingDebtTextField;
-	private JTextField accomodationTextField;
+	private JTextField textField_1;
+	private JTextField textField_2;
+	private JTextField textField_3;
+	private JTextField textField_4;
+	private JTextField textField_5;
 }

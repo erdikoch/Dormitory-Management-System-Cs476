@@ -10,6 +10,9 @@ import java.sql.SQLException;
 import background.Dorm;
 import database.DBConnection;
 import java.awt.Toolkit;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.GroupLayout;
+import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class DormWindow extends javax.swing.JFrame {
 
@@ -42,10 +45,10 @@ public class DormWindow extends javax.swing.JFrame {
 		setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
 		dormNumberLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-		dormNumberLabel.setText("Dormitory Number: ");
+		dormNumberLabel.setText("Dormitory Number(*): ");
 
 		dormAddressLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-		dormAddressLabel.setText("Dormitory Address:");
+		dormAddressLabel.setText("Dormitory Address(*):");
 
 		dormAdressTextArea.setColumns(20);
 		dormAdressTextArea.setRows(5);
@@ -67,94 +70,39 @@ public class DormWindow extends javax.swing.JFrame {
 
 		javax.swing.GroupLayout gl_dormWindowPanel = new javax.swing.GroupLayout(
 				dormWindowPanel);
+		gl_dormWindowPanel.setHorizontalGroup(
+			gl_dormWindowPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_dormWindowPanel.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(gl_dormWindowPanel.createParallelGroup(Alignment.TRAILING)
+						.addGroup(gl_dormWindowPanel.createParallelGroup(Alignment.LEADING)
+							.addGroup(gl_dormWindowPanel.createSequentialGroup()
+								.addComponent(dormNumberLabel, GroupLayout.PREFERRED_SIZE, 129, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.UNRELATED)
+								.addComponent(dormNumberText, GroupLayout.PREFERRED_SIZE, 188, GroupLayout.PREFERRED_SIZE))
+							.addGroup(gl_dormWindowPanel.createSequentialGroup()
+								.addComponent(dormAddressLabel)
+								.addGap(18)
+								.addComponent(dormAddressScrollPane, GroupLayout.PREFERRED_SIZE, 191, GroupLayout.PREFERRED_SIZE)))
+						.addComponent(dormAddButton, GroupLayout.PREFERRED_SIZE, 75, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap(20, Short.MAX_VALUE))
+		);
+		gl_dormWindowPanel.setVerticalGroup(
+			gl_dormWindowPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_dormWindowPanel.createSequentialGroup()
+					.addGap(20)
+					.addGroup(gl_dormWindowPanel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(dormNumberLabel)
+						.addComponent(dormNumberText, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addGap(24)
+					.addGroup(gl_dormWindowPanel.createParallelGroup(Alignment.LEADING)
+						.addComponent(dormAddressLabel)
+						.addComponent(dormAddressScrollPane, GroupLayout.PREFERRED_SIZE, 105, GroupLayout.PREFERRED_SIZE))
+					.addGap(18)
+					.addComponent(dormAddButton, GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
+					.addContainerGap())
+		);
 		dormWindowPanel.setLayout(gl_dormWindowPanel);
-		gl_dormWindowPanel
-				.setHorizontalGroup(gl_dormWindowPanel
-						.createParallelGroup(
-								javax.swing.GroupLayout.Alignment.LEADING)
-						.addGroup(
-								gl_dormWindowPanel
-										.createSequentialGroup()
-										.addContainerGap()
-										.addGroup(
-												gl_dormWindowPanel
-														.createParallelGroup(
-																javax.swing.GroupLayout.Alignment.TRAILING)
-														.addGroup(
-																gl_dormWindowPanel
-																		.createParallelGroup(
-																				javax.swing.GroupLayout.Alignment.LEADING)
-																		.addGroup(
-																				gl_dormWindowPanel
-																						.createSequentialGroup()
-																						.addComponent(
-																								dormNumberLabel,
-																								javax.swing.GroupLayout.PREFERRED_SIZE,
-																								119,
-																								javax.swing.GroupLayout.PREFERRED_SIZE)
-																						.addPreferredGap(
-																								javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-																						.addComponent(
-																								dormNumberText,
-																								javax.swing.GroupLayout.PREFERRED_SIZE,
-																								190,
-																								javax.swing.GroupLayout.PREFERRED_SIZE))
-																		.addGroup(
-																				gl_dormWindowPanel
-																						.createSequentialGroup()
-																						.addComponent(
-																								dormAddressLabel)
-																						.addGap(18,
-																								18,
-																								18)
-																						.addComponent(
-																								dormAddressScrollPane,
-																								javax.swing.GroupLayout.PREFERRED_SIZE,
-																								191,
-																								javax.swing.GroupLayout.PREFERRED_SIZE)))
-														.addComponent(
-																dormAddButton,
-																javax.swing.GroupLayout.PREFERRED_SIZE,
-																75,
-																javax.swing.GroupLayout.PREFERRED_SIZE))
-										.addContainerGap(20, Short.MAX_VALUE)));
-		gl_dormWindowPanel
-				.setVerticalGroup(gl_dormWindowPanel
-						.createParallelGroup(
-								javax.swing.GroupLayout.Alignment.LEADING)
-						.addGroup(
-								gl_dormWindowPanel
-										.createSequentialGroup()
-										.addGap(20, 20, 20)
-										.addGroup(
-												gl_dormWindowPanel
-														.createParallelGroup(
-																javax.swing.GroupLayout.Alignment.BASELINE)
-														.addComponent(
-																dormNumberLabel)
-														.addComponent(
-																dormNumberText,
-																javax.swing.GroupLayout.PREFERRED_SIZE,
-																javax.swing.GroupLayout.DEFAULT_SIZE,
-																javax.swing.GroupLayout.PREFERRED_SIZE))
-										.addGap(24, 24, 24)
-										.addGroup(
-												gl_dormWindowPanel
-														.createParallelGroup(
-																javax.swing.GroupLayout.Alignment.LEADING)
-														.addComponent(
-																dormAddressLabel)
-														.addComponent(
-																dormAddressScrollPane,
-																javax.swing.GroupLayout.PREFERRED_SIZE,
-																105,
-																javax.swing.GroupLayout.PREFERRED_SIZE))
-										.addGap(18, 18, 18)
-										.addComponent(
-												dormAddButton,
-												javax.swing.GroupLayout.DEFAULT_SIZE,
-												32, Short.MAX_VALUE)
-										.addContainerGap()));
 
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(
 				getContentPane());

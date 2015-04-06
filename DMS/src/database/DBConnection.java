@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
-
+//I hate imports
 import view.DormListWindow;
 import view.DormWindow;
 import background.ClosedItem;

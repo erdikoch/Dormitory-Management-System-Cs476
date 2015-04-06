@@ -1192,7 +1192,7 @@ public class MainWindow extends javax.swing.JFrame {
 		
 		JLabel lblTotalDebt = new JLabel("Total Debt:");
 		lblTotalDebt.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblTotalDebt.setBounds(10, 129, 91, 14);
+		lblTotalDebt.setBounds(10, 215, 91, 14);
 		paymentPanel.add(lblTotalDebt);
 		
 		JLabel lblDisbursement = new JLabel("Disbursement:");
@@ -1200,9 +1200,9 @@ public class MainWindow extends javax.swing.JFrame {
 		lblDisbursement.setBounds(10, 173, 111, 14);
 		paymentPanel.add(lblDisbursement);
 		
-		JLabel lblAccomodationTimemonthly = new JLabel("Accomodation Time:");
+		JLabel lblAccomodationTimemonthly = new JLabel("Time Interval(Month):");
 		lblAccomodationTimemonthly.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblAccomodationTimemonthly.setBounds(10, 215, 202, 14);
+		lblAccomodationTimemonthly.setBounds(10, 129, 202, 14);
 		paymentPanel.add(lblAccomodationTimemonthly);
 		
 		JLabel lblPayment_1 = new JLabel("Details");
@@ -1243,7 +1243,7 @@ public class MainWindow extends javax.swing.JFrame {
 		
 		textField_2 = new JTextField();
 		textField_2.setEditable(false);
-		textField_2.setBounds(166, 128, 212, 20);
+		textField_2.setBounds(165, 214, 212, 20);
 		paymentPanel.add(textField_2);
 		
 		textField_3 = new JTextField();
@@ -1253,7 +1253,7 @@ public class MainWindow extends javax.swing.JFrame {
 		
 		textField_4 = new JTextField();
 		textField_4.setEditable(false);
-		textField_4.setBounds(166, 214, 212, 20);
+		textField_4.setBounds(165, 128, 212, 20);
 		paymentPanel.add(textField_4);
 		
 		textField_5 = new JTextField();

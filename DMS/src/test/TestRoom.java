@@ -1,12 +1,19 @@
 package test;
 
 import static org.junit.Assert.*;
+import junit.framework.TestCase;
 
 import org.junit.Test;
 
 import background.Room;
 
-public class TestRoom {
+public class TestRoom extends TestCase {
+
+	@Override
+	protected void setUp() throws Exception {
+		// TODO Auto-generated method stub
+		super.setUp();
+	}
 
 	@Test
 	public void testZeroTypeName() {

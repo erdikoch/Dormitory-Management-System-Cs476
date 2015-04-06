@@ -4,20 +4,16 @@ public class School {
 	private String uniName;
 	private String department;
 	private int grade;
-	
+
 
 	public String getUniName() {
 		return uniName;
 	}
 
 	public void setUniName(String uniName) {
-		if(uniName.equals("")) {
-			uniName = "N/A";
-		} else if (uniName.equals(" ")) {
-			uniName = "N/A";
-		} else {
-			this.uniName = uniName;
-		}
+
+		this.uniName = uniName;
+
 	}
 
 	public String getDepartment() {

@@ -102,6 +102,7 @@ public class ChartChooserView extends javax.swing.JFrame {
 					try {
 
 						Dorm dorm = new Dorm();
+						dorm.getDormName();
 						dorm.setDormName(comboBox.getSelectedItem().toString());
 						CapacityWindow dormCapacity = new CapacityWindow(dorm);
 

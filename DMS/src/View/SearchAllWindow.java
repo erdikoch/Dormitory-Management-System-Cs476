@@ -3,94 +3,119 @@ package view;
 import java.awt.Button;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.JLabel;
+
+import background.Hostel;
+
+import com.toedter.calendar.JDateChooser;
+
+import database.DBConnection;
+
+import javax.swing.JScrollPane;
+import javax.swing.border.BevelBorder;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+
+import java.awt.FlowLayout;
+
+import javax.swing.JButton;
+import javax.swing.border.LineBorder;
+
+import java.awt.Color;
+
+import javax.swing.border.EtchedBorder;
+import javax.swing.table.DefaultTableModel;
 // import org.jdatepicker.impl.UtilDateModel;
+
+import javax.swing.table.TableModel;
+
+import org.apache.batik.svggen.font.table.Table;
+
+import java.awt.event.ActionListener;
+import java.util.Date;
 
 public class SearchAllWindow extends javax.swing.JFrame {
 	private JTable searchTable;
-	private JTextField endDateTextField;
-	private Button enterButton;
-	private JTextField startDateLabel;
+	private DBConnection conn = new DBConnection();
+	private JDateChooser startdateChooser, enddateChooser;
 
 	/**
 	 * Creates new form DormWindow
 	 */
 	public SearchAllWindow() {
+		initComponents();
+
+	}
+
+	private void initComponents() {
 		setTitle("Search");
 		getContentPane().setLayout(null);
-		setBounds(0,0,525,368);
-		
-		Button endDateButton = new Button("End Date");
-		endDateButton.setBounds(202, 10, 70, 22);
-		getContentPane().add(endDateButton);
-		
-		Button startDateButton = new Button("Start Date");
-		startDateButton.setBounds(10, 10, 70, 22);
-		getContentPane().add(startDateButton);
-		
+		setBounds(0, 0, 541, 343);
+
+		JPanel panel = new JPanel();
+		FlowLayout flowLayout = (FlowLayout) panel.getLayout();
+		flowLayout.setAlignment(FlowLayout.LEFT);
+		panel.setBounds(0, 0, 391, 49);
+		getContentPane().add(panel);
+
+		JLabel lblStartDate = new JLabel("Start Date:");
+		lblStartDate.setHorizontalAlignment(SwingConstants.LEFT);
+		lblStartDate.setVerticalAlignment(SwingConstants.TOP);
+		panel.add(lblStartDate);
+		lblStartDate.setFont(new Font("Tahoma", Font.BOLD, 12));
+
+		startdateChooser = new JDateChooser();
+		panel.add(startdateChooser);
+		startdateChooser.setDateFormatString("dd/MM/yyyy");
+
+		JLabel label = new JLabel("End Date:");
+		panel.add(label);
+		label.setFont(new Font("Tahoma", Font.BOLD, 12));
+
+		enddateChooser = new JDateChooser();
+		panel.add(enddateChooser);
+		enddateChooser.setDateFormatString("dd/MM/yyyy");
+
+		JPanel panel_1 = new JPanel();
+		FlowLayout flowLayout_1 = (FlowLayout) panel_1.getLayout();
+		flowLayout_1.setAlignOnBaseline(true);
+		panel_1.setBounds(395, 0, 122, 49);
+		getContentPane().add(panel_1);
+
+		JButton btnEnter = new JButton("ENTER");
+		btnEnter.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				getStudentInfoDateAction(evt);
+			}
+		});
+		btnEnter.setVerticalAlignment(SwingConstants.BOTTOM);
+		btnEnter.setFont(new Font("Tahoma", Font.BOLD, 12));
+		panel_1.add(btnEnter);
+
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setViewportBorder(new EtchedBorder(
+
+		EtchedBorder.LOWERED, new Color(102, 102, 102), new Color(0, 0,
+
+		51)));
+		scrollPane.setBounds(10, 60, 499, 222);
+		getContentPane().add(scrollPane);
+
 		searchTable = new JTable();
-		searchTable.setCellSelectionEnabled(true);
-		searchTable.setBounds(10, 52, 462, 237);
-		getContentPane().add(searchTable);
-		
-		endDateTextField = new JTextField();
-		endDateTextField.setBounds(278, 10, 108, 22);
-		getContentPane().add(endDateTextField);
-		endDateTextField.setColumns(10);
-		
-		enterButton = new Button("ENTER");
-		enterButton.setFont(new Font("Tahoma", Font.BOLD, 12));
-		enterButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		enterButton.setBounds(392, 10, 80, 22);
-		getContentPane().add(enterButton);
-		
-		startDateLabel = new JTextField();
-		startDateLabel.setColumns(10);
-		startDateLabel.setBounds(86, 10, 110, 22);
-		getContentPane().add(startDateLabel);
-		
-		startDateButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				StartDatePopUpView startdate = new StartDatePopUpView();
-				startdate.setVisible(true);
-				startDateLabel.setText(startdate.getCalendar());
-				
-				
-				
-			}
-		});
-		
-		endDateButton.addActionListener(new ActionListener() {
-			EndDatePopUpView endDatePopup = new EndDatePopUpView();
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				EndDatePopUpView endDate = new EndDatePopUpView();
-				endDate.setVisible(true);
-				endDateTextField.setText(endDate.getCalendar());
-				
-				
-			}
-		});
-		
-		initComponents();
+		scrollPane.setViewportView(searchTable);
 	}
 
-	/**
-	 * This method is called from within the constructor to initialize the form.
-	 * WARNING: Do NOT modify this code. The content of this method is always
-	 * regenerated by the Form Editor.
-	 */
-	@SuppressWarnings("unchecked")
-	// <editor-fold defaultstate="collapsed"
-	// desc="Generated Code">//GEN-BEGIN:initComponents
-	private void initComponents() {
-
+	private void getStudentInfoDateAction(ActionEvent evt) {
+		Hostel host = new Hostel();
+		Date startDate = new java.sql.Date(startdateChooser.getDate().getTime());
+		Date endDate = new java.sql.Date(enddateChooser.getDate().getTime());
+		host.setEndDate(endDate);
+		host.setStartDate(startDate);
+		searchTable.setModel(conn.getStudentsForDate(host));
 	}
+
 }

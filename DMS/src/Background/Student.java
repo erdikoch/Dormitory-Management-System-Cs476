@@ -10,7 +10,7 @@ public class Student {
 	private String gender;
 	private String TC;
 	private Date birthday;
-	
+
 
 
 	public Date getBirthday() {
@@ -20,7 +20,7 @@ public class Student {
 	public void setBirthday(Date birthday) {
 		this.birthday = birthday;
 	}
-	
+
 	public String getName() {
 		return name;
 	}
@@ -58,7 +58,7 @@ public class Student {
 		} else if (name.equals(" ")) {
 			name = "N/A";
 		} else {
-		this.email = email;
+			this.email = email;
 		}
 	}
 
@@ -95,13 +95,8 @@ public class Student {
 	}
 
 	public void setTC(String TC) {
-		if(TC.equals("")) {
-			TC = "N/A";
-		} else if (TC.equals(" ")) {
-			TC = "N/A";
-		} else {
-			this.TC = TC;
-		}
+
+		this.TC = TC;
 	}
 
 }

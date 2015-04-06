@@ -11,6 +11,9 @@ import java.sql.Statement;
 import java.sql.Date;
 import java.util.ArrayList;
 
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+
 import view.DormListWindow;
 import view.DormWindow;
 import background.ClosedItem;
@@ -215,6 +218,42 @@ public class DBConnection {
 
 		}
 		return studentList;
+
+	}
+
+	public TableModel getStudentsForDate(Hostel hostel) {
+		Vector<Object> vec = new Vector<Object>();
+		DefaultTableModel searchModel = new DefaultTableModel();
+		fillModelColumn(searchModel);
+		try {
+			proc_stmt = connect().prepareCall(
+					"{ call Get_StudentsForDate(?,?) }");
+			proc_stmt.setDate(1, (Date) hostel.getStartDate());
+			proc_stmt.setDate(2, (Date) hostel.getEndDate());
+			rs = proc_stmt.executeQuery(); 
+			while (rs.next()) {
+				vec.clear();
+				for (int i = 1; i <= searchModel.getColumnCount(); i++) {
+					vec.add(rs.getObject(i));
+					System.out.println(vec + " bu da i: " + i);
+					if (i == 6) {
+						searchModel.addRow(vec);
+					}
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return searchModel;
+	}
+
+	private void fillModelColumn(DefaultTableModel searchModel) {
+		searchModel.addColumn("Dorm");
+		searchModel.addColumn("Room");
+		searchModel.addColumn("Name");
+		searchModel.addColumn("Surname");
+		searchModel.addColumn("Start Date");
+		searchModel.addColumn("End Date");
 
 	}
 

@@ -81,13 +81,8 @@ public class Student {
 	}
 
 	public void setGender(String gender) {
-		if(gender.equals("")) {
-			gender = "N/A";
-		} else if (name.equals(" ")) {
-			gender = "N/A";
-		} else {
-			this.gender = gender;
-		}
+		this.gender = gender;
+		
 	}
 
 	public String getTC() {

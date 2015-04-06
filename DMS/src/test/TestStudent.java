@@ -20,24 +20,10 @@ public class TestStudent {
 	}
 
 	@Test
-	public void testName2() {
-		student = new Student();
-		student.setName("");
-		assertEquals("", student.getName());
-	}
-
-	@Test
 	public void testSurname() {
 		student = new Student();
 		student.setSurname("Hergünşen");
 		assertEquals("Hergünşen", student.getSurname());
-	}
-
-	@Test
-	public void testSurname2() {
-		student = new Student();
-		student.setSurname("");
-		assertEquals("", student.getSurname());
 	}
 
 	@Test
@@ -59,13 +45,6 @@ public class TestStudent {
 		student = new Student();
 		student.setPhone("111-111-1111");
 		assertEquals("111-111-1111", student.getPhone());
-	}
-
-	@Test
-	public void testPhone2() {
-		student = new Student();
-		student.setPhone("");
-		assertEquals("", student.getPhone());
 	}
 
 	@Test

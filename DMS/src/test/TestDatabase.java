@@ -13,10 +13,6 @@ import org.junit.Test;
 
 import database.DBConnection;
 
-/**
- * @author erdi.koc
- *
- */
 public class TestDatabase {
 
 	  Connection connection;

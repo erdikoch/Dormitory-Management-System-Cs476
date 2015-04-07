@@ -41,7 +41,7 @@ public class ChartChooserView extends javax.swing.JFrame {
 		getContentPane().add(lblDorm, gbc_lblDorm);
 
 		final JComboBox<String> comboBox = new JComboBox<String>();
-		DBConnection connection = new DBConnection();
+		final DBConnection connection = new DBConnection();
 		ArrayList<String> list;
 		try {
 			comboBox.removeAllItems();
@@ -111,10 +111,16 @@ public class ChartChooserView extends javax.swing.JFrame {
 						e1.printStackTrace();
 					}
 				else if (genderRadioButton.isSelected()) {
-					Dorm dorm = new Dorm();
-					dorm.setDormName(comboBox.getSelectedItem().toString());
-					MaleFemaleCapacityWindow capacity = new MaleFemaleCapacityWindow(
-							dorm);
+				    try {
+				    	Dorm dorm = new Dorm();
+						dorm.setDormName(comboBox.getSelectedItem().toString());
+						int dormNumber = connection.displayDorm().size();
+						MaleFemaleCapacityWindow capacity = new MaleFemaleCapacityWindow(dorm,dormNumber);
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					
 
 				}
 			}

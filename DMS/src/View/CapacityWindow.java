@@ -22,11 +22,13 @@ public class CapacityWindow {
 		super();
 		this.dorm = dorm;
 		connection = new DBConnection();
-		connection.connect();
+		//connection.connect();
 		JFrame capacityFrame = new JFrame("Dorm Capacity");
+		String dormName = dorm.getDormName();
 		capacityFrame.setBounds(0, 0, 500, 300);
 		capacityFrame.setContentPane(createDemoPanel(dorm,connection.getDormCapacity(dorm),connection.getTotalStudenNumberInDorm(dorm)));
 		capacityFrame.setVisible(true);
+		System.out.println("Total"+connection.getDormCapacity(dorm)+"Student"+connection.getTotalStudenNumberInDorm(dorm));
 	}
 
 	private static PieDataset createDataset(Dorm dorm, int capacity, int totalStudentNumberInDorm) {

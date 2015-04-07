@@ -54,32 +54,19 @@ public class MaleFemaleCapacityWindow {
 		for (int i = 0; i < dormNumber; i++) {
 			categories[i] = dorm.getDormName();
 		}
-	//	final String category1 = "Dorm 1";
-	//	final String category2 = "Dorm 2";
-	//	final String category3 = "Dorm 3";
 
-		// create the dataset...
 		final DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 
 		for (int i = 0; i < dormNumber; i++) {
 			dataset.addValue(maleNumber, series1, categories[i]);
 			dataset.addValue(femaleNumber, series2, categories[i]);
 		}
-	//	dataset.addValue(1.0, series1, category1);
-	//	dataset.addValue(4.0, series1, category2);
-	//	dataset.addValue(3.0, series1, category3);
-
-	//	dataset.addValue(5.0, series2, category1);
-	//	dataset.addValue(7.0, series2, category2);
-	//	dataset.addValue(6.0, series2, category3);
-
 		return dataset;
 
 	}
 
 	private JFreeChart createChart(final CategoryDataset dataset) {
 
-		// create the chart...
 		final JFreeChart chart = ChartFactory.createBarChart(
 				"Gender Rate Chart", // chart title
 				"Category", // domain axis label
@@ -91,26 +78,20 @@ public class MaleFemaleCapacityWindow {
 				false // URLs?
 				);
 
-		// NOW DO SOME OPTIONAL CUSTOMISATION OF THE CHART...
-
-		// set the background color for the chart...
+		
 		chart.setBackgroundPaint(Color.white);
 
-		// get a reference to the plot for further customisation...
 		final CategoryPlot plot = chart.getCategoryPlot();
 		plot.setBackgroundPaint(Color.lightGray);
 		plot.setDomainGridlinePaint(Color.white);
 		plot.setRangeGridlinePaint(Color.white);
 
-		// set the range axis to display integers only...
 		final NumberAxis rangeAxis = (NumberAxis) plot.getRangeAxis();
 		rangeAxis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
 
-		// disable bar outlines...
 		final BarRenderer renderer = (BarRenderer) plot.getRenderer();
 		renderer.setDrawBarOutline(false);
 
-		// set up gradient paints for series...
 		final GradientPaint gp0 = new GradientPaint(0.0f, 0.0f, Color.blue,
 				0.0f, 0.0f, Color.lightGray);
 		final GradientPaint gp1 = new GradientPaint(0.0f, 0.0f, Color.green,
@@ -124,7 +105,6 @@ public class MaleFemaleCapacityWindow {
 		final CategoryAxis domainAxis = plot.getDomainAxis();
 		domainAxis.setCategoryLabelPositions(CategoryLabelPositions
 				.createUpRotationLabelPositions(Math.PI / 6.0));
-		// OPTIONAL CUSTOMISATION COMPLETED.
 
 		return chart;
 

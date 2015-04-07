@@ -68,6 +68,34 @@ public class DBConnection {
 
 		return capacity;
 	}
+	public int getFemaleNumber(Dorm dorm) throws SQLException {
+		int female = 0;
+		connect();
+		proc_stmt = con.prepareCall("{ call Get_FemaleNumber(?) }");
+
+		proc_stmt.setString(1, dorm.getDormName());
+
+		rs = proc_stmt.executeQuery();
+		while (rs.next()) {
+			female = rs.getInt(1);
+		}
+
+		return female;
+	}
+	public int getMaleNumber(Dorm dorm) throws SQLException {
+		int male = 0;
+		connect();
+		proc_stmt = con.prepareCall("{ call Get_MaleNumber(?) }");
+
+		proc_stmt.setString(1, dorm.getDormName());
+
+		rs = proc_stmt.executeQuery();
+		while (rs.next()) {
+			male = rs.getInt(1);
+		}
+
+		return male;
+	}
 
 	public boolean insertRoomType(Room room) {
 		try {

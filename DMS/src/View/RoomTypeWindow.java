@@ -8,6 +8,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
@@ -32,7 +33,7 @@ public class RoomTypeWindow extends JFrame {
 	public RoomTypeWindow() {
 		setTitle("Add Room Type");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 262, 174);
+		setBounds(100, 100, 255, 174);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -60,9 +61,9 @@ public class RoomTypeWindow extends JFrame {
 				room.setRoomPrice(roomPrice);
 				DBConnection conn=new DBConnection();
 				if(conn.insertRoomType(room)){
-					System.out.println("Kayit Basarili");
+					JOptionPane.showMessageDialog(getContentPane(), "Registration completed");
 				}else{
-					System.out.println("Kayit Basarili Degil");
+					JOptionPane.showMessageDialog(getContentPane(), "Registration not completed, please try again");
 				}
 			}
 		});

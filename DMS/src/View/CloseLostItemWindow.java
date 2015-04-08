@@ -1,10 +1,7 @@
 package view;
 
-import javax.swing.JTable;
 import javax.swing.JLabel;
-
 import java.awt.Font;
-
 import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -12,11 +9,9 @@ import javax.swing.JTextArea;
 import javax.swing.JComboBox;
 import javax.swing.JRadioButton;
 import javax.swing.JButton;
-
 import background.ClosedItem;
 import background.LostItem;
 import database.DBConnection;
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.text.ParseException;
@@ -182,9 +177,9 @@ public class CloseLostItemWindow extends javax.swing.JFrame {
 				item.setLostItemId((int)id);
 				conn.updateStatus((int)id);
 				if(conn.insertClosedItem(item)) {
-					JOptionPane.showMessageDialog(getContentPane(), "Lost item is closed");
+					JOptionPane.showMessageDialog(getContentPane(), "Lost item closed");
 				} else {
-					JOptionPane.showMessageDialog(getContentPane(), "Lost item is not closed, please try again!");
+					JOptionPane.showMessageDialog(getContentPane(), "Lost item not closed, please try again!");
 				}
 			} catch (ParseException e) {
 				e.printStackTrace();

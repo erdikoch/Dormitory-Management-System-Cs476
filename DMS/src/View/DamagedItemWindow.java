@@ -6,10 +6,12 @@ import java.awt.TextField;
 import java.awt.Button;
 import java.awt.Font;
 import java.sql.SQLException;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.text.ParseException;
+
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
@@ -25,14 +27,16 @@ import database.DBConnection;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+import com.toedter.calendar.JDateChooser;
+
 public class DamagedItemWindow extends javax.swing.JFrame {
 	private JTextField damagedItemTextField;
-	private JTextField entryDateTextField;
 	private ButtonGroup radioButtonGroup;
 	private JRadioButton inProgressButton, closeButton;
 	private JComboBox cBoxDorm;
 	private boolean isDormSelected;
 	private JTextArea noteTextArea;
+	private JDateChooser entryDateChooser;
 	private DBConnection conn = new DBConnection();
 
 	public DamagedItemWindow() {
@@ -57,11 +61,6 @@ public class DamagedItemWindow extends javax.swing.JFrame {
 		damagedItemTextField.setBounds(116, 28, 136, 29);
 		getContentPane().add(damagedItemTextField);
 		damagedItemTextField.setColumns(10);
-
-		entryDateTextField = new JTextField();
-		entryDateTextField.setBounds(116, 130, 136, 29);
-		getContentPane().add(entryDateTextField);
-		entryDateTextField.setColumns(10);
 
 		JLabel lostItemNameLabel = new JLabel("Damaged Item:");
 		lostItemNameLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -119,6 +118,15 @@ public class DamagedItemWindow extends javax.swing.JFrame {
 		cBoxDorm.setBounds(116, 170, 136, 29);
 		fillCBoxDorm();
 		getContentPane().add(cBoxDorm);
+
+		entryDateChooser = new JDateChooser();
+		entryDateChooser.setBounds(116, 130, 136, 29);
+		entryDateChooser.setDateFormatString("dd/MM/yyyy");
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+		Date date = new Date();
+		dateFormat.format(date);
+		entryDateChooser.setDate(date);
+		getContentPane().add(entryDateChooser);
 	}
 
 	private void fillCBoxDorm() {
@@ -135,37 +143,26 @@ public class DamagedItemWindow extends javax.swing.JFrame {
 	private void clickAddButton(ActionEvent evt) {
 		DamagedItem item = new DamagedItem();
 		if (damagedItemTextField.getText().isEmpty()
-				|| entryDateTextField.getText().isEmpty()
+				|| entryDateChooser.getDate() == null
 				|| noteTextArea.getText().isEmpty() || !isDormSelected) {
 			JOptionPane.showMessageDialog(getContentPane(),
 					"Please fill the empty fields");
 		} else {
-			try {
-				item.setDamagedName(damagedItemTextField.getText());
-				item.setDamagedDate(convertStringToDatetime(entryDateTextField
-						.getText()));
-				item.setDamagedNote(noteTextArea.getText());
-				item.setDamagedDorm(cBoxDorm.getSelectedItem().toString());
-				item.setDamagedStatus(inProgressButton.getText().toString());
+			item.setDamagedName(damagedItemTextField.getText());
+			Date entryDate = new java.sql.Date(entryDateChooser.getDate()
+					.getTime());
+			item.setDamagedDate(entryDate);
+			item.setDamagedNote(noteTextArea.getText());
+			item.setDamagedDorm(cBoxDorm.getSelectedItem().toString());
+			item.setDamagedStatus(inProgressButton.getText().toString());
 
-				if (conn.insertDamagedItem(item)) {
-					JOptionPane.showMessageDialog(getContentPane(),
-							"Registration is completed");
-				} else {
-					JOptionPane.showMessageDialog(getContentPane(),
-							"Registration is not completed, try again!");
-				}
-			} catch (ParseException e) {
-				e.printStackTrace();
+			if (conn.insertDamagedItem(item)) {
+				JOptionPane.showMessageDialog(getContentPane(),
+						"Registration completed");
+			} else {
+				JOptionPane.showMessageDialog(getContentPane(),
+						"Registration not completed, try again!");
 			}
 		}
-	}
-
-	private Date convertStringToDatetime(String dt) throws ParseException {
-		java.util.Date date = new java.util.Date();
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-		date = sdf.parse(dt);
-		Date sqlDate = new java.sql.Date(date.getTime());
-		return sqlDate;
 	}
 }

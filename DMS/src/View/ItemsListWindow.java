@@ -12,23 +12,19 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JScrollPane;
 import javax.swing.border.TitledBorder;
-import javax.swing.JList;
 import javax.swing.border.EtchedBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 import javax.swing.UIManager;
 import javax.swing.JTable;
 
 import database.DBConnection;
-import background.LostItem;
 
-import javax.swing.border.SoftBevelBorder;
-import javax.swing.border.BevelBorder;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
 
 public class ItemsListWindow extends javax.swing.JFrame {
 	private JTable lostItemTable;
@@ -219,7 +215,6 @@ public class ItemsListWindow extends javax.swing.JFrame {
 
 		}
 		if (lostItemTable.getSelectedColumn() == 0 && evt.getClickCount() == 2) {
-			System.out.println(lostItemTable.getSelectedRow());
 		}
 	}
 

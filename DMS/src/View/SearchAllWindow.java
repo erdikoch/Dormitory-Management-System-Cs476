@@ -6,7 +6,9 @@ import java.awt.event.ActionEvent;
 import javax.swing.JTable;
 import javax.swing.JLabel;
 
+import background.Dorm;
 import background.Hostel;
+import background.Room;
 
 import com.toedter.calendar.JDateChooser;
 
@@ -23,18 +25,24 @@ import java.awt.Color;
 import javax.swing.border.EtchedBorder;
 
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.swing.JComboBox;
+
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class SearchAllWindow extends javax.swing.JFrame {
 	private JTable searchTable;
 	private DBConnection conn = new DBConnection();
 	private JDateChooser startdateChooser, enddateChooser;
 	private JTable availableRoomsTable;
+	private JComboBox cBoxDorm, cBoxRoomType, cBoxRoomNo;
 
 	/**
 	 * Creates new form DormWindow
@@ -109,15 +117,33 @@ public class SearchAllWindow extends javax.swing.JFrame {
 		lblRoomNo.setBounds(265, 78, 60, 14);
 		panel.add(lblRoomNo);
 
-		JComboBox cBoxDorm = new JComboBox();
+		cBoxDorm = new JComboBox();
+		cBoxDorm.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent evt) {
+				fillDormCBox(evt);
+			}
+		});
 		cBoxDorm.setBounds(360, 5, 86, 20);
 		panel.add(cBoxDorm);
 
-		JComboBox cBoxRoomType = new JComboBox();
+		cBoxRoomType = new JComboBox();
+		cBoxRoomType.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent evt) {
+				fillRoomTypes(evt);
+			}
+		});
 		cBoxRoomType.setBounds(360, 38, 86, 20);
 		panel.add(cBoxRoomType);
 
-		JComboBox cBoxRoomNo = new JComboBox();
+		cBoxRoomNo = new JComboBox();
+		cBoxRoomNo.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent evt) {
+				fillRoomCBox(evt);
+			}
+		});
 		cBoxRoomNo.setBounds(360, 68, 86, 20);
 		panel.add(cBoxRoomNo);
 
@@ -151,19 +177,102 @@ public class SearchAllWindow extends javax.swing.JFrame {
 		getContentPane().add(label_1);
 	}
 
+	private void fillDormCBox(MouseEvent evt) {
+		cBoxDorm.removeAllItems();
+		try {
+			ArrayList<String> dorms = conn.displayDorm();
+			for (int i = 0; i < dorms.size(); i++)
+				cBoxDorm.addItem(dorms.get(i));
+			cBoxDorm.addItem(null);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void fillRoomTypes(MouseEvent evt) {
+		cBoxRoomType.removeAllItems();
+		try {
+			ArrayList<Integer> list = conn.displayRoomType();
+			for (int i = 0; i < list.size(); i++)
+				cBoxRoomType.addItem(list.get(i));
+			cBoxRoomType.addItem(null);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void fillRoomCBox(MouseEvent evt) {
+		Dorm dorm = new Dorm();
+		Room room = new Room();
+		if (cBoxDorm.getSelectedItem() == null
+				|| cBoxRoomType.getSelectedItem() == null) {
+			JOptionPane.showMessageDialog(getContentPane(),
+					"No Dorm/Room chosen");
+		} else {
+			try {
+				fillNos(dorm, room);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	private void fillNos(Dorm dorm, Room room) throws SQLException {
+		dorm.setDormName(cBoxDorm.getSelectedItem().toString());
+		room.setTypeName(Integer.parseInt(cBoxRoomType.getSelectedItem()
+				.toString()));
+		ArrayList<Integer> list = new ArrayList<Integer>();
+		cBoxRoomNo.removeAllItems();
+		list = conn.displayRoomNo(dorm, room);
+		for (int i = 0; i < list.size(); i++)
+			cBoxRoomNo.addItem(list.get(i));
+		cBoxRoomNo.addItem(null);
+	}
+
 	private void getStudentInfoDateAction(ActionEvent evt) {
 		Hostel host = new Hostel();
-		if (startdateChooser.getDate() == null) {
-			JOptionPane.showMessageDialog(getContentPane(), "Please enter start date");
-		} else if (enddateChooser.getDate() == null) {
-			System.out.println("Not ready");
+		try {
+			if (enddateChooser.getDate() == null
+					&& startdateChooser.getDate() != null) {
+				getInfoNoEndDate(host);
+			} else if (enddateChooser.getDate() != null
+					&& startdateChooser.getDate() != null) {
+				getInfo(host);
+			} else {
+				JOptionPane.showMessageDialog(getContentPane(),
+						"Please enter the start date!");
+			}
+		} catch (ParseException e) {
+			e.printStackTrace();
 		}
-		else {
-			Date startDate = new java.sql.Date(startdateChooser.getDate().getTime());
-			Date endDate = new java.sql.Date(enddateChooser.getDate().getTime());
-			host.setEndDate(endDate);
-			host.setStartDate(startDate);
-			searchTable.setModel(conn.getStudentsForDate(host));
-		}
+	}
+
+	private void getInfoNoEndDate(Hostel host) throws ParseException {
+		String date = "01/01/2050";
+		host.setEndDate(convertStringToDatetime(date));
+		Date startDate = new java.sql.Date(startdateChooser.getDate().getTime());
+		host.setStartDate(startDate);
+		fillModel(host);
+	}
+
+	private void getInfo(Hostel host) {
+		Date startDate = new java.sql.Date(startdateChooser.getDate().getTime());
+		Date endDate = new java.sql.Date(enddateChooser.getDate().getTime());
+		host.setEndDate(endDate);
+		host.setStartDate(startDate);
+		fillModel(host);
+	}
+
+	private void fillModel(Hostel host) {
+		searchTable.setModel(conn.getStudentsForDate(host,
+				cBoxDorm.getSelectedItem(), cBoxRoomNo.getSelectedItem(), cBoxRoomType.getSelectedItem()));
+	}
+
+	private Date convertStringToDatetime(String dt) throws ParseException {
+		java.util.Date date = new java.util.Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		date = sdf.parse(dt);
+		Date sqlDate = new java.sql.Date(date.getTime());
+		return sqlDate;
 	}
 }

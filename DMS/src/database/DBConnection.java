@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+
 //I hate imports
 import view.DormListWindow;
 import view.DormWindow;
@@ -68,6 +69,7 @@ public class DBConnection {
 
 		return capacity;
 	}
+
 	public int getFemaleNumber(Dorm dorm) throws SQLException {
 		int female = 0;
 		connect();
@@ -82,6 +84,7 @@ public class DBConnection {
 
 		return female;
 	}
+
 	public int getMaleNumber(Dorm dorm) throws SQLException {
 		int male = 0;
 		connect();
@@ -249,7 +252,8 @@ public class DBConnection {
 
 	}
 
-	public TableModel getStudentsForDate(Hostel hostel) {
+	public TableModel getStudentsForDate(Hostel hostel, Object dorm,
+			Object roomNo, Object roomType) {
 		DefaultTableModel searchModel = new DefaultTableModel();
 		fillModelColumn(searchModel);
 		try {
@@ -259,9 +263,36 @@ public class DBConnection {
 			proc_stmt.setDate(2, (Date) hostel.getEndDate());
 			rs = proc_stmt.executeQuery();
 			while (rs.next()) {
-				searchModel.addRow(new Object[] { rs.getObject(1),
-						rs.getObject(2), rs.getObject(3), rs.getObject(4),
-						rs.getObject(5), rs.getObject(6) });
+				if (rs.getObject(1).equals(dorm) && roomNo == null
+						&& roomType == null) {
+					searchModel.addRow(new Object[] { rs.getObject(1),
+							rs.getObject(2), rs.getObject(3), rs.getObject(4),
+							rs.getObject(5), rs.getObject(6) });
+				}
+				if (rs.getObject(7).equals(roomType) && rs.getObject(1).equals(dorm) && roomNo == null ) {
+					searchModel.addRow(new Object[] { rs.getObject(1),
+							rs.getObject(2), rs.getObject(3), rs.getObject(4),
+							rs.getObject(5), rs.getObject(6) });
+				}
+				if(rs.getObject(7).equals(roomType) && roomNo == null && dorm == null) {
+					searchModel.addRow(new Object[] { rs.getObject(1),
+							rs.getObject(2), rs.getObject(3), rs.getObject(4),
+							rs.getObject(5), rs.getObject(6) });
+				}
+				if (rs.getObject(2).equals(roomNo)) {
+					searchModel.addRow(new Object[] { rs.getObject(1),
+							rs.getObject(2), rs.getObject(3), rs.getObject(4),
+							rs.getObject(5), rs.getObject(6) });
+				}
+//				if() {
+//					
+//				}
+				if (dorm == null && roomType == null) {
+					searchModel.addRow(new Object[] { rs.getObject(1),
+							rs.getObject(2), rs.getObject(3), rs.getObject(4),
+							rs.getObject(5), rs.getObject(6) });
+				}
+
 			}
 
 		} catch (SQLException e) {
@@ -277,7 +308,6 @@ public class DBConnection {
 		searchModel.addColumn("Surname");
 		searchModel.addColumn("Start Date");
 		searchModel.addColumn("End Date");
-
 	}
 
 	public int GetStudentNumber(Hostel hostel, Dorm dorm, Room room)
@@ -598,7 +628,6 @@ public class DBConnection {
 
 	public LostItem retreiveLostItemInfo(Object lostId) {
 		int id = (int) lostId;
-		System.out.println(id);
 		LostItem item = new LostItem();
 		try {
 			proc_stmt = connect().prepareCall("{ call Get_LostInfo(?) }");

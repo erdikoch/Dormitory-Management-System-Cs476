@@ -114,29 +114,22 @@ public class StudentWindow extends javax.swing.JFrame {
 			private void displayRoomNoMouseClicked(MouseEvent e) {
 				DBConnection conn = new DBConnection();
 				Dorm dorm = new Dorm();
-
 				dorm.setDormName(accoInfoDormComboBox.getSelectedItem()
 						.toString());
 				Room room = new Room();
 				room.setTypeName(Integer.parseInt(cboxRoomType
 						.getSelectedItem().toString()));
-
 				try {
-
 					ArrayList<Integer> list = new ArrayList<Integer>();
-
 					accoInfoRoomComboBox.removeAllItems();
 					list = conn.displayRoomNo(dorm, room);
 					for (int i = 0; i < list.size(); i++) {
 
 						accoInfoRoomComboBox.addItem(list.get(i));
 					}
-
 				} catch (SQLException ev) {
-
 					ev.printStackTrace();
 				}
-
 			}
 		});
 		accoInfoStartDateLabel = new javax.swing.JLabel();
@@ -707,7 +700,6 @@ public class StudentWindow extends javax.swing.JFrame {
 
 			private void displayCBoxRoomType(MouseEvent me) {
 				DBConnection conn = new DBConnection();
-
 				try {
 					cboxRoomType.removeAllItems();
 
@@ -718,7 +710,6 @@ public class StudentWindow extends javax.swing.JFrame {
 
 					e.printStackTrace();
 				}
-
 			}
 		});
 

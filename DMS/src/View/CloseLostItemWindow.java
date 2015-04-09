@@ -1,7 +1,9 @@
 package view;
 
 import javax.swing.JLabel;
+
 import java.awt.Font;
+
 import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -9,24 +11,28 @@ import javax.swing.JTextArea;
 import javax.swing.JComboBox;
 import javax.swing.JRadioButton;
 import javax.swing.JButton;
+
 import background.ClosedItem;
 import background.LostItem;
 import database.DBConnection;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import com.toedter.calendar.JDateChooser;
+
 public class CloseLostItemWindow extends javax.swing.JFrame {
 	private JTextField lostItemTxtField;
-	private JTextField entryDateTxtField;
-	private JTextField closingDateTxtField;
 	private JTextField studentNameTxtField;
 	private ButtonGroup radioButtonGroup;
 	private JTextArea noteTxtArea;
 	private JComboBox cBoxDorm;
 	JRadioButton inProgressButton, closeButton;
+	JDateChooser closingDateChooser, entryDateChooser;
 	private DBConnection conn = new DBConnection();
 	private Object id;
 
@@ -66,21 +72,10 @@ public class CloseLostItemWindow extends javax.swing.JFrame {
 		label_2.setBounds(242, 24, 80, 14);
 		getContentPane().add(label_2);
 
-		entryDateTxtField = new JTextField();
-		entryDateTxtField.setEditable(false);
-		entryDateTxtField.setColumns(10);
-		entryDateTxtField.setBounds(327, 18, 136, 29);
-		getContentPane().add(entryDateTxtField);
-
 		JLabel label_3 = new JLabel("Closing Date:");
 		label_3.setFont(new Font("Tahoma", Font.BOLD, 12));
 		label_3.setBounds(242, 69, 89, 14);
 		getContentPane().add(label_3);
-
-		closingDateTxtField = new JTextField();
-		closingDateTxtField.setColumns(10);
-		closingDateTxtField.setBounds(327, 66, 136, 29);
-		getContentPane().add(closingDateTxtField);
 
 		JLabel label_4 = new JLabel("Dorm:");
 		label_4.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -88,6 +83,7 @@ public class CloseLostItemWindow extends javax.swing.JFrame {
 		getContentPane().add(label_4);
 
 		cBoxDorm = new JComboBox();
+		cBoxDorm.setEnabled(false);
 		cBoxDorm.setBounds(85, 141, 136, 29);
 		getContentPane().add(cBoxDorm);
 
@@ -135,6 +131,20 @@ public class CloseLostItemWindow extends javax.swing.JFrame {
 		radioButtonGroup.add(closeButton);
 		cancelButton.setBounds(397, 190, 77, 23);
 		getContentPane().add(cancelButton);
+
+		entryDateChooser = new JDateChooser();
+		entryDateChooser.setBounds(327, 24, 136, 29);
+		entryDateChooser.setDateFormatString("dd/MM/yyyy");
+		getContentPane().add(entryDateChooser);
+
+		closingDateChooser = new JDateChooser();
+		closingDateChooser.setBounds(327, 68, 136, 29);
+		closingDateChooser.setDateFormatString("dd/MM/yyyy");
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+		Date date = new Date();
+		dateFormat.format(date);
+		closingDateChooser.setDate(date);
+		getContentPane().add(closingDateChooser);
 		fillFields();
 
 	}
@@ -144,55 +154,38 @@ public class CloseLostItemWindow extends javax.swing.JFrame {
 		item = conn.retreiveLostItemInfo(id);
 		lostItemTxtField.setText(item.getLostName());
 		noteTxtArea.setText(item.getLostNote());
-		entryDateTxtField.setText(convertDateToString(item.getLostDate()));
+		entryDateChooser.setDate(item.getLostDate());
 		cBoxDorm.addItem(item.getLostDorm());
-	}
-
-	private String convertDateToString(Date sqlDate) {
-		String dt = null;
-		if (sqlDate != null) {
-			java.sql.Date date = new java.sql.Date(sqlDate.getTime());
-			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-			dt = sdf.format(date);
-		}
-		return dt;
 	}
 
 	private void clickSaveButton() {
 		ClosedItem item = new ClosedItem();
 		LostItem it = new LostItem();
 		String[] nameSurnameSplit = new String[2];
-		if (!closeButton.isSelected()
-				|| closingDateTxtField.getText().isEmpty()
+		if (!closeButton.isSelected() || closingDateChooser.getDate() == null
+				|| entryDateChooser.getDate() == null
 				|| studentNameTxtField.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(getContentPane(),
 					"Please fill the fields!");
 		} else {
-			try {
-				String nameSurname = studentNameTxtField.getText();
-				nameSurnameSplit = nameSurname.split("\\s+");
-				item.setcName(nameSurnameSplit[0]);
-				item.setcSurname(nameSurnameSplit[1]);
-				item.setClosingDate(convertStringToDatetime(closingDateTxtField.getText()));
-				item.setLostItemId((int)id);
-				conn.updateStatus((int)id);
-				if(conn.insertClosedItem(item)) {
-					JOptionPane.showMessageDialog(getContentPane(), "Lost item closed");
-				} else {
-					JOptionPane.showMessageDialog(getContentPane(), "Lost item not closed, please try again!");
-				}
-			} catch (ParseException e) {
-				e.printStackTrace();
+			String nameSurname = studentNameTxtField.getText();
+			nameSurnameSplit = nameSurname.split("\\s+");
+			item.setcName(nameSurnameSplit[0]);
+			item.setcSurname(nameSurnameSplit[1]);
+			Date closingDate = new java.sql.Date(closingDateChooser.getDate()
+					.getTime());
+			item.setClosingDate(closingDate);
+			item.setLostItemId((int) id);
+			conn.updateStatus((int) id);
+			if (conn.insertClosedItem(item)) {
+				JOptionPane.showMessageDialog(getContentPane(),
+						"Lost item closed");
+			} else {
+				JOptionPane.showMessageDialog(getContentPane(),
+						"Lost item not closed, please try again!");
 			}
+
 		}
 
-	}
-	
-	private Date convertStringToDatetime(String dt) throws ParseException {
-		java.util.Date date = new java.util.Date();
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-		date = sdf.parse(dt);
-		Date sqlDate = new java.sql.Date(date.getTime());
-		return sqlDate;
 	}
 }

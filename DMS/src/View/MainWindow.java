@@ -56,13 +56,11 @@ import java.awt.event.KeyEvent;
 import javax.swing.JPanel;
 import javax.swing.ImageIcon;
 import javax.swing.JRadioButton;
+
 import com.toedter.calendar.JDateChooser;
 
 public class MainWindow extends javax.swing.JFrame {
 
-	/**
-	 * Creates new form MainWindow
-	 */
 
 	public static void main(String args[]) {
 		try {
@@ -866,6 +864,20 @@ public class MainWindow extends javax.swing.JFrame {
 		startDateChooser.setDateFormatString("dd/MM/yyyy");
 		endDateChooser = new JDateChooser();
 		endDateChooser.setDateFormatString("dd/MM/yyyy");
+		
+		JButton btnUndo = new JButton();
+		btnUndo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				btnUndoClicked(evt);
+			}
+
+	
+		});
+		btnUndo.setText("UNDO");
+		btnUndo.setFont(new Font("Tahoma", Font.BOLD, 11));
+		btnUndo.setBackground(new Color(204, 255, 204));
+		
+
 
 		javax.swing.GroupLayout gl_accoInfoPanel = new javax.swing.GroupLayout(
 				accoInfoPanel);
@@ -896,9 +908,11 @@ public class MainWindow extends javax.swing.JFrame {
 										.addComponent(endDateChooser, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 										.addComponent(startDateChooser, GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE))
 									.addGap(66)
-									.addGroup(gl_accoInfoPanel.createParallelGroup(Alignment.TRAILING, false)
-										.addComponent(editButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-										.addComponent(saveButton, GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE))))
+									.addGroup(gl_accoInfoPanel.createParallelGroup(Alignment.LEADING)
+										.addComponent(btnUndo, GroupLayout.PREFERRED_SIZE, 105, GroupLayout.PREFERRED_SIZE)
+										.addGroup(gl_accoInfoPanel.createParallelGroup(Alignment.TRAILING, false)
+											.addComponent(editButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+											.addComponent(saveButton, GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)))))
 							.addGap(20))
 						.addGroup(gl_accoInfoPanel.createSequentialGroup()
 							.addComponent(accoInfoRoomLabel, GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
@@ -932,10 +946,15 @@ public class MainWindow extends javax.swing.JFrame {
 							.addGap(6))
 						.addComponent(endDateChooser, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addGap(5)
-					.addGroup(gl_accoInfoPanel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(accoInfoRoomLabel)
-						.addComponent(accRoomCBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(22))
+					.addGroup(gl_accoInfoPanel.createParallelGroup(Alignment.TRAILING)
+						.addGroup(gl_accoInfoPanel.createSequentialGroup()
+							.addGroup(gl_accoInfoPanel.createParallelGroup(Alignment.BASELINE)
+								.addComponent(accoInfoRoomLabel)
+								.addComponent(accRoomCBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+							.addGap(22))
+						.addGroup(gl_accoInfoPanel.createSequentialGroup()
+							.addComponent(btnUndo)
+							.addContainerGap())))
 		);
 		accoInfoPanel.setLayout(gl_accoInfoPanel);
 
@@ -1486,24 +1505,52 @@ public class MainWindow extends javax.swing.JFrame {
 				&& !Name.equals(null) && !Surname.equals(null)
 				&& !school.equals(null) && !dorm.equals(null)
 				&& !hostel.equals(null) && !room.equals(null)) {
+
 			int type1 = Integer.parseInt(accRoomTypeCBox.getSelectedItem()
 					.toString());
 			int studentNumber;
 			try {
+			Dorm dorm1 = db.retrieveDormInfo(name[0], name[1]);
+			Room room1 = db.retrieveRoomInfo(name[0], name[1]);
+			Hostel host1 = db.retrieveHostelInfo(name[0], name[1]);
 				studentNumber = db.GetStudentNumber(hostel, dorm, room);
-				if (studentNumber < type1) {
+				if (!(dorm1.getDormName().equals(accDormCBox))
+						|| room1.getRoomNo() != Integer.parseInt(accRoomCBox
+								.getSelectedItem().toString())
+						|| room1.getTypeName() != Integer
+								.parseInt(accRoomTypeCBox.getSelectedItem()
+										.toString()))
+					if (studentNumber < type1) {
+
+						if (db.updateStudent(student, emgContact, dorm, room,
+								hostel, school, Name, Surname)
+								&& db.updateHostel(student, dorm, room, hostel)) {
+							JOptionPane.showMessageDialog(getContentPane(),
+									"Changes saved");
+
+						} else {
+							JOptionPane.showMessageDialog(getContentPane(),
+									"Changes not saved, please try again!");
+						}
+					} else {
+
+
+						JOptionPane.showMessageDialog(getContentPane(),
+								"This Room is Full");
+			//			btnUndo.setEnabled(false);
+						
+					}
+				else {
 					if (db.updateStudent(student, emgContact, dorm, room,
 							hostel, school, Name, Surname)) {
 						JOptionPane.showMessageDialog(getContentPane(),
 								"Changes saved");
+						
 
 					} else {
 						JOptionPane.showMessageDialog(getContentPane(),
 								"Changes not saved, please try again!");
 					}
-				} else {
-					JOptionPane.showMessageDialog(getContentPane(),
-							"This Room is Full");
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -1574,6 +1621,17 @@ public class MainWindow extends javax.swing.JFrame {
 
 		return student;
 	}
+	private void btnUndoClicked(ActionEvent evt) {
+		DBConnection conn = new DBConnection();
+		accDormCBox.removeAllItems();
+		accRoomCBox.removeAllItems();
+		accRoomTypeCBox.removeAllItems();
+		Dorm dorm = conn.retrieveDormInfo(name[0], name[1]);
+		Room room = conn.retrieveRoomInfo(name[0], name[1]);
+		Hostel host = conn.retrieveHostelInfo(name[0], name[1]);
+		fillAccInfo(dorm, room, host);
+		
+	}
 
 	private void addStudentActionPerformed(java.awt.event.ActionEvent evt) {
 		new StudentWindow().setVisible(true);
@@ -1607,7 +1665,7 @@ public class MainWindow extends javax.swing.JFrame {
 		schGradeText.setEditable(false);
 		accDormCBox.setEnabled(false);
 		accRoomCBox.setEnabled(false);
-		// accRoomTypeCBox.setEnabled(false);
+	//	accRoomTypeCBox.setEnabled(false);
 	}
 
 	private void setEditableTrue() {

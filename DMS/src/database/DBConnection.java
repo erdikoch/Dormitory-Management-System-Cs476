@@ -50,7 +50,7 @@ public class DBConnection {
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-		String url = "jdbc:sqlserver://192.168.234.1:1433;instance=MSSQLSERVER;DatabaseName=DormManagement";
+		String url = "jdbc:sqlserver://192.168.230.1:1433;instance=MSSQLSERVER;DatabaseName=DormManagement";
 		con = DriverManager.getConnection(url, "sa", "123456");
 		return con;
 	}
@@ -367,7 +367,7 @@ public class DBConnection {
 			connect();
 
 			proc_stmt = con
-					.prepareCall("{ call Update_StudentPersonalInfo(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) }");
+					.prepareCall("{ call Update_StudentPersonalInfo(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) }");
 			proc_stmt.setString(1, std.getName());
 			proc_stmt.setString(2, std.getSurname());
 			proc_stmt.setString(3, Name);
@@ -383,11 +383,31 @@ public class DBConnection {
 			proc_stmt.setString(13, sch.getDepartment());
 			proc_stmt.setString(14, sch.getUniName());
 			proc_stmt.setInt(15, sch.getGrade());
-			proc_stmt.setDate(16, (Date) host.getStartDate());
-			proc_stmt.setDate(17, (Date) host.getEndDate());
-			proc_stmt.setString(18, dorm.getDormName());
-			proc_stmt.setInt(19, room.getTypeName());
-			proc_stmt.setInt(20, room.getRoomNo());
+			proc_stmt.executeUpdate();
+			return true;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+
+	}
+	public boolean updateHostel(Student std, Dorm dorm,
+			Room room, Hostel host) {
+
+		try {
+			connect();
+
+			proc_stmt = con
+					.prepareCall("{ call Update_Hostel(?,?,?,?,?,?,?) }");
+	
+			proc_stmt.setString(1, std.getName());
+			proc_stmt.setString(2, std.getSurname());
+			proc_stmt.setDate(3, (Date) host.getStartDate());
+			proc_stmt.setDate(4, (Date) host.getEndDate());
+			proc_stmt.setString(5, dorm.getDormName());
+			proc_stmt.setInt(6, room.getTypeName());
+			proc_stmt.setInt(7, room.getRoomNo()); 
 
 			proc_stmt.executeUpdate();
 			return true;

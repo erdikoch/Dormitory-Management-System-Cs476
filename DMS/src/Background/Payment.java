@@ -4,6 +4,7 @@ public class Payment{
 	protected double amount;
 	protected int paymentType;
 	
+	
 	private static final int CASH = 0;
 	private static final int CREDIT_CARD = 1;
 	

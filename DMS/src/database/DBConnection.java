@@ -359,6 +359,34 @@ public class DBConnection {
 		}
 
 	}
+	public  Room getPaymentInfo(String name,String surname){
+		
+		Room room = new Room();
+		try {
+			connect();
+			proc_stmt = con
+					.prepareCall("{ call Get_PaymentInfo(?,?) }");
+
+			proc_stmt.setString(1, name);
+			proc_stmt.setString(2, surname);
+			rs = proc_stmt.executeQuery();
+			while (rs.next()) {
+				room.setRoomPrice(rs.getDouble(1));
+				room.setMonthDiff(rs.getInt(2));
+				room.setTotalDebt(rs.getDouble(3));
+
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return room;
+		
+
+	//	return price;
+		
+	}
 
 	public boolean updateStudent(Student std, EmergencyContact emg, Dorm dorm,
 			Room room, Hostel host, School sch, String Name, String Surname) {

@@ -1052,22 +1052,22 @@ public class MainWindow extends javax.swing.JFrame {
 
 		lblNewLabel = new JLabel("Room Price:");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNewLabel.setBounds(10, 83, 91, 14);
+		lblNewLabel.setBounds(10, 90, 91, 14);
 		paymentPanel.add(lblNewLabel);
 
 		JLabel lblTotalDebt = new JLabel("Total Debt:");
 		lblTotalDebt.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblTotalDebt.setBounds(10, 215, 91, 14);
+		lblTotalDebt.setBounds(10, 223, 91, 14);
 		paymentPanel.add(lblTotalDebt);
 
 		JLabel lblDisbursement = new JLabel("Disbursement:");
 		lblDisbursement.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblDisbursement.setBounds(10, 173, 111, 14);
+		lblDisbursement.setBounds(10, 178, 111, 14);
 		paymentPanel.add(lblDisbursement);
 
 		JLabel lblAccomodationTimemonthly = new JLabel("Time Interval(Month):");
 		lblAccomodationTimemonthly.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblAccomodationTimemonthly.setBounds(10, 129, 202, 14);
+		lblAccomodationTimemonthly.setBounds(10, 135, 202, 14);
 		paymentPanel.add(lblAccomodationTimemonthly);
 
 		JLabel lblPayment_1 = new JLabel("Details");
@@ -1080,50 +1080,52 @@ public class MainWindow extends javax.swing.JFrame {
 		lblPaymentType.setBounds(10, 268, 122, 25);
 		paymentPanel.add(lblPaymentType);
 
-		JRadioButton rdbtnNewRadioButton = new JRadioButton("Cash");
-		rdbtnNewRadioButton.setBounds(187, 271, 79, 23);
-		paymentPanel.add(rdbtnNewRadioButton);
+		JRadioButton rdbtnCash = new JRadioButton("Cash");
+		rdbtnCash.setFont(new Font("Tahoma", Font.BOLD, 13));
+		rdbtnCash.setBounds(165, 271, 101, 25);
+		paymentPanel.add(rdbtnCash);
 
 		JRadioButton rdbtnCreditCard = new JRadioButton("Credit Card");
+		rdbtnCreditCard.setFont(new Font("Tahoma", Font.BOLD, 13));
 		rdbtnCreditCard.setBounds(268, 271, 109, 23);
 		paymentPanel.add(rdbtnCreditCard);
 
 		ButtonGroup group = new ButtonGroup();
 		group.add(rdbtnCreditCard);
-		group.add(rdbtnNewRadioButton);
+		group.add(rdbtnCash);
 
 		JLabel lblRemainingDebt = new JLabel("Remaining Debt(*):");
 		lblRemainingDebt.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblRemainingDebt.setBounds(422, 85, 135, 25);
+		lblRemainingDebt.setBounds(423, 85, 135, 25);
 		paymentPanel.add(lblRemainingDebt);
 
 		JButton btnEnter = new JButton("Enter");
 		btnEnter.setBounds(288, 389, 89, 23);
 		paymentPanel.add(btnEnter);
-
-		textField_1 = new JTextField();
-		textField_1.setEditable(false);
-		textField_1.setBounds(165, 82, 212, 20);
-		paymentPanel.add(textField_1);
-
-		textField_2 = new JTextField();
-		textField_2.setEditable(false);
-		textField_2.setBounds(165, 214, 212, 20);
-		paymentPanel.add(textField_2);
-
-		textField_3 = new JTextField();
-		textField_3.setEditable(false);
-		textField_3.setBounds(166, 172, 212, 20);
-		paymentPanel.add(textField_3);
-
-		textField_4 = new JTextField();
-		textField_4.setEditable(false);
-		textField_4.setBounds(165, 128, 212, 20);
-		paymentPanel.add(textField_4);
-
+		
+		txtRoomPrice = new JTextField();
+		txtRoomPrice.setBounds(165, 87, 184, 25);
+		paymentPanel.add(txtRoomPrice);
+		txtRoomPrice.setColumns(10);
+		
+		txtTimeInterval = new JTextField();
+		txtTimeInterval.setColumns(10);
+		txtTimeInterval.setBounds(165, 132, 184, 25);
+		paymentPanel.add(txtTimeInterval);
+		
+		txtDisbursement = new JTextField();
+		txtDisbursement.setColumns(10);
+		txtDisbursement.setBounds(165, 175, 184, 25);
+		paymentPanel.add(txtDisbursement);
+		
+		txtTotalDebt = new JTextField();
+		txtTotalDebt.setColumns(10);
+		txtTotalDebt.setBounds(165, 220, 184, 25);
+		paymentPanel.add(txtTotalDebt);
+		
 		textField_5 = new JTextField();
-		textField_5.setEditable(false);
-		textField_5.setBounds(568, 89, 212, 20);
+		textField_5.setColumns(10);
+		textField_5.setBounds(572, 85, 184, 25);
 		paymentPanel.add(textField_5);
 
 		javax.swing.GroupLayout gl_mainPanePanel = new javax.swing.GroupLayout(
@@ -1367,6 +1369,7 @@ public class MainWindow extends javax.swing.JFrame {
 		Hostel host = new Hostel();
 		Dorm dorm = new Dorm();
 		Room room = new Room();
+		Room room1 = new Room();
 		name = new String[2];
 		String selected = studentSearchList.getSelectedValue().toString();
 		for (int j = 0; j < name.length; j++) {
@@ -1380,6 +1383,7 @@ public class MainWindow extends javax.swing.JFrame {
 			dorm = conn.retrieveDormInfo(name[0], name[1]);
 			room = conn.retrieveRoomInfo(name[0], name[1]);
 			host = conn.retrieveHostelInfo(name[0], name[1]);
+			room1 = conn.getPaymentInfo(name[0],name[1]);
 		}
 
 		if (evt.getClickCount() == 2) {
@@ -1387,6 +1391,8 @@ public class MainWindow extends javax.swing.JFrame {
 			fillEmergencyContact(emg);
 			fillSchoolInfo(sch);
 			fillAccInfo(dorm, room, host);
+			fillPayment(room1);
+			
 		}
 	}
 
@@ -1416,6 +1422,13 @@ public class MainWindow extends javax.swing.JFrame {
 		if (!std.getTC().equals("0"))
 			stdTCText.setText(std.getTC());
 		stdPhoneText.setText(std.getPhone());
+	}
+	private void fillPayment(Room room){
+		
+		txtRoomPrice.setText(Double.toString(room.getRoomPrice()));
+		txtTimeInterval.setText(Integer.toString(room.getMonthDiff()));
+		txtTotalDebt.setText(Double.toString(room.getTotalDebt()));
+		
 	}
 
 	private void fillEmergencyContact(EmergencyContact emg) {
@@ -1527,6 +1540,7 @@ public class MainWindow extends javax.swing.JFrame {
 								&& db.updateHostel(student, dorm, room, hostel)) {
 							JOptionPane.showMessageDialog(getContentPane(),
 									"Changes saved");
+							
 
 						} else {
 							JOptionPane.showMessageDialog(getContentPane(),
@@ -1537,7 +1551,7 @@ public class MainWindow extends javax.swing.JFrame {
 
 						JOptionPane.showMessageDialog(getContentPane(),
 								"This Room is Full");
-			//			btnUndo.setEnabled(false);
+
 						
 					}
 				else {
@@ -1781,9 +1795,9 @@ public class MainWindow extends javax.swing.JFrame {
 	private JLabel lblNewLabel;
 	private JDateChooser birthDateChooser, startDateChooser, endDateChooser;
 	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
+	private JTextField txtRoomPrice;
+	private JTextField txtTimeInterval;
+	private JTextField txtDisbursement;
+	private JTextField txtTotalDebt;
 	private JTextField textField_5;
 }

@@ -17,6 +17,7 @@ import org.jfree.ui.RefineryUtilities;
 import background.Dorm;
 import background.EmergencyContact;
 import background.Hostel;
+import background.Payment;
 import background.Room;
 import background.School;
 import background.Student;
@@ -161,7 +162,7 @@ public class MainWindow extends javax.swing.JFrame {
 		personalInfoMailLabel = new javax.swing.JLabel();
 		personalInfoBirthdayLabel = new javax.swing.JLabel();
 		stdNameText = new javax.swing.JTextField();
-		stdSurnameTExt = new javax.swing.JTextField();
+		stdSurnameText = new javax.swing.JTextField();
 		stdTCText = new javax.swing.JTextField();
 		stdPhoneText = new javax.swing.JTextField();
 		stdMailText = new javax.swing.JTextField();
@@ -406,7 +407,7 @@ public class MainWindow extends javax.swing.JFrame {
 																														.createParallelGroup(
 																																Alignment.LEADING)
 																														.addComponent(
-																																stdSurnameTExt)
+																																stdSurnameText)
 																														.addComponent(
 																																stdTCText)
 																														.addGroup(
@@ -509,7 +510,7 @@ public class MainWindow extends javax.swing.JFrame {
 														.addComponent(
 																personalInfoMailLabel)
 														.addComponent(
-																stdSurnameTExt,
+																stdSurnameText,
 																GroupLayout.PREFERRED_SIZE,
 																GroupLayout.DEFAULT_SIZE,
 																GroupLayout.PREFERRED_SIZE)
@@ -1080,12 +1081,12 @@ public class MainWindow extends javax.swing.JFrame {
 		lblPaymentType.setBounds(10, 268, 122, 25);
 		paymentPanel.add(lblPaymentType);
 
-		JRadioButton rdbtnCash = new JRadioButton("Cash");
+		final JRadioButton rdbtnCash = new JRadioButton("Cash");
 		rdbtnCash.setFont(new Font("Tahoma", Font.BOLD, 13));
 		rdbtnCash.setBounds(165, 271, 101, 25);
 		paymentPanel.add(rdbtnCash);
 
-		JRadioButton rdbtnCreditCard = new JRadioButton("Credit Card");
+		final JRadioButton rdbtnCreditCard = new JRadioButton("Credit Card");
 		rdbtnCreditCard.setFont(new Font("Tahoma", Font.BOLD, 13));
 		rdbtnCreditCard.setBounds(268, 271, 109, 23);
 		paymentPanel.add(rdbtnCreditCard);
@@ -1100,6 +1101,43 @@ public class MainWindow extends javax.swing.JFrame {
 		paymentPanel.add(lblRemainingDebt);
 
 		JButton btnEnter = new JButton("Enter");
+		btnEnter.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				double a,b = 0;
+				DBConnection con = new DBConnection();
+				Student std = new Student();
+				Room room = new Room();
+				Dorm drm = new Dorm();
+				if (rdbtnCash.isSelected()) {
+					String cash="Cash";
+				//	payment.setPaymentType(cash);
+					std.setName(stdNameText.getText());
+					std.setSurname(stdSurnameText.getText());
+					int no = Integer.parseInt(accRoomCBox.getSelectedItem().toString());
+					room.setRoomNo(no);
+					drm.setDormName(accDormCBox.getSelectedItem().toString());
+					a = Double.parseDouble(txtTotalDebt.getText());
+					if (txtDisbursement.getText().isEmpty()) {
+						JOptionPane.showMessageDialog(getContentPane(), "Please enter disbursement");
+					} else {
+						b = Double.parseDouble(txtDisbursement.getText());
+					}
+					double remaining = a-b;
+					txtRemainingDebt.setText(Double.toString(remaining));
+					//payment.setAmount(remaining);
+					if(con.insertPayment(drm, room, std, remaining,cash)){
+						JOptionPane.showMessageDialog(getContentPane(),"Payment Done");
+					}else{
+						JOptionPane.showMessageDialog(getContentPane(),"There is a problem");
+					}
+				} else if(rdbtnCreditCard.isSelected()){
+					String creditcard="Credit Card";
+					txtRemainingDebt.setText("0");
+				}else{
+					JOptionPane.showMessageDialog(getContentPane(), "Please, Choose Payment Type");
+				}
+			}
+		});
 		btnEnter.setBounds(288, 389, 89, 23);
 		paymentPanel.add(btnEnter);
 		
@@ -1123,10 +1161,10 @@ public class MainWindow extends javax.swing.JFrame {
 		txtTotalDebt.setBounds(165, 220, 184, 25);
 		paymentPanel.add(txtTotalDebt);
 		
-		textField_5 = new JTextField();
-		textField_5.setColumns(10);
-		textField_5.setBounds(572, 85, 184, 25);
-		paymentPanel.add(textField_5);
+		txtRemainingDebt = new JTextField();
+		txtRemainingDebt.setColumns(10);
+		txtRemainingDebt.setBounds(572, 85, 184, 25);
+		paymentPanel.add(txtRemainingDebt);
 
 		javax.swing.GroupLayout gl_mainPanePanel = new javax.swing.GroupLayout(
 				mainPanePanel);
@@ -1371,7 +1409,7 @@ public class MainWindow extends javax.swing.JFrame {
 		Room room = new Room();
 		Room room1 = new Room();
 		name = new String[2];
-		String selected = studentSearchList.getSelectedValue().toString();
+		//String selected = studentSearchList.getSelectedValue().toString();
 		for (int j = 0; j < name.length; j++) {
 			name = studentSearchList.getSelectedValue().toString()
 					.split("\\s+");
@@ -1383,7 +1421,7 @@ public class MainWindow extends javax.swing.JFrame {
 			dorm = conn.retrieveDormInfo(name[0], name[1]);
 			room = conn.retrieveRoomInfo(name[0], name[1]);
 			host = conn.retrieveHostelInfo(name[0], name[1]);
-			room1 = conn.getPaymentInfo(name[0],name[1]);
+			room1 = conn.getPaymentInfo(name[0], name[1]);
 		}
 
 		if (evt.getClickCount() == 2) {
@@ -1415,7 +1453,7 @@ public class MainWindow extends javax.swing.JFrame {
 
 	private void fillStudentInfo(Student std) {
 		stdNameText.setText(std.getName());
-		stdSurnameTExt.setText(std.getSurname());
+		stdSurnameText.setText(std.getSurname());
 		stdMailText.setText(std.getEmail());
 		stdGenderCBox.addItem(std.getGender());
 		birthDateChooser.setDate(std.getBirthday());
@@ -1424,11 +1462,12 @@ public class MainWindow extends javax.swing.JFrame {
 		stdPhoneText.setText(std.getPhone());
 	}
 	private void fillPayment(Room room){
-		
 		txtRoomPrice.setText(Double.toString(room.getRoomPrice()));
 		txtTimeInterval.setText(Integer.toString(room.getMonthDiff()));
 		txtTotalDebt.setText(Double.toString(room.getTotalDebt()));
-		
+		if(txtDisbursement.getText().isEmpty()) {
+			txtRemainingDebt.setText(txtTotalDebt.getText());
+		}
 	}
 
 	private void fillEmergencyContact(EmergencyContact emg) {
@@ -1627,7 +1666,7 @@ public class MainWindow extends javax.swing.JFrame {
 			student.setBirthday(birthdate);
 		}
 		student.setName(stdNameText.getText());
-		student.setSurname(stdSurnameTExt.getText());
+		student.setSurname(stdSurnameText.getText());
 		student.setEmail(stdMailText.getText());
 		student.setGender(stdGenderCBox.getSelectedItem().toString());
 		student.setTC(stdTCText.getText());
@@ -1665,7 +1704,7 @@ public class MainWindow extends javax.swing.JFrame {
 
 	private void setEditableFalse() {
 		stdNameText.setEditable(false);
-		stdSurnameTExt.setEditable(false);
+		stdSurnameText.setEditable(false);
 		stdTCText.setEditable(false);
 		// birthDateChooser.getDateEditor().setEnabled(false);
 		stdPhoneText.setEditable(false);
@@ -1684,7 +1723,7 @@ public class MainWindow extends javax.swing.JFrame {
 
 	private void setEditableTrue() {
 		stdNameText.setEditable(true);
-		stdSurnameTExt.setEditable(true);
+		stdSurnameText.setEditable(true);
 		stdTCText.setEditable(true);
 		stdPhoneText.setEditable(true);
 		stdMailText.setEditable(true);
@@ -1745,7 +1784,7 @@ public class MainWindow extends javax.swing.JFrame {
 	private javax.swing.JComboBox accDormCBox, accRoomCBox, accRoomTypeCBox;
 	private javax.swing.JButton saveButton;
 	private JMenuItem mntmAddRoomType;
-	private javax.swing.JTextField stdSurnameTExt;
+	private javax.swing.JTextField stdSurnameText;
 	private javax.swing.JTextField stdTCText;
 	private javax.swing.JTextField searchStudentText;
 	private JMenuItem viewDormMenuItem;
@@ -1795,9 +1834,11 @@ public class MainWindow extends javax.swing.JFrame {
 	private JLabel lblNewLabel;
 	private JDateChooser birthDateChooser, startDateChooser, endDateChooser;
 	private JTextField textField;
+	private Payment payment;
+	private DBConnection conn;
 	private JTextField txtRoomPrice;
 	private JTextField txtTimeInterval;
 	private JTextField txtDisbursement;
 	private JTextField txtTotalDebt;
-	private JTextField textField_5;
+	private JTextField txtRemainingDebt;
 }

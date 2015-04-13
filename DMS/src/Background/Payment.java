@@ -2,7 +2,7 @@ package background;
 
 public class Payment{
 	protected double amount;
-	protected int paymentType;
+	protected String paymentType;
 	
 	
 	private static final int CASH = 0;
@@ -19,21 +19,12 @@ public class Payment{
 		}
 	}
 	
-	public int getPaymentType() {
+	public String getPaymentType() {
 		return this.paymentType;
 	}
 	
-	public void setPaymentType() {
-		if(paymentType == CASH) 
-		{
-			CashPayment payment = new CashPayment();
-			payment.paymentDetails();		
-		} 
-		else if(paymentType == CREDIT_CARD) 
-		{
-			CreditCardPayment payment = new CreditCardPayment();
-			payment.paymentDetails();
-		}
+	public void setPaymentType(String paymentType) {
+		this.paymentType = paymentType;
 	}	
 
 	public double getAmount(){

@@ -42,9 +42,9 @@ public class CashPayment extends Payment {
 		this.accomodationTime = accomodationTime;
 	}
 
-	public int getRemainingDebt() {
-		return remainingDebt;
-	}
+//	public int getRemainingDebt() {
+//		return remainingDebt;
+//	}
 
 	public void setRemainingDebt(int remainingDebt) {
 		this.remainingDebt = remainingDebt;
@@ -55,6 +55,6 @@ public class CashPayment extends Payment {
 		}
 
 		@Override public String paymentDetails(){
-			return "This cash amount is" + amount;
+			return "This cash amount is" + remainingDebt;
 		}
 	}

@@ -1,7 +1,7 @@
 package background;
 
 public class Payment{
-	protected double amount;
+	protected double remainingDebt;
 	protected String paymentType;
 	
 	
@@ -10,12 +10,12 @@ public class Payment{
 	
 	
 	public Payment(){
-		this.amount=0;
+		this.remainingDebt=0;
 	}
 
 	public Payment(double amount){
 		if(amount>=0) {
-			this.amount=amount;
+			this.remainingDebt=amount;
 		}
 	}
 	
@@ -27,17 +27,17 @@ public class Payment{
 		this.paymentType = paymentType;
 	}	
 
-	public double getAmount(){
-		return this.amount;	
+	public double getRemainingDebt(){
+		return this.remainingDebt;	
 	}
 
-	public void setAmount(double amount){
+	public void setRemainingDebt(double amount){
 		if(amount >= 0) {
-			this.amount=amount;
+			this.remainingDebt=amount;
 		}
 	}
 
 	public String paymentDetails(){
-		return "This amount is "+amount;
+		return "This amount is "+remainingDebt;
 	}
 }

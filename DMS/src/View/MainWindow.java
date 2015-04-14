@@ -62,7 +62,6 @@ import com.toedter.calendar.JDateChooser;
 
 public class MainWindow extends javax.swing.JFrame {
 
-
 	public static void main(String args[]) {
 		try {
 			for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager
@@ -865,98 +864,259 @@ public class MainWindow extends javax.swing.JFrame {
 		startDateChooser.setDateFormatString("dd/MM/yyyy");
 		endDateChooser = new JDateChooser();
 		endDateChooser.setDateFormatString("dd/MM/yyyy");
-		
+
 		JButton btnUndo = new JButton();
 		btnUndo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
-				btnUndoClicked(evt);
+				clickUndoButton(evt);
 			}
 
-	
 		});
 		btnUndo.setText("UNDO");
 		btnUndo.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnUndo.setBackground(new Color(204, 255, 204));
-		
-
 
 		javax.swing.GroupLayout gl_accoInfoPanel = new javax.swing.GroupLayout(
 				accoInfoPanel);
-		gl_accoInfoPanel.setHorizontalGroup(
-			gl_accoInfoPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_accoInfoPanel.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_accoInfoPanel.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_accoInfoPanel.createSequentialGroup()
-							.addGroup(gl_accoInfoPanel.createParallelGroup(Alignment.LEADING)
-								.addComponent(accoInfoLabel, GroupLayout.PREFERRED_SIZE, 165, GroupLayout.PREFERRED_SIZE)
-								.addGroup(gl_accoInfoPanel.createSequentialGroup()
-									.addGroup(gl_accoInfoPanel.createParallelGroup(Alignment.LEADING)
-										.addComponent(accoInfoDormLabel)
-										.addComponent(lblType, GroupLayout.PREFERRED_SIZE, 82, GroupLayout.PREFERRED_SIZE))
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addGroup(gl_accoInfoPanel.createParallelGroup(Alignment.LEADING)
-										.addGroup(gl_accoInfoPanel.createParallelGroup(Alignment.TRAILING, false)
-											.addComponent(accRoomCBox, Alignment.LEADING, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-											.addComponent(accDormCBox, Alignment.LEADING, 0, 92, Short.MAX_VALUE))
-										.addComponent(accRoomTypeCBox, GroupLayout.PREFERRED_SIZE, 92, GroupLayout.PREFERRED_SIZE))
-									.addGap(70)
-									.addGroup(gl_accoInfoPanel.createParallelGroup(Alignment.TRAILING)
-										.addComponent(accoInfoStartDateLabel, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
-										.addComponent(accoInfoEndDateLabel, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE))
-									.addGap(18)
-									.addGroup(gl_accoInfoPanel.createParallelGroup(Alignment.LEADING, false)
-										.addComponent(endDateChooser, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-										.addComponent(startDateChooser, GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE))
-									.addGap(66)
-									.addGroup(gl_accoInfoPanel.createParallelGroup(Alignment.LEADING)
-										.addComponent(btnUndo, GroupLayout.PREFERRED_SIZE, 105, GroupLayout.PREFERRED_SIZE)
-										.addGroup(gl_accoInfoPanel.createParallelGroup(Alignment.TRAILING, false)
-											.addComponent(editButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-											.addComponent(saveButton, GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)))))
-							.addGap(20))
-						.addGroup(gl_accoInfoPanel.createSequentialGroup()
-							.addComponent(accoInfoRoomLabel, GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
-							.addGap(639))))
-		);
-		gl_accoInfoPanel.setVerticalGroup(
-			gl_accoInfoPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_accoInfoPanel.createSequentialGroup()
-					.addGroup(gl_accoInfoPanel.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_accoInfoPanel.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(accoInfoLabel)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addGroup(gl_accoInfoPanel.createParallelGroup(Alignment.BASELINE)
-								.addComponent(accoInfoDormLabel)
-								.addComponent(accDormCBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(accoInfoStartDateLabel)
-								.addComponent(startDateChooser, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-						.addGroup(gl_accoInfoPanel.createSequentialGroup()
-							.addGap(41)
-							.addComponent(editButton)))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_accoInfoPanel.createParallelGroup(Alignment.TRAILING)
-						.addGroup(gl_accoInfoPanel.createParallelGroup(Alignment.BASELINE)
-							.addComponent(accoInfoEndDateLabel)
-							.addComponent(saveButton, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_accoInfoPanel.createSequentialGroup()
-							.addGroup(gl_accoInfoPanel.createParallelGroup(Alignment.BASELINE)
-								.addComponent(lblType, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE)
-								.addComponent(accRoomTypeCBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-							.addGap(6))
-						.addComponent(endDateChooser, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(5)
-					.addGroup(gl_accoInfoPanel.createParallelGroup(Alignment.TRAILING)
-						.addGroup(gl_accoInfoPanel.createSequentialGroup()
-							.addGroup(gl_accoInfoPanel.createParallelGroup(Alignment.BASELINE)
-								.addComponent(accoInfoRoomLabel)
-								.addComponent(accRoomCBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-							.addGap(22))
-						.addGroup(gl_accoInfoPanel.createSequentialGroup()
-							.addComponent(btnUndo)
-							.addContainerGap())))
-		);
+		gl_accoInfoPanel
+				.setHorizontalGroup(gl_accoInfoPanel
+						.createParallelGroup(Alignment.LEADING)
+						.addGroup(
+								gl_accoInfoPanel
+										.createSequentialGroup()
+										.addContainerGap()
+										.addGroup(
+												gl_accoInfoPanel
+														.createParallelGroup(
+																Alignment.LEADING)
+														.addGroup(
+																gl_accoInfoPanel
+																		.createSequentialGroup()
+																		.addGroup(
+																				gl_accoInfoPanel
+																						.createParallelGroup(
+																								Alignment.LEADING)
+																						.addComponent(
+																								accoInfoLabel,
+																								GroupLayout.PREFERRED_SIZE,
+																								165,
+																								GroupLayout.PREFERRED_SIZE)
+																						.addGroup(
+																								gl_accoInfoPanel
+																										.createSequentialGroup()
+																										.addGroup(
+																												gl_accoInfoPanel
+																														.createParallelGroup(
+																																Alignment.LEADING)
+																														.addComponent(
+																																accoInfoDormLabel)
+																														.addComponent(
+																																lblType,
+																																GroupLayout.PREFERRED_SIZE,
+																																82,
+																																GroupLayout.PREFERRED_SIZE))
+																										.addPreferredGap(
+																												ComponentPlacement.RELATED)
+																										.addGroup(
+																												gl_accoInfoPanel
+																														.createParallelGroup(
+																																Alignment.LEADING)
+																														.addGroup(
+																																gl_accoInfoPanel
+																																		.createParallelGroup(
+																																				Alignment.TRAILING,
+																																				false)
+																																		.addComponent(
+																																				accRoomCBox,
+																																				Alignment.LEADING,
+																																				0,
+																																				GroupLayout.DEFAULT_SIZE,
+																																				Short.MAX_VALUE)
+																																		.addComponent(
+																																				accDormCBox,
+																																				Alignment.LEADING,
+																																				0,
+																																				92,
+																																				Short.MAX_VALUE))
+																														.addComponent(
+																																accRoomTypeCBox,
+																																GroupLayout.PREFERRED_SIZE,
+																																92,
+																																GroupLayout.PREFERRED_SIZE))
+																										.addGap(70)
+																										.addGroup(
+																												gl_accoInfoPanel
+																														.createParallelGroup(
+																																Alignment.TRAILING)
+																														.addComponent(
+																																accoInfoStartDateLabel,
+																																GroupLayout.PREFERRED_SIZE,
+																																83,
+																																GroupLayout.PREFERRED_SIZE)
+																														.addComponent(
+																																accoInfoEndDateLabel,
+																																GroupLayout.PREFERRED_SIZE,
+																																83,
+																																GroupLayout.PREFERRED_SIZE))
+																										.addGap(18)
+																										.addGroup(
+																												gl_accoInfoPanel
+																														.createParallelGroup(
+																																Alignment.LEADING,
+																																false)
+																														.addComponent(
+																																endDateChooser,
+																																GroupLayout.DEFAULT_SIZE,
+																																GroupLayout.DEFAULT_SIZE,
+																																Short.MAX_VALUE)
+																														.addComponent(
+																																startDateChooser,
+																																GroupLayout.DEFAULT_SIZE,
+																																212,
+																																Short.MAX_VALUE))
+																										.addGap(66)
+																										.addGroup(
+																												gl_accoInfoPanel
+																														.createParallelGroup(
+																																Alignment.LEADING)
+																														.addComponent(
+																																btnUndo,
+																																GroupLayout.PREFERRED_SIZE,
+																																105,
+																																GroupLayout.PREFERRED_SIZE)
+																														.addGroup(
+																																gl_accoInfoPanel
+																																		.createParallelGroup(
+																																				Alignment.TRAILING,
+																																				false)
+																																		.addComponent(
+																																				editButton,
+																																				GroupLayout.DEFAULT_SIZE,
+																																				GroupLayout.DEFAULT_SIZE,
+																																				Short.MAX_VALUE)
+																																		.addComponent(
+																																				saveButton,
+																																				GroupLayout.DEFAULT_SIZE,
+																																				105,
+																																				Short.MAX_VALUE)))))
+																		.addGap(20))
+														.addGroup(
+																gl_accoInfoPanel
+																		.createSequentialGroup()
+																		.addComponent(
+																				accoInfoRoomLabel,
+																				GroupLayout.DEFAULT_SIZE,
+																				113,
+																				Short.MAX_VALUE)
+																		.addGap(639)))));
+		gl_accoInfoPanel
+				.setVerticalGroup(gl_accoInfoPanel
+						.createParallelGroup(Alignment.LEADING)
+						.addGroup(
+								gl_accoInfoPanel
+										.createSequentialGroup()
+										.addGroup(
+												gl_accoInfoPanel
+														.createParallelGroup(
+																Alignment.LEADING)
+														.addGroup(
+																gl_accoInfoPanel
+																		.createSequentialGroup()
+																		.addContainerGap()
+																		.addComponent(
+																				accoInfoLabel)
+																		.addPreferredGap(
+																				ComponentPlacement.UNRELATED)
+																		.addGroup(
+																				gl_accoInfoPanel
+																						.createParallelGroup(
+																								Alignment.BASELINE)
+																						.addComponent(
+																								accoInfoDormLabel)
+																						.addComponent(
+																								accDormCBox,
+																								GroupLayout.PREFERRED_SIZE,
+																								GroupLayout.DEFAULT_SIZE,
+																								GroupLayout.PREFERRED_SIZE)
+																						.addComponent(
+																								accoInfoStartDateLabel)
+																						.addComponent(
+																								startDateChooser,
+																								GroupLayout.PREFERRED_SIZE,
+																								GroupLayout.DEFAULT_SIZE,
+																								GroupLayout.PREFERRED_SIZE)))
+														.addGroup(
+																gl_accoInfoPanel
+																		.createSequentialGroup()
+																		.addGap(41)
+																		.addComponent(
+																				editButton)))
+										.addPreferredGap(
+												ComponentPlacement.UNRELATED)
+										.addGroup(
+												gl_accoInfoPanel
+														.createParallelGroup(
+																Alignment.TRAILING)
+														.addGroup(
+																gl_accoInfoPanel
+																		.createParallelGroup(
+																				Alignment.BASELINE)
+																		.addComponent(
+																				accoInfoEndDateLabel)
+																		.addComponent(
+																				saveButton,
+																				GroupLayout.PREFERRED_SIZE,
+																				23,
+																				GroupLayout.PREFERRED_SIZE))
+														.addGroup(
+																gl_accoInfoPanel
+																		.createSequentialGroup()
+																		.addGroup(
+																				gl_accoInfoPanel
+																						.createParallelGroup(
+																								Alignment.BASELINE)
+																						.addComponent(
+																								lblType,
+																								GroupLayout.PREFERRED_SIZE,
+																								15,
+																								GroupLayout.PREFERRED_SIZE)
+																						.addComponent(
+																								accRoomTypeCBox,
+																								GroupLayout.PREFERRED_SIZE,
+																								GroupLayout.DEFAULT_SIZE,
+																								GroupLayout.PREFERRED_SIZE))
+																		.addGap(6))
+														.addComponent(
+																endDateChooser,
+																GroupLayout.PREFERRED_SIZE,
+																GroupLayout.DEFAULT_SIZE,
+																GroupLayout.PREFERRED_SIZE))
+										.addGap(5)
+										.addGroup(
+												gl_accoInfoPanel
+														.createParallelGroup(
+																Alignment.TRAILING)
+														.addGroup(
+																gl_accoInfoPanel
+																		.createSequentialGroup()
+																		.addGroup(
+																				gl_accoInfoPanel
+																						.createParallelGroup(
+																								Alignment.BASELINE)
+																						.addComponent(
+																								accoInfoRoomLabel)
+																						.addComponent(
+																								accRoomCBox,
+																								GroupLayout.PREFERRED_SIZE,
+																								GroupLayout.DEFAULT_SIZE,
+																								GroupLayout.PREFERRED_SIZE))
+																		.addGap(22))
+														.addGroup(
+																gl_accoInfoPanel
+																		.createSequentialGroup()
+																		.addComponent(
+																				btnUndo)
+																		.addContainerGap()))));
 		accoInfoPanel.setLayout(gl_accoInfoPanel);
 
 		javax.swing.GroupLayout gl_mainPaneSubPanel = new javax.swing.GroupLayout(
@@ -1081,12 +1241,12 @@ public class MainWindow extends javax.swing.JFrame {
 		lblPaymentType.setBounds(10, 268, 122, 25);
 		paymentPanel.add(lblPaymentType);
 
-		final JRadioButton rdbtnCash = new JRadioButton("Cash");
+		rdbtnCash = new JRadioButton("Cash");
 		rdbtnCash.setFont(new Font("Tahoma", Font.BOLD, 13));
 		rdbtnCash.setBounds(165, 271, 101, 25);
 		paymentPanel.add(rdbtnCash);
 
-		final JRadioButton rdbtnCreditCard = new JRadioButton("Credit Card");
+		rdbtnCreditCard = new JRadioButton("Credit Card");
 		rdbtnCreditCard.setFont(new Font("Tahoma", Font.BOLD, 13));
 		rdbtnCreditCard.setBounds(268, 271, 109, 23);
 		paymentPanel.add(rdbtnCreditCard);
@@ -1103,64 +1263,32 @@ public class MainWindow extends javax.swing.JFrame {
 		JButton btnEnter = new JButton("Enter");
 		btnEnter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
-				double a,b = 0;
-				DBConnection con = new DBConnection();
-				Student std = new Student();
-				Room room = new Room();
-				Dorm drm = new Dorm();
-				if (rdbtnCash.isSelected()) {
-					String cash="Cash";
-				//	payment.setPaymentType(cash);
-					std.setName(stdNameText.getText());
-					std.setSurname(stdSurnameText.getText());
-					int no = Integer.parseInt(accRoomCBox.getSelectedItem().toString());
-					room.setRoomNo(no);
-					drm.setDormName(accDormCBox.getSelectedItem().toString());
-					a = Double.parseDouble(txtTotalDebt.getText());
-					if (txtDisbursement.getText().isEmpty()) {
-						JOptionPane.showMessageDialog(getContentPane(), "Please enter disbursement");
-					} else {
-						b = Double.parseDouble(txtDisbursement.getText());
-					}
-					double remaining = a-b;
-					txtRemainingDebt.setText(Double.toString(remaining));
-					//payment.setAmount(remaining);
-					if(con.insertPayment(drm, room, std, remaining,cash)){
-						JOptionPane.showMessageDialog(getContentPane(),"Payment Done");
-					}else{
-						JOptionPane.showMessageDialog(getContentPane(),"There is a problem");
-					}
-				} else if(rdbtnCreditCard.isSelected()){
-					String creditcard="Credit Card";
-					txtRemainingDebt.setText("0");
-				}else{
-					JOptionPane.showMessageDialog(getContentPane(), "Please, Choose Payment Type");
-				}
+				clickEnterButton(evt);
 			}
 		});
 		btnEnter.setBounds(288, 389, 89, 23);
 		paymentPanel.add(btnEnter);
-		
+
 		txtRoomPrice = new JTextField();
 		txtRoomPrice.setBounds(165, 87, 184, 25);
 		paymentPanel.add(txtRoomPrice);
 		txtRoomPrice.setColumns(10);
-		
+
 		txtTimeInterval = new JTextField();
 		txtTimeInterval.setColumns(10);
 		txtTimeInterval.setBounds(165, 132, 184, 25);
 		paymentPanel.add(txtTimeInterval);
-		
+
 		txtDisbursement = new JTextField();
 		txtDisbursement.setColumns(10);
 		txtDisbursement.setBounds(165, 175, 184, 25);
 		paymentPanel.add(txtDisbursement);
-		
+
 		txtTotalDebt = new JTextField();
 		txtTotalDebt.setColumns(10);
 		txtTotalDebt.setBounds(165, 220, 184, 25);
 		paymentPanel.add(txtTotalDebt);
-		
+
 		txtRemainingDebt = new JTextField();
 		txtRemainingDebt.setColumns(10);
 		txtRemainingDebt.setBounds(572, 85, 184, 25);
@@ -1348,7 +1476,7 @@ public class MainWindow extends javax.swing.JFrame {
 		getContentPane().setLayout(layout);
 
 		pack();
-	}// </editor-fold>//GEN-END:initComponents
+	}
 
 	private void filterList() {
 		System.out.println(studentSearchList.getModel());
@@ -1396,20 +1524,17 @@ public class MainWindow extends javax.swing.JFrame {
 	}
 
 	private void clickStudentSearchList(MouseEvent evt) {
-		accDormCBox.removeAllItems();
-		accRoomCBox.removeAllItems();
-		stdGenderCBox.removeAllItems();
-		accRoomTypeCBox.removeAllItems();
+		removeItems();
 		DBConnection conn = new DBConnection();
 		Student std = new Student();
 		EmergencyContact emg = new EmergencyContact();
+		Payment pymt = new Payment();
 		School sch = new School();
 		Hostel host = new Hostel();
 		Dorm dorm = new Dorm();
 		Room room = new Room();
 		Room room1 = new Room();
 		name = new String[2];
-		//String selected = studentSearchList.getSelectedValue().toString();
 		for (int j = 0; j < name.length; j++) {
 			name = studentSearchList.getSelectedValue().toString()
 					.split("\\s+");
@@ -1422,6 +1547,7 @@ public class MainWindow extends javax.swing.JFrame {
 			room = conn.retrieveRoomInfo(name[0], name[1]);
 			host = conn.retrieveHostelInfo(name[0], name[1]);
 			room1 = conn.getPaymentInfo(name[0], name[1]);
+			pymt = conn.getRemainingDebt(name[0], name[1]);
 		}
 
 		if (evt.getClickCount() == 2) {
@@ -1429,9 +1555,16 @@ public class MainWindow extends javax.swing.JFrame {
 			fillEmergencyContact(emg);
 			fillSchoolInfo(sch);
 			fillAccInfo(dorm, room, host);
-			fillPayment(room1);
-			
+			fillPayment(room1, pymt);
+
 		}
+	}
+
+	private void removeItems() {
+		accDormCBox.removeAllItems();
+		accRoomCBox.removeAllItems();
+		stdGenderCBox.removeAllItems();
+		accRoomTypeCBox.removeAllItems();
 	}
 
 	private void fillAccInfo(Dorm dorm, Room room, Hostel host) {
@@ -1461,12 +1594,16 @@ public class MainWindow extends javax.swing.JFrame {
 			stdTCText.setText(std.getTC());
 		stdPhoneText.setText(std.getPhone());
 	}
-	private void fillPayment(Room room){
+
+	private void fillPayment(Room room, Payment pymt) {
 		txtRoomPrice.setText(Double.toString(room.getRoomPrice()));
 		txtTimeInterval.setText(Integer.toString(room.getMonthDiff()));
 		txtTotalDebt.setText(Double.toString(room.getTotalDebt()));
-		if(txtDisbursement.getText().isEmpty()) {
-			txtRemainingDebt.setText(txtTotalDebt.getText());
+		System.out.println(pymt.getRemainingDebt());
+		if (pymt.getRemainingDebt() == 0) {
+			txtRemainingDebt.setText(Double.toString(room.getTotalDebt()));
+		} else {
+			txtRemainingDebt.setText(Double.toString(pymt.getRemainingDebt()));
 		}
 	}
 
@@ -1562,9 +1699,9 @@ public class MainWindow extends javax.swing.JFrame {
 					.toString());
 			int studentNumber;
 			try {
-			Dorm dorm1 = db.retrieveDormInfo(name[0], name[1]);
-			Room room1 = db.retrieveRoomInfo(name[0], name[1]);
-			Hostel host1 = db.retrieveHostelInfo(name[0], name[1]);
+				Dorm dorm1 = db.retrieveDormInfo(name[0], name[1]);
+				Room room1 = db.retrieveRoomInfo(name[0], name[1]);
+				Hostel host1 = db.retrieveHostelInfo(name[0], name[1]);
 				studentNumber = db.GetStudentNumber(hostel, dorm, room);
 				if (!(dorm1.getDormName().equals(accDormCBox))
 						|| room1.getRoomNo() != Integer.parseInt(accRoomCBox
@@ -1579,7 +1716,6 @@ public class MainWindow extends javax.swing.JFrame {
 								&& db.updateHostel(student, dorm, room, hostel)) {
 							JOptionPane.showMessageDialog(getContentPane(),
 									"Changes saved");
-							
 
 						} else {
 							JOptionPane.showMessageDialog(getContentPane(),
@@ -1587,18 +1723,15 @@ public class MainWindow extends javax.swing.JFrame {
 						}
 					} else {
 
-
 						JOptionPane.showMessageDialog(getContentPane(),
 								"This Room is Full");
 
-						
 					}
 				else {
 					if (db.updateStudent(student, emgContact, dorm, room,
 							hostel, school, Name, Surname)) {
 						JOptionPane.showMessageDialog(getContentPane(),
 								"Changes saved");
-						
 
 					} else {
 						JOptionPane.showMessageDialog(getContentPane(),
@@ -1674,7 +1807,8 @@ public class MainWindow extends javax.swing.JFrame {
 
 		return student;
 	}
-	private void btnUndoClicked(ActionEvent evt) {
+
+	private void clickUndoButton(ActionEvent evt) {
 		DBConnection conn = new DBConnection();
 		accDormCBox.removeAllItems();
 		accRoomCBox.removeAllItems();
@@ -1683,7 +1817,55 @@ public class MainWindow extends javax.swing.JFrame {
 		Room room = conn.retrieveRoomInfo(name[0], name[1]);
 		Hostel host = conn.retrieveHostelInfo(name[0], name[1]);
 		fillAccInfo(dorm, room, host);
-		
+
+	}
+
+	private void clickEnterButton(ActionEvent evt) {
+		double totalDebt, disbursement = 0;
+		DBConnection con = new DBConnection();
+		Student std = new Student();
+		Room room = new Room();
+		Dorm drm = new Dorm();
+		std.setName(stdNameText.getText());
+		std.setSurname(stdSurnameText.getText());
+		room.setRoomNo(Integer.parseInt(accRoomCBox.getSelectedItem()
+				.toString()));
+		drm.setDormName(accDormCBox.getSelectedItem().toString());
+		Payment pymt = new Payment();
+		if (rdbtnCash.isSelected()) {
+			String cash = "Cash";
+			pymt.setPaymentType(cash);
+			totalDebt = Double.parseDouble(txtTotalDebt.getText());
+			if (txtDisbursement.getText().isEmpty()) {
+				JOptionPane.showMessageDialog(getContentPane(),
+						"Please enter disbursement");
+			} else {
+				disbursement = Double.parseDouble(txtDisbursement.getText());
+			}
+			double remaining = totalDebt - disbursement;
+			txtRemainingDebt.setText(Double.toString(remaining));
+			pymt.setRemainingDebt(remaining);
+			if (con.insertPayment(drm, room, std, pymt)) {
+				JOptionPane.showMessageDialog(getContentPane(), "Payment done");
+			} else {
+				JOptionPane.showMessageDialog(getContentPane(),
+						"Payment not done, try again!");
+			}
+		} else if (rdbtnCreditCard.isSelected()) {
+			String creditcard = "Credit Card";
+			txtRemainingDebt.setText("0");
+			pymt.setRemainingDebt(0);
+			pymt.setPaymentType(creditcard);
+			if (con.insertPayment(drm, room, std, pymt)) {
+				JOptionPane.showMessageDialog(getContentPane(), "Payment done");
+			} else {
+				JOptionPane.showMessageDialog(getContentPane(),
+						"Payment not done, try again!");
+			}
+		} else {
+			JOptionPane.showMessageDialog(getContentPane(),
+					"Please, Choose Payment Type");
+		}
 	}
 
 	private void addStudentActionPerformed(java.awt.event.ActionEvent evt) {
@@ -1718,7 +1900,7 @@ public class MainWindow extends javax.swing.JFrame {
 		schGradeText.setEditable(false);
 		accDormCBox.setEnabled(false);
 		accRoomCBox.setEnabled(false);
-	//	accRoomTypeCBox.setEnabled(false);
+		// accRoomTypeCBox.setEnabled(false);
 	}
 
 	private void setEditableTrue() {
@@ -1833,9 +2015,9 @@ public class MainWindow extends javax.swing.JFrame {
 	private JLabel label;
 	private JLabel lblNewLabel;
 	private JDateChooser birthDateChooser, startDateChooser, endDateChooser;
-	private JTextField textField;
-	private Payment payment;
+	private JTextField textField;;
 	private DBConnection conn;
+	JRadioButton rdbtnCreditCard, rdbtnCash;
 	private JTextField txtRoomPrice;
 	private JTextField txtTimeInterval;
 	private JTextField txtDisbursement;

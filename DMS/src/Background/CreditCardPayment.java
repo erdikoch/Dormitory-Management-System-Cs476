@@ -43,9 +43,9 @@ public class CreditCardPayment extends Payment {
 		this.accomodationTime = accomodationTime;
 	}
 
-	public int getRemainingDebt() {
-		return remainingDebt;
-	}
+//	public int getRemainingDebt() {
+//		return remainingDebt;
+//	}
 
 	public void setRemainingDebt(int remainingDebt) {
 		this.remainingDebt = remainingDebt;

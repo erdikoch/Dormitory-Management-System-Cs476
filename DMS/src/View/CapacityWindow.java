@@ -17,23 +17,26 @@ import background.Dorm;
 public class CapacityWindow {
 	private Dorm dorm;
 	private DBConnection connection;
-	
+
 	public CapacityWindow(Dorm dorm) throws SQLException {
 		super();
 		this.dorm = dorm;
 		connection = new DBConnection();
-		//connection.connect();
+		// connection.connect();
 		JFrame capacityFrame = new JFrame("Dorm Capacity");
 		String dormName = dorm.getDormName();
 		capacityFrame.setBounds(0, 0, 500, 300);
-		capacityFrame.setContentPane(createDemoPanel(dorm,connection.getDormCapacity(dorm),connection.getTotalStudenNumberInDorm(dorm)));
+		capacityFrame.setContentPane(createDemoPanel(dorm,
+				connection.getDormCapacity(dorm),
+				connection.getTotalStudenNumberInDorm(dorm)));
 		capacityFrame.setVisible(true);
-		System.out.println("Total"+connection.getDormCapacity(dorm)+"Student"+connection.getTotalStudenNumberInDorm(dorm));
 	}
 
-	private static PieDataset createDataset(Dorm dorm, int capacity, int totalStudentNumberInDorm) {
+	private static PieDataset createDataset(Dorm dorm, int capacity,
+			int totalStudentNumberInDorm) {
 		DefaultPieDataset dataset = new DefaultPieDataset();
-		dataset.setValue("Filled Dorm Space", new Double(totalStudentNumberInDorm));
+		dataset.setValue("Filled Dorm Space", new Double(
+				totalStudentNumberInDorm));
 		dataset.setValue("Dorm Empty Spaces", new Double(capacity));
 		return dataset;
 	}
@@ -48,8 +51,10 @@ public class CapacityWindow {
 		return chart;
 	}
 
-	public static JPanel createDemoPanel(Dorm dorm, int capacity, int totalStudentNumberInDorm) {
-		JFreeChart chart = createChart(createDataset(dorm,capacity,totalStudentNumberInDorm));
+	public static JPanel createDemoPanel(Dorm dorm, int capacity,
+			int totalStudentNumberInDorm) {
+		JFreeChart chart = createChart(createDataset(dorm, capacity,
+				totalStudentNumberInDorm));
 		return new ChartPanel(chart);
 	}
 }

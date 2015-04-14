@@ -19,28 +19,28 @@ public class TestPayment extends TestCase {
 	@SuppressWarnings("deprecation")
 	@Test
 	public void testSetAmount() {
-		payment.setAmount(100.00);
-		assertEquals(100.00, payment.getAmount());
+		payment.setRemainingDebt(100.00);
+		assertEquals(100.00, payment.getRemainingDebt());
 	}
 	
 	@SuppressWarnings("deprecation")
 	@Test
 	public void testSetNegativeAmount() {
-		payment.setAmount(-100.00);
-		assertEquals(-100.00, payment.getAmount());
+		payment.setRemainingDebt(-100.00);
+		assertEquals(-100.00, payment.getRemainingDebt());
 	}
 	
 	@SuppressWarnings("deprecation")
 	@Test
 	public void testSetZeroAmount() {
-		payment.setAmount(0);
-		assertEquals(0, payment.getAmount());
+		payment.setRemainingDebt(0);
+		assertEquals(0, payment.getRemainingDebt());
 	}
 	
 	@SuppressWarnings("deprecation")
 	@Test
 	public void testSetLongDigitAmount() {
-		payment.setAmount(100000000.00);
-		assertEquals(100000000.00, payment.getAmount());
+		payment.setRemainingDebt(100000000.00);
+		assertEquals(100000000.00, payment.getRemainingDebt());
 	}
 }

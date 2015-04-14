@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
-
 //I hate imports
 import view.DormListWindow;
 import view.DormWindow;
@@ -131,16 +130,18 @@ public class DBConnection {
 		}
 
 	}
-	
-	public boolean insertPayment(Dorm drm, Room room, Student std, double remaining, String Cash) {
+
+	public boolean insertPayment(Dorm drm, Room room, Student std,
+			Payment pymt) {
 		try {
-			proc_stmt = connect().prepareCall("{ call Insert_Payment(?,?,?,?,?,?) }");
+			proc_stmt = connect().prepareCall(
+					"{ call Insert_Payment(?,?,?,?,?,?) }");
 			proc_stmt.setString(1, std.getName());
 			proc_stmt.setString(2, std.getSurname());
 			proc_stmt.setInt(3, room.getRoomNo());
 			proc_stmt.setString(4, drm.getDormName());
-			proc_stmt.setString(5, Cash);
-			proc_stmt.setDouble(6, remaining);
+			proc_stmt.setString(5, pymt.getPaymentType());
+			proc_stmt.setDouble(6, pymt.getRemainingDebt());
 			proc_stmt.executeUpdate();
 			return true;
 		} catch (SQLException e) {
@@ -288,12 +289,14 @@ public class DBConnection {
 							rs.getObject(2), rs.getObject(3), rs.getObject(4),
 							rs.getObject(5), rs.getObject(6) });
 				}
-				if (rs.getObject(7).equals(roomType) && rs.getObject(1).equals(dorm) && roomNo == null ) {
+				if (rs.getObject(7).equals(roomType)
+						&& rs.getObject(1).equals(dorm) && roomNo == null) {
 					searchModel.addRow(new Object[] { rs.getObject(1),
 							rs.getObject(2), rs.getObject(3), rs.getObject(4),
 							rs.getObject(5), rs.getObject(6) });
 				}
-				if(rs.getObject(7).equals(roomType) && roomNo == null && dorm == null) {
+				if (rs.getObject(7).equals(roomType) && roomNo == null
+						&& dorm == null) {
 					searchModel.addRow(new Object[] { rs.getObject(1),
 							rs.getObject(2), rs.getObject(3), rs.getObject(4),
 							rs.getObject(5), rs.getObject(6) });
@@ -303,9 +306,6 @@ public class DBConnection {
 							rs.getObject(2), rs.getObject(3), rs.getObject(4),
 							rs.getObject(5), rs.getObject(6) });
 				}
-//				if() {
-//					
-//				}
 				if (dorm == null && roomType == null) {
 					searchModel.addRow(new Object[] { rs.getObject(1),
 							rs.getObject(2), rs.getObject(3), rs.getObject(4),
@@ -378,14 +378,12 @@ public class DBConnection {
 		}
 
 	}
-	public  Room getPaymentInfo(String name,String surname){
-		
+
+	public Room getPaymentInfo(String name, String surname) {
 		Room room = new Room();
 		try {
 			connect();
-			proc_stmt = con
-					.prepareCall("{ call Get_PaymentInfo(?,?) }");
-
+			proc_stmt = con.prepareCall("{ call Get_PaymentInfo(?,?) }");
 			proc_stmt.setString(1, name);
 			proc_stmt.setString(2, surname);
 			rs = proc_stmt.executeQuery();
@@ -393,18 +391,32 @@ public class DBConnection {
 				room.setRoomPrice(rs.getDouble(1));
 				room.setMonthDiff(rs.getInt(2));
 				room.setTotalDebt(rs.getDouble(3));
-
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 		return room;
-		
+	}
 
-	//	return price;
-		
+	public Payment getRemainingDebt(String name, String surname) {
+		Payment pymt = new Payment();
+		try {
+			proc_stmt = con.prepareCall("{ call Get_RemainingDebt(?,?) }");
+			proc_stmt.setString(1, name);
+			proc_stmt.setString(2, surname);
+			rs = proc_stmt.executeQuery();
+			while (rs.next()) {
+				pymt.setRemainingDebt(rs.getDouble(1));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return pymt;
+	}
+
+	public void getRemainingDebt() {
+
 	}
 
 	public boolean updateStudent(Student std, EmergencyContact emg, Dorm dorm,
@@ -439,22 +451,22 @@ public class DBConnection {
 		}
 
 	}
-	public boolean updateHostel(Student std, Dorm dorm,
-			Room room, Hostel host) {
+
+	public boolean updateHostel(Student std, Dorm dorm, Room room, Hostel host) {
 
 		try {
 			connect();
 
 			proc_stmt = con
 					.prepareCall("{ call Update_Hostel(?,?,?,?,?,?,?) }");
-	
+
 			proc_stmt.setString(1, std.getName());
 			proc_stmt.setString(2, std.getSurname());
 			proc_stmt.setDate(3, (Date) host.getStartDate());
 			proc_stmt.setDate(4, (Date) host.getEndDate());
 			proc_stmt.setString(5, dorm.getDormName());
 			proc_stmt.setInt(6, room.getTypeName());
-			proc_stmt.setInt(7, room.getRoomNo()); 
+			proc_stmt.setInt(7, room.getRoomNo());
 
 			proc_stmt.executeUpdate();
 			return true;

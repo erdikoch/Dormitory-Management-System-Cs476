@@ -246,71 +246,147 @@ public class MainWindow extends javax.swing.JFrame {
 		searchButton.setBackground(new java.awt.Color(204, 255, 204));
 		searchButton.setText("Q");
 
+		dormCBox = new JComboBox();
+		dormCBox.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent evt) {
+				dormCBox.removeAllItems();
+				fillDormBox(evt);
+				isDormSelected = true;
+			}
+		});
+		roomTypeCBox = new JComboBox();
+		roomTypeCBox.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent evt) {
+				roomTypeCBox.removeAllItems();
+				fillRoomTypeBox(evt);
+			}
+		});
+		roomNoCBox = new JComboBox();
+		roomNoCBox.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent evt) {
+				roomNoCBox.removeAllItems();
+				fillRoomNoBox(evt);
+			}
+		});
+
 		javax.swing.GroupLayout gl_mainSearchPanel = new javax.swing.GroupLayout(
 				mainSearchPanel);
-		mainSearchPanel.setLayout(gl_mainSearchPanel);
 		gl_mainSearchPanel
 				.setHorizontalGroup(gl_mainSearchPanel
-						.createParallelGroup(
-								javax.swing.GroupLayout.Alignment.LEADING)
+						.createParallelGroup(Alignment.LEADING)
 						.addGroup(
 								gl_mainSearchPanel
 										.createSequentialGroup()
-										.addContainerGap()
 										.addGroup(
 												gl_mainSearchPanel
 														.createParallelGroup(
-																javax.swing.GroupLayout.Alignment.LEADING,
-																false)
-														.addComponent(
-																searchScrollPane)
+																Alignment.TRAILING)
 														.addGroup(
-																javax.swing.GroupLayout.Alignment.TRAILING,
 																gl_mainSearchPanel
 																		.createSequentialGroup()
+																		.addContainerGap()
 																		.addComponent(
-																				searchStudentText)
-																		.addPreferredGap(
-																				javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+																				searchStudentText,
+																				GroupLayout.DEFAULT_SIZE,
+																				199,
+																				Short.MAX_VALUE)
+																		.addGap(18)
 																		.addComponent(
 																				searchButton))
-														.addComponent(
-																searchStudentLabel,
-																javax.swing.GroupLayout.DEFAULT_SIZE,
-																212,
-																Short.MAX_VALUE))
-										.addContainerGap(22, Short.MAX_VALUE)));
+														.addGroup(
+																gl_mainSearchPanel
+																		.createSequentialGroup()
+																		.addGap(10)
+																		.addGroup(
+																				gl_mainSearchPanel
+																						.createParallelGroup(
+																								Alignment.LEADING)
+																						.addComponent(
+																								searchScrollPane)
+																						.addComponent(
+																								searchStudentLabel,
+																								GroupLayout.DEFAULT_SIZE,
+																								258,
+																								Short.MAX_VALUE)
+																						.addGroup(
+																								gl_mainSearchPanel
+																										.createSequentialGroup()
+																										.addPreferredGap(
+																												ComponentPlacement.RELATED)
+																										.addComponent(
+																												dormCBox,
+																												GroupLayout.PREFERRED_SIZE,
+																												75,
+																												GroupLayout.PREFERRED_SIZE)
+																										.addGap(18)
+																										.addComponent(
+																												roomTypeCBox,
+																												GroupLayout.PREFERRED_SIZE,
+																												75,
+																												GroupLayout.PREFERRED_SIZE)
+																										.addPreferredGap(
+																												ComponentPlacement.RELATED,
+																												15,
+																												Short.MAX_VALUE)
+																										.addComponent(
+																												roomNoCBox,
+																												GroupLayout.PREFERRED_SIZE,
+																												75,
+																												GroupLayout.PREFERRED_SIZE)))))
+										.addGap(22)));
 		gl_mainSearchPanel
 				.setVerticalGroup(gl_mainSearchPanel
-						.createParallelGroup(
-								javax.swing.GroupLayout.Alignment.LEADING)
+						.createParallelGroup(Alignment.LEADING)
 						.addGroup(
 								gl_mainSearchPanel
 										.createSequentialGroup()
 										.addContainerGap()
-										.addComponent(
-												searchStudentLabel,
-												javax.swing.GroupLayout.PREFERRED_SIZE,
-												27,
-												javax.swing.GroupLayout.PREFERRED_SIZE)
+										.addComponent(searchStudentLabel,
+												GroupLayout.PREFERRED_SIZE, 27,
+												GroupLayout.PREFERRED_SIZE)
 										.addPreferredGap(
-												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+												ComponentPlacement.RELATED)
 										.addGroup(
 												gl_mainSearchPanel
 														.createParallelGroup(
-																javax.swing.GroupLayout.Alignment.LEADING,
-																false)
+																Alignment.BASELINE)
 														.addComponent(
-																searchStudentText)
+																dormCBox,
+																GroupLayout.PREFERRED_SIZE,
+																27,
+																GroupLayout.PREFERRED_SIZE)
+														.addComponent(
+																roomNoCBox,
+																GroupLayout.PREFERRED_SIZE,
+																27,
+																GroupLayout.PREFERRED_SIZE)
+														.addComponent(
+																roomTypeCBox,
+																GroupLayout.PREFERRED_SIZE,
+																27,
+																GroupLayout.PREFERRED_SIZE))
+										.addGap(18)
+										.addGroup(
+												gl_mainSearchPanel
+														.createParallelGroup(
+																Alignment.BASELINE)
+														.addComponent(
+																searchStudentText,
+																GroupLayout.PREFERRED_SIZE,
+																29,
+																GroupLayout.PREFERRED_SIZE)
 														.addComponent(
 																searchButton,
-																javax.swing.GroupLayout.DEFAULT_SIZE,
+																GroupLayout.PREFERRED_SIZE,
 																34,
-																Short.MAX_VALUE))
+																GroupLayout.PREFERRED_SIZE))
 										.addPreferredGap(
-												javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-										.addComponent(searchScrollPane)
+												ComponentPlacement.UNRELATED)
+										.addComponent(searchScrollPane,
+												GroupLayout.DEFAULT_SIZE, 395,
+												Short.MAX_VALUE)
 										.addContainerGap()));
+		mainSearchPanel.setLayout(gl_mainSearchPanel);
 
 		tabbedPane.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
@@ -1458,7 +1534,7 @@ public class MainWindow extends javax.swing.JFrame {
 																		15,
 																		GroupLayout.PREFERRED_SIZE)
 																.addContainerGap(
-																		781,
+																		800,
 																		Short.MAX_VALUE))
 												.addComponent(
 														mainPanePanel,
@@ -1469,18 +1545,65 @@ public class MainWindow extends javax.swing.JFrame {
 				.createParallelGroup(Alignment.LEADING)
 				.addComponent(jSeparator1, GroupLayout.PREFERRED_SIZE,
 						GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-				.addComponent(mainSearchPanel, GroupLayout.DEFAULT_SIZE, 540,
-						Short.MAX_VALUE)
 				.addComponent(mainPanePanel, GroupLayout.DEFAULT_SIZE, 540,
-						Short.MAX_VALUE));
+						Short.MAX_VALUE)
+				.addComponent(mainSearchPanel, Alignment.TRAILING,
+						GroupLayout.DEFAULT_SIZE, 540, Short.MAX_VALUE));
 		getContentPane().setLayout(layout);
 
 		pack();
 	}
 
-	private void filterList() {
-		System.out.println(studentSearchList.getModel());
+	private void fillDormBox(MouseEvent evt) {
+		DBConnection conn = new DBConnection();
+		ArrayList<String> dormLst = null;
+		try {
+			dormLst = conn.displayDorm();
+			for (int i = 0; i < dormLst.size(); i++)
+				dormCBox.addItem(dormLst.get(i));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 
+	private void fillRoomTypeBox(MouseEvent evt) {
+		DBConnection conn = new DBConnection();
+		ArrayList<Integer> roomTypes;
+		try {
+			roomTypes = conn.displayRoomType();
+			for (int i = 0; i < roomTypes.size(); i++)
+				roomTypeCBox.addItem(roomTypes.get(i));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void fillRoomNoBox(MouseEvent evt) {
+		DBConnection conn = new DBConnection();
+		Dorm dorm = new Dorm();
+		if (dormCBox.getSelectedItem() == null
+				|| roomTypeCBox.getSelectedItem() == null) {
+			System.out.println("did not fill it :D");
+		} else {
+			dorm.setDormName(dormCBox.getSelectedItem().toString());
+			Room room = new Room();
+			room.setTypeName(Integer.parseInt(roomTypeCBox.getSelectedItem()
+					.toString()));
+			try {
+				ArrayList<Integer> roomLst = new ArrayList<Integer>();
+				roomNoCBox.removeAllItems();
+				roomLst = conn.displayRoomNo(dorm, room);
+
+				for (int i = 0; i < roomLst.size(); i++) {
+					roomNoCBox.addItem(roomLst.get(i));
+				}
+			} catch (SQLException ev) {
+				ev.printStackTrace();
+			}
+		}
+	}
+
+	private void filterList() {
 		int start = 0;
 		int itemIx = 0;
 		Set resultSet = new HashSet();
@@ -1508,18 +1631,26 @@ public class MainWindow extends javax.swing.JFrame {
 
 	public void fillStudentList() {
 		DBConnection conn = new DBConnection();
-		String studentArray[] = null;
-		try {
-			ArrayList<String> studenNameSurname = conn
-					.displayStudentNameSurname();
-			studentArray = new String[studenNameSurname.size()];
-			for (int i = 0; i < studentArray.length; i++) {
-				studentArray[i] = studenNameSurname.get(i);
+		ArrayList<String> studenNameSurname;
+		if (isDormSelected) {
+			studenNameSurname = conn.getStudentsInDorm(dormCBox.getSelectedItem().toString());
+			for (int i = 0; i < studenNameSurname.size(); i++) {
 				searchModel.addElement(studenNameSurname.get(i));
 			}
+		} else {
+			String studentArray[] = null;
+			try {
+				studenNameSurname = conn
+						.displayStudentNameSurname();
+				studentArray = new String[studenNameSurname.size()];
+				for (int i = 0; i < studentArray.length; i++) {
+					studentArray[i] = studenNameSurname.get(i);
+					searchModel.addElement(studenNameSurname.get(i));
+				}
 
-		} catch (Exception e) {
-			e.printStackTrace();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -2023,4 +2154,8 @@ public class MainWindow extends javax.swing.JFrame {
 	private JTextField txtDisbursement;
 	private JTextField txtTotalDebt;
 	private JTextField txtRemainingDebt;
+	private JComboBox dormCBox;
+	private JComboBox roomTypeCBox;
+	private JComboBox roomNoCBox;
+	private boolean isDormSelected = false;
 }

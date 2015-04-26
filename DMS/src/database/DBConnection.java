@@ -131,8 +131,7 @@ public class DBConnection {
 
 	}
 
-	public boolean insertPayment(Dorm drm, Room room, Student std,
-			Payment pymt) {
+	public boolean insertPayment(Dorm drm, Room room, Student std, Payment pymt) {
 		try {
 			proc_stmt = connect().prepareCall(
 					"{ call Insert_Payment(?,?,?,?,?,?) }");
@@ -657,6 +656,24 @@ public class DBConnection {
 			e.printStackTrace();
 		}
 		return room;
+	}
+
+	public ArrayList<String> getStudentsInDorm(String dorm) {
+		String name, surname = null;
+		ArrayList<String> std = new ArrayList<>();
+		try {
+			proc_stmt = connect().prepareCall("{ call Get_StudentsInDorm(?) }");
+			proc_stmt.setString(1, dorm);
+			rs = proc_stmt.executeQuery();
+			while (rs.next()) {
+				name = rs.getString("StudentName");
+				surname = rs.getString("StudentSurname");
+				std.add(name + " " + surname);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return std;
 	}
 
 	public void retrieveLostItems() {

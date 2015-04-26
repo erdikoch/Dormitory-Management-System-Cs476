@@ -188,32 +188,6 @@ public class DormListWindow extends javax.swing.JFrame {
 				javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
 
 		pack();
-	}// </editor-fold>//GEN-END:initComponents
-
-	// Belki bunu kullanýrým, silmedim o yüzden -Nazli (silmeyin)
-	private void moveMouseOnList(MouseEvent evt) {
-		String info = null;
-		DBConnection conn = new DBConnection();
-		String rNo = (String) roomList.getSelectedValue();
-		String room = rNo.substring(7);
-		int roomNo = Integer.parseInt(room);
-		try {
-			ArrayList<Integer> studentsinRooms = conn.retrieveStudentsinRooms(
-					selectedDorm, roomNo);
-			roomList = (JList) evt.getSource();
-			for (int i = 0; i < studentsinRooms.size(); i++) {
-				info += studentsinRooms.get(i) + ", ";
-			}
-			int index = roomList.locationToIndex(evt.getPoint());
-			if (index > -1) {
-				roomList.setToolTipText(null);
-				String text = (String) listModelRooms.getElementAt(index);
-				roomList.setToolTipText(text);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
 	}
 
 	private void clickDormList(MouseEvent evt) {

@@ -141,6 +141,10 @@ public class MainWindow extends javax.swing.JFrame {
 			}
 		});
 		searchButton = new javax.swing.JButton();
+		searchButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		searchButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent evt) {
@@ -254,20 +258,6 @@ public class MainWindow extends javax.swing.JFrame {
 				isDormSelected = true;
 			}
 		});
-		roomTypeCBox = new JComboBox();
-		roomTypeCBox.addMouseListener(new MouseAdapter() {
-			public void mousePressed(MouseEvent evt) {
-				roomTypeCBox.removeAllItems();
-				fillRoomTypeBox(evt);
-			}
-		});
-		roomNoCBox = new JComboBox();
-		roomNoCBox.addMouseListener(new MouseAdapter() {
-			public void mousePressed(MouseEvent evt) {
-				roomNoCBox.removeAllItems();
-				fillRoomNoBox(evt);
-			}
-		});
 
 		javax.swing.GroupLayout gl_mainSearchPanel = new javax.swing.GroupLayout(
 				mainSearchPanel);
@@ -302,7 +292,10 @@ public class MainWindow extends javax.swing.JFrame {
 																						.createParallelGroup(
 																								Alignment.LEADING)
 																						.addComponent(
-																								searchScrollPane)
+																								searchScrollPane,
+																								GroupLayout.PREFERRED_SIZE,
+																								GroupLayout.DEFAULT_SIZE,
+																								GroupLayout.PREFERRED_SIZE)
 																						.addComponent(
 																								searchStudentLabel,
 																								GroupLayout.DEFAULT_SIZE,
@@ -315,21 +308,6 @@ public class MainWindow extends javax.swing.JFrame {
 																												ComponentPlacement.RELATED)
 																										.addComponent(
 																												dormCBox,
-																												GroupLayout.PREFERRED_SIZE,
-																												75,
-																												GroupLayout.PREFERRED_SIZE)
-																										.addGap(18)
-																										.addComponent(
-																												roomTypeCBox,
-																												GroupLayout.PREFERRED_SIZE,
-																												75,
-																												GroupLayout.PREFERRED_SIZE)
-																										.addPreferredGap(
-																												ComponentPlacement.RELATED,
-																												15,
-																												Short.MAX_VALUE)
-																										.addComponent(
-																												roomNoCBox,
 																												GroupLayout.PREFERRED_SIZE,
 																												75,
 																												GroupLayout.PREFERRED_SIZE)))))
@@ -346,25 +324,9 @@ public class MainWindow extends javax.swing.JFrame {
 												GroupLayout.PREFERRED_SIZE)
 										.addPreferredGap(
 												ComponentPlacement.RELATED)
-										.addGroup(
-												gl_mainSearchPanel
-														.createParallelGroup(
-																Alignment.BASELINE)
-														.addComponent(
-																dormCBox,
-																GroupLayout.PREFERRED_SIZE,
-																27,
-																GroupLayout.PREFERRED_SIZE)
-														.addComponent(
-																roomNoCBox,
-																GroupLayout.PREFERRED_SIZE,
-																27,
-																GroupLayout.PREFERRED_SIZE)
-														.addComponent(
-																roomTypeCBox,
-																GroupLayout.PREFERRED_SIZE,
-																27,
-																GroupLayout.PREFERRED_SIZE))
+										.addComponent(dormCBox,
+												GroupLayout.PREFERRED_SIZE, 27,
+												GroupLayout.PREFERRED_SIZE)
 										.addGap(18)
 										.addGroup(
 												gl_mainSearchPanel
@@ -1335,11 +1297,16 @@ public class MainWindow extends javax.swing.JFrame {
 		lblRemainingDebt.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblRemainingDebt.setBounds(423, 85, 135, 25);
 		paymentPanel.add(lblRemainingDebt);
-
 		JButton btnEnter = new JButton("Enter");
 		btnEnter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
-				clickEnterButton(evt);
+
+				try {
+					clickEnterButton(evt);
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
 		btnEnter.setBounds(288, 389, 89, 23);
@@ -1566,43 +1533,6 @@ public class MainWindow extends javax.swing.JFrame {
 		}
 	}
 
-	private void fillRoomTypeBox(MouseEvent evt) {
-		DBConnection conn = new DBConnection();
-		ArrayList<Integer> roomTypes;
-		try {
-			roomTypes = conn.displayRoomType();
-			for (int i = 0; i < roomTypes.size(); i++)
-				roomTypeCBox.addItem(roomTypes.get(i));
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-
-	private void fillRoomNoBox(MouseEvent evt) {
-		DBConnection conn = new DBConnection();
-		Dorm dorm = new Dorm();
-		if (dormCBox.getSelectedItem() == null
-				|| roomTypeCBox.getSelectedItem() == null) {
-			System.out.println("did not fill it :D");
-		} else {
-			dorm.setDormName(dormCBox.getSelectedItem().toString());
-			Room room = new Room();
-			room.setTypeName(Integer.parseInt(roomTypeCBox.getSelectedItem()
-					.toString()));
-			try {
-				ArrayList<Integer> roomLst = new ArrayList<Integer>();
-				roomNoCBox.removeAllItems();
-				roomLst = conn.displayRoomNo(dorm, room);
-
-				for (int i = 0; i < roomLst.size(); i++) {
-					roomNoCBox.addItem(roomLst.get(i));
-				}
-			} catch (SQLException ev) {
-				ev.printStackTrace();
-			}
-		}
-	}
-
 	private void filterList() {
 		int start = 0;
 		int itemIx = 0;
@@ -1633,15 +1563,15 @@ public class MainWindow extends javax.swing.JFrame {
 		DBConnection conn = new DBConnection();
 		ArrayList<String> studenNameSurname;
 		if (isDormSelected) {
-			studenNameSurname = conn.getStudentsInDorm(dormCBox.getSelectedItem().toString());
+			studenNameSurname = conn.getStudentsInDorm(dormCBox
+					.getSelectedItem().toString());
 			for (int i = 0; i < studenNameSurname.size(); i++) {
 				searchModel.addElement(studenNameSurname.get(i));
 			}
 		} else {
 			String studentArray[] = null;
 			try {
-				studenNameSurname = conn
-						.displayStudentNameSurname();
+				studenNameSurname = conn.displayStudentNameSurname();
 				studentArray = new String[studenNameSurname.size()];
 				for (int i = 0; i < studentArray.length; i++) {
 					studentArray[i] = studenNameSurname.get(i);
@@ -1951,8 +1881,11 @@ public class MainWindow extends javax.swing.JFrame {
 
 	}
 
-	private void clickEnterButton(ActionEvent evt) {
+	private void clickEnterButton(ActionEvent evt) throws SQLException {
 		double totalDebt, disbursement = 0;
+		double remaining = 0;
+		boolean checkDebt = true;
+
 		DBConnection con = new DBConnection();
 		Student std = new Student();
 		Room room = new Room();
@@ -1963,6 +1896,7 @@ public class MainWindow extends javax.swing.JFrame {
 				.toString()));
 		drm.setDormName(accDormCBox.getSelectedItem().toString());
 		Payment pymt = new Payment();
+
 		if (rdbtnCash.isSelected()) {
 			String cash = "Cash";
 			pymt.setPaymentType(cash);
@@ -1972,30 +1906,122 @@ public class MainWindow extends javax.swing.JFrame {
 						"Please enter disbursement");
 			} else {
 				disbursement = Double.parseDouble(txtDisbursement.getText());
+				pymt.setDisbursement(disbursement);
 			}
-			double remaining = totalDebt - disbursement;
-			txtRemainingDebt.setText(Double.toString(remaining));
-			pymt.setRemainingDebt(remaining);
-			if (con.insertPayment(drm, room, std, pymt)) {
-				JOptionPane.showMessageDialog(getContentPane(), "Payment done");
+			if (con.checkStudentIDCounter(std) == 0
+					&& !txtDisbursement.getText().isEmpty()) {
+				remaining = totalDebt - disbursement;
+
+				pymt.setRemainingDebt(remaining);
+				if (con.getRemainingDebt(std) == 0.0) {
+					JOptionPane.showMessageDialog(getContentPane(),
+							"You dont have any debt");
+					checkDebt = false;
+
+				}
+				if (checkDebt) {
+					if (con.insertPayment(drm, room, std, pymt)) {
+						JOptionPane.showMessageDialog(getContentPane(),
+								"Payment done");
+						txtRemainingDebt.setText(Double.toString(con
+								.getRemainingDebt(std)));
+					} else {
+						JOptionPane.showMessageDialog(getContentPane(),
+								"Payment not done, try again!");
+					}
+				}
 			} else {
-				JOptionPane.showMessageDialog(getContentPane(),
-						"Payment not done, try again!");
+
+				remaining = con.getRemainingDebt(std);
+				remaining = remaining - pymt.getDisbursement();
+				pymt.setRemainingDebt(remaining);
+				if (con.getRemainingDebt(std) == 0.0) {
+					JOptionPane.showMessageDialog(getContentPane(),
+							"You dont have any debt");
+					checkDebt = false;
+
+				}
+				if (checkDebt) {
+					if (con.insertPayment(drm, room, std, pymt)) {
+						JOptionPane.showMessageDialog(getContentPane(),
+								"Payment done");
+						txtRemainingDebt.setText(Double.toString(con
+								.getRemainingDebt(std)));
+					} else {
+						JOptionPane.showMessageDialog(getContentPane(),
+								"Payment not done, try again!");
+					}
+				}
+
 			}
+
 		} else if (rdbtnCreditCard.isSelected()) {
+			double remaining_2 = 0;
 			String creditcard = "Credit Card";
-			txtRemainingDebt.setText("0");
-			pymt.setRemainingDebt(0);
+
+			double totalDebt_2 = Double.parseDouble(txtTotalDebt.getText());
+
 			pymt.setPaymentType(creditcard);
-			if (con.insertPayment(drm, room, std, pymt)) {
-				JOptionPane.showMessageDialog(getContentPane(), "Payment done");
+
+			if (con.checkStudentIDCounter(std) == 0
+					&& !txtDisbursement.getText().isEmpty()) {
+
+				txtDisbursement.setText(txtTotalDebt.getText());
+				Double disbursement_2 = Double.parseDouble(txtDisbursement
+						.getText());
+				pymt.setDisbursement(disbursement_2);
+				remaining_2 = totalDebt_2 - disbursement_2;
+
+				pymt.setRemainingDebt(remaining_2);
+
+				if (con.getRemainingDebt(std) == 0.0) {
+					JOptionPane.showMessageDialog(getContentPane(),
+							"You dont have any debt");
+					checkDebt = false;
+
+				}
+				if (checkDebt) {
+					if (con.insertPayment(drm, room, std, pymt)) {
+						JOptionPane.showMessageDialog(getContentPane(),
+								"Payment done");
+						txtRemainingDebt.setText(Double.toString(con
+								.getRemainingDebt(std)));
+					} else {
+						JOptionPane.showMessageDialog(getContentPane(),
+								"Payment not done, try again!");
+					}
+				}
 			} else {
-				JOptionPane.showMessageDialog(getContentPane(),
-						"Payment not done, try again!");
+
+				remaining_2 = con.getRemainingDebt(std);
+				pymt.setDisbursement(remaining_2);
+				remaining_2 = remaining_2 - pymt.getDisbursement();
+				pymt.setRemainingDebt(remaining_2);
+				if (con.getRemainingDebt(std) == 0.0) {
+					JOptionPane.showMessageDialog(getContentPane(),
+							"You dont have any debt");
+					checkDebt = false;
+
+				}
+				if (checkDebt) {
+
+					if (con.insertPayment(drm, room, std, pymt)) {
+						JOptionPane.showMessageDialog(getContentPane(),
+								"Payment done");
+						txtRemainingDebt.setText(Double.toString(con
+								.getRemainingDebt(std)));
+					} else {
+						JOptionPane.showMessageDialog(getContentPane(),
+								"Payment not done, try again!");
+					}
+				}
+
 			}
+
 		} else {
 			JOptionPane.showMessageDialog(getContentPane(),
 					"Please, Choose Payment Type");
+
 		}
 	}
 
@@ -2155,7 +2181,7 @@ public class MainWindow extends javax.swing.JFrame {
 	private JTextField txtTotalDebt;
 	private JTextField txtRemainingDebt;
 	private JComboBox dormCBox;
-	private JComboBox roomTypeCBox;
-	private JComboBox roomNoCBox;
 	private boolean isDormSelected = false;
+	int counter = 0;
+
 }

@@ -1,14 +1,15 @@
 package background;
 
 public class Payment{
-	protected double remainingDebt;
-	protected String paymentType;
+	private double remainingDebt;
+	private String paymentType;
+	private double disbursement;
+	
+
 	
 	
-	private static final int CASH = 0;
-	private static final int CREDIT_CARD = 1;
-	
-	
+
+
 	public Payment(){
 		this.remainingDebt=0;
 	}
@@ -21,6 +22,13 @@ public class Payment{
 	
 	public String getPaymentType() {
 		return this.paymentType;
+	}
+	public double getDisbursement() {
+		return disbursement;
+	}
+
+	public void setDisbursement(double disbursement) {
+		this.disbursement = disbursement;
 	}
 	
 	public void setPaymentType(String paymentType) {

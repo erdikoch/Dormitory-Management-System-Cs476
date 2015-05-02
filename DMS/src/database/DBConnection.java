@@ -51,7 +51,7 @@ public class DBConnection {
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-		String url = "jdbc:sqlserver://192.168.234.1:1433;instance=MSSQLSERVER;DatabaseName=DormManagement";
+		String url = "jdbc:sqlserver://192.168.230.1:1433;instance=MSSQLSERVER;DatabaseName=DormManagement";
 		con = DriverManager.getConnection(url, "sa", "123456");
 		return con;
 	}
@@ -134,19 +134,54 @@ public class DBConnection {
 	public boolean insertPayment(Dorm drm, Room room, Student std, Payment pymt) {
 		try {
 			proc_stmt = connect().prepareCall(
-					"{ call Insert_Payment(?,?,?,?,?,?) }");
+					"{ call Insert_Payment(?,?,?,?,?,?,?) }");
 			proc_stmt.setString(1, std.getName());
 			proc_stmt.setString(2, std.getSurname());
 			proc_stmt.setInt(3, room.getRoomNo());
 			proc_stmt.setString(4, drm.getDormName());
 			proc_stmt.setString(5, pymt.getPaymentType());
 			proc_stmt.setDouble(6, pymt.getRemainingDebt());
+			proc_stmt.setDouble(7, pymt.getDisbursement());
 			proc_stmt.executeUpdate();
 			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return false;
 		}
+	}
+	public int checkStudentIDCounter(Student std) throws SQLException{
+		int counter=0;
+		
+			proc_stmt = connect().prepareCall(
+					"{ call Get_StudentIDCountForPayment (?,?) }");
+			proc_stmt.setString(1, std.getName());
+			proc_stmt.setString(2, std.getSurname());
+	
+		
+			rs = proc_stmt.executeQuery();
+			while (rs.next()) {
+				counter = rs.getInt(1);
+			}
+			
+			return counter;
+			
+	}
+	public double getRemainingDebt(Student std) throws SQLException{
+		double rDebt=0;
+		
+			proc_stmt = connect().prepareCall(
+					"{ call Get_RemainingDebt (?,?) }");
+			proc_stmt.setString(1, std.getName());
+			proc_stmt.setString(2, std.getSurname());
+	
+			rs = proc_stmt.executeQuery();
+			while (rs.next()) {
+				rDebt= rs.getDouble(1);
+			
+			}
+			
+			return rDebt;
+			
 	}
 
 	public ArrayList<String> displayDorm() throws SQLException {

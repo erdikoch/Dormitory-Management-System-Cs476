@@ -12,7 +12,7 @@ public class TestDorm extends TestCase {
 	
 	@Override
 	protected void setUp() throws Exception {
-		Dorm dorm = new Dorm();
+		dorm = new Dorm();
 		super.setUp();
 	}
 

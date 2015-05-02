@@ -12,7 +12,7 @@ public class TestPayment extends TestCase {
 	
 	@Override
 	protected void setUp() throws Exception {
-		Payment payment = new Payment();
+		payment = new Payment();
 		super.setUp();
 	}
 

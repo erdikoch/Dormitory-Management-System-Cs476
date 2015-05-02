@@ -4,14 +4,22 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.Date;
 
+import junit.framework.TestCase;
+
 import org.junit.Test;
 
 import background.Student;
 
-public class TestStudent {
+public class TestStudent extends TestCase {
 	private Student student;
 	private Date birtdate;
 
+	@Override
+	protected void setUp() throws Exception {
+		student = new Student();
+		super.setUp();
+	}
+	
 	@Test
 	public void testName() {
 		student = new Student();

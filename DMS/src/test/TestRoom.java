@@ -124,4 +124,22 @@ public class TestRoom extends TestCase {
 		room.setRoomPrice((double) 600.3232323);
 		assertEquals(600.3232323, room.getRoomPrice());
 	}
+	
+	@Test
+	public void testMonthDiff() {
+		room.setMonthDiff(12);
+		assertEquals(12, room.getMonthDiff());
+	}
+	
+	@Test
+	public void testTotalDebtZero() {
+		room.setTotalDebt(0.0);
+		assertEquals(0.0, room.getTotalDebt());
+	}
+	
+	@Test
+	public void testTotalDebt() {
+		room.setTotalDebt(15.275);
+		assertEquals(15.275, room.getTotalDebt());
+	}
 }

@@ -117,7 +117,6 @@ public class MainWindow extends javax.swing.JFrame {
 		buttonGroup2 = new javax.swing.ButtonGroup();
 		jSeparator1 = new javax.swing.JSeparator();
 		mainSearchPanel = new javax.swing.JPanel();
-		searchStudentLabel = new javax.swing.JLabel();
 		searchScrollPane = new javax.swing.JScrollPane();
 		studentSearchList = new javax.swing.JList();
 		searchModel = new DefaultListModel();
@@ -246,9 +245,6 @@ public class MainWindow extends javax.swing.JFrame {
 		jSeparator1.setBackground(new java.awt.Color(255, 51, 0));
 		jSeparator1.setForeground(new java.awt.Color(255, 51, 0));
 		jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
-
-		searchStudentLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-		searchStudentLabel.setText("             Search Student");
 		studentSearchList.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 		searchScrollPane.setViewportView(studentSearchList);
 		searchStudentText.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -263,96 +259,48 @@ public class MainWindow extends javax.swing.JFrame {
 				isDormSelected = true;
 			}
 		});
+		
+		label_1 = new JLabel();
+		label_1.setText("             Search Student");
+		label_1.setFont(new Font("Tahoma", Font.BOLD, 14));
 
 		javax.swing.GroupLayout gl_mainSearchPanel = new javax.swing.GroupLayout(
 				mainSearchPanel);
-		gl_mainSearchPanel
-				.setHorizontalGroup(gl_mainSearchPanel
-						.createParallelGroup(Alignment.LEADING)
-						.addGroup(
-								gl_mainSearchPanel
-										.createSequentialGroup()
-										.addGroup(
-												gl_mainSearchPanel
-														.createParallelGroup(
-																Alignment.TRAILING)
-														.addGroup(
-																gl_mainSearchPanel
-																		.createSequentialGroup()
-																		.addContainerGap()
-																		.addComponent(
-																				searchStudentText,
-																				GroupLayout.DEFAULT_SIZE,
-																				199,
-																				Short.MAX_VALUE)
-																		.addGap(18)
-																		.addComponent(
-																				searchButton))
-														.addGroup(
-																gl_mainSearchPanel
-																		.createSequentialGroup()
-																		.addGap(10)
-																		.addGroup(
-																				gl_mainSearchPanel
-																						.createParallelGroup(
-																								Alignment.LEADING)
-																						.addComponent(
-																								searchScrollPane,
-																								GroupLayout.PREFERRED_SIZE,
-																								GroupLayout.DEFAULT_SIZE,
-																								GroupLayout.PREFERRED_SIZE)
-																						.addComponent(
-																								searchStudentLabel,
-																								GroupLayout.DEFAULT_SIZE,
-																								258,
-																								Short.MAX_VALUE)
-																						.addGroup(
-																								gl_mainSearchPanel
-																										.createSequentialGroup()
-																										.addPreferredGap(
-																												ComponentPlacement.RELATED)
-																										.addComponent(
-																												dormCBox,
-																												GroupLayout.PREFERRED_SIZE,
-																												75,
-																												GroupLayout.PREFERRED_SIZE)))))
-										.addGap(22)));
-		gl_mainSearchPanel
-				.setVerticalGroup(gl_mainSearchPanel
-						.createParallelGroup(Alignment.LEADING)
-						.addGroup(
-								gl_mainSearchPanel
-										.createSequentialGroup()
-										.addContainerGap()
-										.addComponent(searchStudentLabel,
-												GroupLayout.PREFERRED_SIZE, 27,
-												GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(
-												ComponentPlacement.RELATED)
-										.addComponent(dormCBox,
-												GroupLayout.PREFERRED_SIZE, 27,
-												GroupLayout.PREFERRED_SIZE)
-										.addGap(18)
-										.addGroup(
-												gl_mainSearchPanel
-														.createParallelGroup(
-																Alignment.BASELINE)
-														.addComponent(
-																searchStudentText,
-																GroupLayout.PREFERRED_SIZE,
-																29,
-																GroupLayout.PREFERRED_SIZE)
-														.addComponent(
-																searchButton,
-																GroupLayout.PREFERRED_SIZE,
-																34,
-																GroupLayout.PREFERRED_SIZE))
-										.addPreferredGap(
-												ComponentPlacement.UNRELATED)
-										.addComponent(searchScrollPane,
-												GroupLayout.DEFAULT_SIZE, 395,
-												Short.MAX_VALUE)
-										.addContainerGap()));
+		gl_mainSearchPanel.setHorizontalGroup(
+			gl_mainSearchPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_mainSearchPanel.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(gl_mainSearchPanel.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_mainSearchPanel.createSequentialGroup()
+							.addComponent(searchScrollPane)
+							.addGap(22))
+						.addGroup(Alignment.TRAILING, gl_mainSearchPanel.createSequentialGroup()
+							.addComponent(dormCBox, 0, 199, Short.MAX_VALUE)
+							.addGap(18)
+							.addComponent(searchButton)
+							.addGap(22))
+						.addGroup(gl_mainSearchPanel.createSequentialGroup()
+							.addComponent(label_1, GroupLayout.PREFERRED_SIZE, 258, GroupLayout.PREFERRED_SIZE)
+							.addContainerGap(22, Short.MAX_VALUE))
+						.addGroup(gl_mainSearchPanel.createSequentialGroup()
+							.addComponent(searchStudentText, GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
+							.addGap(22))))
+		);
+		gl_mainSearchPanel.setVerticalGroup(
+			gl_mainSearchPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(Alignment.TRAILING, gl_mainSearchPanel.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(label_1, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(searchStudentText, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
+					.addGap(18)
+					.addGroup(gl_mainSearchPanel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(dormCBox, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
+						.addComponent(searchButton, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE))
+					.addGap(18)
+					.addComponent(searchScrollPane, GroupLayout.DEFAULT_SIZE, 384, Short.MAX_VALUE)
+					.addGap(12))
+		);
 		mainSearchPanel.setLayout(gl_mainSearchPanel);
 
 		tabbedPane.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -1500,41 +1448,23 @@ public class MainWindow extends javax.swing.JFrame {
 
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(
 				getContentPane());
-		layout.setHorizontalGroup(layout
-				.createParallelGroup(Alignment.LEADING)
-				.addGroup(
-						layout.createSequentialGroup()
-								.addComponent(mainSearchPanel,
-										GroupLayout.PREFERRED_SIZE,
-										GroupLayout.DEFAULT_SIZE,
-										GroupLayout.PREFERRED_SIZE)
-								.addPreferredGap(ComponentPlacement.UNRELATED)
-								.addGroup(
-										layout.createParallelGroup(
-												Alignment.LEADING)
-												.addGroup(
-														layout.createSequentialGroup()
-																.addComponent(
-																		jSeparator1,
-																		GroupLayout.PREFERRED_SIZE,
-																		15,
-																		GroupLayout.PREFERRED_SIZE)
-																.addContainerGap(
-																		800,
-																		Short.MAX_VALUE))
-												.addComponent(
-														mainPanePanel,
-														GroupLayout.DEFAULT_SIZE,
-														GroupLayout.DEFAULT_SIZE,
-														Short.MAX_VALUE))));
-		layout.setVerticalGroup(layout
-				.createParallelGroup(Alignment.LEADING)
-				.addComponent(jSeparator1, GroupLayout.PREFERRED_SIZE,
-						GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-				.addComponent(mainPanePanel, GroupLayout.DEFAULT_SIZE, 540,
-						Short.MAX_VALUE)
-				.addComponent(mainSearchPanel, Alignment.TRAILING,
-						GroupLayout.DEFAULT_SIZE, 540, Short.MAX_VALUE));
+		layout.setHorizontalGroup(
+			layout.createParallelGroup(Alignment.LEADING)
+				.addGroup(layout.createSequentialGroup()
+					.addComponent(mainSearchPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGroup(layout.createParallelGroup(Alignment.LEADING)
+						.addGroup(layout.createSequentialGroup()
+							.addComponent(jSeparator1, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE)
+							.addContainerGap(800, Short.MAX_VALUE))
+						.addComponent(mainPanePanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+		);
+		layout.setVerticalGroup(
+			layout.createParallelGroup(Alignment.LEADING)
+				.addComponent(jSeparator1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+				.addComponent(mainPanePanel, GroupLayout.DEFAULT_SIZE, 540, Short.MAX_VALUE)
+				.addComponent(mainSearchPanel, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 540, Short.MAX_VALUE)
+		);
 		getContentPane().setLayout(layout);
 
 		pack();
@@ -2179,7 +2109,6 @@ public class MainWindow extends javax.swing.JFrame {
 	private javax.swing.JLabel schoolInfoDepartmentLabel;
 	private javax.swing.JLabel schoolInfoGradeLabel;
 	private javax.swing.JLabel accoInfoDormLabel;
-	private javax.swing.JLabel searchStudentLabel;
 	private javax.swing.JLabel accoInfoRoomLabel;
 	private javax.swing.JLabel accoInfoStartDateLabel;
 	private javax.swing.JLabel accoInfoEndDateLabel;
@@ -2215,4 +2144,5 @@ public class MainWindow extends javax.swing.JFrame {
 	int counter = 0;
 	private JTable paymentTable;
 	private TableModel model;
+	private JLabel label_1;
 }

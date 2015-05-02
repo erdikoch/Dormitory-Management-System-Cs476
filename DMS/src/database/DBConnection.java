@@ -149,39 +149,39 @@ public class DBConnection {
 			return false;
 		}
 	}
-	public int checkStudentIDCounter(Student std) throws SQLException{
-		int counter=0;
-		
-			proc_stmt = connect().prepareCall(
-					"{ call Get_StudentIDCountForPayment (?,?) }");
-			proc_stmt.setString(1, std.getName());
-			proc_stmt.setString(2, std.getSurname());
-	
-		
-			rs = proc_stmt.executeQuery();
-			while (rs.next()) {
-				counter = rs.getInt(1);
-			}
-			
-			return counter;
-			
+
+	public int checkStudentIDCounter(Student std) throws SQLException {
+		int counter = 0;
+
+		proc_stmt = connect().prepareCall(
+				"{ call Get_StudentIDCountForPayment (?,?) }");
+		proc_stmt.setString(1, std.getName());
+		proc_stmt.setString(2, std.getSurname());
+
+		rs = proc_stmt.executeQuery();
+		while (rs.next()) {
+			counter = rs.getInt(1);
+		}
+
+		return counter;
+
 	}
-	public double getRemainingDebt(Student std) throws SQLException{
-		double rDebt=0;
-		
-			proc_stmt = connect().prepareCall(
-					"{ call Get_RemainingDebt (?,?) }");
-			proc_stmt.setString(1, std.getName());
-			proc_stmt.setString(2, std.getSurname());
-	
-			rs = proc_stmt.executeQuery();
-			while (rs.next()) {
-				rDebt= rs.getDouble(1);
-			
-			}
-			
-			return rDebt;
-			
+
+	public double getRemainingDebt(Student std) throws SQLException {
+		double rDebt = 0;
+
+		proc_stmt = connect().prepareCall("{ call Get_RemainingDebt (?,?) }");
+		proc_stmt.setString(1, std.getName());
+		proc_stmt.setString(2, std.getSurname());
+
+		rs = proc_stmt.executeQuery();
+		while (rs.next()) {
+			rDebt = rs.getDouble(1);
+
+		}
+
+		return rDebt;
+
 	}
 
 	public ArrayList<String> displayDorm() throws SQLException {
@@ -304,6 +304,40 @@ public class DBConnection {
 		}
 		return studentList;
 
+	}
+
+	public TableModel getPaymentHistory(Student std) {
+		DefaultTableModel paymentModel = new DefaultTableModel();
+		paymentModel.fireTableDataChanged();
+		fillPaymentModelColumn(paymentModel);
+		try {
+			proc_stmt = connect().prepareCall("{ call Get_PaymentHistory(?,?) }");
+			proc_stmt.setString(1, std.getName());
+			proc_stmt.setString(2, std.getSurname());
+			rs = proc_stmt.executeQuery();
+			while (rs.next()) {
+			
+				paymentModel.addRow(new Object[] { rs.getObject(1),
+						rs.getObject(2), rs.getObject(3), rs.getObject(4),
+						rs.getObject(5) });
+				
+		
+				
+			}
+			
+		} catch (SQLException e) {		
+			e.printStackTrace();
+		}
+		return paymentModel;
+	}
+
+	private void fillPaymentModelColumn(DefaultTableModel paymentModel) {
+		paymentModel.addColumn("Dorm Name");
+		paymentModel.addColumn("Room Type");
+		paymentModel.addColumn("Payment Type");
+		paymentModel.addColumn("Disbursement");
+		paymentModel.addColumn("Paid Date");
+		
 	}
 
 	public TableModel getStudentsForDate(Hostel hostel, Object dorm,

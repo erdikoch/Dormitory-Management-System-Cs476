@@ -60,6 +60,11 @@ import javax.swing.JRadioButton;
 
 import com.toedter.calendar.JDateChooser;
 
+import javax.swing.SwingConstants;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.TableModel;
+
 public class MainWindow extends javax.swing.JFrame {
 
 	public static void main(String args[]) {
@@ -1336,6 +1341,20 @@ public class MainWindow extends javax.swing.JFrame {
 		txtRemainingDebt.setColumns(10);
 		txtRemainingDebt.setBounds(572, 85, 184, 25);
 		paymentPanel.add(txtRemainingDebt);
+		
+		JLabel lblNewLabel_1 = new JLabel("Payment and Debt History");
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblNewLabel_1.setBounds(492, 130, 232, 25);
+		paymentPanel.add(lblNewLabel_1);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(436, 170, 320, 321);
+		paymentPanel.add(scrollPane);
+		
+		paymentTable = new JTable();
+	//	scrollPane.setColumnHeaderView(paymentTable);
+		scrollPane.setViewportView(paymentTable);
 
 		javax.swing.GroupLayout gl_mainPanePanel = new javax.swing.GroupLayout(
 				mainPanePanel);
@@ -1617,6 +1636,7 @@ public class MainWindow extends javax.swing.JFrame {
 			fillSchoolInfo(sch);
 			fillAccInfo(dorm, room, host);
 			fillPayment(room1, pymt);
+		
 
 		}
 	}
@@ -1666,6 +1686,7 @@ public class MainWindow extends javax.swing.JFrame {
 		} else {
 			txtRemainingDebt.setText(Double.toString(pymt.getRemainingDebt()));
 		}
+		fillPaymentModel();
 	}
 
 	private void fillEmergencyContact(EmergencyContact emg) {
@@ -1880,12 +1901,23 @@ public class MainWindow extends javax.swing.JFrame {
 		fillAccInfo(dorm, room, host);
 
 	}
+	private void fillPaymentModel() {
+		DBConnection con=new DBConnection();
+		Student std = new Student();
+		std.setName(stdNameText.getText());
+		std.setSurname(stdSurnameText.getText());
+		 model = con.getPaymentHistory(std);
+		paymentTable.setModel(model);
+		
+
+	}
 
 	private void clickEnterButton(ActionEvent evt) throws SQLException {
 		double totalDebt, disbursement = 0;
 		double remaining = 0;
 		boolean checkDebt = true;
-
+	
+		
 		DBConnection con = new DBConnection();
 		Student std = new Student();
 		Room room = new Room();
@@ -1913,18 +1945,15 @@ public class MainWindow extends javax.swing.JFrame {
 				remaining = totalDebt - disbursement;
 
 				pymt.setRemainingDebt(remaining);
-				if (con.getRemainingDebt(std) == 0.0) {
-					JOptionPane.showMessageDialog(getContentPane(),
-							"You dont have any debt");
-					checkDebt = false;
-
-				}
+			
 				if (checkDebt) {
 					if (con.insertPayment(drm, room, std, pymt)) {
 						JOptionPane.showMessageDialog(getContentPane(),
 								"Payment done");
 						txtRemainingDebt.setText(Double.toString(con
 								.getRemainingDebt(std)));
+						paymentTable.removeAll();
+						fillPaymentModel();
 					} else {
 						JOptionPane.showMessageDialog(getContentPane(),
 								"Payment not done, try again!");
@@ -1947,6 +1976,8 @@ public class MainWindow extends javax.swing.JFrame {
 								"Payment done");
 						txtRemainingDebt.setText(Double.toString(con
 								.getRemainingDebt(std)));
+						paymentTable.removeAll();
+						fillPaymentModel();
 					} else {
 						JOptionPane.showMessageDialog(getContentPane(),
 								"Payment not done, try again!");
@@ -1974,18 +2005,15 @@ public class MainWindow extends javax.swing.JFrame {
 
 				pymt.setRemainingDebt(remaining_2);
 
-				if (con.getRemainingDebt(std) == 0.0) {
-					JOptionPane.showMessageDialog(getContentPane(),
-							"You dont have any debt");
-					checkDebt = false;
-
-				}
+		
 				if (checkDebt) {
 					if (con.insertPayment(drm, room, std, pymt)) {
 						JOptionPane.showMessageDialog(getContentPane(),
 								"Payment done");
 						txtRemainingDebt.setText(Double.toString(con
 								.getRemainingDebt(std)));
+						paymentTable.removeAll();
+						fillPaymentModel();
 					} else {
 						JOptionPane.showMessageDialog(getContentPane(),
 								"Payment not done, try again!");
@@ -2010,6 +2038,8 @@ public class MainWindow extends javax.swing.JFrame {
 								"Payment done");
 						txtRemainingDebt.setText(Double.toString(con
 								.getRemainingDebt(std)));
+						paymentTable.removeAll();
+						fillPaymentModel();
 					} else {
 						JOptionPane.showMessageDialog(getContentPane(),
 								"Payment not done, try again!");
@@ -2183,5 +2213,6 @@ public class MainWindow extends javax.swing.JFrame {
 	private JComboBox dormCBox;
 	private boolean isDormSelected = false;
 	int counter = 0;
-
+	private JTable paymentTable;
+	private TableModel model;
 }

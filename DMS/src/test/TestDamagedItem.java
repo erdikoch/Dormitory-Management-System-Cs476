@@ -42,31 +42,31 @@ public class TestDamagedItem extends TestCase {
 	}
 	
 	@Test
-	public void testDamagedItemName() {
+	public void testDamagedItemUpperCaseName() {
 		damagedItem.setDamagedName("NAME");
 		assertEquals("NAME", damagedItem.getDamagedName());
 	}
 	
 	@Test
-	public void testDamagedItemName2() {
+	public void testDamagedItemLowerCaseName() {
 		damagedItem.setDamagedName("name");
 		assertEquals("name", damagedItem.getDamagedName());
 	}
 	
 	@Test
-	public void testDamagedItemName3() {
+	public void testDamagedItemNumberName() {
 		damagedItem.setDamagedName("123");
 		assertEquals("123", damagedItem.getDamagedName());
 	}
 	
 	@Test
-	public void testDamagedItemName4() {
+	public void testDamagedItemTwoWordsName() {
 		damagedItem.setDamagedName("word word");
 		assertEquals("word word", damagedItem.getDamagedName());
 	}
 	
 	@Test
-	public void testDamagedItemName5() {
+	public void testDamagedItemWordNumberName() {
 		damagedItem.setDamagedName("word 123");
 		assertEquals("word 123", damagedItem.getDamagedName());
 	}
@@ -78,14 +78,26 @@ public class TestDamagedItem extends TestCase {
 	}
 	
 	@Test
+	public void testEmptyNote() {
+		damagedItem.setDamagedNote("");
+		assertEquals("", damagedItem.getDamagedNote());
+	}
+	
+	@Test
+	public void testBlankNote() {
+		damagedItem.setDamagedNote(" ");
+		assertEquals(" ", damagedItem.getDamagedNote());
+	}
+	
+	@Test
 	public void testDormName() {
 		damagedItem.setDamagedDorm("dorm1");
 		assertEquals("dorm1", damagedItem.getDamagedDorm());
 	}
 	
 	@Test
-	public void testDormName2() {
-		damagedItem.setDamagedDorm("dorm 1");
-		assertEquals("dorm 1", damagedItem.getDamagedDorm());
+	public void testDormIntegerName() {
+		damagedItem.setDamagedDorm("123");
+		assertEquals("123", damagedItem.getDamagedDorm());
 	}
 }

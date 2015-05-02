@@ -46,9 +46,27 @@ public class TestLostItem extends TestCase {
 	}
 	
 	@Test
+	public void testLostItemBlankNote() {
+		item.setLostNote(" ");
+		assertEquals(" ", item.getLostNote());
+	}
+	
+	@Test
 	public void testLostItemStatus() {
 		item.setLostStatus("in progress");
 		assertEquals("in progress", item.getLostStatus());
+	}
+	
+	@Test
+	public void testLostItemEmptyStatus() {
+		item.setLostStatus("");
+		assertEquals("", item.getLostStatus());
+	}
+	
+	@Test
+	public void testLostItemBlankStatus() {
+		item.setLostStatus(" ");
+		assertEquals(" ", item.getLostStatus());
 	}
 	
 	@Test
@@ -58,14 +76,46 @@ public class TestLostItem extends TestCase {
 	}
 	
 	@Test
+	public void testLostItemEmptyDormName() {
+		item.setLostDorm("");
+		assertEquals("", item.getLostDorm());
+	}
+	
+	@Test
+	public void testLostItemBlankDormName() {
+		item.setLostDorm(" ");
+		assertEquals(" ", item.getLostDorm());
+	}
+	
+	@Test
 	public void testLostItemEntryDate() {
 		entryDate = new Date(12 / 12 / 2000);
 		item.setLostDate(entryDate);
 	}
 	
 	@Test
-	public void testBirthday3() {
+	public void testLostItemEntryDateDash() {
+		entryDate = new Date(12-12-2000);
+		item.setLostDate(entryDate);
+	}
+	
+	@Test
+	public void testBirthdayComma() {
 		entryDate = new Date(12, 12, 2000);
+		item.setLostDate(entryDate);
+		assertEquals(entryDate, item.getLostDate());
+	}
+	
+	@Test
+	public void testBirthdayDash() {
+		entryDate = new Date(12/12/2000);
+		item.setLostDate(entryDate);
+		assertEquals(entryDate, item.getLostDate());
+	}
+	
+	@Test
+	public void testBirthday() {
+		entryDate = new Date(12-12-2000);
 		item.setLostDate(entryDate);
 		assertEquals(entryDate, item.getLostDate());
 	}

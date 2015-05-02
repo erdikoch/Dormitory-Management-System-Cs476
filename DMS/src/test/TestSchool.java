@@ -29,27 +29,51 @@ public class TestSchool extends TestCase {
 	}
 	
 	@Test
+	public void testBlankUniversityName() {
+		school.setUniName(" ");
+		assertEquals(" ",school.getUniName());
+	}
+	
+	@Test
+	public void testEmptyUniversityName() {
+		school.setUniName("");
+		assertEquals("",school.getUniName());
+	}
+		
+	@Test
 	public void testDepartment() {
 		school.setDepartment("Computer Science");
 		assertEquals("Computer Science",school.getDepartment());
 	}
 	
 	@Test
+	public void testEmptyDepartment() {
+		school.setDepartment("");
+		assertEquals("",school.getDepartment());
+	}
+	
+	@Test
+	public void testBlankDepartment() {
+		school.setDepartment(" ");
+		assertEquals(" ",school.getDepartment());
+	}
+	
+	@Test
 	public void testOneDigitGrade() {
 		school.setGrade(3);
-		assertEquals(3,school.getGrade());
+		assertEquals(3, school.getGrade());
 	}
 	
 	@Test
 	public void testGradeZero() {
 		school.setGrade(0);
-		assertEquals(0,school.getGrade());
+		assertEquals(0, school.getGrade());
 	}
 	
 	@Test
 	public void testTwoDigitGrade() {
 		school.setGrade(13);
-		assertEquals(13,school.getGrade());
+		assertEquals(13, school.getGrade());
 	}
 	
 	@Test

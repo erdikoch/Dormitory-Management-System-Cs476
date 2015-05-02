@@ -18,8 +18,8 @@ public class TestDorm extends TestCase {
 
 	@Test
 	public void testDormName() {
-		dorm.setDormName("NazlÄ±'s Home");
-		assertEquals("NazlÄ±'s Home", dorm.getDormName());
+		dorm.setDormName("Nazli's Home");
+		assertEquals("Nazli's Home", dorm.getDormName());
 	}
 
 	@Test

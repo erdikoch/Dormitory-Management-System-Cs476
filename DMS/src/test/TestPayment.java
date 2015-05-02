@@ -43,4 +43,32 @@ public class TestPayment extends TestCase {
 		payment.setRemainingDebt(100000000.00);
 		assertEquals(100000000.00, payment.getRemainingDebt());
 	}
+	
+	@SuppressWarnings("deprecation")
+	@Test
+	public void testBlankPaymentType() {
+		payment.setPaymentType(" ");;
+		assertEquals(" ", payment.getRemainingDebt());
+	}
+	
+	@SuppressWarnings("deprecation")
+	@Test
+	public void testEmptyPaymentType() {
+		payment.setPaymentType("");;
+		assertEquals("", payment.getRemainingDebt());
+	}
+	
+	@SuppressWarnings("deprecation")
+	@Test
+	public void testCreditCardPaymentType() {
+		payment.setPaymentType("Credit Card");;
+		assertEquals("Credit Card", payment.getRemainingDebt());
+	}
+	
+	@SuppressWarnings("deprecation")
+	@Test
+	public void testCashPaymentType() {
+		payment.setPaymentType("Cash");;
+		assertEquals("Cash", payment.getRemainingDebt());
+	}
 }

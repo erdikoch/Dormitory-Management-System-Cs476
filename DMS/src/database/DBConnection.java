@@ -114,6 +114,20 @@ public class DBConnection {
 			return false;
 		}
 	}
+	public boolean updateStudentStatusPassive(Student std){
+		try {
+			proc_stmt = connect().prepareCall("{ call Update_StudentStatus(?,?) }");
+			proc_stmt.setString(1, std.getName());
+			proc_stmt.setString(2, std.getSurname());
+
+			proc_stmt.executeUpdate();
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}	
+	}
+	
 
 	public boolean insertDorm(Dorm dorm) throws SQLException {
 
@@ -294,7 +308,7 @@ public class DBConnection {
 	public ArrayList<String> displayStudentNameSurname() throws SQLException {
 		ArrayList<String> studentList = new ArrayList<String>();
 		Statement st = connect().createStatement();
-		String sql = "select StudentName,StudentSurname from Student";
+		String sql = "select StudentName,StudentSurname from Student where Status='Active'";
 		rs = st.executeQuery(sql);
 		while (rs.next()) {
 			String name = rs.getString("StudentName");
@@ -726,6 +740,7 @@ public class DBConnection {
 		}
 		return room;
 	}
+
 
 	public ArrayList<String> getStudentsInDorm(String dorm) {
 		String name, surname = null;

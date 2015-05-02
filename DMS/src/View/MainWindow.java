@@ -11,6 +11,8 @@ import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JPopupMenu;
+import javax.swing.SwingUtilities;
 
 import org.jfree.ui.RefineryUtilities;
 
@@ -126,8 +128,37 @@ public class MainWindow extends javax.swing.JFrame {
 			@Override
 			public void mouseClicked(MouseEvent evt) {
 				clickStudentSearchList(evt);
+		
 			}
 		});
+		
+		pop=new JPopupMenu();
+		studentItem = new JMenuItem("Remove");
+		studentItem.addActionListener(new ActionListener() {
+		
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				DBConnection db = new DBConnection();
+				studentItem.getSelectedObjects();
+				Student std =new Student(); 
+				String []name=new String [2];
+				for (int i = 0; i < name.length; i++) {
+					name=studentSearchList.getSelectedValue().toString().split("\\s+");
+				}
+				std.setName(name[0]);
+				std.setSurname(name[1]);
+				if(db.updateStudentStatusPassive(std)){
+					JOptionPane.showMessageDialog(getContentPane(), "Student Deleted");
+				}else{
+					JOptionPane.showMessageDialog(getContentPane(), "Error");
+				}
+;				
+				
+			}
+		});
+		pop.add(studentItem);
+		studentSearchList.setComponentPopupMenu(pop);
+	
 		searchStudentText = new javax.swing.JTextField();
 		searchStudentText.addKeyListener(new KeyAdapter() {
 			@Override
@@ -2145,4 +2176,6 @@ public class MainWindow extends javax.swing.JFrame {
 	private JTable paymentTable;
 	private TableModel model;
 	private JLabel label_1;
+	private JPopupMenu pop;
+	private JMenuItem studentItem;
 }

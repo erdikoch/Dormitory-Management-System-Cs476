@@ -1740,7 +1740,7 @@ public class MainWindow extends javax.swing.JFrame {
 
 			int type1 = Integer.parseInt(accRoomTypeCBox.getSelectedItem()
 					.toString());
-			int studentNumber;
+			int studentNumber,studentNumber1;
 			try {
 				Dorm dorm1 = db.retrieveDormInfo(name[0], name[1]);
 				Room room1 = db.retrieveRoomInfo(name[0], name[1]);
@@ -1753,12 +1753,26 @@ public class MainWindow extends javax.swing.JFrame {
 								.parseInt(accRoomTypeCBox.getSelectedItem()
 										.toString()))
 					if (studentNumber < type1) {
-
+						db.updateRoomStatusAvailable(dorm1.getDormName(), room1.getRoomNo());
+						//studentNumber1 = conn.GetStudentNumber(host1, dorm1, room1);
 						if (db.updateStudent(student, emgContact, dorm, room,
 								hostel, school, Name, Surname)
 								&& db.updateHostel(student, dorm, room, hostel)) {
 							JOptionPane.showMessageDialog(getContentPane(),
 									"Changes saved");
+							dorm1 = db.retrieveDormInfo(name[0], name[1]);
+							room1 = db.retrieveRoomInfo(name[0], name[1]);
+							host1 = db.retrieveHostelInfo(name[0], name[1]);
+							studentNumber=db.GetStudentNumber(host1, dorm1, room1);
+							 if(studentNumber<type1){
+								 
+								 db.updateRoomStatusAvailable(dorm1.getDormName(), room1.getRoomNo());
+								 
+							 }else{
+								 db.updateRoomStatusFull(dorm1, room1); 
+							 }
+							 
+								
 
 						} else {
 							JOptionPane.showMessageDialog(getContentPane(),
@@ -1768,6 +1782,7 @@ public class MainWindow extends javax.swing.JFrame {
 
 						JOptionPane.showMessageDialog(getContentPane(),
 								"This Room is Full");
+						db.updateRoomStatusFull(dorm1, room1);
 
 					}
 				else {

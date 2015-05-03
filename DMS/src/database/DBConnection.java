@@ -114,6 +114,32 @@ public class DBConnection {
 			return false;
 		}
 	}
+	public void updateRoomStatusFull(Dorm dorm, Room room){
+		try {
+			proc_stmt = connect().prepareCall("{ call Update_RoomStatusFull(?,?) }");
+			proc_stmt.setInt(1, room.getRoomNo());
+			proc_stmt.setString(2, dorm.getDormName());
+
+			proc_stmt.executeUpdate();
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		
+		}
+	}
+	public void updateRoomStatusAvailable(String DName, int roomn){
+		try {
+			proc_stmt = connect().prepareCall("{ call Update_RoomStatusAvailable(?,?) }");
+			proc_stmt.setInt(1, roomn);
+			proc_stmt.setString(2, DName);
+
+			proc_stmt.executeUpdate();
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		
+		}
+	}
 	public boolean updateStudentStatusPassive(Student std){
 		try {
 			proc_stmt = connect().prepareCall("{ call Update_StudentStatus(?,?) }");
@@ -343,6 +369,37 @@ public class DBConnection {
 			e.printStackTrace();
 		}
 		return paymentModel;
+	}
+	public TableModel getSearchAvailable(Hostel host) {
+	
+		DefaultTableModel Model = new DefaultTableModel();
+		Model.fireTableDataChanged();
+		fillPaymentModelColumn(Model);
+		try {
+			proc_stmt = connect().prepareCall("{ call Get_SearchAvailableRooms(?,?,?,?) }");
+			proc_stmt.setDate(1, (Date) host.getStartDate());
+			proc_stmt.setDate(2, (Date) host.getEndDate());
+		
+			rs = proc_stmt.executeQuery();
+			while (rs.next()) {
+			
+				Model.addRow(new Object[] { rs.getObject(1),
+						rs.getObject(2)});
+				
+		
+				
+			}
+			
+		} catch (SQLException e) {		
+			e.printStackTrace();
+		}
+		return Model;
+	}
+	private void fillAvModelColumn(DefaultTableModel Model) {
+		Model.addColumn("Dorm Name");
+		Model.addColumn("Room No");
+		Model.addColumn("Room Type");
+	
 	}
 
 	private void fillPaymentModelColumn(DefaultTableModel paymentModel) {

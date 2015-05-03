@@ -248,24 +248,31 @@ public class SearchAllWindow extends javax.swing.JFrame {
 	}
 
 	private void getInfoNoEndDate(Hostel host) throws ParseException {
+		
 		String date = "01/01/2050";
 		host.setEndDate(convertStringToDatetime(date));
 		Date startDate = new java.sql.Date(startdateChooser.getDate().getTime());
 		host.setStartDate(startDate);
 		fillModel(host);
+		fillAvailableModel(host);
 	}
 
 	private void getInfo(Hostel host) {
+		
 		Date startDate = new java.sql.Date(startdateChooser.getDate().getTime());
 		Date endDate = new java.sql.Date(enddateChooser.getDate().getTime());
 		host.setEndDate(endDate);
 		host.setStartDate(startDate);
 		fillModel(host);
+		fillAvailableModel(host);
 	}
 
 	private void fillModel(Hostel host) {
 		searchTable.setModel(conn.getStudentsForDate(host,
 				cBoxDorm.getSelectedItem(), cBoxRoomNo.getSelectedItem(), cBoxRoomType.getSelectedItem()));
+	}
+	private void fillAvailableModel(Hostel host) {
+		searchTable.setModel(conn.getSearchAvailable(host));
 	}
 
 	private Date convertStringToDatetime(String dt) throws ParseException {

@@ -1081,6 +1081,13 @@ public class StudentWindow extends javax.swing.JFrame {
 							room, hostel)) {
 						JOptionPane.showMessageDialog(getContentPane(),
 								"Registration completed");
+					 studentNumber = conn.GetStudentNumber(hostel, dorm, room);
+					 if(studentNumber==type){
+						 conn.updateRoomStatusFull(dorm, room);
+					 }else{
+						 conn.updateRoomStatusAvailable(dorm.getDormName(), room.getRoomNo());
+					 }
+						
 					} else {
 						JOptionPane.showMessageDialog(getContentPane(),
 								"Registration not completed");
@@ -1088,6 +1095,7 @@ public class StudentWindow extends javax.swing.JFrame {
 				} else {
 					JOptionPane.showMessageDialog(getContentPane(),
 							"This room is full");
+					conn.updateRoomStatusFull(dorm, room);
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();

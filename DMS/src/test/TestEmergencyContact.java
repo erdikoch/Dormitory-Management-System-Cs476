@@ -1,6 +1,5 @@
 package test;
 
-import static org.junit.Assert.assertEquals;
 import junit.framework.TestCase;
 
 import org.junit.Test;

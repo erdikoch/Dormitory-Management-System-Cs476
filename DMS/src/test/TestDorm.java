@@ -1,6 +1,5 @@
 ﻿package test;
 
-import static org.junit.Assert.assertEquals;
 import junit.framework.TestCase;
 
 import org.junit.Test;
@@ -9,7 +8,7 @@ import background.Dorm;
 
 public class TestDorm extends TestCase {
 	private Dorm dorm;
-	
+
 	@Override
 	protected void setUp() throws Exception {
 		dorm = new Dorm();

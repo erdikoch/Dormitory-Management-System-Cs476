@@ -1,6 +1,5 @@
 package test;
 
-import static org.junit.Assert.assertEquals;
 import junit.framework.TestCase;
 
 import org.junit.Test;
@@ -9,66 +8,62 @@ import background.Payment;
 
 public class TestPayment extends TestCase {
 	private Payment payment;
-	
+
 	@Override
 	protected void setUp() throws Exception {
 		payment = new Payment();
 		super.setUp();
 	}
 
-	@SuppressWarnings("deprecation")
 	@Test
 	public void testSetAmount() {
 		payment.setRemainingDebt(100.00);
 		assertEquals(100.00, payment.getRemainingDebt());
 	}
-	
-	@SuppressWarnings("deprecation")
+
 	@Test
 	public void testSetNegativeAmount() {
 		payment.setRemainingDebt(-100.00);
 		assertEquals(-100.00, payment.getRemainingDebt());
 	}
-	
-	@SuppressWarnings("deprecation")
+
 	@Test
 	public void testSetZeroAmount() {
 		payment.setRemainingDebt(0);
 		assertEquals(0, payment.getRemainingDebt());
 	}
-	
-	@SuppressWarnings("deprecation")
+
 	@Test
 	public void testSetLongDigitAmount() {
 		payment.setRemainingDebt(100000000.00);
 		assertEquals(100000000.00, payment.getRemainingDebt());
 	}
-	
-	@SuppressWarnings("deprecation")
+
 	@Test
 	public void testBlankPaymentType() {
-		payment.setPaymentType(" ");;
+		payment.setPaymentType(" ");
+		;
 		assertEquals(" ", payment.getRemainingDebt());
 	}
-	
-	@SuppressWarnings("deprecation")
+
 	@Test
 	public void testEmptyPaymentType() {
-		payment.setPaymentType("");;
+		payment.setPaymentType("");
+		;
 		assertEquals("", payment.getRemainingDebt());
 	}
-	
-	@SuppressWarnings("deprecation")
+
 	@Test
 	public void testCreditCardPaymentType() {
-		payment.setPaymentType("Credit Card");;
+		payment.setPaymentType("Credit Card");
+		;
 		assertEquals("Credit Card", payment.getRemainingDebt());
 	}
-	
-	@SuppressWarnings("deprecation")
+
 	@Test
 	public void testCashPaymentType() {
-		payment.setPaymentType("Cash");;
+		payment.setPaymentType("Cash");
+		;
 		assertEquals("Cash", payment.getRemainingDebt());
 	}
 }

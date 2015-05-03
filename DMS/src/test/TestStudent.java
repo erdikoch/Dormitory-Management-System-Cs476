@@ -1,7 +1,5 @@
 package test;
 
-import static org.junit.Assert.assertEquals;
-
 import java.util.Date;
 
 import junit.framework.TestCase;
@@ -19,7 +17,7 @@ public class TestStudent extends TestCase {
 		student = new Student();
 		super.setUp();
 	}
-	
+
 	@Test
 	public void testName() {
 		student = new Student();

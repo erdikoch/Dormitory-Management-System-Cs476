@@ -1,7 +1,5 @@
 package test;
 
-import static org.junit.Assert.assertEquals;
-
 import java.util.Calendar;
 
 import junit.framework.TestCase;
@@ -12,7 +10,7 @@ import background.Hostel;
 
 public class TestHostel extends TestCase {
 	private Hostel hostel;
-	
+
 	@Override
 	protected void setUp() throws Exception {
 		hostel = new Hostel();
@@ -22,12 +20,12 @@ public class TestHostel extends TestCase {
 	@Test
 	public void testStartDate() {
 		hostel.setStartDate(Calendar.getInstance().getTime());
-		assertEquals(Calendar.getInstance().getTime(),hostel.getStartDate());
+		assertEquals(Calendar.getInstance().getTime(), hostel.getStartDate());
 	}
-	
+
 	@Test
 	public void testEndDate() {
 		hostel.setEndDate(Calendar.getInstance().getTime());
-		assertEquals(Calendar.getInstance().getTime(),hostel.getEndDate());
+		assertEquals(Calendar.getInstance().getTime(), hostel.getEndDate());
 	}
 }

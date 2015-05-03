@@ -15,7 +15,6 @@ public class Room {
 		return totalDebt;
 	}
 
-
 	public int getTypeName() {
 		return typeName;
 	}
@@ -23,6 +22,7 @@ public class Room {
 	public void setTypeName(int typeName) {
 		this.typeName = typeName;
 	}
+
 	public int getMonthDiff() {
 		return monthDiff;
 	}
@@ -30,6 +30,7 @@ public class Room {
 	public void setMonthDiff(int monthDiff) {
 		this.monthDiff = monthDiff;
 	}
+
 	public int getRoomNo() {
 		return roomNo;
 	}
@@ -45,9 +46,5 @@ public class Room {
 	public void setRoomPrice(double roomPice) {
 		this.roomPrice = roomPice;
 	}
-
-	
-	
-
 
 }

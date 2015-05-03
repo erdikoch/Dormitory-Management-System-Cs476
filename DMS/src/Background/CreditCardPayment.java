@@ -1,6 +1,5 @@
 package background;
 
-import java.util.Calendar;
 import java.util.Date;
 
 public class CreditCardPayment extends Payment {
@@ -27,7 +26,7 @@ public class CreditCardPayment extends Payment {
 		this.totalDebt = totalDebt;
 	}
 
-	public int getDisbursement() {
+	public double getDisbursement() {
 		return disbursement;
 	}
 
@@ -42,10 +41,6 @@ public class CreditCardPayment extends Payment {
 	public void setAccomodationTime(Date accomodationTime) {
 		this.accomodationTime = accomodationTime;
 	}
-
-//	public int getRemainingDebt() {
-//		return remainingDebt;
-//	}
 
 	public void setRemainingDebt(int remainingDebt) {
 		this.remainingDebt = remainingDebt;

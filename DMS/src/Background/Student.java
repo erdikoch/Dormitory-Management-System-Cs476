@@ -11,8 +11,6 @@ public class Student {
 	private String TC;
 	private Date birthday;
 
-
-
 	public Date getBirthday() {
 		return birthday;
 	}
@@ -26,7 +24,7 @@ public class Student {
 	}
 
 	public void setName(String name) {
-		if(name.equals("")) {
+		if (name.equals("")) {
 			name = "N/A";
 		} else if (name.equals(" ")) {
 			name = "N/A";
@@ -40,7 +38,7 @@ public class Student {
 	}
 
 	public void setSurname(String surname) {
-		if(surname.equals("")) {
+		if (surname.equals("")) {
 			surname = "N/A";
 		} else if (name.equals(" ")) {
 			surname = "N/A";
@@ -48,12 +46,13 @@ public class Student {
 			this.surname = surname;
 		}
 	}
+
 	public String getEmail() {
 		return email;
 	}
 
 	public void setEmail(String email) {
-		if(name.equals("")) {
+		if (name.equals("")) {
 			name = "N/A";
 		} else if (name.equals(" ")) {
 			name = "N/A";
@@ -67,7 +66,7 @@ public class Student {
 	}
 
 	public void setPhone(String phone) {
-		if(phone.equals("")) {
+		if (phone.equals("")) {
 			phone = "N/A";
 		} else if (name.equals(" ")) {
 			phone = "N/A";
@@ -82,7 +81,7 @@ public class Student {
 
 	public void setGender(String gender) {
 		this.gender = gender;
-		
+
 	}
 
 	public String getTC() {

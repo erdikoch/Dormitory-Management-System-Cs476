@@ -9,8 +9,7 @@ public class LostItem {
 	private String note;
 	private String dormName;
 	private int lostID;
-	
-	
+
 	public int getLostID() {
 		return lostID;
 	}
@@ -26,7 +25,7 @@ public class LostItem {
 	public void setLostName(String lostItemName) {
 		this.lostItemName = lostItemName;
 	}
-	
+
 	public String getLostNote() {
 		return note;
 	}
@@ -34,7 +33,7 @@ public class LostItem {
 	public void setLostNote(String note) {
 		this.note = note;
 	}
-	
+
 	public Date getLostDate() {
 		return entryDate;
 	}
@@ -42,11 +41,11 @@ public class LostItem {
 	public void setLostDate(Date entryDate) {
 		this.entryDate = entryDate;
 	}
-	
+
 	public String getLostStatus() {
 		return status;
 	}
-	
+
 	public void setLostStatus(String status) {
 		this.status = status;
 	}
@@ -58,7 +57,5 @@ public class LostItem {
 	public void setLostDorm(String dormName) {
 		this.dormName = dormName;
 	}
-	
-	
-	
+
 }

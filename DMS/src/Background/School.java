@@ -5,7 +5,6 @@ public class School {
 	private String department;
 	private int grade;
 
-
 	public String getUniName() {
 		return uniName;
 	}
@@ -21,13 +20,13 @@ public class School {
 	}
 
 	public void setDepartment(String department) {
-		if(department.equals("")) {
+		if (department.equals("")) {
 			department = "N/A";
 		} else if (department.equals(" ")) {
 			department = "N/A";
 		} else {
 			this.department = department;
-		}	
+		}
 	}
 
 	public int getGrade() {
@@ -35,8 +34,8 @@ public class School {
 	}
 
 	public void setGrade(int grade) {
-		if(grade>=0 || grade<=100) {
-			this.grade = grade; 
+		if (grade >= 0 || grade <= 100) {
+			this.grade = grade;
 		}
-	}	
+	}
 }

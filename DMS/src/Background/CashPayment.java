@@ -1,15 +1,14 @@
 package background;
 
-import java.util.Calendar;
 import java.util.Date;
 
 public class CashPayment extends Payment {
 	private int roomPrice;
 	private int totalDebt;
-	private int disbursement;
+	private double disbursement;
 	private Date accomodationTime;
 	private int remainingDebt;
-	
+
 	public int getRoomPrice() {
 		return roomPrice;
 	}
@@ -26,11 +25,11 @@ public class CashPayment extends Payment {
 		this.totalDebt = totalDebt;
 	}
 
-	public int getDisbursement() {
+	public double getDisbursement() {
 		return disbursement;
 	}
 
-	public void setDisbursement(int disbursement) {
+	public void setDisbursement(double disbursement) {
 		this.disbursement = disbursement;
 	}
 
@@ -42,19 +41,16 @@ public class CashPayment extends Payment {
 		this.accomodationTime = accomodationTime;
 	}
 
-//	public int getRemainingDebt() {
-//		return remainingDebt;
-//	}
-
 	public void setRemainingDebt(int remainingDebt) {
 		this.remainingDebt = remainingDebt;
 	}
 
-	  public CashPayment(){
+	public CashPayment() {
 
-		}
-
-		@Override public String paymentDetails(){
-			return "This cash amount is" + remainingDebt;
-		}
 	}
+
+	@Override
+	public String paymentDetails() {
+		return "This cash amount is" + remainingDebt;
+	}
+}

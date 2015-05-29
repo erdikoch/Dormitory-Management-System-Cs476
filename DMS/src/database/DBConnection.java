@@ -265,7 +265,6 @@ public class DBConnection {
 	}
 
 	public boolean insertRoom(Room room, Dorm dorm) throws SQLException {
-
 		try {
 			proc_stmt = connect().prepareCall("{ call Insert_Room(?,?,?) }");
 			proc_stmt.setInt(1, room.getRoomNo());
@@ -370,13 +369,14 @@ public class DBConnection {
 		}
 		return paymentModel;
 	}
+	
 	public TableModel getSearchAvailable(Hostel host) {
 	
 		DefaultTableModel Model = new DefaultTableModel();
 		Model.fireTableDataChanged();
-		fillPaymentModelColumn(Model);
+		fillAvModelColumn(Model);
 		try {
-			proc_stmt = connect().prepareCall("{ call Get_SearchAvailableRooms(?,?,?,?) }");
+			proc_stmt = connect().prepareCall("{ call Get_SearchAvailableRooms(?,?) }");
 			proc_stmt.setDate(1, (Date) host.getStartDate());
 			proc_stmt.setDate(2, (Date) host.getEndDate());
 		
@@ -384,9 +384,7 @@ public class DBConnection {
 			while (rs.next()) {
 			
 				Model.addRow(new Object[] { rs.getObject(1),
-						rs.getObject(2)});
-				
-		
+						rs.getObject(2), rs.getObject(3)});	
 				
 			}
 			

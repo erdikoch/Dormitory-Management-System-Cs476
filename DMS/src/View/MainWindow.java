@@ -128,37 +128,39 @@ public class MainWindow extends javax.swing.JFrame {
 			@Override
 			public void mouseClicked(MouseEvent evt) {
 				clickStudentSearchList(evt);
-		
+
 			}
 		});
-		
-		pop=new JPopupMenu();
+
+		pop = new JPopupMenu();
 		studentItem = new JMenuItem("Remove");
 		studentItem.addActionListener(new ActionListener() {
-		
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				DBConnection db = new DBConnection();
 				studentItem.getSelectedObjects();
-				Student std =new Student(); 
-				String []name=new String [2];
+				Student std = new Student();
+				String[] name = new String[2];
 				for (int i = 0; i < name.length; i++) {
-					name=studentSearchList.getSelectedValue().toString().split("\\s+");
+					name = studentSearchList.getSelectedValue().toString()
+							.split("\\s+");
 				}
 				std.setName(name[0]);
 				std.setSurname(name[1]);
-				if(db.updateStudentStatusPassive(std)){
-					JOptionPane.showMessageDialog(getContentPane(), "Student Deleted");
-				}else{
+				if (db.updateStudentStatusPassive(std)) {
+					JOptionPane.showMessageDialog(getContentPane(),
+							"Student Deleted");
+				} else {
 					JOptionPane.showMessageDialog(getContentPane(), "Error");
 				}
-;				
-				
+				;
+
 			}
 		});
 		pop.add(studentItem);
 		studentSearchList.setComponentPopupMenu(pop);
-	
+
 		searchStudentText = new javax.swing.JTextField();
 		searchStudentText.addKeyListener(new KeyAdapter() {
 			@Override
@@ -288,50 +290,105 @@ public class MainWindow extends javax.swing.JFrame {
 				dormCBox.removeAllItems();
 				fillDormBox(evt);
 				isDormSelected = true;
+				if (dormCBox.getSelectedItem().toString() == null) {
+					studentSearchList.removeAll();
+					fill();
+
+				}
 			}
 		});
-		
+
 		label_1 = new JLabel();
 		label_1.setText("             Search Student");
 		label_1.setFont(new Font("Tahoma", Font.BOLD, 14));
 
 		javax.swing.GroupLayout gl_mainSearchPanel = new javax.swing.GroupLayout(
 				mainSearchPanel);
-		gl_mainSearchPanel.setHorizontalGroup(
-			gl_mainSearchPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_mainSearchPanel.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_mainSearchPanel.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_mainSearchPanel.createSequentialGroup()
-							.addComponent(searchScrollPane)
-							.addGap(22))
-						.addGroup(Alignment.TRAILING, gl_mainSearchPanel.createSequentialGroup()
-							.addComponent(dormCBox, 0, 199, Short.MAX_VALUE)
-							.addGap(18)
-							.addComponent(searchButton)
-							.addGap(22))
-						.addGroup(gl_mainSearchPanel.createSequentialGroup()
-							.addComponent(label_1, GroupLayout.PREFERRED_SIZE, 258, GroupLayout.PREFERRED_SIZE)
-							.addContainerGap(22, Short.MAX_VALUE))
-						.addGroup(gl_mainSearchPanel.createSequentialGroup()
-							.addComponent(searchStudentText, GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
-							.addGap(22))))
-		);
-		gl_mainSearchPanel.setVerticalGroup(
-			gl_mainSearchPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, gl_mainSearchPanel.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(label_1, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(searchStudentText, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
-					.addGroup(gl_mainSearchPanel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(dormCBox, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
-						.addComponent(searchButton, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE))
-					.addGap(18)
-					.addComponent(searchScrollPane, GroupLayout.DEFAULT_SIZE, 384, Short.MAX_VALUE)
-					.addGap(12))
-		);
+		gl_mainSearchPanel
+				.setHorizontalGroup(gl_mainSearchPanel
+						.createParallelGroup(Alignment.LEADING)
+						.addGroup(
+								gl_mainSearchPanel
+										.createSequentialGroup()
+										.addContainerGap()
+										.addGroup(
+												gl_mainSearchPanel
+														.createParallelGroup(
+																Alignment.LEADING)
+														.addGroup(
+																gl_mainSearchPanel
+																		.createSequentialGroup()
+																		.addComponent(
+																				searchScrollPane)
+																		.addGap(22))
+														.addGroup(
+																Alignment.TRAILING,
+																gl_mainSearchPanel
+																		.createSequentialGroup()
+																		.addComponent(
+																				dormCBox,
+																				0,
+																				199,
+																				Short.MAX_VALUE)
+																		.addGap(18)
+																		.addComponent(
+																				searchButton)
+																		.addGap(22))
+														.addGroup(
+																gl_mainSearchPanel
+																		.createSequentialGroup()
+																		.addComponent(
+																				label_1,
+																				GroupLayout.PREFERRED_SIZE,
+																				258,
+																				GroupLayout.PREFERRED_SIZE)
+																		.addContainerGap(
+																				22,
+																				Short.MAX_VALUE))
+														.addGroup(
+																gl_mainSearchPanel
+																		.createSequentialGroup()
+																		.addComponent(
+																				searchStudentText,
+																				GroupLayout.DEFAULT_SIZE,
+																				258,
+																				Short.MAX_VALUE)
+																		.addGap(22)))));
+		gl_mainSearchPanel
+				.setVerticalGroup(gl_mainSearchPanel
+						.createParallelGroup(Alignment.LEADING)
+						.addGroup(
+								Alignment.TRAILING,
+								gl_mainSearchPanel
+										.createSequentialGroup()
+										.addContainerGap()
+										.addComponent(label_1,
+												GroupLayout.PREFERRED_SIZE, 27,
+												GroupLayout.PREFERRED_SIZE)
+										.addPreferredGap(
+												ComponentPlacement.RELATED)
+										.addComponent(searchStudentText,
+												GroupLayout.PREFERRED_SIZE, 29,
+												GroupLayout.PREFERRED_SIZE)
+										.addGap(18)
+										.addGroup(
+												gl_mainSearchPanel
+														.createParallelGroup(
+																Alignment.BASELINE)
+														.addComponent(
+																dormCBox,
+																GroupLayout.PREFERRED_SIZE,
+																27,
+																GroupLayout.PREFERRED_SIZE)
+														.addComponent(
+																searchButton,
+																GroupLayout.PREFERRED_SIZE,
+																34,
+																GroupLayout.PREFERRED_SIZE))
+										.addGap(18)
+										.addComponent(searchScrollPane,
+												GroupLayout.DEFAULT_SIZE, 384,
+												Short.MAX_VALUE).addGap(12)));
 		mainSearchPanel.setLayout(gl_mainSearchPanel);
 
 		tabbedPane.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -1320,19 +1377,19 @@ public class MainWindow extends javax.swing.JFrame {
 		txtRemainingDebt.setColumns(10);
 		txtRemainingDebt.setBounds(572, 85, 184, 25);
 		paymentPanel.add(txtRemainingDebt);
-		
+
 		JLabel lblNewLabel_1 = new JLabel("Payment and Debt History");
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblNewLabel_1.setBounds(492, 130, 232, 25);
 		paymentPanel.add(lblNewLabel_1);
-		
+
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(436, 170, 320, 321);
 		paymentPanel.add(scrollPane);
-		
+
 		paymentTable = new JTable();
-	//	scrollPane.setColumnHeaderView(paymentTable);
+		// scrollPane.setColumnHeaderView(paymentTable);
 		scrollPane.setViewportView(paymentTable);
 
 		javax.swing.GroupLayout gl_mainPanePanel = new javax.swing.GroupLayout(
@@ -1479,23 +1536,41 @@ public class MainWindow extends javax.swing.JFrame {
 
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(
 				getContentPane());
-		layout.setHorizontalGroup(
-			layout.createParallelGroup(Alignment.LEADING)
-				.addGroup(layout.createSequentialGroup()
-					.addComponent(mainSearchPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(layout.createParallelGroup(Alignment.LEADING)
-						.addGroup(layout.createSequentialGroup()
-							.addComponent(jSeparator1, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE)
-							.addContainerGap(800, Short.MAX_VALUE))
-						.addComponent(mainPanePanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-		);
-		layout.setVerticalGroup(
-			layout.createParallelGroup(Alignment.LEADING)
-				.addComponent(jSeparator1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-				.addComponent(mainPanePanel, GroupLayout.DEFAULT_SIZE, 540, Short.MAX_VALUE)
-				.addComponent(mainSearchPanel, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 540, Short.MAX_VALUE)
-		);
+		layout.setHorizontalGroup(layout
+				.createParallelGroup(Alignment.LEADING)
+				.addGroup(
+						layout.createSequentialGroup()
+								.addComponent(mainSearchPanel,
+										GroupLayout.DEFAULT_SIZE,
+										GroupLayout.DEFAULT_SIZE,
+										Short.MAX_VALUE)
+								.addPreferredGap(ComponentPlacement.UNRELATED)
+								.addGroup(
+										layout.createParallelGroup(
+												Alignment.LEADING)
+												.addGroup(
+														layout.createSequentialGroup()
+																.addComponent(
+																		jSeparator1,
+																		GroupLayout.PREFERRED_SIZE,
+																		15,
+																		GroupLayout.PREFERRED_SIZE)
+																.addContainerGap(
+																		800,
+																		Short.MAX_VALUE))
+												.addComponent(
+														mainPanePanel,
+														GroupLayout.DEFAULT_SIZE,
+														GroupLayout.DEFAULT_SIZE,
+														Short.MAX_VALUE))));
+		layout.setVerticalGroup(layout
+				.createParallelGroup(Alignment.LEADING)
+				.addComponent(jSeparator1, GroupLayout.PREFERRED_SIZE,
+						GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+				.addComponent(mainPanePanel, GroupLayout.DEFAULT_SIZE, 540,
+						Short.MAX_VALUE)
+				.addComponent(mainSearchPanel, Alignment.TRAILING,
+						GroupLayout.DEFAULT_SIZE, 540, Short.MAX_VALUE));
 		getContentPane().setLayout(layout);
 
 		pack();
@@ -1508,6 +1583,7 @@ public class MainWindow extends javax.swing.JFrame {
 			dormLst = conn.displayDorm();
 			for (int i = 0; i < dormLst.size(); i++)
 				dormCBox.addItem(dormLst.get(i));
+			dormCBox.addItem("");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -1542,13 +1618,48 @@ public class MainWindow extends javax.swing.JFrame {
 	public void fillStudentList() {
 		DBConnection conn = new DBConnection();
 		ArrayList<String> studenNameSurname;
-		if (isDormSelected) {
+		if (isDormSelected && dormCBox.getSelectedItem().toString() != null) {
 			studenNameSurname = conn.getStudentsInDorm(dormCBox
 					.getSelectedItem().toString());
 			for (int i = 0; i < studenNameSurname.size(); i++) {
 				searchModel.addElement(studenNameSurname.get(i));
 			}
 		} else {
+			String studentArray[] = null;
+			try {
+				studenNameSurname = conn.displayStudentNameSurname();
+				studentArray = new String[studenNameSurname.size()];
+				for (int i = 0; i < studentArray.length; i++) {
+					studentArray[i] = studenNameSurname.get(i);
+					searchModel.addElement(studenNameSurname.get(i));
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public void fill2() {
+		DBConnection conn = new DBConnection();
+		ArrayList<String> studenNameSurname;
+		String studentArray[] = null;
+		try {
+			studenNameSurname = conn.displayStudentNameSurname();
+			studentArray = new String[studenNameSurname.size()];
+			for (int i = 0; i < studentArray.length; i++) {
+				studentArray[i] = studenNameSurname.get(i);
+				searchModel.addElement(studenNameSurname.get(i));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void fill() {
+		DBConnection conn = new DBConnection();
+		ArrayList<String> studenNameSurname;
+		if (dormCBox.getSelectedItem().toString() == "") {
 			String studentArray[] = null;
 			try {
 				studenNameSurname = conn.displayStudentNameSurname();
@@ -1597,7 +1708,6 @@ public class MainWindow extends javax.swing.JFrame {
 			fillSchoolInfo(sch);
 			fillAccInfo(dorm, room, host);
 			fillPayment(room1, pymt);
-		
 
 		}
 	}
@@ -1658,7 +1768,15 @@ public class MainWindow extends javax.swing.JFrame {
 
 	private void clickSearchButton(MouseEvent evt) {
 		searchModel.clear();
-		fillStudentList();
+		if (isDormSelected) {
+			if (dormCBox.getSelectedItem().toString() != "") {
+				fillStudentList();
+			} else {
+				fill();
+			}
+		} else {
+			fill2();
+		}
 
 	}
 
@@ -1740,7 +1858,7 @@ public class MainWindow extends javax.swing.JFrame {
 
 			int type1 = Integer.parseInt(accRoomTypeCBox.getSelectedItem()
 					.toString());
-			int studentNumber,studentNumber1;
+			int studentNumber, studentNumber1;
 			try {
 				Dorm dorm1 = db.retrieveDormInfo(name[0], name[1]);
 				Room room1 = db.retrieveRoomInfo(name[0], name[1]);
@@ -1753,8 +1871,10 @@ public class MainWindow extends javax.swing.JFrame {
 								.parseInt(accRoomTypeCBox.getSelectedItem()
 										.toString()))
 					if (studentNumber < type1) {
-						db.updateRoomStatusAvailable(dorm1.getDormName(), room1.getRoomNo());
-						//studentNumber1 = conn.GetStudentNumber(host1, dorm1, room1);
+						db.updateRoomStatusAvailable(dorm1.getDormName(),
+								room1.getRoomNo());
+						// studentNumber1 = conn.GetStudentNumber(host1, dorm1,
+						// room1);
 						if (db.updateStudent(student, emgContact, dorm, room,
 								hostel, school, Name, Surname)
 								&& db.updateHostel(student, dorm, room, hostel)) {
@@ -1763,16 +1883,16 @@ public class MainWindow extends javax.swing.JFrame {
 							dorm1 = db.retrieveDormInfo(name[0], name[1]);
 							room1 = db.retrieveRoomInfo(name[0], name[1]);
 							host1 = db.retrieveHostelInfo(name[0], name[1]);
-							studentNumber=db.GetStudentNumber(host1, dorm1, room1);
-							 if(studentNumber<type1){
-								 
-								 db.updateRoomStatusAvailable(dorm1.getDormName(), room1.getRoomNo());
-								 
-							 }else{
-								 db.updateRoomStatusFull(dorm1, room1); 
-							 }
-							 
-								
+							studentNumber = db.GetStudentNumber(host1, dorm1,
+									room1);
+							if (studentNumber < type1) {
+
+								db.updateRoomStatusAvailable(
+										dorm1.getDormName(), room1.getRoomNo());
+
+							} else {
+								db.updateRoomStatusFull(dorm1, room1);
+							}
 
 						} else {
 							JOptionPane.showMessageDialog(getContentPane(),
@@ -1877,14 +1997,14 @@ public class MainWindow extends javax.swing.JFrame {
 		fillAccInfo(dorm, room, host);
 
 	}
+
 	private void fillPaymentModel() {
-		DBConnection con=new DBConnection();
+		DBConnection con = new DBConnection();
 		Student std = new Student();
 		std.setName(stdNameText.getText());
 		std.setSurname(stdSurnameText.getText());
-		 model = con.getPaymentHistory(std);
+		model = con.getPaymentHistory(std);
 		paymentTable.setModel(model);
-		
 
 	}
 
@@ -1892,8 +2012,7 @@ public class MainWindow extends javax.swing.JFrame {
 		double totalDebt, disbursement = 0;
 		double remaining = 0;
 		boolean checkDebt = true;
-	
-		
+
 		DBConnection con = new DBConnection();
 		Student std = new Student();
 		Room room = new Room();
@@ -1921,7 +2040,7 @@ public class MainWindow extends javax.swing.JFrame {
 				remaining = totalDebt - disbursement;
 
 				pymt.setRemainingDebt(remaining);
-			
+
 				if (checkDebt) {
 					if (con.insertPayment(drm, room, std, pymt)) {
 						JOptionPane.showMessageDialog(getContentPane(),
@@ -1981,7 +2100,6 @@ public class MainWindow extends javax.swing.JFrame {
 
 				pymt.setRemainingDebt(remaining_2);
 
-		
 				if (checkDebt) {
 					if (con.insertPayment(drm, room, std, pymt)) {
 						JOptionPane.showMessageDialog(getContentPane(),

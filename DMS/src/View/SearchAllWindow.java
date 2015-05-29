@@ -272,7 +272,7 @@ public class SearchAllWindow extends javax.swing.JFrame {
 				cBoxDorm.getSelectedItem(), cBoxRoomNo.getSelectedItem(), cBoxRoomType.getSelectedItem()));
 	}
 	private void fillAvailableModel(Hostel host) {
-		searchTable.setModel(conn.getSearchAvailable(host));
+		availableRoomsTable.setModel(conn.getSearchAvailable(host));
 	}
 
 	private Date convertStringToDatetime(String dt) throws ParseException {

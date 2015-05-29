@@ -5,6 +5,7 @@ public class EmergencyContact {
 	private String surname;
 	private String phone;
 
+
 	public String getName() {
 		return name;
 	}
@@ -26,7 +27,7 @@ public class EmergencyContact {
 	}
 
 	public void setPhone(String phone) {
-		if (phone.equals("")) {
+		if(phone.equals("")) {
 			phone = "N/A";
 		} else if (phone.equals(" ")) {
 			phone = "N/A";
